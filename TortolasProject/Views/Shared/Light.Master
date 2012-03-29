@@ -10,43 +10,40 @@
     <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
 </head>
 <body>
+    <div id="pageContainer">
         <div id="header">   
-      <!--      <div id="headerContainer">       <!-- Logo y publicidad -->
-                <div id="logoContainer">
-                   <img alt="MTB Malaga" id="logoHeader" src="../../Content/logo_azul.png" />
-			    </div>
-       <!--         
-                <div id="bannerHeader">
-                    <h2>Banner de publicidad</h2>
-                </div>
-        
-            </div>
-        
+            <div id="logoContainer">
+                <img alt="MTB Malaga" id="logoHeader" src="../../Content/logo_azul.png" />
+			</div>
             <div id="menubar">              <!-- Menú de navegación -->
                     <ul id="navMenu">
                         <li><%: Html.ActionLink("Inicio", "Index", "Home")%></li>
-                        <li><%: Html.ActionLink("Rincón del socio", "Light", "Home")%></li>
+                        <li><%: Html.ActionLink("Rincón del socio", "About", "Home")%></li>
                         <li><%: Html.ActionLink("Eventos", "Index", "Home")%></li>
                         <li><%: Html.ActionLink("Rutas", "About", "Home")%></li>
                         <li><%: Html.ActionLink("Estadísticas", "Index", "Home")%></li>
                         <li><%: Html.ActionLink("Pedidos", "About", "Home")%></li>
-                    </ul>    
-                <div id="logindisplay">     <!-- DIV Log In -->
+                    </ul> 
+            </div>
+            <div id="logindisplay">     <!-- DIV Log In -->
                     <% Html.RenderPartial("LogOnUserControl"); %>
-                </div>
-          <!--  </div> -->
+            </div>
         </div>
-        <div id="mainLeft">
-         <p>Notificaciones</p>
-        </div>
-        <div id="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-        </div>
-        <div id="mainRight">
-            <p>Publi</p>
+        <div id="body">
+            <div id="mainLeft">
+             <p>Notificaciones</p>
+            </div>
+            <div id="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+            <div id="mainRight">
+                <p>Publi</p>
+            </div>
         </div>
         <div id="footer">
-                <p>iCube</p>
+            <p>iCube</p>
         </div>
+    </div>
+        
 </body>
 </html>
