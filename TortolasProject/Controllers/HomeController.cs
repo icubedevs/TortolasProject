@@ -19,5 +19,10 @@ namespace TortolasProject.Controllers
         {
             return View();
         }
+
+        public ActionResult Prueba()
+        {
+            return View();
+        }
     }
 }
