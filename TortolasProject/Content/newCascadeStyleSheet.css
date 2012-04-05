@@ -1,0 +1,16 @@
+/* 
+    Document   : newCascadeStyleSheet
+    Created on : 02-abr-2012, 12:04:11
+    Author     : IsmiKin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+#cabecera{
+    margin-top: 20px;
+    width:100%;
+}

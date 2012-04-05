@@ -19,5 +19,14 @@ namespace TortolasProject.Controllers
         {
             return View();
         }
+
+        public ActionResult Captacion()
+        {
+            return View();
+        }
+
+
     }
+
+     
 }
