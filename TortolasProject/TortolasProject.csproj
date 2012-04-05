@@ -609,6 +609,7 @@
     <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Home\Captacion.aspx" />
     <Content Include="Views\Home\Light.aspx" />
+    <Content Include="Views\Home\prueba.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -22,7 +22,7 @@
                         <li><%: Html.ActionLink("Eventos", "Index", "Home")%></li>
                         <li><%: Html.ActionLink("Rutas", "About", "Home")%></li>
                         <li><%: Html.ActionLink("Estadísticas", "Index", "Home")%></li>
-                        <li><%: Html.ActionLink("Pedidos", "About", "Home")%></li>
+                        <li><%: Html.ActionLink("Pedidos", "prueba", "Home")%></li>
                     </ul> 
             </div>
             <div id="logindisplay">     <!-- DIV Log In -->
@@ -31,13 +31,20 @@
         </div>
         <div id="body">
             <div id="mainLeft">
-             <p>Notificaciones</p>
+                    <ul id="navAdminMenu">
+                        <li><%: Html.ActionLink("Contabilidad", "Index", "Home")%></li>
+                        <li><%: Html.ActionLink("Gestión socios", "About", "Home")%></li>
+                        <li><%: Html.ActionLink("Empresas", "Index", "Home")%></li>
+                        <li><%: Html.ActionLink("Monitores", "About", "Home")%></li>
+                    </ul>
             </div>
             <div id="main">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>
             <div id="mainRight">
-                <p>Publi</p>
+                <div id="cuadroTexto">
+                    <p>Hola</p>
+                </div>
             </div>
         </div>
         <div id="footer">
