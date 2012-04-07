@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -65,15 +66,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\mtbMalaga.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\light.css" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
@@ -608,8 +614,8 @@
     <Content Include="Scripts\styles\Silver\sprite.png" />
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
-    <Content Include="Views\Home\Light.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -646,10 +652,20 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Shared\Light.Master" />
+    <None Include="Models\mtbMalaga.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>mtbMalaga.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\pngfix\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Scripts\pngfix\Thumbs.db" />
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\mtbMalaga.dbml.layout">
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
