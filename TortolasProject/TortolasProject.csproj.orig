@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -65,16 +66,123 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\FacturaController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\mtbMalaga.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\light.css" />
+<<<<<<< HEAD
+=======
+    <Content Include="Content\crud.css" />
+    <Content Include="Content\icons\agents.ico" />
+    <Content Include="Content\icons\aim-away.ico" />
+    <Content Include="Content\icons\aim-chat.ico" />
+    <Content Include="Content\icons\aim.ico" />
+    <Content Include="Content\icons\arrow-down.ico" />
+    <Content Include="Content\icons\block.ico" />
+    <Content Include="Content\icons\buddy-signon.ico" />
+    <Content Include="Content\icons\chat-bold.ico" />
+    <Content Include="Content\icons\chat-emoticons.ico" />
+    <Content Include="Content\icons\chat-event.ico" />
+    <Content Include="Content\icons\chat-home.ico" />
+    <Content Include="Content\icons\chat-italic.ico" />
+    <Content Include="Content\icons\chat-list.ico" />
+    <Content Include="Content\icons\chat-txtbg.ico" />
+    <Content Include="Content\icons\chat-underline.ico" />
+    <Content Include="Content\icons\check.ico" />
+    <Content Include="Content\icons\checkbox-checked.ico" />
+    <Content Include="Content\icons\checkbox-unchecked.ico" />
+    <Content Include="Content\icons\contract.ico" />
+    <Content Include="Content\icons\dbtool-green.ico" />
+    <Content Include="Content\icons\dbtool-orange.ico" />
+    <Content Include="Content\icons\dbtool-red.ico" />
+    <Content Include="Content\icons\dbtool.ico" />
+    <Content Include="Content\icons\delete.ico" />
+    <Content Include="Content\icons\email.ico" />
+    <Content Include="Content\icons\expand.ico" />
+    <Content Include="Content\icons\file.ico" />
+    <Content Include="Content\icons\find-new-users.ico" />
+    <Content Include="Content\icons\folder.ico" />
+    <Content Include="Content\icons\font.ico" />
+    <Content Include="Content\icons\help.ico" />
+    <Content Include="Content\icons\history.ico" />
+    <Content Include="Content\icons\icq-away.ico" />
+    <Content Include="Content\icons\icq-dnd.ico" />
+    <Content Include="Content\icons\icq-freeforchat.ico" />
+    <Content Include="Content\icons\icq-invisible.ico" />
+    <Content Include="Content\icons\icq-na.ico" />
+    <Content Include="Content\icons\icq-occupied.ico" />
+    <Content Include="Content\icons\icq.ico" />
+    <Content Include="Content\icons\import.ico" />
+    <Content Include="Content\icons\info.ico" />
+    <Content Include="Content\icons\irc-arrow.ico" />
+    <Content Include="Content\icons\irc-away.ico" />
+    <Content Include="Content\icons\IRC-connect 48x48.ico" />
+    <Content Include="Content\icons\irc-join.ico" />
+    <Content Include="Content\icons\irc-list.ico" />
+    <Content Include="Content\icons\irc-quick.ico" />
+    <Content Include="Content\icons\irc-rename.ico" />
+    <Content Include="Content\icons\irc-server.ico" />
+    <Content Include="Content\icons\irc.ico" />
+    <Content Include="Content\icons\jabber-away.ico" />
+    <Content Include="Content\icons\jabber-control.ico" />
+    <Content Include="Content\icons\jabber-dnd.ico" />
+    <Content Include="Content\icons\jabber-freeforchat.ico" />
+    <Content Include="Content\icons\jabber-invisible.ico" />
+    <Content Include="Content\icons\jabber-na.ico" />
+    <Content Include="Content\icons\jabber.ico" />
+    <Content Include="Content\icons\lock.ico" />
+    <Content Include="Content\icons\message.ico" />
+    <Content Include="Content\icons\miranda-im.ico" />
+    <Content Include="Content\icons\msn-avatar.ico" />
+    <Content Include="Content\icons\msn-away.ico" />
+    <Content Include="Content\icons\msn-invisible.ico" />
+    <Content Include="Content\icons\msn-na.ico" />
+    <Content Include="Content\icons\msn-occupied.ico" />
+    <Content Include="Content\icons\msn-profile.ico" />
+    <Content Include="Content\icons\msn-service.ico" />
+    <Content Include="Content\icons\msn.ico" />
+    <Content Include="Content\icons\multi-user.ico" />
+    <Content Include="Content\icons\multisend.ico" />
+    <Content Include="Content\icons\netmeeting.ico" />
+    <Content Include="Content\icons\options.ico" />
+    <Content Include="Content\icons\phone.ico" />
+    <Content Include="Content\icons\plus.ico" />
+    <Content Include="Content\icons\rename-old.ico" />
+    <Content Include="Content\icons\search-networks.ico" />
+    <Content Include="Content\icons\status-away.ico" />
+    <Content Include="Content\icons\status-dnd.ico" />
+    <Content Include="Content\icons\status-freeforchat.ico" />
+    <Content Include="Content\icons\status-invisible.ico" />
+    <Content Include="Content\icons\status-lunch.ico" />
+    <Content Include="Content\icons\status-na.ico" />
+    <Content Include="Content\icons\status-occupied.ico" />
+    <Content Include="Content\icons\status-offline.ico" />
+    <Content Include="Content\icons\status-online.ico" />
+    <Content Include="Content\icons\status-phone.ico" />
+    <Content Include="Content\icons\status-universal-offline.ico" />
+    <Content Include="Content\icons\submit-bug.ico" />
+    <Content Include="Content\icons\time.ico" />
+    <Content Include="Content\icons\url.ico" />
+    <Content Include="Content\icons\vcard.ico" />
+    <Content Include="Content\icons\warn-user.ico" />
+    <Content Include="Content\icons\warning.ico" />
+    <Content Include="Content\icons\yahoo-away.ico" />
+    <Content Include="Content\icons\yahoo-dnd.ico" />
+    <Content Include="Content\icons\yahoo-invisible.ico" />
+    <Content Include="Content\icons\yahoo-na.ico" />
+    <Content Include="Content\icons\yahoo-occupied.ico" />
+    <Content Include="Content\icons\yahoo.ico" />
+>>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
@@ -553,11 +661,14 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-<<<<<<< HEAD
-    <Content Include="Scripts\pngfix\supersleight-min.js" />
+   <Content Include="Views\Home\cabron.aspx" />
+    <Content Include="Views\Home\Hola.aspx" />
+    <Content Include="Views\Home\eventos.aspx" />
+ <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-    <Content Include="Scripts\styles\Black\editor.png" />
+
+     <Content Include="Scripts\styles\Black\editor.png" />
     <Content Include="Scripts\styles\Black\imagebrowser.png" />
     <Content Include="Scripts\styles\Black\loading-image.gif" />
     <Content Include="Scripts\styles\Black\loading.gif" />
@@ -610,11 +721,8 @@
     <Content Include="Scripts\styles\Silver\sprite.png" />
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
-=======
-    <Content Include="Views\Factura\Index.aspx" />
->>>>>>> Prueba de colores
-    <Content Include="Views\Home\Light.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -650,12 +758,28 @@
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
-    <Content Include="Views\Shared\Light.Master" />
+    <None Include="Models\mtbMalaga.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>mtbMalaga.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\pngfix\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\mtbMalaga.dbml.layout">
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+=======
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\pngfix\Thumbs.db" />
-  </ItemGroup>
+>>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
