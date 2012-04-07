@@ -1,0 +1,42 @@
+﻿.crud table 
+{
+    border:0px;
+    width:%;
+    float:left;
+    position:relative;
+}
+.crudPar
+{
+    background-color:#FFFAFA;
+}
+.crudImpar
+{
+    background-color:#F0FFF0;
+}
+.crudPar:hover
+{
+    background-color:#FFF0F5;
+}
+.crudImpar:hover
+{
+    background-color:#FFF0F5;
+}
+.crudButtons
+{
+    visibility:hidden;
+}
+.crudButtons:hover
+{
+    visibility:visible;
+}
+#crudTable
+{
+    position:relative;
+    width:100%;
+}
+#buttonNew 
+{
+    position:relative;
+    float:right;
+}
+
