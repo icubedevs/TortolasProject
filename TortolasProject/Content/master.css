@@ -1,0 +1,108 @@
+/* 
+    Document   : Master.css
+    Created on : 02-abr-2012, 12:04:11
+    Author     : IsmiKin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+root { 
+    display: block;
+}
+
+body{
+    background-color:#EAEAEA;   
+    font-size: 13px;
+    font-family: Arial, SunSans-Regular, Sans-Serif;
+    padding:0;
+    margin:0;
+    
+}
+
+
+#cabecera
+{
+    width:100%;
+    height:40px;
+    padding:10px;
+    background-color:#3B5998;
+    position: fixed;   
+}
+
+#logo{
+    float: left;
+    width:20%;
+}
+
+#topnav
+{
+    float:left;
+    position:fixed;
+}
+
+h1{
+    font-size: 30px;
+}
+
+#leftbar
+{
+    display:block;  
+    border:0px solid #222; 
+    position:relative; 
+    font:16px Tahoma, Sans-serif;
+    margin-top:60px;
+}
+
+#leftbar li
+{
+    margin-left: 10px;
+    width:inherit;
+    color:black; 
+    text-decoration:none;
+}
+
+#leftbar li:hover
+{
+    background-color: #262626;
+}
+
+
+#leftbar ul
+{
+    padding:0; 
+    margin:0;
+}
+
+
+#container{
+    height:100%;
+    margin-bottom: 10px;
+    margin: 0 auto;
+}
+
+#containerleft{
+        
+        float: left;
+        width: 15%;
+        padding: 0px;
+        font-family: Georgia,'Times New Roman',times,serif;
+        background-color:#DCDCDC;
+        height:100%;
+        
+}
+
+
+#containercenter{
+    width: 7%;
+    float:left;
+    background-color:#EAEAEA;
+   
+     
+}
+
+#containeright{
+        
+        float: left;
+        width: 15%;
+        padding: 0;
+}

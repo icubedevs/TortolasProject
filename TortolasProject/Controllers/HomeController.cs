@@ -20,7 +20,7 @@ namespace TortolasProject.Controllers
         {
             return View();
         }
-        public ActionResult Hola()
+ public ActionResult Hola()
         {
             return View();
         }
@@ -29,6 +29,12 @@ namespace TortolasProject.Controllers
             return View();
         }
 
+    public ActionResult Captacion()
+        {
+            return View();
+        }
+        
 
-    }
+
+    } 
 }
