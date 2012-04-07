@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -65,14 +66,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\mtbMalaga.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
     <Content Include="Content\crud.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
@@ -173,6 +182,7 @@
     <Content Include="Content\icons\yahoo-na.ico" />
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
+>>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
@@ -651,15 +661,15 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-<<<<<<< HEAD
-    <Content Include="Views\Home\cabron.aspx" />
+   <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
 =======
-    <Content Include="Scripts\pngfix\supersleight-min.js" />
+ <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-    <Content Include="Scripts\styles\Black\editor.png" />
+
+     <Content Include="Scripts\styles\Black\editor.png" />
     <Content Include="Scripts\styles\Black\imagebrowser.png" />
     <Content Include="Scripts\styles\Black\loading-image.gif" />
     <Content Include="Scripts\styles\Black\loading.gif" />
@@ -712,9 +722,9 @@
     <Content Include="Scripts\styles\Silver\sprite.png" />
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
-    <Content Include="Views\Home\Light.aspx" />
->>>>>>> c8d2bd879b42e29d8bb91b1b3e3d7d3ac1494b08
+
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -753,12 +763,26 @@
 <<<<<<< HEAD
 =======
   <ItemGroup>
-    <Content Include="Views\Shared\Light.Master" />
+    <None Include="Models\mtbMalaga.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>mtbMalaga.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\pngfix\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\mtbMalaga.dbml.layout">
+      <DependentUpon>mtbMalaga.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+=======
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\pngfix\Thumbs.db" />
-  </ItemGroup>
->>>>>>> c8d2bd879b42e29d8bb91b1b3e3d7d3ac1494b08
+>>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

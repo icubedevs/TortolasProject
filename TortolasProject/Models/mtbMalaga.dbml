@@ -1,29 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icube2" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icube2;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icube2ConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Products" Member="Products">
-    <Type Name="Products">
-      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="ProductName" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbUsuario" Member="tbUsuario">
-    <Type Name="tbUsuario">
-      <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nickname" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="Contraseña" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="Email" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Apellidos" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Direccion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
-      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="DNI" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Association Name="tbUsuario_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbDocInscripcion" />
-      <Association Name="tbUsuario_tbEvento" Member="tbEvento" ThisKey="idUsuario" OtherKey="FKUsuarioCreador" Type="tbEvento" />
-      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbPedidoUsuario" />
-      <Association Name="tbUsuario_tbRuta" Member="tbRuta" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbRuta" />
-      <Association Name="tbUsuario_tbSocio" Member="tbSocio" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbSocio" />
-    </Type>
-  </Table>
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icubeDB" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbAnuncio" Member="tbAnuncio">
     <Type Name="tbAnuncio">
       <Column Name="idAnuncio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -37,8 +13,8 @@
     <Type Name="tbArticulo">
       <Column Name="idArticulo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="FKInventario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="Imagen" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Imagen" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="FKLineaFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -50,8 +26,8 @@
   </Table>
   <Table Name="dbo.tbAsociacion" Member="tbAsociacion">
     <Type Name="tbAsociacion">
-      <Column Name="Tematica" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="Direccion" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Tematica" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbEmpresa_tbAsociacion" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="CIF" Type="tbEmpresa" IsForeignKey="true" />
     </Type>
@@ -66,7 +42,7 @@
   </Table>
   <Table Name="dbo.tbContrato" Member="tbContrato">
     <Type Name="tbContrato">
-      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FKJuntaDirectiva" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FechaCaducidad" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -122,9 +98,9 @@
   <Table Name="dbo.tbDescuentoSocio" Member="tbDescuentoSocio">
     <Type Name="tbDescuentoSocio">
       <Column Name="idDescuentoSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Tipo" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Utilidad" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Utilidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="FechaExpiracion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
     </Type>
@@ -137,18 +113,18 @@
       <Column Name="FKEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbCursillo_tbDocInscripcion" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
-      <Association Name="tbUsuario_tbDocInscripcion" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
       <Association Name="tbEvento_tbDocInscripcion" Member="tbEvento" ThisKey="FKEvento" OtherKey="idEvento" Type="tbEvento" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbDocInscripcion" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbEmpresa" Member="tbEmpresa">
     <Type Name="tbEmpresa">
       <Column Name="CIF" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Localidad" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="DireccionWeb" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DireccionWeb" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
       <Column Name="TelefonodeContacto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="tbEmpresa_tbAsociacion" Member="tbAsociacion" ThisKey="CIF" OtherKey="FKCodigoEmpresa" Type="tbAsociacion" Cardinality="One" />
       <Association Name="tbEmpresa_tbContrato" Member="tbContrato" ThisKey="CIF" OtherKey="FKCodigoEmpresa" Type="tbContrato" />
       <Association Name="tbEmpresa_tbConvenio" Member="tbConvenio" ThisKey="CIF" OtherKey="FKCodigoEmpresa" Type="tbConvenio" />
@@ -159,15 +135,15 @@
   <Table Name="dbo.tbEstadoFactura" Member="tbEstadoFactura">
     <Type Name="tbEstadoFactura">
       <Column Name="idEstadoFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Association Name="tbEstadoFactura_tbFactura" Member="tbFactura" ThisKey="idEstadoFactura" OtherKey="FKEstado" Type="tbFactura" />
     </Type>
   </Table>
   <Table Name="dbo.tbEvento" Member="tbEvento">
     <Type Name="tbEvento">
       <Column Name="idEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Titulo" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="Lugar" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Lugar" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Actividad" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="FechaAperturaInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="FechaLimiteInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -227,15 +203,15 @@
   <Table Name="dbo.tbInventario" Member="tbInventario">
     <Type Name="tbInventario">
       <Column Name="idInventario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Localizacion" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Localizacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Telefono" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Responsable" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Association Name="tbInventario_tbArticulo" Member="tbArticulo" ThisKey="idInventario" OtherKey="FKInventario" Type="tbArticulo" />
     </Type>
   </Table>
   <Table Name="dbo.tbJuntaDirectiva" Member="tbJuntaDirectiva">
     <Type Name="tbJuntaDirectiva">
-      <Column Name="CargoDirectivo" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="CargoDirectivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="FKSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbJuntaDirectiva_tbContrato" Member="tbContrato" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbContrato" />
       <Association Name="tbJuntaDirectiva_tbCursillo" Member="tbCursillo" ThisKey="FKSocio" OtherKey="FKUsuarioCreador" Type="tbCursillo" />
@@ -276,10 +252,10 @@
     <Type Name="tbMovimientoGasto">
       <Column Name="idMovimientoGasto" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Concepto" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Responsable" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="tbFactura_tbMovimientoGasto" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
     </Type>
@@ -288,17 +264,17 @@
     <Type Name="tbMovimientoIngreso">
       <Column Name="idMovimientoIngreso" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="Concepto" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="Responsable" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="tbFactura_tbMovimientoIngreso" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbPatrocinador" Member="tbPatrocinador">
     <Type Name="tbPatrocinador">
-      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idPatrocinador" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbPatrocinador_tbPublicidad" Member="tbPublicidad" ThisKey="FKCodigoEmpresa" OtherKey="FKCodigoEmpresa" Type="tbPublicidad" />
@@ -336,8 +312,8 @@
   </Table>
   <Table Name="dbo.tbProveedores" Member="tbProveedores">
     <Type Name="tbProveedores">
-      <Column Name="Mercado" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
-      <Column Name="DireccionFisica" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="Mercado" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DireccionFisica" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="CodigoPostal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
       <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idProveedores" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -347,7 +323,7 @@
   </Table>
   <Table Name="dbo.tbPublicidad" Member="tbPublicidad">
     <Type Name="tbPublicidad">
-      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="idPublicidad" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbPublicidad_tbAvisoRetiradaPublicidad" Member="tbAvisoRetiradaPublicidad" ThisKey="idPublicidad" OtherKey="FKCodigoPublicidad" Type="tbAvisoRetiradaPublicidad" />
@@ -373,11 +349,11 @@
   <Table Name="dbo.tbRuta" Member="tbRuta">
     <Type Name="tbRuta">
       <Column Name="idRuta" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="URL" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="rutaArchivo" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="rutaArchivo" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
       <Association Name="tbUsuario_tbRuta" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
     </Type>
   </Table>
@@ -385,11 +361,29 @@
     <Type Name="tbSocio">
       <Column Name="idSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="NumeroSocio" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Estado" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="tbSocio_tbFactura" Member="tbFactura" ThisKey="FKUsuario" OtherKey="FKUsuario" Type="tbFactura" />
       <Association Name="tbSocio_tbJuntaDirectiva" Member="tbJuntaDirectiva" ThisKey="idSocio" OtherKey="FKSocio" Type="tbJuntaDirectiva" Cardinality="One" />
       <Association Name="tbUsuario_tbSocio" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUsuario" Member="tbUsuario">
+    <Type Name="tbUsuario">
+      <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nickname" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Contraseña" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Email" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DNI" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Association Name="tbUsuario_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbDocInscripcion" />
+      <Association Name="tbUsuario_tbEvento" Member="tbEvento" ThisKey="idUsuario" OtherKey="FKUsuarioCreador" Type="tbEvento" />
+      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbPedidoUsuario" />
+      <Association Name="tbUsuario_tbRuta" Member="tbRuta" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbRuta" />
+      <Association Name="tbUsuario_tbSocio" Member="tbSocio" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbSocio" />
     </Type>
   </Table>
 </Database>
