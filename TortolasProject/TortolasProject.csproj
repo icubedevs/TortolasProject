@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\crud.css" />
+    <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -600,6 +601,8 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jsactions\captacion.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo.binder.min.js" />
@@ -658,14 +661,15 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-   <Content Include="Views\Home\cabron.aspx" />
+    <Content Include="Views\Facturas\Create.ascx" />
+    <Content Include="Views\Facturas\Prueba.ascx" />
+    <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
- <Content Include="Scripts\pngfix\supersleight-min.js" />
+    <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-
-     <Content Include="Scripts\styles\Black\editor.png" />
+    <Content Include="Scripts\styles\Black\editor.png" />
     <Content Include="Scripts\styles\Black\imagebrowser.png" />
     <Content Include="Scripts\styles\Black\loading-image.gif" />
     <Content Include="Scripts\styles\Black\loading.gif" />
@@ -751,9 +755,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\mtbMalaga.dbml">
