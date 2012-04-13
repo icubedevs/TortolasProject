@@ -30,6 +30,9 @@ namespace TortolasProject.Models
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
+    partial void InserttbUsuario(tbUsuario instance);
+    partial void UpdatetbUsuario(tbUsuario instance);
+    partial void DeletetbUsuario(tbUsuario instance);
     partial void InserttbAnuncio(tbAnuncio instance);
     partial void UpdatetbAnuncio(tbAnuncio instance);
     partial void DeletetbAnuncio(tbAnuncio instance);
@@ -126,9 +129,6 @@ namespace TortolasProject.Models
     partial void InserttbSocio(tbSocio instance);
     partial void UpdatetbSocio(tbSocio instance);
     partial void DeletetbSocio(tbSocio instance);
-    partial void InserttbUsuario(tbUsuario instance);
-    partial void UpdatetbUsuario(tbUsuario instance);
-    partial void DeletetbUsuario(tbUsuario instance);
     #endregion
 		
 		public mtbMalagaDataContext() : 
@@ -159,6 +159,14 @@ namespace TortolasProject.Models
 				base(connection, mappingSource)
 		{
 			OnCreated();
+		}
+		
+		public System.Data.Linq.Table<tbUsuario> tbUsuario
+		{
+			get
+			{
+				return this.GetTable<tbUsuario>();
+			}
 		}
 		
 		public System.Data.Linq.Table<tbAnuncio> tbAnuncio
@@ -416,13 +424,399 @@ namespace TortolasProject.Models
 				return this.GetTable<tbSocio>();
 			}
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUsuario")]
+	public partial class tbUsuario : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		public System.Data.Linq.Table<tbUsuario> tbUsuario
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _idUsuario;
+		
+		private string _Nickname;
+		
+		private string _Contraseña;
+		
+		private string _Email;
+		
+		private string _Nombre;
+		
+		private string _Apellidos;
+		
+		private string _Direccion;
+		
+		private System.Nullable<System.DateTime> _FechaNacimiento;
+		
+		private string _DNI;
+		
+		private EntitySet<tbDocInscripcion> _tbDocInscripcion;
+		
+		private EntitySet<tbEvento> _tbEvento;
+		
+		private EntitySet<tbPedidoUsuario> _tbPedidoUsuario;
+		
+		private EntitySet<tbRuta> _tbRuta;
+		
+		private EntitySet<tbSocio> _tbSocio;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidUsuarioChanging(System.Guid value);
+    partial void OnidUsuarioChanged();
+    partial void OnNicknameChanging(string value);
+    partial void OnNicknameChanged();
+    partial void OnContraseñaChanging(string value);
+    partial void OnContraseñaChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnApellidosChanging(string value);
+    partial void OnApellidosChanged();
+    partial void OnDireccionChanging(string value);
+    partial void OnDireccionChanged();
+    partial void OnFechaNacimientoChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaNacimientoChanged();
+    partial void OnDNIChanging(string value);
+    partial void OnDNIChanged();
+    #endregion
+		
+		public tbUsuario()
+		{
+			this._tbDocInscripcion = new EntitySet<tbDocInscripcion>(new Action<tbDocInscripcion>(this.attach_tbDocInscripcion), new Action<tbDocInscripcion>(this.detach_tbDocInscripcion));
+			this._tbEvento = new EntitySet<tbEvento>(new Action<tbEvento>(this.attach_tbEvento), new Action<tbEvento>(this.detach_tbEvento));
+			this._tbPedidoUsuario = new EntitySet<tbPedidoUsuario>(new Action<tbPedidoUsuario>(this.attach_tbPedidoUsuario), new Action<tbPedidoUsuario>(this.detach_tbPedidoUsuario));
+			this._tbRuta = new EntitySet<tbRuta>(new Action<tbRuta>(this.attach_tbRuta), new Action<tbRuta>(this.detach_tbRuta));
+			this._tbSocio = new EntitySet<tbSocio>(new Action<tbSocio>(this.attach_tbSocio), new Action<tbSocio>(this.detach_tbSocio));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid idUsuario
 		{
 			get
 			{
-				return this.GetTable<tbUsuario>();
+				return this._idUsuario;
 			}
+			set
+			{
+				if ((this._idUsuario != value))
+				{
+					this.OnidUsuarioChanging(value);
+					this.SendPropertyChanging();
+					this._idUsuario = value;
+					this.SendPropertyChanged("idUsuario");
+					this.OnidUsuarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nickname", DbType="VarChar(100)")]
+		public string Nickname
+		{
+			get
+			{
+				return this._Nickname;
+			}
+			set
+			{
+				if ((this._Nickname != value))
+				{
+					this.OnNicknameChanging(value);
+					this.SendPropertyChanging();
+					this._Nickname = value;
+					this.SendPropertyChanged("Nickname");
+					this.OnNicknameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contraseña", DbType="VarChar(100)")]
+		public string Contraseña
+		{
+			get
+			{
+				return this._Contraseña;
+			}
+			set
+			{
+				if ((this._Contraseña != value))
+				{
+					this.OnContraseñaChanging(value);
+					this.SendPropertyChanging();
+					this._Contraseña = value;
+					this.SendPropertyChanged("Contraseña");
+					this.OnContraseñaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(100) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
+		public string Apellidos
+		{
+			get
+			{
+				return this._Apellidos;
+			}
+			set
+			{
+				if ((this._Apellidos != value))
+				{
+					this.OnApellidosChanging(value);
+					this.SendPropertyChanging();
+					this._Apellidos = value;
+					this.SendPropertyChanged("Apellidos");
+					this.OnApellidosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this.OnDireccionChanging(value);
+					this.SendPropertyChanging();
+					this._Direccion = value;
+					this.SendPropertyChanged("Direccion");
+					this.OnDireccionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaNacimiento", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaNacimiento
+		{
+			get
+			{
+				return this._FechaNacimiento;
+			}
+			set
+			{
+				if ((this._FechaNacimiento != value))
+				{
+					this.OnFechaNacimientoChanging(value);
+					this.SendPropertyChanging();
+					this._FechaNacimiento = value;
+					this.SendPropertyChanged("FechaNacimiento");
+					this.OnFechaNacimientoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="VarChar(9)")]
+		public string DNI
+		{
+			get
+			{
+				return this._DNI;
+			}
+			set
+			{
+				if ((this._DNI != value))
+				{
+					this.OnDNIChanging(value);
+					this.SendPropertyChanging();
+					this._DNI = value;
+					this.SendPropertyChanged("DNI");
+					this.OnDNIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbDocInscripcion", Storage="_tbDocInscripcion", ThisKey="idUsuario", OtherKey="FKUsuario")]
+		public EntitySet<tbDocInscripcion> tbDocInscripcion
+		{
+			get
+			{
+				return this._tbDocInscripcion;
+			}
+			set
+			{
+				this._tbDocInscripcion.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbEvento", Storage="_tbEvento", ThisKey="idUsuario", OtherKey="FKUsuarioCreador")]
+		public EntitySet<tbEvento> tbEvento
+		{
+			get
+			{
+				return this._tbEvento;
+			}
+			set
+			{
+				this._tbEvento.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbPedidoUsuario", Storage="_tbPedidoUsuario", ThisKey="idUsuario", OtherKey="FKUsuario")]
+		public EntitySet<tbPedidoUsuario> tbPedidoUsuario
+		{
+			get
+			{
+				return this._tbPedidoUsuario;
+			}
+			set
+			{
+				this._tbPedidoUsuario.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbRuta", Storage="_tbRuta", ThisKey="idUsuario", OtherKey="FKUsuario")]
+		public EntitySet<tbRuta> tbRuta
+		{
+			get
+			{
+				return this._tbRuta;
+			}
+			set
+			{
+				this._tbRuta.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbSocio", Storage="_tbSocio", ThisKey="idUsuario", OtherKey="FKUsuario")]
+		public EntitySet<tbSocio> tbSocio
+		{
+			get
+			{
+				return this._tbSocio;
+			}
+			set
+			{
+				this._tbSocio.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbDocInscripcion(tbDocInscripcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbDocInscripcion(tbDocInscripcion entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbEvento(tbEvento entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbEvento(tbEvento entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbPedidoUsuario(tbPedidoUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbPedidoUsuario(tbPedidoUsuario entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbRuta(tbRuta entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbRuta(tbRuta entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbSocio(tbSocio entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbSocio(tbSocio entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
 		}
 	}
 	
@@ -2678,9 +3072,9 @@ namespace TortolasProject.Models
 		
 		private EntityRef<tbCursillo> _tbCursillo;
 		
-		private EntityRef<tbEvento> _tbEvento;
-		
 		private EntityRef<tbUsuario> _tbUsuario;
+		
+		private EntityRef<tbEvento> _tbEvento;
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
@@ -2701,8 +3095,8 @@ namespace TortolasProject.Models
 		public tbDocInscripcion()
 		{
 			this._tbCursillo = default(EntityRef<tbCursillo>);
-			this._tbEvento = default(EntityRef<tbEvento>);
 			this._tbUsuario = default(EntityRef<tbUsuario>);
+			this._tbEvento = default(EntityRef<tbEvento>);
 			OnCreated();
 		}
 		
@@ -2852,40 +3246,6 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbDocInscripcion", Storage="_tbEvento", ThisKey="FKEvento", OtherKey="idEvento", IsForeignKey=true)]
-		public tbEvento tbEvento
-		{
-			get
-			{
-				return this._tbEvento.Entity;
-			}
-			set
-			{
-				tbEvento previousValue = this._tbEvento.Entity;
-				if (((previousValue != value) 
-							|| (this._tbEvento.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbEvento.Entity = null;
-						previousValue.tbDocInscripcion.Remove(this);
-					}
-					this._tbEvento.Entity = value;
-					if ((value != null))
-					{
-						value.tbDocInscripcion.Add(this);
-						this._FKEvento = value.idEvento;
-					}
-					else
-					{
-						this._FKEvento = default(System.Guid);
-					}
-					this.SendPropertyChanged("tbEvento");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbDocInscripcion", Storage="_tbUsuario", ThisKey="FKUsuario", OtherKey="idUsuario", IsForeignKey=true)]
 		public tbUsuario tbUsuario
 		{
@@ -2916,6 +3276,40 @@ namespace TortolasProject.Models
 						this._FKUsuario = default(System.Guid);
 					}
 					this.SendPropertyChanged("tbUsuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbDocInscripcion", Storage="_tbEvento", ThisKey="FKEvento", OtherKey="idEvento", IsForeignKey=true)]
+		public tbEvento tbEvento
+		{
+			get
+			{
+				return this._tbEvento.Entity;
+			}
+			set
+			{
+				tbEvento previousValue = this._tbEvento.Entity;
+				if (((previousValue != value) 
+							|| (this._tbEvento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbEvento.Entity = null;
+						previousValue.tbDocInscripcion.Remove(this);
+					}
+					this._tbEvento.Entity = value;
+					if ((value != null))
+					{
+						value.tbDocInscripcion.Add(this);
+						this._FKEvento = value.idEvento;
+					}
+					else
+					{
+						this._FKEvento = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbEvento");
 				}
 			}
 		}
@@ -8294,400 +8688,6 @@ namespace TortolasProject.Models
 		{
 			this.SendPropertyChanging();
 			entity.tbSocio = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUsuario")]
-	public partial class tbUsuario : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _idUsuario;
-		
-		private string _Nickname;
-		
-		private string _Contraseña;
-		
-		private System.Guid _Email;
-		
-		private string _Nombre;
-		
-		private string _Apellidos;
-		
-		private string _Direccion;
-		
-		private System.Nullable<System.DateTime> _FechaNacimiento;
-		
-		private string _DNI;
-		
-		private EntitySet<tbDocInscripcion> _tbDocInscripcion;
-		
-		private EntitySet<tbEvento> _tbEvento;
-		
-		private EntitySet<tbPedidoUsuario> _tbPedidoUsuario;
-		
-		private EntitySet<tbRuta> _tbRuta;
-		
-		private EntitySet<tbSocio> _tbSocio;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidUsuarioChanging(System.Guid value);
-    partial void OnidUsuarioChanged();
-    partial void OnNicknameChanging(string value);
-    partial void OnNicknameChanged();
-    partial void OnContraseñaChanging(string value);
-    partial void OnContraseñaChanged();
-    partial void OnEmailChanging(System.Guid value);
-    partial void OnEmailChanged();
-    partial void OnNombreChanging(string value);
-    partial void OnNombreChanged();
-    partial void OnApellidosChanging(string value);
-    partial void OnApellidosChanged();
-    partial void OnDireccionChanging(string value);
-    partial void OnDireccionChanged();
-    partial void OnFechaNacimientoChanging(System.Nullable<System.DateTime> value);
-    partial void OnFechaNacimientoChanged();
-    partial void OnDNIChanging(string value);
-    partial void OnDNIChanged();
-    #endregion
-		
-		public tbUsuario()
-		{
-			this._tbDocInscripcion = new EntitySet<tbDocInscripcion>(new Action<tbDocInscripcion>(this.attach_tbDocInscripcion), new Action<tbDocInscripcion>(this.detach_tbDocInscripcion));
-			this._tbEvento = new EntitySet<tbEvento>(new Action<tbEvento>(this.attach_tbEvento), new Action<tbEvento>(this.detach_tbEvento));
-			this._tbPedidoUsuario = new EntitySet<tbPedidoUsuario>(new Action<tbPedidoUsuario>(this.attach_tbPedidoUsuario), new Action<tbPedidoUsuario>(this.detach_tbPedidoUsuario));
-			this._tbRuta = new EntitySet<tbRuta>(new Action<tbRuta>(this.attach_tbRuta), new Action<tbRuta>(this.detach_tbRuta));
-			this._tbSocio = new EntitySet<tbSocio>(new Action<tbSocio>(this.attach_tbSocio), new Action<tbSocio>(this.detach_tbSocio));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idUsuario", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid idUsuario
-		{
-			get
-			{
-				return this._idUsuario;
-			}
-			set
-			{
-				if ((this._idUsuario != value))
-				{
-					this.OnidUsuarioChanging(value);
-					this.SendPropertyChanging();
-					this._idUsuario = value;
-					this.SendPropertyChanged("idUsuario");
-					this.OnidUsuarioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nickname", DbType="VarChar(100)")]
-		public string Nickname
-		{
-			get
-			{
-				return this._Nickname;
-			}
-			set
-			{
-				if ((this._Nickname != value))
-				{
-					this.OnNicknameChanging(value);
-					this.SendPropertyChanging();
-					this._Nickname = value;
-					this.SendPropertyChanged("Nickname");
-					this.OnNicknameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Contraseña", DbType="VarChar(100)")]
-		public string Contraseña
-		{
-			get
-			{
-				return this._Contraseña;
-			}
-			set
-			{
-				if ((this._Contraseña != value))
-				{
-					this.OnContraseñaChanging(value);
-					this.SendPropertyChanging();
-					this._Contraseña = value;
-					this.SendPropertyChanged("Contraseña");
-					this.OnContraseñaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Nombre
-		{
-			get
-			{
-				return this._Nombre;
-			}
-			set
-			{
-				if ((this._Nombre != value))
-				{
-					this.OnNombreChanging(value);
-					this.SendPropertyChanging();
-					this._Nombre = value;
-					this.SendPropertyChanged("Nombre");
-					this.OnNombreChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="VarChar(100) NOT NULL", CanBeNull=false)]
-		public string Apellidos
-		{
-			get
-			{
-				return this._Apellidos;
-			}
-			set
-			{
-				if ((this._Apellidos != value))
-				{
-					this.OnApellidosChanging(value);
-					this.SendPropertyChanging();
-					this._Apellidos = value;
-					this.SendPropertyChanged("Apellidos");
-					this.OnApellidosChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string Direccion
-		{
-			get
-			{
-				return this._Direccion;
-			}
-			set
-			{
-				if ((this._Direccion != value))
-				{
-					this.OnDireccionChanging(value);
-					this.SendPropertyChanging();
-					this._Direccion = value;
-					this.SendPropertyChanged("Direccion");
-					this.OnDireccionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaNacimiento", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaNacimiento
-		{
-			get
-			{
-				return this._FechaNacimiento;
-			}
-			set
-			{
-				if ((this._FechaNacimiento != value))
-				{
-					this.OnFechaNacimientoChanging(value);
-					this.SendPropertyChanging();
-					this._FechaNacimiento = value;
-					this.SendPropertyChanged("FechaNacimiento");
-					this.OnFechaNacimientoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="VarChar(9)")]
-		public string DNI
-		{
-			get
-			{
-				return this._DNI;
-			}
-			set
-			{
-				if ((this._DNI != value))
-				{
-					this.OnDNIChanging(value);
-					this.SendPropertyChanging();
-					this._DNI = value;
-					this.SendPropertyChanged("DNI");
-					this.OnDNIChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbDocInscripcion", Storage="_tbDocInscripcion", ThisKey="idUsuario", OtherKey="FKUsuario")]
-		public EntitySet<tbDocInscripcion> tbDocInscripcion
-		{
-			get
-			{
-				return this._tbDocInscripcion;
-			}
-			set
-			{
-				this._tbDocInscripcion.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbEvento", Storage="_tbEvento", ThisKey="idUsuario", OtherKey="FKUsuarioCreador")]
-		public EntitySet<tbEvento> tbEvento
-		{
-			get
-			{
-				return this._tbEvento;
-			}
-			set
-			{
-				this._tbEvento.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbPedidoUsuario", Storage="_tbPedidoUsuario", ThisKey="idUsuario", OtherKey="FKUsuario")]
-		public EntitySet<tbPedidoUsuario> tbPedidoUsuario
-		{
-			get
-			{
-				return this._tbPedidoUsuario;
-			}
-			set
-			{
-				this._tbPedidoUsuario.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbRuta", Storage="_tbRuta", ThisKey="idUsuario", OtherKey="FKUsuario")]
-		public EntitySet<tbRuta> tbRuta
-		{
-			get
-			{
-				return this._tbRuta;
-			}
-			set
-			{
-				this._tbRuta.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbSocio", Storage="_tbSocio", ThisKey="idUsuario", OtherKey="FKUsuario")]
-		public EntitySet<tbSocio> tbSocio
-		{
-			get
-			{
-				return this._tbSocio;
-			}
-			set
-			{
-				this._tbSocio.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbDocInscripcion(tbDocInscripcion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = this;
-		}
-		
-		private void detach_tbDocInscripcion(tbDocInscripcion entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = null;
-		}
-		
-		private void attach_tbEvento(tbEvento entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = this;
-		}
-		
-		private void detach_tbEvento(tbEvento entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = null;
-		}
-		
-		private void attach_tbPedidoUsuario(tbPedidoUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = this;
-		}
-		
-		private void detach_tbPedidoUsuario(tbPedidoUsuario entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = null;
-		}
-		
-		private void attach_tbRuta(tbRuta entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = this;
-		}
-		
-		private void detach_tbRuta(tbRuta entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = null;
-		}
-		
-		private void attach_tbSocio(tbSocio entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = this;
-		}
-		
-		private void detach_tbSocio(tbSocio entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUsuario = null;
 		}
 	}
 }
