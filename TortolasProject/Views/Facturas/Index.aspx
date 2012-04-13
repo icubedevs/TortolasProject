@@ -6,6 +6,7 @@
 
 <asp:Content ID="FacturasIndexScript" ContentPlaceHolderID="ScriptContent" runat="server">
     <script src="<%: Url.Content("~/Scripts/jsactions/Facturas/facturasNav.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Facturas/facturasIndex.js") %>" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="FacturasIndexTitle" ContentPlaceHolderID="TitleContent" runat="server">
@@ -15,16 +16,19 @@
 <asp:Content ID="FacturasIndexMain" ContentPlaceHolderID="MainContent" runat="server">
     <div id="FacturasNav">
         <ul>
-            <li>Nueva factura</li>
-            <li>Sólo ingresos</li>
-            <li>Sólo gastos</li>
-            <li>Movimientos</li>
-            <li>Gráficos contables</li>
+            <li id="nuevaFacturaButtonNav">Nueva factura</li>
+            <li id="ingresosButtonNav">Sólo ingresos</li>
+            <li id="gastosButtonNav">Sólo gastos</li>
+            <li id="movimientosButtonNav">Movimientos</li>
+            <li id="graficosContablesButtonNav">Gráficos contables</li>
         </ul>
         <div id="FacturasFilter">Filtro ></div>
     </div>
 
-    <input id="ButtonPulsa" type="button" value="Pulsar" title="Pulsar" />
     <div id="divPruebaAjax">AJAX</div>
+
+    <div id="FacturasIndexGrid">
+        
+    </div>
 </asp:Content>
 
