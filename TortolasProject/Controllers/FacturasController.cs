@@ -25,7 +25,13 @@ namespace TortolasProject.Controllers
         {
             return PartialView("Create");
         }
-        
+
+        public ActionResult Details(Guid id)
+        {
+
+            tbUsuario usuario = FacturasRepo.details(id);
+            return PartialView("Details", usuario);
+        }
         //LeerFacturas
         [HttpPost]
         public ActionResult leerTodos()
@@ -41,40 +47,6 @@ namespace TortolasProject.Controllers
             
 
             return Json(usuarios);
-        }
-
-        public class usuarioPrueba
-        {
-            public Guid idUsuario { get; set;}
-            public String Nickname { get; set;}
-            public String DNI { get; set;}
-            public String Email { get; set;}
-        }
-
-        [HttpPost]
-        public ActionResult leerPrueba()
-        {
-            List<usuarioPrueba> listaUsuarios = new List<usuarioPrueba>();
-            
-            usuarioPrueba dani = new usuarioPrueba{
-                idUsuario = new Guid(),
-                Nickname = "dani",
-                Email = "dani@dani.com",
-                DNI = "123456789"
-            };
-
-            usuarioPrueba ismi = new usuarioPrueba
-            {
-                idUsuario = new Guid(),
-                Nickname = "ismi",
-                Email = "ismi@dani.com",
-                DNI = "123456389"
-            };
-
-            listaUsuarios.Add(dani);
-            listaUsuarios.Add(ismi);
-
-            return Json(listaUsuarios);           
-        }
+        }   
     }
 }
