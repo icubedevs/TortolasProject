@@ -13,8 +13,10 @@
     });
 
     $("#gastosButtonNav").click(function () {
-        $("#divPruebaAjax").html("Sólo gastos view");
-        $("#FacturasIndexGrid").show();
+        $.post('Facturas/Details', function (data) {
+            $("#divPruebaAjax").html(data);
+            $("#FacturasIndexGrid").hide();
+        });
     });
 
     $("#movimientosButtonNav").click(function () {

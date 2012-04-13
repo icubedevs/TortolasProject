@@ -11,7 +11,7 @@
         });
     }
     $("#FacturasIndexGrid").kendoGrid({
-        height: 200,
+        height: 400,
         columns: [
             {
                 field: "idUsuario",
@@ -28,19 +28,27 @@
             {
                 field: "DNI",
                 title: "DNI"
+            },
+            {
+               command: "Detalles"
             }
         ],
         dataSource:
         {
             transport: {
                 read: {
-                    url: "Facturas/leerPrueba",
+                    url: "Facturas/leerTodos",
                     dataType: "json",
                     type: "POST"
-                }
+                }      
             }
         }
     });
 
 
 });
+
+$(".k-grid-content tr").live('click', function () {
+    alert("Has pulsado en una fila);
+});
+
