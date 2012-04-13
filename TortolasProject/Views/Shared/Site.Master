@@ -10,8 +10,9 @@
     <link href="../../Content/crud.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/slide.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/style.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../Scripts/styles/kendo.default.min.css"  rel="stylesheet" type="text/css" />
+    <link href="../../Scripts/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="CssContent" runat="server" />		   
-  <!--  <link href="../../Content/light.css" rel="stylesheet" type="text/css" /> -->
     <script src="<%: Url.Content("~/Scripts/jquery-1.7.2.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/kendo.all.min.js") %>" type="text/javascript"></script>

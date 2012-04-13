@@ -126,7 +126,7 @@ h1{
     
     width:845px;
     height:100%;
-    margin:0px;
+    margin:0px auto;
     padding:10px 210px; /* 210px por ser el tamaño del containerLeft + 10px. */
     
     
