@@ -28,8 +28,7 @@ namespace TortolasProject.Controllers
 
         public ActionResult Details(Guid id)
         {
-
-            tbUsuario usuario = FacturasRepo.details(id);
+            tbUsuario usuario = FacturasRepo.details(id);   
             return PartialView("Details", usuario);
         }
         //LeerFacturas

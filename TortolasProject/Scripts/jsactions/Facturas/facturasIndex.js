@@ -49,6 +49,6 @@
 });
 
 $(".k-grid-content tr").live('click', function () {
-    alert("Has pulsado en una fila);
+    alert("Has pulsado en una fila");
 });
 
