@@ -58,5 +58,22 @@
                  </tr>
         <% } %>
     </table>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#buttonAjax").click(function () {
+
+                $.ajax({
+                    type: "POST",
+                    url: "Empresas/Prueba",
+                    data: { texto: "hola", numero: 1 }
+                }).success(function (data) {
+                    $("#pruebaAjax").append(data);
+                });
+            });
+        });
+    
+    </script>
+    <input id="buttonAjax" type="button" value="AJAX" />
+    <div id="pruebaAjax"></div>
 
 </asp:Content>

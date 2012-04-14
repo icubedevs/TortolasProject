@@ -18,6 +18,12 @@ namespace TortolasProject.Controllers
             return View(empresas);
         }
 
+        [HttpPost]
+        public ActionResult Prueba(string s, int n)
+        {
+            return new Data"Prueba de ajax";
+        }
+
     }
     
 }
