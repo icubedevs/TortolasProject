@@ -9,13 +9,17 @@
     <link href="../../Content/nav.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/crud.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/slide.css" rel="stylesheet" type="text/css" />
-    <link href="../../Content/style.css" rel="stylesheet" type="text/css" />    
-  <!--  <link href="../../Content/light.css" rel="stylesheet" type="text/css" /> -->
+    <link href="../../Content/style.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../Scripts/styles/kendo.default.min.css"  rel="stylesheet" type="text/css" />
+    <link href="../../Scripts/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="CssContent" runat="server" />		   
     <script src="<%: Url.Content("~/Scripts/jquery-1.7.2.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/kendo.all.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/slide.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/captacion.js") %>" type="text/javascript"></script>
+    <asp:ContentPlaceHolder ID="ScriptContent" runat="server" />		
+
     <script>
         (function ($) {
 
@@ -98,8 +102,8 @@
 
 
     <div id="cabecera">
-        <div id="logo">
-            <img src="Content/images/logomtb.png" width="80%" height="110%"></img>
+        <div id="logoContainer">
+            <img id="logo" src="Content/images/logomtb.png"></img>
         </div>
         <nav id="topNav">
         	<ul>
@@ -135,33 +139,33 @@
 
 <!-- FIN MENU BAR -->
 
-<div id="container">
+        <div id="container">
 
-    <div id="containerleft" class="container">
-        <div id="leftbar">
-            <ul>
-                <li>
-                    <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Usuarios</a>
-                </li>
-                <li>
-                    <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Eventos</a>
-                </li>
-            </ul>
-        </div>
-    </div>
+            <div id="containerleft">
+                <div id="leftbar">
+                    <ul>
+                        <li>
+                            <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Usuarios</a>
+                        </li>
+                        <li>
+                            <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Eventos</a>
+                        </li>
+                        <li>
+                            <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-    <div id="containercenter" class="container">
-    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-		
-    </div><!-- / container -->
+            <div id="containercenter">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />		
+            </div><!-- / container -->
     
-    <div id="containeright" class="container">
-        	
-            lalal		
-    </div>
-  
+            <div id="containeright">
+                    lalal		
+            </div>
    
-    </div>
+        </div>
     </form>
 </body>
 </html>
