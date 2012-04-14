@@ -139,6 +139,30 @@
 
 <!-- FIN MENU BAR -->
 
+<<<<<<< HEAD
+<div id="container">
+
+    <div id="containerleft" class="container">
+        <div id="leftbar">
+            <ul>
+                <li>
+                    <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Usuarios</a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Eventos</a>
+                </li>
+                <li>
+                    <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Empresas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="containercenter" class="container">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+		
+    </div><!-- / container -->
+=======
         <div id="container">
 
             <div id="containerleft">
@@ -160,6 +184,7 @@
             <div id="containercenter">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />		
             </div><!-- / container -->
+>>>>>>> f8982f7b87be1b447151fd28c4241695c389e0a0
     
             <div id="containeright">
                     lalal		

@@ -6,7 +6,7 @@ nav { display:block;  border:0px solid #222; position:relative; font:16px Tahoma
 nav ul { padding:0; margin:0; }
 nav li { position:relative; float:left; list-style-type:none; }
 nav ul:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
-nav li a { display:block; padding:10px 20px; border-left:0px solid #b3acb3; border-right:0px solid #b3acb3; color:black; text-decoration:none; }
+nav li a { display:block; padding:10px 20px; border-left:0px solid #b3acb3; border-right:0px solid #b3acb3; color:white; text-decoration:none; }
 nav li a:focus { outline:none; text-decoration:underline; }
 nav li:first-child a { border-left:none; }
 nav li.last a { border-right:none; }
