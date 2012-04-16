@@ -1,0 +1,82 @@
+﻿#nuevaFacturaForm
+{
+    position:relative;
+    float:left;
+    width:inherit;
+}
+#nuevaFacturaHeader
+{
+    display:block;
+    position:relative;
+    float:left;
+    width:inherit;
+    min-height:100px;
+    border-bottom:1px solid gray;
+}
+#relacionesNuevaFacturaContainer
+{
+    position:relative;
+    float:right;
+}
+#conceptoNuevaFacturaDiv
+{
+    position:relative;
+    float:left;
+    text-align:left;
+}
+
+#totalNuevaFacturaDiv
+{
+    position:relative;
+    float:right;
+    text-align:right;
+}
+#nuevaFacturaAñadirLineaFacturaButton
+{
+    position:relative;
+    float:left;
+}
+
+#nuevaFacturaLineasFacturaContainer
+{
+    position:relative;
+    float:left;
+    width:inherit; 
+}
+#nuevaFacturaBottom
+{
+    position:relative;
+    float:left;
+    margin-top:5px;
+    width:inherit;
+}
+#descartarNuevaFacturaButton
+{
+    position:relative;
+    float:left;
+    margin-left:10px;    
+    padding:5px;
+    
+    color:gray;
+    
+    border:1px solid gray;
+    border-radius:5px;
+    box-shadow:0px -1px 1px snow inset;
+}
+#guardarNuevaFacturaButton
+{
+    position:relative;
+    float:right;
+    margin-right:10px;
+    padding:5px;
+    
+    background-color:gray;
+    color:white;
+    
+    border:1px: solid gray; 
+    border-radius:5px;   
+    box-shadow:0px -1px 1px #DCDCDC inset;
+    
+}
+.inputText{
+}
