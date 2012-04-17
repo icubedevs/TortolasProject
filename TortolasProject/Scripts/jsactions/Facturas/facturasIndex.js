@@ -10,24 +10,19 @@
             });
         });
     }
-    $("#FacturasIndexGrid").kendoGrid({
-        height: 400,
+    $("#FacturasGrid").kendoGrid({
         columns: [
             {
-                field: "idUsuario",
-                title: "idUsuario"
+                field: "fecha",
+                title: "Fecha"
             },
             {
-                field: "Nickname",
-                title: "Nickname"
+                field: "concepto",
+                title: "Concepto"
             },
             {
-                field: "Email",
-                title: "Email"
-            },
-            {
-                field: "DNI",
-                title: "DNI"
+                field: "total",
+                title: "Total"
             },
             {
                command: "Detalles"
@@ -49,6 +44,12 @@
 });
 
 $(".k-grid-content tr").live('click', function () {
-    alert("Has pulsado en una fila);
+    var tabla = $("FacturasGrid").data("kendoGrid");
+    tabla.select().each(function () {
+        var datos = tabla.dataItem($(this));
+        alert(datos);
+    });
+
+
 });
 

@@ -1,30 +1,41 @@
 ﻿$(document).ready(function () {
 
     $("#nuevaFacturaButtonNav").click(function () {
-        $.post('Facturas/Create', function (data) {
-            $("#divPruebaAjax").html(data);
-            $("#FacturasIndexGrid").hide();
+        $.post('Facturas/cargarVistaNuevaFactura', function (data) {
+            $("#FacturasGrid").hide();
+            $("#FacturasContainer").html(data);
+            $("#FacturasContainer").show();
+            $("#nuevaFacturaButtonNav").hide();
+
         });
     });
 
     $("#ingresosButtonNav").click(function () {
-        $("#divPruebaAjax").html("Sólo ingresos view");
-        $("#FacturasIndexGrid").show();
+        //$("#FacturasContainer").html("Sólo ingresos view");
+        //$("#FacturasIndexGrid").show();
+        url = 'Facturas/nuevaFactura';
+        datos = { name: "dani", coche: "twingo" }
+        $.post(url, datos, function (data) {
+            $("#FacturasGrid").fadeOut('slow', function () {
+                $(this).hide();
+                $("#FacturasContainer").html(data);
+            });
+
+        });
     });
 
     $("#gastosButtonNav").click(function () {
         $.post('Facturas/Details', function (data) {
-            $("#divPruebaAjax").html(data);
+            $("#FacturasContainer").html(data);
             $("#FacturasIndexGrid").hide();
         });
     });
 
     $("#movimientosButtonNav").click(function () {
-        $("#divPruebaAjax").html("Moviemientos view");
+        $("#FacturasContainer").html("Moviemientos view");
     });
 
     $("#graficosContablesButtonNav").click(function () {
-        $("#divPruebaAjax").html("Graficos contables view");
+        $("#FacturasContainer").html("Graficos contables view");
     });
 });
-
