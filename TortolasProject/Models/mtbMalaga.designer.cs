@@ -132,7 +132,7 @@ namespace TortolasProject.Models
     #endregion
 		
 		public mtbMalagaDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
