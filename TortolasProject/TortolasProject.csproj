@@ -758,7 +758,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\Pedidos\" />
     <Folder Include="Scripts\NewFolder1\" />
+    <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
