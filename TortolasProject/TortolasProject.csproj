@@ -14,6 +14,7 @@
     <AssemblyName>TortolasProject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,8 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Monitores\MonitoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -78,6 +81,8 @@
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Monitores\MonitoresRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Usuarios\UsuariosRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -602,6 +607,8 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
+    <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
@@ -663,6 +670,7 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Views\Administracion\Index.aspx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\Prueba.ascx" />
@@ -672,61 +680,62 @@
     <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-    <Content Include="Scripts\styles\Black\editor.png" />
-    <Content Include="Scripts\styles\Black\imagebrowser.png" />
-    <Content Include="Scripts\styles\Black\loading-image.gif" />
-    <Content Include="Scripts\styles\Black\loading.gif" />
-    <Content Include="Scripts\styles\Black\slider-h.gif" />
-    <Content Include="Scripts\styles\Black\slider-v.gif" />
-    <Content Include="Scripts\styles\Black\sprite.png" />
-    <Content Include="Scripts\styles\BlueOpal\editor.png" />
-    <Content Include="Scripts\styles\BlueOpal\imagebrowser.png" />
-    <Content Include="Scripts\styles\BlueOpal\loading-image.gif" />
-    <Content Include="Scripts\styles\BlueOpal\loading.gif" />
-    <Content Include="Scripts\styles\BlueOpal\slider-h.gif" />
-    <Content Include="Scripts\styles\BlueOpal\slider-v.gif" />
-    <Content Include="Scripts\styles\BlueOpal\sprite.png" />
-    <Content Include="Scripts\styles\Default\editor.png" />
-    <Content Include="Scripts\styles\Default\imagebrowser.png" />
-    <Content Include="Scripts\styles\Default\loading-image.gif" />
-    <Content Include="Scripts\styles\Default\loading.gif" />
-    <Content Include="Scripts\styles\Default\slider-h.gif" />
-    <Content Include="Scripts\styles\Default\slider-v.gif" />
-    <Content Include="Scripts\styles\Default\sprite.png" />
-    <Content Include="Scripts\styles\images\android-sprite.png" />
-    <Content Include="Scripts\styles\images\iconmasks.svg" />
-    <Content Include="Scripts\styles\images\ios-sprite.png" />
-    <Content Include="Scripts\styles\kendo.black.min.css" />
-    <Content Include="Scripts\styles\kendo.blueopal.min.css" />
-    <Content Include="Scripts\styles\kendo.common.min.css" />
-    <Content Include="Scripts\styles\kendo.dataviz.min.css" />
-    <Content Include="Scripts\styles\kendo.default.min.css" />
-    <Content Include="Scripts\styles\kendo.metro.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.all.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.android2.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.android4.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.blackberry.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.ios.min.css" />
-    <Content Include="Scripts\styles\kendo.mobile.meego.min.css" />
-    <Content Include="Scripts\styles\kendo.silver.min.css" />
-    <Content Include="Scripts\styles\Metro\editor.png" />
-    <Content Include="Scripts\styles\Metro\imagebrowser.png" />
-    <Content Include="Scripts\styles\Metro\loading-image.gif" />
-    <Content Include="Scripts\styles\Metro\loading.gif" />
-    <Content Include="Scripts\styles\Metro\slider-h.gif" />
-    <Content Include="Scripts\styles\Metro\slider-v.gif" />
-    <Content Include="Scripts\styles\Metro\sprite.png" />
-    <Content Include="Scripts\styles\Silver\editor.png" />
-    <Content Include="Scripts\styles\Silver\imagebrowser.png" />
-    <Content Include="Scripts\styles\Silver\loading-image.gif" />
-    <Content Include="Scripts\styles\Silver\loading.gif" />
-    <Content Include="Scripts\styles\Silver\slider-h.gif" />
-    <Content Include="Scripts\styles\Silver\slider-v.gif" />
-    <Content Include="Scripts\styles\Silver\sprite.png" />
-    <Content Include="Scripts\styles\textures\glass.png" />
-    <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Scripts\pngfix\styles\Black\editor.png" />
+    <Content Include="Scripts\pngfix\styles\Black\imagebrowser.png" />
+    <Content Include="Scripts\pngfix\styles\Black\loading-image.gif" />
+    <Content Include="Scripts\pngfix\styles\Black\loading.gif" />
+    <Content Include="Scripts\pngfix\styles\Black\slider-h.gif" />
+    <Content Include="Scripts\pngfix\styles\Black\slider-v.gif" />
+    <Content Include="Scripts\pngfix\styles\Black\sprite.png" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\editor.png" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\imagebrowser.png" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\loading-image.gif" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\loading.gif" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\slider-h.gif" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\slider-v.gif" />
+    <Content Include="Scripts\pngfix\styles\BlueOpal\sprite.png" />
+    <Content Include="Scripts\pngfix\styles\Default\editor.png" />
+    <Content Include="Scripts\pngfix\styles\Default\imagebrowser.png" />
+    <Content Include="Scripts\pngfix\styles\Default\loading-image.gif" />
+    <Content Include="Scripts\pngfix\styles\Default\loading.gif" />
+    <Content Include="Scripts\pngfix\styles\Default\slider-h.gif" />
+    <Content Include="Scripts\pngfix\styles\Default\slider-v.gif" />
+    <Content Include="Scripts\pngfix\styles\Default\sprite.png" />
+    <Content Include="Scripts\pngfix\styles\images\android-sprite.png" />
+    <Content Include="Scripts\pngfix\styles\images\iconmasks.svg" />
+    <Content Include="Scripts\pngfix\styles\images\ios-sprite.png" />
+    <Content Include="Scripts\pngfix\styles\kendo.black.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.blueopal.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.common.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.dataviz.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.default.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.metro.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.all.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.android2.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.android4.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.blackberry.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.ios.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.mobile.meego.min.css" />
+    <Content Include="Scripts\pngfix\styles\kendo.silver.min.css" />
+    <Content Include="Scripts\pngfix\styles\Metro\editor.png" />
+    <Content Include="Scripts\pngfix\styles\Metro\imagebrowser.png" />
+    <Content Include="Scripts\pngfix\styles\Metro\loading-image.gif" />
+    <Content Include="Scripts\pngfix\styles\Metro\loading.gif" />
+    <Content Include="Scripts\pngfix\styles\Metro\slider-h.gif" />
+    <Content Include="Scripts\pngfix\styles\Metro\slider-v.gif" />
+    <Content Include="Scripts\pngfix\styles\Metro\sprite.png" />
+    <Content Include="Scripts\pngfix\styles\Silver\editor.png" />
+    <Content Include="Scripts\pngfix\styles\Silver\imagebrowser.png" />
+    <Content Include="Scripts\pngfix\styles\Silver\loading-image.gif" />
+    <Content Include="Scripts\pngfix\styles\Silver\loading.gif" />
+    <Content Include="Scripts\pngfix\styles\Silver\slider-h.gif" />
+    <Content Include="Scripts\pngfix\styles\Silver\slider-v.gif" />
+    <Content Include="Scripts\pngfix\styles\Silver\sprite.png" />
+    <Content Include="Scripts\pngfix\styles\textures\glass.png" />
+    <Content Include="Scripts\pngfix\styles\textures\highlight.png" />
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
+    <Content Include="Views\Monitores\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -758,7 +767,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
