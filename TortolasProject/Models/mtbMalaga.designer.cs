@@ -72,9 +72,6 @@ namespace TortolasProject.Models
     partial void InserttbEvento(tbEvento instance);
     partial void UpdatetbEvento(tbEvento instance);
     partial void DeletetbEvento(tbEvento instance);
-    partial void InserttbEventoOficial(tbEventoOficial instance);
-    partial void UpdatetbEventoOficial(tbEventoOficial instance);
-    partial void DeletetbEventoOficial(tbEventoOficial instance);
     partial void InserttbFactura(tbFactura instance);
     partial void UpdatetbFactura(tbFactura instance);
     partial void DeletetbFactura(tbFactura instance);
@@ -1452,7 +1449,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbAsociacion", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="CIF", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbAsociacion", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="idEmpresa", IsForeignKey=true)]
 		public tbEmpresa tbEmpresa
 		{
 			get
@@ -1475,7 +1472,7 @@ namespace TortolasProject.Models
 					if ((value != null))
 					{
 						value.tbAsociacion = this;
-						this._FKCodigoEmpresa = value.CIF;
+						this._FKCodigoEmpresa = value.idEmpresa;
 					}
 					else
 					{
@@ -1937,7 +1934,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbContrato", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="CIF", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbContrato", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="idEmpresa", IsForeignKey=true)]
 		public tbEmpresa tbEmpresa
 		{
 			get
@@ -1960,7 +1957,7 @@ namespace TortolasProject.Models
 					if ((value != null))
 					{
 						value.tbContrato.Add(this);
-						this._FKCodigoEmpresa = value.CIF;
+						this._FKCodigoEmpresa = value.idEmpresa;
 					}
 					else
 					{
@@ -2146,7 +2143,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbConvenio", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="CIF", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbConvenio", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="idEmpresa", IsForeignKey=true)]
 		public tbEmpresa tbEmpresa
 		{
 			get
@@ -2169,7 +2166,7 @@ namespace TortolasProject.Models
 					if ((value != null))
 					{
 						value.tbConvenio.Add(this);
-						this._FKCodigoEmpresa = value.CIF;
+						this._FKCodigoEmpresa = value.idEmpresa;
 					}
 					else
 					{
@@ -3341,7 +3338,7 @@ namespace TortolasProject.Models
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private System.Guid _CIF;
+		private System.Guid _idEmpresa;
 		
 		private string _Nombre;
 		
@@ -3352,6 +3349,8 @@ namespace TortolasProject.Models
 		private int _TelefonodeContacto;
 		
 		private string _Email;
+		
+		private string _CIF;
 		
 		private EntityRef<tbAsociacion> _tbAsociacion;
 		
@@ -3367,8 +3366,8 @@ namespace TortolasProject.Models
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnCIFChanging(System.Guid value);
-    partial void OnCIFChanged();
+    partial void OnidEmpresaChanging(System.Guid value);
+    partial void OnidEmpresaChanged();
     partial void OnNombreChanging(string value);
     partial void OnNombreChanged();
     partial void OnLocalidadChanging(string value);
@@ -3379,6 +3378,8 @@ namespace TortolasProject.Models
     partial void OnTelefonodeContactoChanged();
     partial void OnEmailChanging(string value);
     partial void OnEmailChanged();
+    partial void OnCIFChanging(string value);
+    partial void OnCIFChanged();
     #endregion
 		
 		public tbEmpresa()
@@ -3391,22 +3392,22 @@ namespace TortolasProject.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CIF", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid CIF
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEmpresa", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid idEmpresa
 		{
 			get
 			{
-				return this._CIF;
+				return this._idEmpresa;
 			}
 			set
 			{
-				if ((this._CIF != value))
+				if ((this._idEmpresa != value))
 				{
-					this.OnCIFChanging(value);
+					this.OnidEmpresaChanging(value);
 					this.SendPropertyChanging();
-					this._CIF = value;
-					this.SendPropertyChanged("CIF");
-					this.OnCIFChanged();
+					this._idEmpresa = value;
+					this.SendPropertyChanged("idEmpresa");
+					this.OnidEmpresaChanged();
 				}
 			}
 		}
@@ -3511,7 +3512,27 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbAsociacion", Storage="_tbAsociacion", ThisKey="CIF", OtherKey="FKCodigoEmpresa", IsUnique=true, IsForeignKey=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CIF", DbType="VarChar(15) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string CIF
+		{
+			get
+			{
+				return this._CIF;
+			}
+			set
+			{
+				if ((this._CIF != value))
+				{
+					this.OnCIFChanging(value);
+					this.SendPropertyChanging();
+					this._CIF = value;
+					this.SendPropertyChanged("CIF");
+					this.OnCIFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbAsociacion", Storage="_tbAsociacion", ThisKey="idEmpresa", OtherKey="FKCodigoEmpresa", IsUnique=true, IsForeignKey=false)]
 		public tbAsociacion tbAsociacion
 		{
 			get
@@ -3540,7 +3561,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbContrato", Storage="_tbContrato", ThisKey="CIF", OtherKey="FKCodigoEmpresa")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbContrato", Storage="_tbContrato", ThisKey="idEmpresa", OtherKey="FKCodigoEmpresa")]
 		public EntitySet<tbContrato> tbContrato
 		{
 			get
@@ -3553,7 +3574,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbConvenio", Storage="_tbConvenio", ThisKey="CIF", OtherKey="FKCodigoEmpresa")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbConvenio", Storage="_tbConvenio", ThisKey="idEmpresa", OtherKey="FKCodigoEmpresa")]
 		public EntitySet<tbConvenio> tbConvenio
 		{
 			get
@@ -3566,7 +3587,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbPatrocinador", Storage="_tbPatrocinador", ThisKey="CIF", OtherKey="FKCodigoEmpresa")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbPatrocinador", Storage="_tbPatrocinador", ThisKey="idEmpresa", OtherKey="FKCodigoEmpresa")]
 		public EntitySet<tbPatrocinador> tbPatrocinador
 		{
 			get
@@ -3579,7 +3600,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbProveedores", Storage="_tbProveedores", ThisKey="CIF", OtherKey="FKCodigoEmpresa")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbProveedores", Storage="_tbProveedores", ThisKey="idEmpresa", OtherKey="FKCodigoEmpresa")]
 		public EntitySet<tbProveedores> tbProveedores
 		{
 			get
@@ -3805,8 +3826,6 @@ namespace TortolasProject.Models
 		
 		private EntitySet<tbDocInscripcion> _tbDocInscripcion;
 		
-		private EntitySet<tbEventoOficial> _tbEventoOficial;
-		
 		private EntityRef<tbUsuario> _tbUsuario;
 		
     #region Definiciones de métodos de extensibilidad
@@ -3839,7 +3858,6 @@ namespace TortolasProject.Models
 		{
 			this._tbAnuncio = default(EntityRef<tbAnuncio>);
 			this._tbDocInscripcion = new EntitySet<tbDocInscripcion>(new Action<tbDocInscripcion>(this.attach_tbDocInscripcion), new Action<tbDocInscripcion>(this.detach_tbDocInscripcion));
-			this._tbEventoOficial = new EntitySet<tbEventoOficial>(new Action<tbEventoOficial>(this.attach_tbEventoOficial), new Action<tbEventoOficial>(this.detach_tbEventoOficial));
 			this._tbUsuario = default(EntityRef<tbUsuario>);
 			OnCreated();
 		}
@@ -4090,19 +4108,6 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbEventoOficial", Storage="_tbEventoOficial", ThisKey="idEvento", OtherKey="FKEvento")]
-		public EntitySet<tbEventoOficial> tbEventoOficial
-		{
-			get
-			{
-				return this._tbEventoOficial;
-			}
-			set
-			{
-				this._tbEventoOficial.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbEvento", Storage="_tbUsuario", ThisKey="FKUsuarioCreador", OtherKey="idUsuario", IsForeignKey=true)]
 		public tbUsuario tbUsuario
 		{
@@ -4168,25 +4173,11 @@ namespace TortolasProject.Models
 			this.SendPropertyChanging();
 			entity.tbEvento = null;
 		}
-		
-		private void attach_tbEventoOficial(tbEventoOficial entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbEvento = this;
-		}
-		
-		private void detach_tbEventoOficial(tbEventoOficial entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbEvento = null;
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbEventoOficial")]
-	public partial class tbEventoOficial : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tbEventoOficial
 	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Nullable<decimal> _Precio;
 		
@@ -4194,27 +4185,8 @@ namespace TortolasProject.Models
 		
 		private System.Guid _FKJuntaDirectiva;
 		
-		private EntityRef<tbEvento> _tbEvento;
-		
-		private EntityRef<tbJuntaDirectiva> _tbJuntaDirectiva;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnPrecioChanging(System.Nullable<decimal> value);
-    partial void OnPrecioChanged();
-    partial void OnFKEventoChanging(System.Guid value);
-    partial void OnFKEventoChanged();
-    partial void OnFKJuntaDirectivaChanging(System.Guid value);
-    partial void OnFKJuntaDirectivaChanged();
-    #endregion
-		
 		public tbEventoOficial()
 		{
-			this._tbEvento = default(EntityRef<tbEvento>);
-			this._tbJuntaDirectiva = default(EntityRef<tbJuntaDirectiva>);
-			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Precio", DbType="Money")]
@@ -4228,16 +4200,12 @@ namespace TortolasProject.Models
 			{
 				if ((this._Precio != value))
 				{
-					this.OnPrecioChanging(value);
-					this.SendPropertyChanging();
 					this._Precio = value;
-					this.SendPropertyChanged("Precio");
-					this.OnPrecioChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier NOT NULL")]
 		public System.Guid FKEvento
 		{
 			get
@@ -4248,20 +4216,12 @@ namespace TortolasProject.Models
 			{
 				if ((this._FKEvento != value))
 				{
-					if (this._tbEvento.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFKEventoChanging(value);
-					this.SendPropertyChanging();
 					this._FKEvento = value;
-					this.SendPropertyChanged("FKEvento");
-					this.OnFKEventoChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKJuntaDirectiva", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKJuntaDirectiva", DbType="UniqueIdentifier NOT NULL")]
 		public System.Guid FKJuntaDirectiva
 		{
 			get
@@ -4272,104 +4232,8 @@ namespace TortolasProject.Models
 			{
 				if ((this._FKJuntaDirectiva != value))
 				{
-					if (this._tbJuntaDirectiva.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFKJuntaDirectivaChanging(value);
-					this.SendPropertyChanging();
 					this._FKJuntaDirectiva = value;
-					this.SendPropertyChanged("FKJuntaDirectiva");
-					this.OnFKJuntaDirectivaChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbEventoOficial", Storage="_tbEvento", ThisKey="FKEvento", OtherKey="idEvento", IsForeignKey=true)]
-		public tbEvento tbEvento
-		{
-			get
-			{
-				return this._tbEvento.Entity;
-			}
-			set
-			{
-				tbEvento previousValue = this._tbEvento.Entity;
-				if (((previousValue != value) 
-							|| (this._tbEvento.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbEvento.Entity = null;
-						previousValue.tbEventoOficial.Remove(this);
-					}
-					this._tbEvento.Entity = value;
-					if ((value != null))
-					{
-						value.tbEventoOficial.Add(this);
-						this._FKEvento = value.idEvento;
-					}
-					else
-					{
-						this._FKEvento = default(System.Guid);
-					}
-					this.SendPropertyChanged("tbEvento");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbJuntaDirectiva_tbEventoOficial", Storage="_tbJuntaDirectiva", ThisKey="FKJuntaDirectiva", OtherKey="FKSocio", IsForeignKey=true)]
-		public tbJuntaDirectiva tbJuntaDirectiva
-		{
-			get
-			{
-				return this._tbJuntaDirectiva.Entity;
-			}
-			set
-			{
-				tbJuntaDirectiva previousValue = this._tbJuntaDirectiva.Entity;
-				if (((previousValue != value) 
-							|| (this._tbJuntaDirectiva.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbJuntaDirectiva.Entity = null;
-						previousValue.tbEventoOficial.Remove(this);
-					}
-					this._tbJuntaDirectiva.Entity = value;
-					if ((value != null))
-					{
-						value.tbEventoOficial.Add(this);
-						this._FKJuntaDirectiva = value.FKSocio;
-					}
-					else
-					{
-						this._FKJuntaDirectiva = default(System.Guid);
-					}
-					this.SendPropertyChanged("tbJuntaDirectiva");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -5413,8 +5277,6 @@ namespace TortolasProject.Models
 		
 		private EntitySet<tbCursillo> _tbCursillo;
 		
-		private EntitySet<tbEventoOficial> _tbEventoOficial;
-		
 		private EntitySet<tbFactura> _tbFactura;
 		
 		private EntitySet<tbPedidoGlobal> _tbPedidoGlobal;
@@ -5435,7 +5297,6 @@ namespace TortolasProject.Models
 		{
 			this._tbContrato = new EntitySet<tbContrato>(new Action<tbContrato>(this.attach_tbContrato), new Action<tbContrato>(this.detach_tbContrato));
 			this._tbCursillo = new EntitySet<tbCursillo>(new Action<tbCursillo>(this.attach_tbCursillo), new Action<tbCursillo>(this.detach_tbCursillo));
-			this._tbEventoOficial = new EntitySet<tbEventoOficial>(new Action<tbEventoOficial>(this.attach_tbEventoOficial), new Action<tbEventoOficial>(this.detach_tbEventoOficial));
 			this._tbFactura = new EntitySet<tbFactura>(new Action<tbFactura>(this.attach_tbFactura), new Action<tbFactura>(this.detach_tbFactura));
 			this._tbPedidoGlobal = new EntitySet<tbPedidoGlobal>(new Action<tbPedidoGlobal>(this.attach_tbPedidoGlobal), new Action<tbPedidoGlobal>(this.detach_tbPedidoGlobal));
 			this._tbSocio = default(EntityRef<tbSocio>);
@@ -5509,19 +5370,6 @@ namespace TortolasProject.Models
 			set
 			{
 				this._tbCursillo.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbJuntaDirectiva_tbEventoOficial", Storage="_tbEventoOficial", ThisKey="FKSocio", OtherKey="FKJuntaDirectiva")]
-		public EntitySet<tbEventoOficial> tbEventoOficial
-		{
-			get
-			{
-				return this._tbEventoOficial;
-			}
-			set
-			{
-				this._tbEventoOficial.Assign(value);
 			}
 		}
 		
@@ -5624,18 +5472,6 @@ namespace TortolasProject.Models
 		}
 		
 		private void detach_tbCursillo(tbCursillo entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbJuntaDirectiva = null;
-		}
-		
-		private void attach_tbEventoOficial(tbEventoOficial entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbJuntaDirectiva = this;
-		}
-		
-		private void detach_tbEventoOficial(tbEventoOficial entity)
 		{
 			this.SendPropertyChanging();
 			entity.tbJuntaDirectiva = null;
@@ -6895,7 +6731,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbPatrocinador", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="CIF", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbPatrocinador", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="idEmpresa", IsForeignKey=true)]
 		public tbEmpresa tbEmpresa
 		{
 			get
@@ -6918,7 +6754,7 @@ namespace TortolasProject.Models
 					if ((value != null))
 					{
 						value.tbPatrocinador.Add(this);
-						this._FKCodigoEmpresa = value.CIF;
+						this._FKCodigoEmpresa = value.idEmpresa;
 					}
 					else
 					{
@@ -7795,7 +7631,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbProveedores", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="CIF", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEmpresa_tbProveedores", Storage="_tbEmpresa", ThisKey="FKCodigoEmpresa", OtherKey="idEmpresa", IsForeignKey=true)]
 		public tbEmpresa tbEmpresa
 		{
 			get
@@ -7818,7 +7654,7 @@ namespace TortolasProject.Models
 					if ((value != null))
 					{
 						value.tbProveedores.Add(this);
-						this._FKCodigoEmpresa = value.CIF;
+						this._FKCodigoEmpresa = value.idEmpresa;
 					}
 					else
 					{

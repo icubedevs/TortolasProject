@@ -14,7 +14,7 @@
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexMain" ContentPlaceHolderID="MainContent" runat="server">
-    <div id="EmpresasNavegador">
+     <div id="EmpresasNavegador">
         <ul>
             <li id="EmpresasNav">
                 Empresas
@@ -30,5 +30,13 @@
             </li>  
         </ul> 
         <div id="EmpresasFilter">Filtro ></div>   
+    </div> 
+    <br /><br />
+    <div id="EmpresasGrid">
+    
+    </div>
+
+    <div id="VentanaEditar">
+        <label for="nombreempresa">Nombre: </label><input type="text" id="nombreempresa" class="k-input" /><br />
     </div>
 </asp:Content>
