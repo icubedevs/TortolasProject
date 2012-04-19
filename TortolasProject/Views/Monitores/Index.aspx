@@ -15,9 +15,21 @@
 
 </div>
 
+<div id="editarfila">
+    <label for="nombreedit">Nombre : </label><input type="text" id="nombreedit" class="k-input"/><br />
+    <label for="apellidosedit">Apellidos : </label><input type="text" id="apellidosedit" class="k-input"/><br />
+    <label for="dniedit">DNI : </label><input type="text" id="dniedit" class="k-input"/><br />
+    
+    <br /><br />
+    <input type="button" value="Editar" id="botonEditar" class="k-button"/>
+    
+</div>
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CssContent" runat="server">
+
+<link href="../../Content/Administracion/Monitores/monitores.css" rel="stylesheet" type="text/css" /> 
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
