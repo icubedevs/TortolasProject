@@ -1,0 +1,11 @@
+﻿#FacturasContainer
+{
+    margin-top:10px;
+    width:inherit;
+}
+#FacturasGrid 
+{
+    position:relative;
+    float:left;
+    width:inherit;
+}

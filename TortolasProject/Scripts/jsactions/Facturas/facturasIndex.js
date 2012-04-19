@@ -1,54 +1,66 @@
 ﻿$(document).ready(function () {
 
-    // Boton de prueba de AJAX
-    $("#ButtonPulsa").live('click', pruebaAjax);
-    function pruebaAjax() {
-        $.post('Facturas/leerTodos', function (data) {
-            $.each(data, function (key, val) {
-
-                $("#divPruebaAjax").append("<p>" + key + " -> " + val);
-            });
-        });
-    }
-    $("#FacturasIndexGrid").kendoGrid({
-        height: 400,
+    // DataSource KENDO
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "Facturas/leerTodos",
+                dataType: "json",
+                type: "POST"
+            }
+        },
+        schema:
+            {
+                model:
+                {
+                    id: "idFactura"
+                }
+            }
+    });
+    // Tabla de facturas
+    $("#FacturasGrid").kendoGrid({
+        dataSource: dataSource,
         columns: [
             {
-                field: "idUsuario",
-                title: "idUsuario"
+                field: "idFactura",
+                title: "idFactura"
             },
             {
-                field: "Nickname",
-                title: "Nickname"
+                field: "fecha",
+                title: "Fecha"
             },
             {
-                field: "Email",
-                title: "Email"
+                field: "concepto",
+                title: "Concepto"
             },
             {
-                field: "DNI",
-                title: "DNI"
-            },
-            {
-               command: "Detalles"
+                field: "total",
+                title: "Total"
             }
-        ],
-        dataSource:
-        {
-            transport: {
-                read: {
-                    url: "Facturas/leerTodos",
-                    dataType: "json",
-                    type: "POST"
-                }      
-            }
-        }
+        ]
     });
 
+    $(".k-grid-content tr").live("click", function () {
+        // Obtenemos la UID de la fila creada por KENDO
+        var uid = $(this).attr("data-uid");
 
+        // Obtenemos la fila
+        var fila = dataSource.getByUid(uid);
+
+        // Llamamos a la función para ver los detalles de la factura
+        leerFactura(fila.idFactura);
+    });
 });
 
-$(".k-grid-content tr").live('click', function () {
-    alert("Has pulsado en una fila);
-});
-
+function leerFactura(idFactura) {
+    
+    var url = "Facturas/leerFactura";
+    var datos = {
+     idFactura:  idFactura 
+     };
+    $.post(url, datos, function (data) {
+        $("#FacturasGrid").hide();
+        $("#FacturasContainer").html(data);
+        $("#FacturasContainer").show();
+    });          
+}

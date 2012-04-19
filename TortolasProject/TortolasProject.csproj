@@ -82,7 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\crud.css" />
+    <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
+    <Content Include="Content\Facturas\nuevaFactura.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -605,6 +607,7 @@
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo.binder.min.js" />
@@ -665,6 +668,7 @@
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
+    <Content Include="Views\Facturas\NuevaFactura.ascx" />
     <Content Include="Views\Facturas\Prueba.ascx" />
     <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
@@ -759,7 +763,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Pedidos\" />
-    <Folder Include="Scripts\NewFolder1\" />
     <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
