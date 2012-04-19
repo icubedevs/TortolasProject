@@ -30,12 +30,12 @@ namespace TortolasProject.Models
 		
     #region Definiciones de métodos de extensibilidad
     partial void OnCreated();
-    partial void InserttbUsuario(tbUsuario instance);
-    partial void UpdatetbUsuario(tbUsuario instance);
-    partial void DeletetbUsuario(tbUsuario instance);
     partial void InserttbAnuncio(tbAnuncio instance);
     partial void UpdatetbAnuncio(tbAnuncio instance);
     partial void DeletetbAnuncio(tbAnuncio instance);
+    partial void InserttbUsuario(tbUsuario instance);
+    partial void UpdatetbUsuario(tbUsuario instance);
+    partial void DeletetbUsuario(tbUsuario instance);
     partial void InserttbArticulo(tbArticulo instance);
     partial void UpdatetbArticulo(tbArticulo instance);
     partial void DeletetbArticulo(tbArticulo instance);
@@ -132,7 +132,7 @@ namespace TortolasProject.Models
     #endregion
 		
 		public mtbMalagaDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -161,19 +161,19 @@ namespace TortolasProject.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tbUsuario> tbUsuario
-		{
-			get
-			{
-				return this.GetTable<tbUsuario>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbAnuncio> tbAnuncio
 		{
 			get
 			{
 				return this.GetTable<tbAnuncio>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbUsuario> tbUsuario
+		{
+			get
+			{
+				return this.GetTable<tbUsuario>();
 			}
 		}
 		
@@ -422,6 +422,198 @@ namespace TortolasProject.Models
 			get
 			{
 				return this.GetTable<tbSocio>();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbAnuncio")]
+	public partial class tbAnuncio : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _idAnuncio;
+		
+		private System.Nullable<System.Guid> _FKCursillo;
+		
+		private System.Guid _FKEvento;
+		
+		private EntityRef<tbCursillo> _tbCursillo;
+		
+		private EntityRef<tbEvento> _tbEvento;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidAnuncioChanging(System.Guid value);
+    partial void OnidAnuncioChanged();
+    partial void OnFKCursilloChanging(System.Nullable<System.Guid> value);
+    partial void OnFKCursilloChanged();
+    partial void OnFKEventoChanging(System.Guid value);
+    partial void OnFKEventoChanged();
+    #endregion
+		
+		public tbAnuncio()
+		{
+			this._tbCursillo = default(EntityRef<tbCursillo>);
+			this._tbEvento = default(EntityRef<tbEvento>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAnuncio", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid idAnuncio
+		{
+			get
+			{
+				return this._idAnuncio;
+			}
+			set
+			{
+				if ((this._idAnuncio != value))
+				{
+					if (this._tbEvento.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidAnuncioChanging(value);
+					this.SendPropertyChanging();
+					this._idAnuncio = value;
+					this.SendPropertyChanged("idAnuncio");
+					this.OnidAnuncioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKCursillo", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FKCursillo
+		{
+			get
+			{
+				return this._FKCursillo;
+			}
+			set
+			{
+				if ((this._FKCursillo != value))
+				{
+					if (this._tbCursillo.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFKCursilloChanging(value);
+					this.SendPropertyChanging();
+					this._FKCursillo = value;
+					this.SendPropertyChanged("FKCursillo");
+					this.OnFKCursilloChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FKEvento
+		{
+			get
+			{
+				return this._FKEvento;
+			}
+			set
+			{
+				if ((this._FKEvento != value))
+				{
+					this.OnFKEventoChanging(value);
+					this.SendPropertyChanging();
+					this._FKEvento = value;
+					this.SendPropertyChanged("FKEvento");
+					this.OnFKEventoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbCursillo_tbAnuncio", Storage="_tbCursillo", ThisKey="FKCursillo", OtherKey="idCursillo", IsForeignKey=true)]
+		public tbCursillo tbCursillo
+		{
+			get
+			{
+				return this._tbCursillo.Entity;
+			}
+			set
+			{
+				tbCursillo previousValue = this._tbCursillo.Entity;
+				if (((previousValue != value) 
+							|| (this._tbCursillo.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbCursillo.Entity = null;
+						previousValue.tbAnuncio.Remove(this);
+					}
+					this._tbCursillo.Entity = value;
+					if ((value != null))
+					{
+						value.tbAnuncio.Add(this);
+						this._FKCursillo = value.idCursillo;
+					}
+					else
+					{
+						this._FKCursillo = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("tbCursillo");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbAnuncio", Storage="_tbEvento", ThisKey="idAnuncio", OtherKey="idEvento", IsForeignKey=true)]
+		public tbEvento tbEvento
+		{
+			get
+			{
+				return this._tbEvento.Entity;
+			}
+			set
+			{
+				tbEvento previousValue = this._tbEvento.Entity;
+				if (((previousValue != value) 
+							|| (this._tbEvento.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbEvento.Entity = null;
+						previousValue.tbAnuncio = null;
+					}
+					this._tbEvento.Entity = value;
+					if ((value != null))
+					{
+						value.tbAnuncio = this;
+						this._idAnuncio = value.idEvento;
+					}
+					else
+					{
+						this._idAnuncio = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbEvento");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -817,198 +1009,6 @@ namespace TortolasProject.Models
 		{
 			this.SendPropertyChanging();
 			entity.tbUsuario = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbAnuncio")]
-	public partial class tbAnuncio : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _idAnuncio;
-		
-		private System.Nullable<System.Guid> _FKCursillo;
-		
-		private System.Guid _FKEvento;
-		
-		private EntityRef<tbCursillo> _tbCursillo;
-		
-		private EntityRef<tbEvento> _tbEvento;
-		
-    #region Definiciones de métodos de extensibilidad
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidAnuncioChanging(System.Guid value);
-    partial void OnidAnuncioChanged();
-    partial void OnFKCursilloChanging(System.Nullable<System.Guid> value);
-    partial void OnFKCursilloChanged();
-    partial void OnFKEventoChanging(System.Guid value);
-    partial void OnFKEventoChanged();
-    #endregion
-		
-		public tbAnuncio()
-		{
-			this._tbCursillo = default(EntityRef<tbCursillo>);
-			this._tbEvento = default(EntityRef<tbEvento>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idAnuncio", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid idAnuncio
-		{
-			get
-			{
-				return this._idAnuncio;
-			}
-			set
-			{
-				if ((this._idAnuncio != value))
-				{
-					if (this._tbEvento.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidAnuncioChanging(value);
-					this.SendPropertyChanging();
-					this._idAnuncio = value;
-					this.SendPropertyChanged("idAnuncio");
-					this.OnidAnuncioChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKCursillo", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> FKCursillo
-		{
-			get
-			{
-				return this._FKCursillo;
-			}
-			set
-			{
-				if ((this._FKCursillo != value))
-				{
-					if (this._tbCursillo.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFKCursilloChanging(value);
-					this.SendPropertyChanging();
-					this._FKCursillo = value;
-					this.SendPropertyChanged("FKCursillo");
-					this.OnFKCursilloChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid FKEvento
-		{
-			get
-			{
-				return this._FKEvento;
-			}
-			set
-			{
-				if ((this._FKEvento != value))
-				{
-					this.OnFKEventoChanging(value);
-					this.SendPropertyChanging();
-					this._FKEvento = value;
-					this.SendPropertyChanged("FKEvento");
-					this.OnFKEventoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbCursillo_tbAnuncio", Storage="_tbCursillo", ThisKey="FKCursillo", OtherKey="idCursillo", IsForeignKey=true)]
-		public tbCursillo tbCursillo
-		{
-			get
-			{
-				return this._tbCursillo.Entity;
-			}
-			set
-			{
-				tbCursillo previousValue = this._tbCursillo.Entity;
-				if (((previousValue != value) 
-							|| (this._tbCursillo.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbCursillo.Entity = null;
-						previousValue.tbAnuncio.Remove(this);
-					}
-					this._tbCursillo.Entity = value;
-					if ((value != null))
-					{
-						value.tbAnuncio.Add(this);
-						this._FKCursillo = value.idCursillo;
-					}
-					else
-					{
-						this._FKCursillo = default(Nullable<System.Guid>);
-					}
-					this.SendPropertyChanged("tbCursillo");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbEvento_tbAnuncio", Storage="_tbEvento", ThisKey="idAnuncio", OtherKey="idEvento", IsForeignKey=true)]
-		public tbEvento tbEvento
-		{
-			get
-			{
-				return this._tbEvento.Entity;
-			}
-			set
-			{
-				tbEvento previousValue = this._tbEvento.Entity;
-				if (((previousValue != value) 
-							|| (this._tbEvento.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbEvento.Entity = null;
-						previousValue.tbAnuncio = null;
-					}
-					this._tbEvento.Entity = value;
-					if ((value != null))
-					{
-						value.tbAnuncio = this;
-						this._idAnuncio = value.idEvento;
-					}
-					else
-					{
-						this._idAnuncio = default(System.Guid);
-					}
-					this.SendPropertyChanged("tbEvento");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	
@@ -4402,6 +4402,8 @@ namespace TortolasProject.Models
 		
 		private System.Nullable<System.Guid> _FKCodigoEmpresa;
 		
+		private string _Concepto;
+		
 		private EntitySet<tbLineaFactura> _tbLineaFactura;
 		
 		private EntitySet<tbMovimientoGasto> _tbMovimientoGasto;
@@ -4450,6 +4452,8 @@ namespace TortolasProject.Models
     partial void OnFKContratoChanged();
     partial void OnFKCodigoEmpresaChanging(System.Nullable<System.Guid> value);
     partial void OnFKCodigoEmpresaChanged();
+    partial void OnConceptoChanging(string value);
+    partial void OnConceptoChanged();
     #endregion
 		
 		public tbFactura()
@@ -4708,6 +4712,26 @@ namespace TortolasProject.Models
 					this._FKCodigoEmpresa = value;
 					this.SendPropertyChanged("FKCodigoEmpresa");
 					this.OnFKCodigoEmpresaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Concepto", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Concepto
+		{
+			get
+			{
+				return this._Concepto;
+			}
+			set
+			{
+				if ((this._Concepto != value))
+				{
+					this.OnConceptoChanging(value);
+					this.SendPropertyChanging();
+					this._Concepto = value;
+					this.SendPropertyChanged("Concepto");
+					this.OnConceptoChanged();
 				}
 			}
 		}
@@ -6039,7 +6063,17 @@ namespace TortolasProject.Models
 		
 		private System.Guid _idMonitor;
 		
-		private System.Guid _DNI;
+		private string _DNI;
+		
+		private string _Nombre;
+		
+		private string _Apellidos;
+		
+		private string _Direccion;
+		
+		private System.Nullable<int> _Telefono;
+		
+		private string _Email;
 		
 		private EntitySet<tbCursilloMonitor> _tbCursilloMonitor;
 		
@@ -6049,8 +6083,18 @@ namespace TortolasProject.Models
     partial void OnCreated();
     partial void OnidMonitorChanging(System.Guid value);
     partial void OnidMonitorChanged();
-    partial void OnDNIChanging(System.Guid value);
+    partial void OnDNIChanging(string value);
     partial void OnDNIChanged();
+    partial void OnNombreChanging(string value);
+    partial void OnNombreChanged();
+    partial void OnApellidosChanging(string value);
+    partial void OnApellidosChanged();
+    partial void OnDireccionChanging(string value);
+    partial void OnDireccionChanged();
+    partial void OnTelefonoChanging(System.Nullable<int> value);
+    partial void OnTelefonoChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
     #endregion
 		
 		public tbMonitor()
@@ -6079,8 +6123,8 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid DNI
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DNI", DbType="NVarChar(60) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string DNI
 		{
 			get
 			{
@@ -6095,6 +6139,106 @@ namespace TortolasProject.Models
 					this._DNI = value;
 					this.SendPropertyChanged("DNI");
 					this.OnDNIChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Nombre", DbType="NVarChar(60)")]
+		public string Nombre
+		{
+			get
+			{
+				return this._Nombre;
+			}
+			set
+			{
+				if ((this._Nombre != value))
+				{
+					this.OnNombreChanging(value);
+					this.SendPropertyChanging();
+					this._Nombre = value;
+					this.SendPropertyChanged("Nombre");
+					this.OnNombreChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Apellidos", DbType="NVarChar(60)")]
+		public string Apellidos
+		{
+			get
+			{
+				return this._Apellidos;
+			}
+			set
+			{
+				if ((this._Apellidos != value))
+				{
+					this.OnApellidosChanging(value);
+					this.SendPropertyChanging();
+					this._Apellidos = value;
+					this.SendPropertyChanged("Apellidos");
+					this.OnApellidosChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Direccion", DbType="NVarChar(100)")]
+		public string Direccion
+		{
+			get
+			{
+				return this._Direccion;
+			}
+			set
+			{
+				if ((this._Direccion != value))
+				{
+					this.OnDireccionChanging(value);
+					this.SendPropertyChanging();
+					this._Direccion = value;
+					this.SendPropertyChanged("Direccion");
+					this.OnDireccionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Telefono", DbType="Int")]
+		public System.Nullable<int> Telefono
+		{
+			get
+			{
+				return this._Telefono;
+			}
+			set
+			{
+				if ((this._Telefono != value))
+				{
+					this.OnTelefonoChanging(value);
+					this.SendPropertyChanging();
+					this._Telefono = value;
+					this.SendPropertyChanged("Telefono");
+					this.OnTelefonoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(60)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
 				}
 			}
 		}
