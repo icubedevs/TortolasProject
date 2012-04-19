@@ -18,14 +18,17 @@
 
 <asp:Content ID="FacturasIndexMain" ContentPlaceHolderID="MainContent" runat="server">
     <div id="FacturasNav">
-        <ul>
-            <li id="nuevaFacturaButtonNav">Nueva factura</li>
-            <li id="ingresosButtonNav">Sólo ingresos</li>
-            <li id="gastosButtonNav">Sólo gastos</li>
-            <li id="movimientosButtonNav">Movimientos</li>
-            <li id="graficosContablesButtonNav">Gráficos contables</li>
-        </ul>
-        <div id="FacturasFilter">Filtro ></div>
+        <div id="mainFacturasNav">
+            <ul>
+                <li id="nuevaFacturaButtonNav">Nueva factura</li>
+                <li id="ingresosButtonNav">Sólo ingresos</li>
+                <li id="gastosButtonNav">Sólo gastos</li>
+                <li id="movimientosButtonNav">Movimientos</li>
+                <li id="graficosContablesButtonNav">Gráficos contables</li>
+            </ul>
+            <div id="FacturasFilter">Filtro ></div>
+        </div>
+        <div id="volverFacturasNav">< Volver</div>
     </div>
 
     <div id="FacturasContainer"> </div>

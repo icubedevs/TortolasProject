@@ -1,17 +1,30 @@
 ﻿$(document).ready(function () {
 
-    // Boton de prueba de AJAX
-    $("#ButtonPulsa").live('click', pruebaAjax);
-    function pruebaAjax() {
-        $.post('Facturas/leerTodos', function (data) {
-            $.each(data, function (key, val) {
-
-                $("#divPruebaAjax").append("<p>" + key + " -> " + val);
-            });
-        });
-    }
+    // DataSource KENDO
+    var dataSource = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "Facturas/leerTodos",
+                dataType: "json",
+                type: "POST"
+            }
+        },
+        schema:
+            {
+                model:
+                {
+                    id: "idFactura"
+                }
+            }
+    });
+    // Tabla de facturas
     $("#FacturasGrid").kendoGrid({
+        dataSource: dataSource,
         columns: [
+            {
+                field: "idFactura",
+                title: "idFactura"
+            },
             {
                 field: "fecha",
                 title: "Fecha"
@@ -23,33 +36,31 @@
             {
                 field: "total",
                 title: "Total"
-            },
-            {
-               command: "Detalles"
             }
-        ],
-        dataSource:
-        {
-            transport: {
-                read: {
-                    url: "Facturas/leerTodos",
-                    dataType: "json",
-                    type: "POST"
-                }      
-            }
-        }
+        ]
     });
 
+    $(".k-grid-content tr").live("click", function () {
+        // Obtenemos la UID de la fila creada por KENDO
+        var uid = $(this).attr("data-uid");
 
-});
+        // Obtenemos la fila
+        var fila = dataSource.getByUid(uid);
 
-$(".k-grid-content tr").live('click', function () {
-    var tabla = $("FacturasGrid").data("kendoGrid");
-    tabla.select().each(function () {
-        var datos = tabla.dataItem($(this));
-        alert(datos);
+        // Llamamos a la función para ver los detalles de la factura
+        leerFactura(fila.idFactura);
     });
-
-
 });
 
+function leerFactura(idFactura) {
+    
+    var url = "Facturas/leerFactura";
+    var datos = {
+     idFactura:  idFactura 
+     };
+    $.post(url, datos, function (data) {
+        $("#FacturasGrid").hide();
+        $("#FacturasContainer").html(data);
+        $("#FacturasContainer").show();
+    });          
+}

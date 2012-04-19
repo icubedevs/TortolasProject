@@ -30,6 +30,15 @@ namespace TortolasProject.Controllers
             return PartialView("NuevaFactura");
         }
 
+            // Detalles factura
+        [HttpPost]
+        public ActionResult leerFactura(FormCollection datos)
+        {
+            Guid idFactura = Guid.Parse(datos["idFactura"]);
+            tbFactura usuario = FacturasRepo.leerFactura(idFactura);
+            return PartialView("Details", usuario);
+        }
+
         
 
 
@@ -37,11 +46,7 @@ namespace TortolasProject.Controllers
         ///////////////////////////////////////////////////////////////////////////////
         // Funciones
         ///////////////////////////////////////////////////////////////////////////////
-        public ActionResult leerFactura(Guid id)
-        {
-            tbFactura usuario = FacturasRepo.leerFactura(id);
-            return PartialView("Details", usuario);
-        }
+        
 
         
 
@@ -52,6 +57,7 @@ namespace TortolasProject.Controllers
             var facturas = from f in FacturasRepo.listarFacturas() 
                            select new
                                {
+                                   idFactura = f.idFactura,
                                    concepto = f.Concepto,
                                    estado = f.FKEstado,
                                    total = f.Total,
@@ -71,6 +77,7 @@ namespace TortolasProject.Controllers
             String concepto = data["concepto"];
             Guid ef = Guid.Parse(data["estado"]);
             Guid jd = Guid.Parse(data["jd"]);
+
             // Creamos la nueva entidad
             tbFactura f = new tbFactura
             {
@@ -87,6 +94,15 @@ namespace TortolasProject.Controllers
 
 
             return 1; // Pensado para devolver errores
+        }
+
+
+            // Eliminar factura
+        [HttpPost]
+        public void eliminarFactura(FormCollection id)
+        {
+            //FacturasRepo.eliminarFactura(id);
+            id.AllKeys.ToString();
         }
 
  

@@ -1,12 +1,10 @@
 ﻿$(document).ready(function () {
-
     $("#nuevaFacturaButtonNav").click(function () {
         $.post('Facturas/cargarVistaNuevaFactura', function (data) {
             $("#FacturasGrid").hide();
             $("#FacturasContainer").html(data);
             $("#FacturasContainer").show();
             $("#nuevaFacturaButtonNav").hide();
-
         });
     });
 
@@ -20,7 +18,6 @@
                 $(this).hide();
                 $("#FacturasContainer").html(data);
             });
-
         });
     });
 
