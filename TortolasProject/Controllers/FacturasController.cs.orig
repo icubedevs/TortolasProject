@@ -34,8 +34,12 @@ namespace TortolasProject.Controllers
         [HttpPost]
         public ActionResult leerFactura(FormCollection datos)
         {
+<<<<<<< HEAD
+            tbUsuario usuario = FacturasRepo.details(id);   
+=======
             Guid idFactura = Guid.Parse(datos["idFactura"]);
             tbFactura usuario = FacturasRepo.leerFactura(idFactura);
+>>>>>>> 5a565b7e0275528db0c90b7cd59d1e2ccfb87fef
             return PartialView("Details", usuario);
         }
 
