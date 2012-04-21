@@ -86,6 +86,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Administracion\Monitores\monitores.css" />
     <Content Include="Content\crud.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\icons\agents.ico" />

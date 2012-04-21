@@ -36,4 +36,6 @@
 <script src="../../Scripts/jsactions/Administracion/Monitores/Monitores.js" ></script>
 <link rel="stylesheet" type="text/css" href="../../Scripts/pngfix/styles/kendo.common.min.css" />
 <link rel="stylesheet" type="text/css" href="../../Scripts/pngfix/styles/kendo.default.min.css" />
+
+
 </asp:Content>
