@@ -33,9 +33,17 @@ namespace TortolasProject.Controllers
                                idEmpresa = ob.idEmpresa,
                                Nombre = ob.Nombre,
                                CIF = ob.CIF,
-                               Localidad = ob.Localidad
+                               Localidad = ob.Localidad,
+                               DireccionWeb = ob.DireccionWeb,
+                               TelefonodeContacto = ob.TelefonodeContacto,
+                               Email = ob.Email
                            };
             return Json(empresas);
+        }
+        [HttpPost]
+        public ActionResult CargarVistaNuevaEmpresa()
+        {
+            return PartialView("NuevaEmpresa");
         }
     }    
 }

@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function (){
-    //alert("poya");
+    //alert("qwe");
    var datasource = new kendo.data.DataSource 
    ({
             transport:
@@ -16,7 +16,7 @@ $(document).ready(function (){
         {
              model:
              {
-                id: "CIF"
+                id: "idEmpresa"
              }
         }
    });
@@ -26,6 +26,8 @@ $(document).ready(function (){
         //height: 400,
         dataSource : datasource, 
         selectable : true,
+        pageable : true,
+        sortable : true,
         columns: [
             {
                 field: "Nombre",
@@ -38,6 +40,18 @@ $(document).ready(function (){
             {
                 field: "Localidad",
                 title: "localidad"
+            },
+            {
+                field: "DireccionWeb",
+                title: "Direccion Web"
+            },
+            {
+                field: "TelefonodeContacto",
+                title: "Telefono de Contacto"
+            },
+            {
+                field: "Email",
+                title: "E-Mail"
             },
             {
                 title: "Herramientas",
@@ -57,6 +71,9 @@ $(document).ready(function (){
             height: 400
         }).data("kendoWindow");
 
+
+    // FUNCIONES --------------------------------------------------------
+
    $(".botonEditarFila").live("click", function()
    {
         
@@ -66,13 +83,41 @@ $(document).ready(function (){
         
         //alert("df");
         $("#nombreempresa").val(filajson.Nombre);
-        //$("#nombreempresa").val(filajson.Nombre);
+        $("#cif").val(filajson.CIF);
+        $("#localidad").val(filajson.Localidad);
+        $("#direccionweb").val(filajson.DireccionWeb);
+        $("#telefonodecontacto").val(filajson.TelefonodeContacto);
+        $("#email-c").val(filajson.Email);
+
         
         weditar.center();
         
         weditar.open();
    });
+   $("#BotonCancelarVentanaEditar").live("click", function()
+   {            
+        weditar.close();
+   });
+   $("#BotonAceptarVentanaEditar").live("click", function()
+   {
+        weditar.close();
+   });
+   $("#BotonNuevaEmpresa").click(function () {
+        $.post('Empresas/CargarVistaNuevaEmpresa', function(data) {
+            $("#EmpresasHerramientasContent").hide();
+            $("#EmpresasGrid").hide();
+            $("#NuevaEmpresaFormulario").html(data);
+            $("#NuevaEmpresaFormulario").show();
+        });
+   });
 
+   $("#EmpresasNav").live("click", function () {
+        $.post('Empresas/Index', function () {
+            $("#EmpresasHerramientasContent").show();
+            $("#EmpresasGrid").show();
+            $("#NuevaEmpresaFormulario2").hide();
+        });
+    });
 
 
     

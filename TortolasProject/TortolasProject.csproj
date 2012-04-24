@@ -84,6 +84,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\crud.css" />
+    <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Empresas\EmpresasNew.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\Facturas\nuevaFactura.css" />
@@ -608,6 +610,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
+    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
@@ -670,6 +673,7 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Views\Empresas\Index.aspx" />
+    <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\NuevaFactura.ascx" />
@@ -805,7 +809,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>6709</DevelopmentServerPort>
+          <DevelopmentServerPort>2329</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
