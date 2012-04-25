@@ -13,10 +13,12 @@
     <link href="../../Scripts/styles/kendo.default.min.css"  rel="stylesheet" type="text/css" />
     <link href="../../Scripts/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="CssContent" runat="server" />		   
+  
     <script src="<%: Url.Content("~/Scripts/jquery-1.7.2.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/kendo.all.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/slide.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/loginSiteMaster.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/captacion.js") %>" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server" />		
 
@@ -48,50 +50,82 @@
 <body class="no-js">
     <form runat="server">
 <div id="toppanel">
-	<div id="panel">
+<!-- #############################  PANEL DE LOGIN  ################################################################# -->	
+    <div id="panel">
 		<div class="content clearfix">
 			<div class="left">
 				<h1>¡Bienvenido a MTB Málaga!</h1>
-                                <img src="Content/images/mtbiker.png" ></img>
+                                <img src="../../Content/images/mtbiker.png" ></img>
 			</div>
-			<div class="left">
-				<!-- Login Form -->
-				<form class="clearfix" action="#" method="post">
-					<h1>Login</h1>
-					<label class="grey" for="log">Usuario:</label>
-					<input class="field" type="text" name="log" id="log" value="" size="23" />
-					<label class="grey" for="pwd">Contraseña:</label>
-					<input class="field" type="password" name="pwd" id="pwd" size="23" />
-	            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
-        			<div class="clear"></div>
-					<input type="submit" name="submit" value="Login" class="bt_login" />
-					<a class="lost-pwd" href="#">Lost your password?</a>
-				</form>
-			</div>
-			<div class="left right">			
-				<!-- Register Form -->
-				<form action="#" method="post">
-					<h1>¿Aun no eres miembro? ¡Inscribete!</h1>				
-					<label class="grey" for="signup">Usuario:</label>
-					<input class="field" type="text" name="signup" id="signup" value="" size="23" />
-					<label class="grey" for="email">E-mail:</label>
-					<input class="field" type="text" name="email" id="email" size="23" />
-					<label>La contraseña sera enviada a tu e-mail.</label>
-					<input type="submit" name="submit" value="Register" class="bt_register" />
-				</form>
-			</div>
+			<%
+                if (Request.IsAuthenticated)
+                {
+            %>
+                    <!-- CUIDADO! Al tener float:right el orden es: de arriba hacia abajo en la página sale de derecha a izquierda -->
+                    <div id="logOutButton">
+                        <%: Html.ActionLink("Cerrar sesión", "LogOff", "Account")%> 
+                    </div>
+                    <div id="messageContainer">
+                        No tiene mensajes
+                    </div>
+                    <div id="userNameLabel">
+                        <strong><%: Page.User.Identity.Name %></strong>
+                    </div>
+        <%
+                }
+                else
+                {
+        %> 
+                <div id="logInButton">
+                   <div class="left">
+				        <!-- Login Form -->
+				        <form class="clearfix" action="/Home/LogOn" method="post">
+					        <h1>Login</h1>
+					        <label class="grey" for="log">Usuario:</label>
+					        <input class="field" type="text" name="log" id="userLogIn" value="" size="23" />
+					        <label class="grey" for="pwd">Contraseña:</label>
+					        <input class="field" type="password" name="pwd" id="pwdLogIn" size="23" />
+	            	        <label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Recordarme</label>
+        			        <div class="clear"></div>
+					        <input type="button" name="submit" value="Iniciar sesión" class="bt_login" id="LogInButton" />
+					        <a class="lost-pwd" href="#">¿Has olvidado tu contraseña?</a>
+				        </form>
+			        </div>		
+			        <div class="left right">			
+				        <!-- Register Form -->
+					        <h1>¿Aun no eres miembro? ¡Inscríbete!</h1>	
+                            <form id="registrarForm" method="post" action="Home/Registro">
+					            <label class="grey" for="log">Usuario:</label>
+					            <input class="field" type="text" name="log" id="nicknameRegister" value="" size="23" />
+					            <label class="grey" for="pwd">Contraseña:</label>
+					            <input class="field" type="password" name="pwd" id="PasswordRegister" size="23" />
+                                <label class="grey" for="pwd">Repita la contraseña:</label>
+					            <input class="field" type="password" name="pwd" id="PasswordConfirmationRegister" size="23" />
+                                <label class="grey" for="log">Email:</label>
+					            <input class="field" type="text" name="log" id="emailRegister" value="" size="23" />
+					        
+                                <input type="button" name="submit" value="Registrarse" class="bt_register" id="registroButton" />
+                            </form>
+			        </div>
+                </div>
+                <% } %>
 		</div>
-</div> <!-- /login -->	
+    </div> 
+    <!-- ###################################### FIN LOGIN ###################################################### -->	
 
-<!-- The tab on top -->	
- <div class="tab">
+
+    <div class="tab">
 		<ul class="login">
 			<li class="left">&nbsp;</li>
-			<li>¡Hola Visitante!</li>
+			<li>¡Hola 
+                <% if (Request.IsAuthenticated) { %> <%: Page.User.Identity.Name %> <% 
+                }else{ %> visitante! <% } %>
+            </li>
 			<li class="sep">|</li>
 			<li id="toggle">
-				<a id="open" class="open" href="#">Login | Registro</a>
-				<a id="close" style="display: none;" class="close" href="#">Close Panel</a>			
+				<a id="open" class="open" href="#"><% if (Request.IsAuthenticated) { %> Mis cosas <% 
+                }else{ %> LogIn | Registro <% } %></a>
+				<a id="close" style="display: none;" class="close" href="#">Cerrar panel</a>			
 			</li>
 			<li class="right">&nbsp;</li>
 		</ul> 
@@ -103,7 +137,7 @@
 
     <div id="cabecera">
         <div id="logoContainer">
-            <img id="logo" src="Content/images/logomtb.png"></img>
+            <img id="logo" src="../../Content/images/logomtb.png"></img>
         </div>
         <nav id="topNav">
         	<ul>
@@ -143,6 +177,10 @@
 
             <div id="containerleft">
                 <div id="leftbar">
+                <%
+                    if (Request.IsAuthenticated)
+                    {
+                %>
                     <ul>
                         <li>
                             <a href="#"><img src="../../Content/images/UserGroup.png" width="10%" />Usuarios</a>
@@ -154,6 +192,9 @@
                             <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
                         </li>
                     </ul>
+                <% 
+                    }
+                %>
                 </div>
             </div>
 
