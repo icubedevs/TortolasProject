@@ -153,6 +153,9 @@
                         <li>
                             <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
                         </li>
+                        <li>
+                            <a href="Pedidos"><img src="../../Content/images/UserGroup.png" width="10%" />Articulos</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -162,7 +165,7 @@
             </div><!-- / container -->
     
             <div id="containeright">
-                    lalal		
+                    lalalalala
             </div>
    
         </div>
