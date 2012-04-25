@@ -10,7 +10,7 @@ namespace TortolasProject.Controllers
 {
     public class FacturasController : Controller
     {
-        mtbMalagaDataContext bd = new mtbMalagaDataContext();
+        mtbMalagaDataContext db = new mtbMalagaDataContext();
         static FacturasRepositorio FacturasRepo = new FacturasRepositorio();
 
         ///////////////////////////////////////////////////////////////////////////////
@@ -23,11 +23,10 @@ namespace TortolasProject.Controllers
             return View();
         }
 
-            // NuevaFactura
-        [HttpPost]
-        public ActionResult cargarVistaNuevaFactura()
+            // Nueva Factura
+        public ActionResult nuevaFactura()
         {
-            return PartialView("NuevaFactura");
+            return View();
         }
 
             // Detalles factura
@@ -35,8 +34,8 @@ namespace TortolasProject.Controllers
         public ActionResult leerFactura(FormCollection datos)
         {
             Guid idFactura = Guid.Parse(datos["idFactura"]);
-            tbFactura usuario = FacturasRepo.leerFactura(idFactura);
-            return PartialView("Details", usuario);
+            tbFactura factura = FacturasRepo.leerFactura(idFactura);
+            return PartialView("Details", factura);
         }
 
         
@@ -46,11 +45,8 @@ namespace TortolasProject.Controllers
         ///////////////////////////////////////////////////////////////////////////////
         // Funciones
         ///////////////////////////////////////////////////////////////////////////////
-        
 
-        
-
-            //Leer dacturas
+            //  Leer facturas
         [HttpPost]
         public ActionResult leerTodos()
         {
@@ -104,6 +100,23 @@ namespace TortolasProject.Controllers
             //FacturasRepo.eliminarFactura(id);
             id.AllKeys.ToString();
         }
+
+
+            // Obtener usuarios para autocomplete
+        [HttpPost]
+        public JsonResult usuariosAutocomplete()
+        {
+            var usuarios = from u in db.tbUsuario
+                           select new
+                           {
+                               idUsuario = u.idUsuario,
+                               nickname = u.Nickname
+                           };
+
+            return Json(usuarios);
+        }
+
+
 
  
     }

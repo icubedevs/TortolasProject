@@ -62,5 +62,5 @@ function leerFactura(idFactura) {
         $("#FacturasGrid").hide();
         $("#FacturasContainer").html(data);
         $("#FacturasContainer").show();
-    });          
+    });
 }

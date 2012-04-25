@@ -7,20 +7,27 @@
     box-shadow:0px 1px 0px gray;
     margin-bottom:5px;
 }
-#FacturasNav ul
+#mainFacturasNav
+{
+    position:relative;
+    float:left;
+    width:inherit;
+    height:inherit;
+}
+#mainFacturasNav ul
 {
     position:relative;
     float:left;
     list-style:none;
 }
-#FacturasNav ul li
+#mainFacturasNav ul li
 {
     padding:0px 2px;
     display:inline;
     color:Gray;
     cursor:pointer;
 }
-#FacturasNav ul li:hover
+#mainFacturasNav ul li:hover
 {
     border-bottom:3px solid gray;   
 }
@@ -45,5 +52,28 @@
     border:1px solid #C0C0C0;
     box-shadow:0px -1px 1px #DCDCDC inset;
 }
-
+#volverFacturasNav
+{
+    position:relative;
+    float:left;
+    width:inherit;
+    height:inherit;
+}
+#volverFacturasNav ul
+{
+    position:relative;
+    float:left;
+    list-style:none;
+}
+#volverFacturasNav ul li
+{
+    padding:0px 2px;
+    display:inline;
+    color:Gray;
+    cursor:pointer;
+}
+#volverFacturasNav ul li:hover
+{
+    border-bottom:3px solid gray;   
+}
 

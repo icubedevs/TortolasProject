@@ -1,16 +1,24 @@
 ﻿$(document).ready(function () {
+
+    $("#volverFacturasNav").hide();
+
+    $("#volverFacturasNav").click(function () {
+        volverListaFacturas();
+    });
+
+    /*
     $("#nuevaFacturaButtonNav").click(function () {
         $.post('Facturas/cargarVistaNuevaFactura', function (data) {
             $("#FacturasGrid").hide();
             $("#FacturasContainer").html(data);
             $("#FacturasContainer").show();
-            $("#nuevaFacturaButtonNav").hide();
+            $("#mainFacturasNav").hide();
+            $("#volverFacturasNav").show();
         });
-    });
+    }); */
 
     $("#ingresosButtonNav").click(function () {
-        //$("#FacturasContainer").html("Sólo ingresos view");
-        //$("#FacturasIndexGrid").show();
+
         url = 'Facturas/nuevaFactura';
         datos = { name: "dani", coche: "twingo" }
         $.post(url, datos, function (data) {
@@ -36,3 +44,12 @@
         $("#FacturasContainer").html("Graficos contables view");
     });
 });
+
+function volverListaFacturas() {
+    $("#volverFacturasNav").hide();
+    $("#FacturasContainer").hide();
+    $("#FacturasGrid").data("kendoGrid").dataSource.read();
+    $("#FacturasGrid").show();
+    $("#mainFacturasNav").show();
+
+}

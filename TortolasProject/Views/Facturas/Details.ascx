@@ -3,4 +3,3 @@
    <p>Concepto:     <%= Model.Concepto %>   </p>
    <p>Total:        <%= Model.Total %>      </p>
    <p>Fecha:        <%= Model.Fecha %>      </p>
-
