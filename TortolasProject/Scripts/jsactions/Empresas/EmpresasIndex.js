@@ -1,33 +1,33 @@
 ﻿
-$(document).ready(function (){
-    //alert("qwe");
-   var datasource = new kendo.data.DataSource 
-   ({
-            transport:
+$(document).ready(function () {
+    var idEmpresa = null;
+    var datasource = new kendo.data.DataSource
+    ({
+        transport:
             {
-                read: 
+                read:
                 {
                     url: "Empresas/LeerTodos",
                     datatype: "json",
                     type: "POST"
                 }
-        },
+            },
         schema:
         {
-             model:
+            model:
              {
-                id: "idEmpresa"
+                 id: "idEmpresa"
              }
         }
-   });
+    });
 
-   $("#EmpresasGrid").kendoGrid
-   ({
+    $("#EmpresasGrid").kendoGrid
+    ({
         //height: 400,
-        dataSource : datasource, 
-        selectable : true,
-        pageable : true,
-        sortable : true,
+        dataSource: datasource,
+        selectable: true,
+        pageable: true,
+        sortable: true,
         columns: [
             {
                 field: "Nombre",
@@ -55,16 +55,17 @@ $(document).ready(function (){
             },
             {
                 title: "Herramientas",
-                command: { text: "Editar", className : "botonEditarFila"}
-            },
-        ],
-   });      
-  
-   var weditar = $("#VentanaEditar")
+                command: { text: "Editar", className: "botonEditarFila" }
+            }
+        ]
+
+    });
+
+    var weditar = $("#VentanaEditar")
         .kendoWindow
         ({
             title: "Editar",
-            modal : true,
+            modal: true,
             visible: false,
             resizable: false,
             width: 600,
@@ -74,14 +75,13 @@ $(document).ready(function (){
 
     // FUNCIONES --------------------------------------------------------
 
-   $(".botonEditarFila").live("click", function()
-   {
-        
+    $(".botonEditarFila").live("click", function () {
+
         var fila = $("#EmpresasGrid").find("tbody tr.k-state-selected");
-        
+
         var filajson = $("#EmpresasGrid").data("kendoGrid").dataItem(fila).toJSON();
-        
-        //alert("df");
+        idEmpresa = datasource.getByUid(fila.attr("data-uid")).idEmpresa;
+
         $("#nombreempresa").val(filajson.Nombre);
         $("#cif").val(filajson.CIF);
         $("#localidad").val(filajson.Localidad);
@@ -89,29 +89,51 @@ $(document).ready(function (){
         $("#telefonodecontacto").val(filajson.TelefonodeContacto);
         $("#email-c").val(filajson.Email);
 
-        
+
         weditar.center();
-        
+
         weditar.open();
-   });
-   $("#BotonCancelarVentanaEditar").live("click", function()
-   {            
+    });
+    $("#BotonCancelarVentanaEditar").live("click", function () {
         weditar.close();
-   });
-   $("#BotonAceptarVentanaEditar").live("click", function()
-   {
-        weditar.close();
-   });
-   $("#BotonNuevaEmpresa").click(function () {
-        $.post('Empresas/CargarVistaNuevaEmpresa', function(data) {
+    });
+    $("#BotonAceptarVentanaEditar").live("click", function () {
+        var datos = {};
+        //Coger datos
+        datos["nombreempresaupdate"] = $("#nombreempresa").val();
+        datos["cifupdate"] = $("#cif").val();
+        datos["localidadupdate"] = $("#localidad").val();
+        datos["direccionweb"] = $("#direccionweb").val();
+        datos["telefonodecontactoupdate"] = $("#telefonodecontacto").val();
+        datos["emailupdate"] = $("#email-c").val();
+        datos["idempresa"] = idEmpresa;
+
+        //alert(datos["nombreempresaupdate"]);
+
+        $.ajax(
+        {
+            url: "Empresas/UpdateEmpresa",
+            type: "POST",
+            data: datos,
+            success: function () {
+                datasource.read();
+                weditar.close();
+            },
+            async: false
+        });
+    });
+
+
+    $("#BotonNuevaEmpresa").click(function () {
+        $.post('Empresas/CargarVistaNuevaEmpresa', function (data) {
             $("#EmpresasHerramientasContent").hide();
             $("#EmpresasGrid").hide();
             $("#NuevaEmpresaFormulario").html(data);
             $("#NuevaEmpresaFormulario").show();
         });
-   });
+    });
 
-   $("#EmpresasNav").live("click", function () {
+    $("#EmpresasNav").live("click", function () {
         $.post('Empresas/Index', function () {
             $("#EmpresasHerramientasContent").show();
             $("#EmpresasGrid").show();
@@ -120,5 +142,5 @@ $(document).ready(function (){
     });
 
 
-    
+
 });
