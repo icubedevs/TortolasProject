@@ -17,6 +17,11 @@ namespace TortolasProject.Controllers
             return View();
         }
 
+        public ActionResult AñadirArticulo()
+        {
+            return View();
+        }
+
         public ActionResult leerTodos()
         {
             var articulos = from art in ArticulosRepo.listarArticulos() 
@@ -30,7 +35,10 @@ namespace TortolasProject.Controllers
 
             return Json(articulos);
         }
-                         
 
+        public ActionResult cargarVistaAñadirArticulo()
+        {
+            return PartialView("AñadirArticulo");
+        }
     }
 }

@@ -191,6 +191,8 @@
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\newCascadeStyleSheet.css" />
+    <Content Include="Content\Pedidos\articulosAñadirArticulo.css" />
+    <Content Include="Content\Pedidos\articulosIndex.css" />
     <Content Include="Content\slide.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -670,6 +672,7 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Views\Articulos\AñadirArticulo.ascx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\NuevaFactura.ascx" />
@@ -735,7 +738,7 @@
     <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
-    <Content Include="Views\Pedidos\Index.aspx" />
+    <Content Include="Views\Articulos\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -767,7 +770,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

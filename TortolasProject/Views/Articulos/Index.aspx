@@ -4,12 +4,11 @@
     Articulos
 </asp:Content>
 
-<asp:Content ID="PedidosIndxMain" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="PedidosIndexMain" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="CrearPedidoButton">Añadir artículo</div>
-
-    <div id="articulosGrid">
-    </div>
+    <div id="añadirArticuloButton"><input type="button" class="k-button" value="Añadir artículo" /></div>
+    <div id="añadirArticuloDiv" </div>
+    <div id="articulosGrid"></div>
 
 </asp:Content>
 

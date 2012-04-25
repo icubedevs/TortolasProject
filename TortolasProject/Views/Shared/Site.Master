@@ -154,7 +154,7 @@
                             <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
                         </li>
                         <li>
-                            <a href="Pedidos"><img src="../../Content/images/UserGroup.png" width="10%" />Articulos</a>
+                            <a href="Articulos"><img src="../../Content/images/UserGroup.png" width="10%" />Articulos</a>
                         </li>
                     </ul>
                 </div>
