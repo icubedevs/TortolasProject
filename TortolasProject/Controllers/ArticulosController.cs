@@ -17,7 +17,7 @@ namespace TortolasProject.Controllers
             return View();
         }
 
-        public ActionResult AñadirArticulo()
+        public ActionResult AnadirArticulo()
         {
             return View();
         }
@@ -36,9 +36,9 @@ namespace TortolasProject.Controllers
             return Json(articulos);
         }
 
-        public ActionResult cargarVistaAñadirArticulo()
+        public ActionResult cargarVistaAnadirArticulo()
         {
-            return PartialView("AñadirArticulo");
+            return PartialView("AnadirArticulo");
         }
 
         public int nuevoArticulo(FormCollection Data)
@@ -57,7 +57,7 @@ namespace TortolasProject.Controllers
                 Precio = precio,
             };
 
-            ArticulosRepo.añadirArticulo(f);
+            ArticulosRepo.anadirArticulo(f);
             return 1; //mirar control de errores
         }
     }

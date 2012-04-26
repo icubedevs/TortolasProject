@@ -6,8 +6,8 @@
 
 <asp:Content ID="PedidosIndexMain" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div id="añadirArticuloButton"><input type="button" class="k-button" value="Añadir artículo" /></div>
-    <div id="añadirArticuloDiv"> </div>
+    <div id="anadirArticuloButton"><input type="button" class="k-button" value="Anadir artículo" /></div>
+    <div id="anadirArticuloDiv"> </div>
     <div id="articulosGrid"></div>
 
 </asp:Content>

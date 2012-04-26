@@ -1,26 +1,26 @@
 ﻿$(document).ready(function () {
 
-    //Cargar vista Añadir articulo
-    $("#añadirArticuloButton").click(function () {
-        $.post('Articulos/cargarVistaAñadirArticulo', function (data) {
+    //Cargar vista Anadir articulo
+    $("#anadirArticuloButton").click(function () {
+        $.post('Articulos/cargarVistaAnadirArticulo', function (data) {
             $("#articulosGrid").hide();
-            $("#añadirArticuloDiv").html(data);
-            $("#añadirArticuloDiv").show();
-            $("#añadirArticuloButton").hide();
+            $("#anadirArticuloDiv").html(data);
+            $("#anadirArticuloDiv").show();
+            $("#anadirArticuloButton").hide();
         });
     });
 
     //Cargar vista Index de articulos al cancelar
-    $("#añadirArticuloCancelarButton").live('click', function () {
+    $("#anadirArticuloCancelarButton").live('click', function () {
         volverIndexArticulos();
     });
 
     //Guardar articulo en la BD y volver al index de articulos
-    $("#añadirArticuloAceptarButton").live('click', function () {
-        var nombre = $("#nombreAñadirArticuloAutocomplete").val();
-        var imagen = $("#imagenAñadirArticuloAutocomplete").val();
-        var descripcion = $("#descripcionAñadirArticuloAutocomplete").val();
-        var precio = $("#precioAñadirArticuloAutocomplete").val();
+    $("#anadirArticuloAceptarButton").live('click', function () {
+        var nombre = $("#nombreAnadirArticuloAutocomplete").val();
+        var imagen = $("#imagenAnadirArticuloAutocomplete").val();
+        var descripcion = $("#descripcionAnadirArticuloAutocomplete").val();
+        var precio = $("#precioAnadirArticuloAutocomplete").val();
         data = {
             nombre: nombre,
             imagen: imagen,
@@ -37,16 +37,16 @@
 
     //auxiliar para volver a index de articulo
     function volverIndexArticulos() {
-        $.post('Articulos/AñadirArticulo', function (data) {
-            $("#añadirArticuloForm").hide();
+        $.post('Articulos/AnadirArticulo', function (data) {
+            $("#anadirArticuloForm").hide();
             $("#articulosGrid").show();
-            $("#añadirArticuloButton").show();
-            $("#añadirArticuloCancelarButton").hide();
+            $("#anadirArticuloButton").show();
+            $("#anadirArticuloCancelarButton").hide();
         });
     }
 
     //numeric texbox
-    $('#precioAñadirArticuloAutocomplete').kendoNumericTextBox();
+    $('#precioAnadirArticuloAutocomplete').kendoNumericTextBox();
 
     //Grid de articulos
     $("#articulosGrid").kendoGrid({
