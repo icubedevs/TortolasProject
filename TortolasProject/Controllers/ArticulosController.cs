@@ -40,5 +40,25 @@ namespace TortolasProject.Controllers
         {
             return PartialView("AñadirArticulo");
         }
+
+        public int nuevoArticulo(FormCollection Data)
+        {
+            String nombre = Data ["nombre"];
+            String imagen = Data ["imagen"];
+            String descripcion = Data ["descripcion"];
+            decimal precio = Decimal.Parse(Data ["precio"]);
+
+            tbArticulo f = new tbArticulo()
+            {
+                idArticulo= Guid.NewGuid(),
+                Nombre = nombre,
+                Imagen = imagen,
+                Descripcion = descripcion,
+                Precio = precio,
+            };
+
+            ArticulosRepo.añadirArticulo(f);
+            return 1; //mirar control de errores
+        }
     }
 }

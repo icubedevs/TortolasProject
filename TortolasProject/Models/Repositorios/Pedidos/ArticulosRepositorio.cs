@@ -20,6 +20,11 @@ namespace TortolasProject.Models.Repositorios
             return mtbMalagaDB.tbArticulo.ToList();
         }
 
+        public void añadirArticulo(tbArticulo f)
+        {
+            mtbMalagaDB.tbArticulo.InsertOnSubmit(f);
+            save();
+        }
 
 
 

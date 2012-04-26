@@ -17,7 +17,8 @@
     Precio  <input id='precioAñadirArticuloAutocomplete' />
     </div>
 
-</div>
-
-<div id="añadirArticuloCancelarButton"><input type="button" class="k-button" value="Cancelar" /></div>
 <div id="añadirArticuloAceptarButton"><input type="button" class="k-button" value="Aceptar" /></div>
+
+</div>
+<div id="añadirArticuloCancelarButton"><input type="button" class="k-button" value="Cancelar" /></div>
+
