@@ -32,6 +32,20 @@ namespace TortolasProject.Models.Repositorios
 
             mtbMalagaDB.SubmitChanges();
         }
+        public void createEmp(tbEmpresa emp)
+        {
+            mtbMalagaDB.tbEmpresa.InsertOnSubmit(emp);
+            salvar();        
+        }
+        public void salvar()
+        {
+            mtbMalagaDB.SubmitChanges();
+        }
+        public void deleteEmp(Guid id)
+        {
+            mtbMalagaDB.tbEmpresa.DeleteOnSubmit(buscaremp(id));
+            salvar();
+        }
 
     }
 }

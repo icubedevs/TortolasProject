@@ -46,7 +46,7 @@ namespace TortolasProject.Controllers
             Guid idEmpresa = Guid.Parse(data["idempresa"]);
             String Nombre = data["nombreempresaupdate"];
             String Localidad = data["localidadupdate"];
-            String DireccionWeb = data["direccionweb"];
+            String DireccionWeb = data["direccionwebupdate"];
             int TelefonodeContacto = int.Parse(data["telefonodecontactoupdate"]);
             String Email = data["emailupdate"];
             String CIF = data["cifupdate"];
@@ -64,6 +64,38 @@ namespace TortolasProject.Controllers
             };
 
             EmpresasRepo.updateEmp(Empresa);
+        }
+        [HttpPost]
+        public void CreateEmpresa(FormCollection data)
+        {
+            Guid idEmpresa = Guid.NewGuid();
+            String Nombre = data["nombreempresa"];
+            String Localidad = data["localidad"];
+            String DireccionWeb = data["direccionweb"];
+            int TelefonodeContacto = int.Parse(data["telefonodecontacto"]);
+            String Email = data["email"];
+            String CIF = data["cif"];
+
+
+            tbEmpresa Empresa = new tbEmpresa
+            {
+                idEmpresa = idEmpresa,
+                Nombre = Nombre,
+                Localidad = Localidad,
+                DireccionWeb = DireccionWeb,
+                TelefonodeContacto = TelefonodeContacto,
+                Email = Email,
+                CIF = CIF,
+            };
+
+            EmpresasRepo.createEmp(Empresa);
+            
+        }
+        public void DeleteEmpresa(FormCollection data)
+        {
+            Guid idEmpresa = Guid.Parse(data["idempresa"]);
+
+            EmpresasRepo.deleteEmp(idEmpresa);
         }
         [HttpPost]
         public ActionResult CargarVistaNuevaEmpresa()

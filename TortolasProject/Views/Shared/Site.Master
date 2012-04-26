@@ -153,6 +153,9 @@
                         <li>
                             <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
                         </li>
+                        <li>
+                            <a href="Empresas"><img src="../../Content/images/UserGroup.png" width="10%" />Empresas</a>
+                        </li>
                     </ul>
                 </div>
             </div>

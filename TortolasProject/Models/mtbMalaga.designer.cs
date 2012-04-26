@@ -126,6 +126,9 @@ namespace TortolasProject.Models
     partial void InserttbLineaPedidoUsuario(tbLineaPedidoUsuario instance);
     partial void UpdatetbLineaPedidoUsuario(tbLineaPedidoUsuario instance);
     partial void DeletetbLineaPedidoUsuario(tbLineaPedidoUsuario instance);
+    partial void InserttbMensaje(tbMensaje instance);
+    partial void UpdatetbMensaje(tbMensaje instance);
+    partial void DeletetbMensaje(tbMensaje instance);
     partial void InserttbMonitor(tbMonitor instance);
     partial void UpdatetbMonitor(tbMonitor instance);
     partial void DeletetbMonitor(tbMonitor instance);
@@ -447,6 +450,14 @@ namespace TortolasProject.Models
 			get
 			{
 				return this.GetTable<tbLineaPedidoUsuario>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbMensaje> tbMensaje
+		{
+			get
+			{
+				return this.GetTable<tbMensaje>();
 			}
 		}
 		
@@ -825,6 +836,10 @@ namespace TortolasProject.Models
 		
 		private EntitySet<tbEvento> _tbEvento;
 		
+		private EntitySet<tbMensaje> _tbMensaje;
+		
+		private EntitySet<tbMensaje> _tbMensaje1;
+		
 		private EntitySet<tbPedidoUsuario> _tbPedidoUsuario;
 		
 		private EntitySet<tbRuta> _tbRuta;
@@ -865,6 +880,8 @@ namespace TortolasProject.Models
 		{
 			this._tbDocInscripcion = new EntitySet<tbDocInscripcion>(new Action<tbDocInscripcion>(this.attach_tbDocInscripcion), new Action<tbDocInscripcion>(this.detach_tbDocInscripcion));
 			this._tbEvento = new EntitySet<tbEvento>(new Action<tbEvento>(this.attach_tbEvento), new Action<tbEvento>(this.detach_tbEvento));
+			this._tbMensaje = new EntitySet<tbMensaje>(new Action<tbMensaje>(this.attach_tbMensaje), new Action<tbMensaje>(this.detach_tbMensaje));
+			this._tbMensaje1 = new EntitySet<tbMensaje>(new Action<tbMensaje>(this.attach_tbMensaje1), new Action<tbMensaje>(this.detach_tbMensaje1));
 			this._tbPedidoUsuario = new EntitySet<tbPedidoUsuario>(new Action<tbPedidoUsuario>(this.attach_tbPedidoUsuario), new Action<tbPedidoUsuario>(this.detach_tbPedidoUsuario));
 			this._tbRuta = new EntitySet<tbRuta>(new Action<tbRuta>(this.attach_tbRuta), new Action<tbRuta>(this.detach_tbRuta));
 			this._tbSocio = new EntitySet<tbSocio>(new Action<tbSocio>(this.attach_tbSocio), new Action<tbSocio>(this.detach_tbSocio));
@@ -1122,6 +1139,32 @@ namespace TortolasProject.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbMensaje", Storage="_tbMensaje", ThisKey="idUsuario", OtherKey="FKDestinatario")]
+		public EntitySet<tbMensaje> tbMensaje
+		{
+			get
+			{
+				return this._tbMensaje;
+			}
+			set
+			{
+				this._tbMensaje.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbMensaje1", Storage="_tbMensaje1", ThisKey="idUsuario", OtherKey="FKRemitente")]
+		public EntitySet<tbMensaje> tbMensaje1
+		{
+			get
+			{
+				return this._tbMensaje1;
+			}
+			set
+			{
+				this._tbMensaje1.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbPedidoUsuario", Storage="_tbPedidoUsuario", ThisKey="idUsuario", OtherKey="FKUsuario")]
 		public EntitySet<tbPedidoUsuario> tbPedidoUsuario
 		{
@@ -1237,6 +1280,30 @@ namespace TortolasProject.Models
 		{
 			this.SendPropertyChanging();
 			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbMensaje(tbMensaje entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = this;
+		}
+		
+		private void detach_tbMensaje(tbMensaje entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario = null;
+		}
+		
+		private void attach_tbMensaje1(tbMensaje entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario1 = this;
+		}
+		
+		private void detach_tbMensaje1(tbMensaje entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUsuario1 = null;
 		}
 		
 		private void attach_tbPedidoUsuario(tbPedidoUsuario entity)
@@ -6718,7 +6785,7 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CIF", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CIF", DbType="VarChar(15)")]
 		public string CIF
 		{
 			get
@@ -9372,6 +9439,270 @@ namespace TortolasProject.Models
 		{
 			this.SendPropertyChanging();
 			entity.tbLineaPedidoUsuario = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbMensaje")]
+	public partial class tbMensaje : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _idMensaje;
+		
+		private System.Nullable<System.DateTime> _fecha;
+		
+		private string _estado;
+		
+		private System.Guid _FKRemitente;
+		
+		private System.Guid _FKDestinatario;
+		
+		private string _asunto;
+		
+		private EntityRef<tbUsuario> _tbUsuario;
+		
+		private EntityRef<tbUsuario> _tbUsuario1;
+		
+    #region Definiciones de métodos de extensibilidad
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidMensajeChanging(System.Guid value);
+    partial void OnidMensajeChanged();
+    partial void OnfechaChanging(System.Nullable<System.DateTime> value);
+    partial void OnfechaChanged();
+    partial void OnestadoChanging(string value);
+    partial void OnestadoChanged();
+    partial void OnFKRemitenteChanging(System.Guid value);
+    partial void OnFKRemitenteChanged();
+    partial void OnFKDestinatarioChanging(System.Guid value);
+    partial void OnFKDestinatarioChanged();
+    partial void OnasuntoChanging(string value);
+    partial void OnasuntoChanged();
+    #endregion
+		
+		public tbMensaje()
+		{
+			this._tbUsuario = default(EntityRef<tbUsuario>);
+			this._tbUsuario1 = default(EntityRef<tbUsuario>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMensaje", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid idMensaje
+		{
+			get
+			{
+				return this._idMensaje;
+			}
+			set
+			{
+				if ((this._idMensaje != value))
+				{
+					this.OnidMensajeChanging(value);
+					this.SendPropertyChanging();
+					this._idMensaje = value;
+					this.SendPropertyChanged("idMensaje");
+					this.OnidMensajeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_fecha", DbType="Date")]
+		public System.Nullable<System.DateTime> fecha
+		{
+			get
+			{
+				return this._fecha;
+			}
+			set
+			{
+				if ((this._fecha != value))
+				{
+					this.OnfechaChanging(value);
+					this.SendPropertyChanging();
+					this._fecha = value;
+					this.SendPropertyChanged("fecha");
+					this.OnfechaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_estado", DbType="NVarChar(30)")]
+		public string estado
+		{
+			get
+			{
+				return this._estado;
+			}
+			set
+			{
+				if ((this._estado != value))
+				{
+					this.OnestadoChanging(value);
+					this.SendPropertyChanging();
+					this._estado = value;
+					this.SendPropertyChanged("estado");
+					this.OnestadoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKRemitente", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FKRemitente
+		{
+			get
+			{
+				return this._FKRemitente;
+			}
+			set
+			{
+				if ((this._FKRemitente != value))
+				{
+					if (this._tbUsuario1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFKRemitenteChanging(value);
+					this.SendPropertyChanging();
+					this._FKRemitente = value;
+					this.SendPropertyChanged("FKRemitente");
+					this.OnFKRemitenteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKDestinatario", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FKDestinatario
+		{
+			get
+			{
+				return this._FKDestinatario;
+			}
+			set
+			{
+				if ((this._FKDestinatario != value))
+				{
+					if (this._tbUsuario.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFKDestinatarioChanging(value);
+					this.SendPropertyChanging();
+					this._FKDestinatario = value;
+					this.SendPropertyChanged("FKDestinatario");
+					this.OnFKDestinatarioChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_asunto", DbType="NVarChar(70)")]
+		public string asunto
+		{
+			get
+			{
+				return this._asunto;
+			}
+			set
+			{
+				if ((this._asunto != value))
+				{
+					this.OnasuntoChanging(value);
+					this.SendPropertyChanging();
+					this._asunto = value;
+					this.SendPropertyChanged("asunto");
+					this.OnasuntoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbMensaje", Storage="_tbUsuario", ThisKey="FKDestinatario", OtherKey="idUsuario", IsForeignKey=true)]
+		public tbUsuario tbUsuario
+		{
+			get
+			{
+				return this._tbUsuario.Entity;
+			}
+			set
+			{
+				tbUsuario previousValue = this._tbUsuario.Entity;
+				if (((previousValue != value) 
+							|| (this._tbUsuario.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbUsuario.Entity = null;
+						previousValue.tbMensaje.Remove(this);
+					}
+					this._tbUsuario.Entity = value;
+					if ((value != null))
+					{
+						value.tbMensaje.Add(this);
+						this._FKDestinatario = value.idUsuario;
+					}
+					else
+					{
+						this._FKDestinatario = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbUsuario");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUsuario_tbMensaje1", Storage="_tbUsuario1", ThisKey="FKRemitente", OtherKey="idUsuario", IsForeignKey=true)]
+		public tbUsuario tbUsuario1
+		{
+			get
+			{
+				return this._tbUsuario1.Entity;
+			}
+			set
+			{
+				tbUsuario previousValue = this._tbUsuario1.Entity;
+				if (((previousValue != value) 
+							|| (this._tbUsuario1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbUsuario1.Entity = null;
+						previousValue.tbMensaje1.Remove(this);
+					}
+					this._tbUsuario1.Entity = value;
+					if ((value != null))
+					{
+						value.tbMensaje1.Add(this);
+						this._FKRemitente = value.idUsuario;
+					}
+					else
+					{
+						this._FKRemitente = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbUsuario1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
