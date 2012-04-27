@@ -195,6 +195,9 @@
                         <li>
                             <%: Html.ActionLink("Artículos", "Index", "Articulos") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
+                        <li>
+                            <a href="Empresas"><img src="../../Content/images/UserGroup.png" width="10%" />Empresas</a>
+                        </li>
                     </ul>
                 <% 
                     }

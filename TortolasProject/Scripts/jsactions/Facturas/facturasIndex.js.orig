@@ -10,7 +10,7 @@
             }
         },
         schema:
-            {   
+            {
                 model:
                 {
                     id: "idFactura"
@@ -47,14 +47,25 @@
         // Obtenemos la fila
         var fila = dataSource.getByUid(uid);
 
+<<<<<<< HEAD
+$(".k-grid-content tr").live('click', function () {
+    alert("Has pulsado en una fila");
+=======
         // Llamamos a la función para ver los detalles de la factura
         leerFactura(fila.idFactura);
     });
+>>>>>>> 5a565b7e0275528db0c90b7cd59d1e2ccfb87fef
 });
 
 function leerFactura(idFactura) {
-
-    var url = "../Facturas/leerFactura/" + idFactura;
-    document.location.replace(url);
-}
     
+    var url = "Facturas/leerFactura";
+    var datos = {
+     idFactura:  idFactura 
+     };
+    $.post(url, datos, function (data) {
+        $("#FacturasGrid").hide();
+        $("#FacturasContainer").html(data);
+        $("#FacturasContainer").show();
+    });          
+}

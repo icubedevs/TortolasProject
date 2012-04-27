@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -77,12 +78,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
+=======
+    <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
+>>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
+    <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <Content Include="Content\crud.css" />
+    <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Empresas\EmpresasNew.css" />
+    <Content Include="Content\Facturas\facturasIndex.css" />
+    <Content Include="Content\Facturas\facturasNav.css" />
+    <Content Include="Content\Facturas\factura.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -182,7 +192,8 @@
     <Content Include="Content\icons\yahoo-na.ico" />
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
->>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
+    <Content Include="Content\images\asociaciones.jpg" />
+    <Content Include="Content\images\empresas.png" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
@@ -603,6 +614,18 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jsactions\captacion.js" />
+<<<<<<< HEAD
+    <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
+=======
+    <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
+    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
+>>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
+    <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
+    <Content Include="Scripts\jsactions\siteMaster.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo.binder.min.js" />
@@ -661,14 +684,25 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-   <Content Include="Views\Home\cabron.aspx" />
+<<<<<<< HEAD
+    <Content Include="Views\Facturas\editarFactura.aspx" />
+    <Content Include="Views\Facturas\leerFactura.aspx" />
+    <Content Include="Views\Facturas\factura.aspx" />
+=======
+    <Content Include="Views\Empresas\Index.aspx" />
+    <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
+    <Content Include="Views\Facturas\Create.ascx" />
+    <Content Include="Views\Facturas\Details.ascx" />
+    <Content Include="Views\Facturas\NuevaFactura.ascx" />
+    <Content Include="Views\Facturas\Prueba.ascx" />
+>>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
+    <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
- <Content Include="Scripts\pngfix\supersleight-min.js" />
+    <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-
-     <Content Include="Scripts\styles\Black\editor.png" />
+    <Content Include="Scripts\styles\Black\editor.png" />
     <Content Include="Scripts\styles\Black\imagebrowser.png" />
     <Content Include="Scripts\styles\Black\loading-image.gif" />
     <Content Include="Scripts\styles\Black\loading.gif" />
@@ -756,9 +790,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
-<<<<<<< HEAD
   <ItemGroup>
     <None Include="Models\mtbMalaga.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -775,11 +810,6 @@
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </None>
   </ItemGroup>
-=======
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\pngfix\Thumbs.db" />
->>>>>>> cea46525011c68c07999dcb716d3e1af02a36986
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -797,7 +827,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3608</DevelopmentServerPort>
+          <DevelopmentServerPort>2329</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
