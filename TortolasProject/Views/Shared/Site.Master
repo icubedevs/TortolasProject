@@ -187,7 +187,7 @@
                             <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Monitores", "Index", "Monitores") %>
                         </li>
                         <li>
-                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Eventos", "Index", "Index") %>
+                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Eventos", "Index", "Eventos") %>
                         </li>
                         <li>
                             <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Contabilidad", "Index", "Facturas") %>
