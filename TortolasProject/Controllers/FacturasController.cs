@@ -48,6 +48,7 @@ namespace TortolasProject.Controllers
             return View("leerFactura", f);
         }
 
+        [HttpGet]
         public ActionResult editarFactura(String id)
         {
             Guid idFactura = Guid.Parse(id);

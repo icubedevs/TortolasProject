@@ -14,7 +14,6 @@
     <AssemblyName>TortolasProject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,13 +67,10 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
-    <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
-    <Compile Include="Controllers\Monitores\MonitoresController.cs" />
-    <Compile Include="Controllers\Perfil\PerfilController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -88,22 +84,15 @@
     <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
-    <Compile Include="Models\Repositorios\Monitores\MonitoresRepositorio.cs" />
-    <Compile Include="Models\Repositorios\Perfil\MensajesRepositorio.cs" />
-    <Compile Include="Models\Repositorios\Usuarios\UsuariosRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Administracion\Monitores\monitores.css" />
     <Content Include="Content\crud.css" />
     <Content Include="Content\Empresas\EmpresasNav.css" />
     <Content Include="Content\Empresas\EmpresasNew.css" />
-    <Content Include="Content\emailBIG_titulo.png" />
-    <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\Facturas\factura.css" />
-    <Content Include="Content\Facturas\nuevaFactura.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -205,14 +194,10 @@
     <Content Include="Content\icons\yahoo.ico" />
     <Content Include="Content\images\asociaciones.jpg" />
     <Content Include="Content\images\empresas.png" />
-    <Content Include="Content\images\emailBIG.png" />
-    <Content Include="Content\images\emailBIG_titulo.png" />
-    <Content Include="Content\images\monitores\chucknorris.jpg" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\newCascadeStyleSheet.css" />
-    <Content Include="Content\Perfil\Perfil.css" />
     <Content Include="Content\slide.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -629,9 +614,6 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jsactions\Administracion\Administracion.js" />
-    <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
-    <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
@@ -640,8 +622,6 @@
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
     <Content Include="Scripts\jsactions\siteMaster.js" />
     <Content Include="Scripts\jsactions\Pedidos\articulosIndex.js" />
-    <Content Include="Scripts\jsactions\Perfil\Mensajeria.js" />
-    <Content Include="Scripts\jsactions\Perfil\Perfil.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo.binder.min.js" />
@@ -701,11 +681,9 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Views\Facturas\editarFactura.aspx" />
-    <Content Include="Views\Administracion\Index.aspx" />
     <Content Include="Views\Facturas\leerFactura.aspx" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
     <Content Include="Views\Articulos\EditarArticulo.ascx" />
-    <Content Include="Views\Facturas\NuevaFactura.ascx" />
     <Content Include="Views\Empresas\Index.aspx" />
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
     <Content Include="Views\Facturas\factura.aspx" />
@@ -715,70 +693,68 @@
     <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
-    <Content Include="Scripts\pngfix\styles\Black\editor.png" />
-    <Content Include="Scripts\pngfix\styles\Black\imagebrowser.png" />
-    <Content Include="Scripts\pngfix\styles\Black\loading-image.gif" />
-    <Content Include="Scripts\pngfix\styles\Black\loading.gif" />
-    <Content Include="Scripts\pngfix\styles\Black\slider-h.gif" />
-    <Content Include="Scripts\pngfix\styles\Black\slider-v.gif" />
-    <Content Include="Scripts\pngfix\styles\Black\sprite.png" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\editor.png" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\imagebrowser.png" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\loading-image.gif" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\loading.gif" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\slider-h.gif" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\slider-v.gif" />
-    <Content Include="Scripts\pngfix\styles\BlueOpal\sprite.png" />
-    <Content Include="Scripts\pngfix\styles\Default\editor.png" />
-    <Content Include="Scripts\pngfix\styles\Default\imagebrowser.png" />
-    <Content Include="Scripts\pngfix\styles\Default\loading-image.gif" />
-    <Content Include="Scripts\pngfix\styles\Default\loading.gif" />
-    <Content Include="Scripts\pngfix\styles\Default\slider-h.gif" />
-    <Content Include="Scripts\pngfix\styles\Default\slider-v.gif" />
-    <Content Include="Scripts\pngfix\styles\Default\sprite.png" />
-    <Content Include="Scripts\pngfix\styles\images\android-sprite.png" />
-    <Content Include="Scripts\pngfix\styles\images\iconmasks.svg" />
-    <Content Include="Scripts\pngfix\styles\images\ios-sprite.png" />
-    <Content Include="Scripts\pngfix\styles\kendo.black.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.blueopal.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.common.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.dataviz.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.default.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.metro.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.all.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.android2.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.android4.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.blackberry.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.ios.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.mobile.meego.min.css" />
-    <Content Include="Scripts\pngfix\styles\kendo.silver.min.css" />
-    <Content Include="Scripts\pngfix\styles\Metro\editor.png" />
-    <Content Include="Scripts\pngfix\styles\Metro\imagebrowser.png" />
-    <Content Include="Scripts\pngfix\styles\Metro\loading-image.gif" />
-    <Content Include="Scripts\pngfix\styles\Metro\loading.gif" />
-    <Content Include="Scripts\pngfix\styles\Metro\slider-h.gif" />
-    <Content Include="Scripts\pngfix\styles\Metro\slider-v.gif" />
-    <Content Include="Scripts\pngfix\styles\Metro\sprite.png" />
-    <Content Include="Scripts\pngfix\styles\Silver\editor.png" />
-    <Content Include="Scripts\pngfix\styles\Silver\imagebrowser.png" />
-    <Content Include="Scripts\pngfix\styles\Silver\loading-image.gif" />
-    <Content Include="Scripts\pngfix\styles\Silver\loading.gif" />
-    <Content Include="Scripts\pngfix\styles\Silver\slider-h.gif" />
-    <Content Include="Scripts\pngfix\styles\Silver\slider-v.gif" />
-    <Content Include="Scripts\pngfix\styles\Silver\sprite.png" />
-    <Content Include="Scripts\pngfix\styles\textures\glass.png" />
-    <Content Include="Scripts\pngfix\styles\textures\highlight.png" />
+    <Content Include="Scripts\styles\Black\editor.png" />
+    <Content Include="Scripts\styles\Black\imagebrowser.png" />
+    <Content Include="Scripts\styles\Black\loading-image.gif" />
+    <Content Include="Scripts\styles\Black\loading.gif" />
+    <Content Include="Scripts\styles\Black\slider-h.gif" />
+    <Content Include="Scripts\styles\Black\slider-v.gif" />
+    <Content Include="Scripts\styles\Black\sprite.png" />
+    <Content Include="Scripts\styles\BlueOpal\editor.png" />
+    <Content Include="Scripts\styles\BlueOpal\imagebrowser.png" />
+    <Content Include="Scripts\styles\BlueOpal\loading-image.gif" />
+    <Content Include="Scripts\styles\BlueOpal\loading.gif" />
+    <Content Include="Scripts\styles\BlueOpal\slider-h.gif" />
+    <Content Include="Scripts\styles\BlueOpal\slider-v.gif" />
+    <Content Include="Scripts\styles\BlueOpal\sprite.png" />
+    <Content Include="Scripts\styles\Default\editor.png" />
+    <Content Include="Scripts\styles\Default\imagebrowser.png" />
+    <Content Include="Scripts\styles\Default\loading-image.gif" />
+    <Content Include="Scripts\styles\Default\loading.gif" />
+    <Content Include="Scripts\styles\Default\slider-h.gif" />
+    <Content Include="Scripts\styles\Default\slider-v.gif" />
+    <Content Include="Scripts\styles\Default\sprite.png" />
+    <Content Include="Scripts\styles\images\android-sprite.png" />
+    <Content Include="Scripts\styles\images\iconmasks.svg" />
+    <Content Include="Scripts\styles\images\ios-sprite.png" />
+    <Content Include="Scripts\styles\kendo.black.min.css" />
+    <Content Include="Scripts\styles\kendo.blueopal.min.css" />
+    <Content Include="Scripts\styles\kendo.common.min.css" />
+    <Content Include="Scripts\styles\kendo.dataviz.min.css" />
+    <Content Include="Scripts\styles\kendo.default.min.css" />
+    <Content Include="Scripts\styles\kendo.metro.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.all.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.android2.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.android4.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.blackberry.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.ios.min.css" />
+    <Content Include="Scripts\styles\kendo.mobile.meego.min.css" />
+    <Content Include="Scripts\styles\kendo.silver.min.css" />
+    <Content Include="Scripts\styles\Metro\editor.png" />
+    <Content Include="Scripts\styles\Metro\imagebrowser.png" />
+    <Content Include="Scripts\styles\Metro\loading-image.gif" />
+    <Content Include="Scripts\styles\Metro\loading.gif" />
+    <Content Include="Scripts\styles\Metro\slider-h.gif" />
+    <Content Include="Scripts\styles\Metro\slider-v.gif" />
+    <Content Include="Scripts\styles\Metro\sprite.png" />
+    <Content Include="Scripts\styles\Silver\editor.png" />
+    <Content Include="Scripts\styles\Silver\imagebrowser.png" />
+    <Content Include="Scripts\styles\Silver\loading-image.gif" />
+    <Content Include="Scripts\styles\Silver\loading.gif" />
+    <Content Include="Scripts\styles\Silver\slider-h.gif" />
+    <Content Include="Scripts\styles\Silver\slider-v.gif" />
+    <Content Include="Scripts\styles\Silver\sprite.png" />
+    <Content Include="Scripts\styles\textures\glass.png" />
+    <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
     <Content Include="Views\Articulos\Index.aspx" />
-    <Content Include="Views\Monitores\Index.aspx" />
-    <Content Include="Views\Perfil\Index.aspx" />
-    <Content Include="Web_.config" />
-    <Content Include="Web_.Debug.config">
-      <DependentUpon>Web_.config</DependentUpon>
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Web_.Release.config">
-      <DependentUpon>Web_.config</DependentUpon>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -803,7 +779,6 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\Monitores\" />
     <Folder Include="App_Data\" />
     <Folder Include="Content\Pedidos\" />
   </ItemGroup>
@@ -818,7 +793,6 @@
       <LastGenOutput>mtbMalaga.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Scripts\pngfix\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

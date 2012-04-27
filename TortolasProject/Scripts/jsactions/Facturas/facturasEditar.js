@@ -157,7 +157,7 @@
         };
 
         $.post(url, datos, function (data) {
-            location.replace('./Index');
+            location.replace("../../Facturas");
         });
 
     });
@@ -193,7 +193,7 @@
             fecha: fecha
         };
         $.post(url, datos, function (data) {
-            location.replace('Index');
+            location.replace("../../Facturas");
         });
 
     });
@@ -206,7 +206,7 @@
 
     // Al pulsar en concepto
     $(".k-grid-edit-row .k-textbox").click(function () {
-        alert("click");
+        //alert("click");
     });
 
 
