@@ -66,12 +66,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ArticulosController.cs" />
 <<<<<<< HEAD
-    <Compile Include="Controllers\EventosController.cs" />
+    <Compile Include="Controllers\ArticulosController.cs" />
 =======
+    <Compile Include="Controllers\EventosController.cs" />
+>>>>>>> ae13d94ff0eba7bfc2db8323bedecbd2a0890b7b
     <Compile Include="Controllers\EmpresasController.cs" />
->>>>>>> 5cda35ad7ba6bc1e03e43cd479e0276715af452e
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
@@ -84,28 +84,24 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
 <<<<<<< HEAD
-    <Compile Include="Models\Repositorios\Eventos\EventosRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
 =======
+    <Compile Include="Models\Repositorios\Eventos\EventosRepositorio.cs" />
+>>>>>>> ae13d94ff0eba7bfc2db8323bedecbd2a0890b7b
     <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
->>>>>>> 5cda35ad7ba6bc1e03e43cd479e0276715af452e
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\crud.css" />
-<<<<<<< HEAD
-    <Content Include="Content\Eventos\EventosKendocss.css" />
-=======
     <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Eventos\EventosKendocss.css" />
     <Content Include="Content\Empresas\EmpresasNew.css" />
->>>>>>> 5cda35ad7ba6bc1e03e43cd479e0276715af452e
     <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\Facturas\factura.css" />
-    <Content Include="Content\Facturas\nuevaFactura.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -628,14 +624,14 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
+<<<<<<< HEAD
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
-<<<<<<< HEAD
-    <Content Include="Scripts\jsactions\Eventos\eventos.js" />
 =======
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
+    <Content Include="Scripts\jsactions\Eventos\eventos.js" />
     <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
->>>>>>> 5cda35ad7ba6bc1e03e43cd479e0276715af452e
+>>>>>>> ae13d94ff0eba7bfc2db8323bedecbd2a0890b7b
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
@@ -703,17 +699,18 @@
     <Content Include="Views\Facturas\leerFactura.aspx" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
     <Content Include="Views\Articulos\EditarArticulo.ascx" />
-    <Content Include="Views\Facturas\factura.aspx" />
-<<<<<<< HEAD
-    <Content Include="Views\Eventos\Index.aspx" />
-=======
     <Content Include="Views\Empresas\Index.aspx" />
+    <Content Include="Views\Eventos\Index.aspx" />
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
->>>>>>> 5cda35ad7ba6bc1e03e43cd479e0276715af452e
+<<<<<<< HEAD
+    <Content Include="Views\Facturas\factura.aspx" />
+=======
+    <Content Include="Views\Eventos\VistaCrearEvento.ascx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\NuevaFactura.ascx" />
     <Content Include="Views\Facturas\Prueba.ascx" />
+>>>>>>> ae13d94ff0eba7bfc2db8323bedecbd2a0890b7b
     <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
@@ -820,7 +817,6 @@
       <LastGenOutput>mtbMalaga.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Scripts\pngfix\Thumbs.db" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
@@ -847,7 +843,11 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
+<<<<<<< HEAD
           <DevelopmentServerPort>3608</DevelopmentServerPort>
+=======
+          <DevelopmentServerPort>4753</DevelopmentServerPort>
+>>>>>>> ae13d94ff0eba7bfc2db8323bedecbd2a0890b7b
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

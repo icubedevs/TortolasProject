@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -81,6 +82,7 @@
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Eventos\EventosRepositorio.cs" />
     <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
@@ -89,6 +91,7 @@
   <ItemGroup>
     <Content Include="Content\crud.css" />
     <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Eventos\EventosKendocss.css" />
     <Content Include="Content\Empresas\EmpresasNew.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
@@ -616,7 +619,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
+    <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
+    <Content Include="Scripts\jsactions\Eventos\eventos.js" />
+    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
@@ -685,8 +691,10 @@
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
     <Content Include="Views\Articulos\EditarArticulo.ascx" />
     <Content Include="Views\Empresas\Index.aspx" />
+    <Content Include="Views\Eventos\Index.aspx" />
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
     <Content Include="Views\Facturas\factura.aspx" />
+    <Content Include="Views\Eventos\VistaCrearEvento.ascx" />
     <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
