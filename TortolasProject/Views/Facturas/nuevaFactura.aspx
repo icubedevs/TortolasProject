@@ -18,17 +18,17 @@
 <div id='nuevaFacturaForm'>
     <div id='nuevaFacturaHeader'>
         <div id='relacionesNuevaFacturaContainer'>
-            <div id='usuarioNuevaFacturaDiv'>
-                Usuario     <input id='usuarioNuevaFacturaAutocomplete' />
+            <div id='usuariosNuevaFacturaDiv'>
+                Usuario     <input id='usuariosNuevaFacturaAutocomplete' />
             </div>
-            <div id='socioNuevaFacturaDiv'>
-                Socio       <input id='socioNuevaFacturaAutocomplete' />
+            <div id='eventosNuevaFacturaDiv'>
+                Evento     <input id='eventosNuevaFacturaAutocomplete' />
             </div>
-            <div id='eventoNuevaFacturaDiv'>
-                Evento     <input id='eventoNuevaFacturaAutocomplete' />
+            <div id='pedidosNuevaFacturaDiv'>
+                Pedido    <input id='pedidosNuevaFacturaAutocomplete' />
             </div>
-            <div id='pedidoNuevaFacturaDiv'>
-                Pedido    <input id='pedidoNuevaFacturaAutocomplete' />
+            <div id='articulosNuevaFacturaDiv'>
+                Artículos    <input id='articulosNuevaFacturaAutocomplete' />
             </div>
         </div>
 
@@ -38,12 +38,13 @@
         <div id='conceptoNuevaFacturaDiv'>
             Concepto    <input type='text' id='conceptoNuevaFactura' class='inputText' />   
         </div>
-        <div id='totalNuevaFacturaDiv'>
-            Cuantía     <input type='text' id='totalNuevaFactura' class='inputText' />      
-        </div>
     </div>
-    <button id='nuevaLineaButton'>Nueva línea</button>
-    <div id='nuevaFacturaLineasFacturaGrid'>        
+
+    <div id='nuevaLineaButton'>Nueva línea</div>
+    <div id='nuevaFacturaLineasFacturaGrid'>
+    </div>
+    <div id='totalNuevaFacturaDiv'>
+            Cuantía     <input type='text' id='totalNuevaFactura' class='inputText' />      
     </div>
 
     <div id='nuevaFacturaBottom'>

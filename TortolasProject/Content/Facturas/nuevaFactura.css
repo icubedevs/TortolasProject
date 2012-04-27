@@ -44,6 +44,20 @@
     margin-top:5px;
     width:inherit;
 }
+#nuevaLineaButton
+{
+    position:relative;
+    float:left;
+    margin:10px;    
+    padding:5px;
+    
+    color:gray;
+    
+    border:1px solid gray;
+    border-radius:5px;
+    box-shadow:0px -1px 1px snow inset;
+    cursor:pointer;
+}
 #descartarNuevaFacturaButton
 {
     position:relative;

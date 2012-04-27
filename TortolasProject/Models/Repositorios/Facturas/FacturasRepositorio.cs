@@ -22,6 +22,7 @@ namespace TortolasProject.Models.Repositorios
         public tbFactura leerFactura(Guid id)
         {
             return mtbMalagaDB.tbFactura.Where(factura => factura.idFactura == id).Single();
+            
         }
 
         public void nuevaFactura(tbFactura f)
@@ -82,6 +83,7 @@ namespace TortolasProject.Models.Repositorios
         public void nuevaLinea(tbLineaFactura linea)
         {
             mtbMalagaDB.tbLineaFactura.InsertOnSubmit(linea);
+            save();
         }
 
         public void modificarLinea(Guid id, tbLineaFactura linea)

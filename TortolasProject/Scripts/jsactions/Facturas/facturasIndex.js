@@ -53,14 +53,9 @@
 });
 
 function leerFactura(idFactura) {
-    
-    var url = "Facturas/leerFactura";
-    var datos = {
-     idFactura:  idFactura 
-     };
-    $.post(url, datos, function (data) {
-        $("#FacturasGrid").hide();
-        $("#FacturasContainer").html(data);
-        $("#FacturasContainer").show();
-    });
+
+    var url = "../Facturas/leerFactura/" + idFactura;
+    alert(idFactura);
+    document.location.replace(url);
 }
+    
