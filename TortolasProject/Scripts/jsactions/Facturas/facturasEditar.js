@@ -1,18 +1,8 @@
 ﻿$(document).ready(function () {
+    // Cultura
+    kendo.culture("es-ES");
+    var idFactura = $("#idFactura").val();
 
-    estadoNuevaFactura();
-
-
-});
-
-function obtenerLineas() {
-    $.each($(".k-grid-content tbody tr"), function () {
-
-    });
-
-}
-
-function estadoNuevaFactura() {
     // DatePicker fecha
     $("#fechaFactura").kendoDatePicker({
         start: "day",
@@ -20,28 +10,26 @@ function estadoNuevaFactura() {
         format: "dd/MM/yyyy"
     });
 
-    /*
-    
+
+
     function montarFecha(valor) {
-    var salida = valor.getDate() + "/" + (valor.getMonth() + 1) + "/" + valor.getFullYear();
-    salida = girarFecha(salida);
-    return salida;
+        var salida = valor.getDate() + "/" + (valor.getMonth() + 1) + "/" + valor.getFullYear();
+        salida = girarFecha(salida);
+        return salida;
     }
-    function girarFecha(fecha)
-    {
-    var antiguacompleta = fecha.split("-");
-    salida = antiguacompleta[2] + "/" + antiguacompleta[1] + "/" + antiguacompleta[0];
-    return salida;
+    function girarFecha(fecha) {
+        var antiguacompleta = fecha.split("-");
+        salida = antiguacompleta[2] + "/" + antiguacompleta[1] + "/" + antiguacompleta[0];
+        return salida;
     }
-    
-    */
+
 
 
     // Autocomplete usuarios
     var dsUsuarios = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/usuariosAutocomplete",
+                url: "../usuariosAutocomplete",
                 dataType: "json",
                 type: "POST"
             }
@@ -59,7 +47,7 @@ function estadoNuevaFactura() {
     var dsEventos = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/eventosAutocomplete",
+                url: "../eventosAutocomplete",
                 dataType: "json",
                 type: "POST"
             }
@@ -77,7 +65,7 @@ function estadoNuevaFactura() {
     var dsArticulos = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/articulosAutocomplete",
+                url: "../articulosAutocomplete",
                 dataType: "json",
                 type: "POST"
             }
@@ -91,9 +79,17 @@ function estadoNuevaFactura() {
         dataSource: dsEventos
     });
 
-
     // DataSource KENDO
     var dataSource = new kendo.data.DataSource({
+        transport: {
+            read:
+            {
+                url: "../leerLineasFactura",
+                data: { idFactura: idFactura },
+                dataType: "json",
+                type: "POST"
+            }
+        },
         schema:
             {
                 model:
@@ -132,18 +128,21 @@ function estadoNuevaFactura() {
                     field: "total"
                 },
                 {
-                    command: { name: "edit", text: "", className: "editarLineaButton" },
-                    title: " "
+                    command: "destroy"
                 }
             ],
-        editable: "inline"
+        editable: true
     });
 
     var tabla = $("#facturaLineasFacturaGrid").data("kendoGrid");
     tabla.addRow();
 
-    $(".editarLineaButton").live('click', function () {
-        $(this).val();
+    $(".eliminarLineaButton").live('click', function () {
+        /*var fila = $("#tablaMensajesLeidos").data("kendoGrid").select();          // Cogemos la fila seleccionada
+        var filaJson = $("#tablaMensajesLeidos").data("kendoGrid").dataItem(fila).toJSON();       // La pasamos a JSON
+
+        var idMensaje = dataSourceMensajesLeidos.getByUid(fila.attr("data-uid")).idMensaje;*/
+        // Incluir en array eliminados el idLineaFactura de la seleccionada.
     });
 
 
@@ -151,9 +150,20 @@ function estadoNuevaFactura() {
         tabla.addRow();
     });
 
+    $("#eliminarFacturaButton").click(function () {
+        var url = "../eliminarFactura";
+        var datos = {
+            idFactura: idFactura
+        };
+
+        $.post(url, datos, function (data) {
+            location.replace('./Index');
+        });
+
+    });
 
     $("#descartarFacturaButton").click(function () {
-        //volverListaFacturas();
+        location.replace('Index');
     });
 
     $("#guardarFacturaButton").click(function () {
@@ -161,37 +171,29 @@ function estadoNuevaFactura() {
         var estado = '9242c548-9283-4085-8e27-ebe1ff5e1307';
         var concepto = $('#conceptoFactura').val();
         var total = $('#totalFactura').val();
+        var fecha = $('#fechaFactura').val();
 
-        //var lineasFactura = kendo.stringify($("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource.view());
-        //alert($("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource.view());
-        //var d = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid");
-        //alert(d);
-
-        /*
-        alert(lineasFactura);
-        var ds = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource;
-        //var grid = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid");
-        //grid.select(grid.tbody.find("tr"));
-        */
-        //alert(total);
-        //var lineasFactura = obtenerLineas();
         var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
         var lineasFactura = new Array();
         for (var i = 0; i < lineasFacturaRaw.length; i++) {
             lineasFactura.push({
+                "idLineaFactura": lineasFacturaRaw[i].idLineaFactura,
                 "concepto": lineasFacturaRaw[i].concepto,
                 "unidades": lineasFacturaRaw[i].unidades,
                 "precio": lineasFacturaRaw[i].precio
             });
         }
-        var url = "nuevaFactura";
+
+        var url = "editarFactura";
         var datos = {
             estado: estado,
             concepto: concepto,
-            lineasFactura: kendo.stringify(lineasFactura)
+            lineasFactura: kendo.stringify(lineasFactura),
+            idFactura: idFactura,
+            fecha: fecha
         };
         $.post(url, datos, function (data) {
-            window.location.replace("../Facturas");
+            location.replace('Index');
         });
 
     });
@@ -204,9 +206,18 @@ function estadoNuevaFactura() {
 
     // Al pulsar en concepto
     $(".k-grid-edit-row .k-textbox").click(function () {
-        //alert("click");
+        alert("click");
     });
+
+
+});
+
+function obtenerLineas() {
+    $.each($(".k-grid-content tbody tr"), function () {
+
+    });
+
 }
 
 
-
+ 

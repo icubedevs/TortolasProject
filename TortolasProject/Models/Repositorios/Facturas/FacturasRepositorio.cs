@@ -33,6 +33,12 @@ namespace TortolasProject.Models.Repositorios
         public void eliminarFactura(Guid id)
         {
             tbFactura f = leerFactura(id);
+            
+            foreach ( tbLineaFactura lineaFactura in mtbMalagaDB.tbLineaFactura.Where(lf => lf.FKFactura == f.idFactura) )
+            {
+                eliminarLinea(lineaFactura.idLineaFactura);
+            }
+
             mtbMalagaDB.tbFactura.DeleteOnSubmit(f);
             save();
 
@@ -69,6 +75,7 @@ namespace TortolasProject.Models.Repositorios
             f.FKUsuario = factura.FKUsuario;
             f.Total = factura.Total;
 
+            save();
         }
 
         public IList<tbFactura> getByCourse(Guid idCursillo)
@@ -114,6 +121,10 @@ namespace TortolasProject.Models.Repositorios
             return mtbMalagaDB.tbLineaFactura.Where(lineaFactura => lineaFactura.FKFactura == idFactura).ToList();
         }
 
+        public Boolean existeLinea(tbLineaFactura linea)
+        {
+            return mtbMalagaDB.tbLineaFactura.Contains(linea);
+        }
         ///////////////////////////////////////////////////////////////////////////////
         // Métodos de tbMovimientosIngreso
         ///////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,10 @@
     var idFactura = {
         idFactura: $("#idFactura").val()
     };
+    
+    $("#editarFacturaButton").click(function () {
+        document.location.replace('../editarFactura/' + $("#idFactura").val());
+    });
     // DataSource KENDO
     var dataSource = new kendo.data.DataSource({
         transport: {
@@ -55,8 +59,6 @@
                 }
             ]
     });
-
-
 });
 
 

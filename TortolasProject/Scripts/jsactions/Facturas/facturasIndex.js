@@ -55,7 +55,6 @@
 function leerFactura(idFactura) {
 
     var url = "../Facturas/leerFactura/" + idFactura;
-    alert(idFactura);
     document.location.replace(url);
 }
     
