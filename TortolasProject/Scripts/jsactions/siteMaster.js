@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    // Cultura
+    kendo.culture("es-ES");
+
     $("#registroButton").click(function () {
         var u = $("#nicknameRegister").val();
         var p = $("#PasswordRegister").val();

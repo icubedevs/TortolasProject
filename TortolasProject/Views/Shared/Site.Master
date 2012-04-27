@@ -19,7 +19,7 @@
     <script src="<%: Url.Content("~/Scripts/kendo.all.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/cultures/kendo.culture.es-ES.min.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/slide.js") %>" type="text/javascript"></script>
-    <script src="<%: Url.Content("~/Scripts/jsactions/loginSiteMaster.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/siteMaster.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/captacion.js") %>" type="text/javascript"></script>
     <asp:ContentPlaceHolder ID="ScriptContent" runat="server" />		
 
@@ -184,16 +184,16 @@
                 %>
                     <ul>
                         <li>
-                            <a href="Monitores"><img src="../../Content/images/UserGroup.png" width="10%" />Monitores</a>
+                            <%: Html.ActionLink("Monitores", "Index", "Monitores") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
                         <li>
-                            <a href="Eventos"><img src="../../Content/images/UserGroup.png" width="10%" />Eventos</a>
+                            <%: Html.ActionLink("Eventos", "Index", "Index") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
                         <li>
-                            <a href="Facturas"><img src="../../Content/images/UserGroup.png" width="10%" />Contabilidad</a>
+                            <%: Html.ActionLink("Contabilidad", "Index", "Facturas") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
                         <li>
-                            <a href="Articulos"><img src="../../Content/images/UserGroup.png" width="10%" />Artículos</a>
+                            <%: Html.ActionLink("Artículos", "Index", "Articulos") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
                     </ul>
                 <% 
