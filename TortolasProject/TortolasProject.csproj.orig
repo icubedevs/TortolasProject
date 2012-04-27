@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -77,11 +78,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\crud.css" />
+    <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\Facturas\nuevaFactura.css" />
@@ -605,6 +609,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
+    <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
@@ -666,10 +671,10 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Views\Empresas\Index.aspx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\NuevaFactura.ascx" />
-    <Content Include="Views\Facturas\Prueba.ascx" />
     <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />

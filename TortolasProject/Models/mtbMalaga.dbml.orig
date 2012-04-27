@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icubeDB" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+<<<<<<< HEAD
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString2" Provider="System.Data.SqlClient" />
+=======
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString1" Provider="System.Data.SqlClient" />
+>>>>>>> 4de8db891b02e38095e2a4e3e7fa88208137bfc7
+  <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
+    <Type Name="aspnet_Applications">
+      <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Applications_aspnet_Membership" Member="aspnet_Membership" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Membership" />
+      <Association Name="aspnet_Applications_aspnet_Paths" Member="aspnet_Paths" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Paths" />
+      <Association Name="aspnet_Applications_aspnet_Roles" Member="aspnet_Roles" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Roles" />
+      <Association Name="aspnet_Applications_aspnet_Users" Member="aspnet_Users" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUsuario" Member="tbUsuario">
+    <Type Name="tbUsuario">
+      <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nickname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Contraseña" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DNI" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="FKUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbUsuario_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbDocInscripcion" />
+      <Association Name="tbUsuario_tbEvento" Member="tbEvento" ThisKey="idUsuario" OtherKey="FKUsuarioCreador" Type="tbEvento" />
+      <Association Name="tbUsuario_tbMensaje" Member="tbMensaje" ThisKey="idUsuario" OtherKey="FKDestinatario" Type="tbMensaje" />
+      <Association Name="tbUsuario_tbMensaje1" Member="tbMensaje1" ThisKey="idUsuario" OtherKey="FKRemitente" Type="tbMensaje" />
+      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbPedidoUsuario" />
+      <Association Name="tbUsuario_tbRuta" Member="tbRuta" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbRuta" />
+      <Association Name="tbUsuario_tbSocio" Member="tbSocio" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbSocio" />
+      <Association Name="aspnet_Users_tbUsuario" Member="aspnet_Users" ThisKey="FKUser" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Membership" Member="aspnet_Membership">
+    <Type Name="aspnet_Membership">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordFormat" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordSalt" Type="System.String" DbType="NVarChar(128) NOT NULL" CanBeNull="false" />
+      <Column Name="MobilePIN" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="LoweredEmail" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordQuestion" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="PasswordAnswer" Type="System.String" DbType="NVarChar(128)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="IsLockedOut" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CreateDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLoginDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastPasswordChangedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LastLockoutDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FailedPasswordAnswerAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="aspnet_Applications_aspnet_Membership" Member="aspnet_Applications" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Applications" IsForeignKey="true" />
+      <Association Name="aspnet_Users_aspnet_Membership" Member="aspnet_Users" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Paths" Member="aspnet_Paths">
+    <Type Name="aspnet_Paths">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Path" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredPath" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Paths_aspnet_PersonalizationAllUsers" Member="aspnet_PersonalizationAllUsers" ThisKey="PathId" OtherKey="PathId" Type="aspnet_PersonalizationAllUsers" Cardinality="One" />
+      <Association Name="aspnet_Paths_aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUser" ThisKey="PathId" OtherKey="PathId" Type="aspnet_PersonalizationPerUser" />
+      <Association Name="aspnet_Applications_aspnet_Paths" Member="aspnet_Applications" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Applications" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_PersonalizationAllUsers" Member="aspnet_PersonalizationAllUsers">
+    <Type Name="aspnet_PersonalizationAllUsers">
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PageSettings" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Paths_aspnet_PersonalizationAllUsers" Member="aspnet_Paths" ThisKey="PathId" OtherKey="PathId" Type="aspnet_Paths" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUser">
+    <Type Name="aspnet_PersonalizationPerUser">
+      <Column Name="Id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PathId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="PageSettings" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Paths_aspnet_PersonalizationPerUser" Member="aspnet_Paths" ThisKey="PathId" OtherKey="PathId" Type="aspnet_Paths" IsForeignKey="true" />
+      <Association Name="aspnet_Users_aspnet_PersonalizationPerUser" Member="aspnet_Users" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Profile" Member="aspnet_Profile">
+    <Type Name="aspnet_Profile">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PropertyNames" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyValuesString" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="PropertyValuesBinary" Type="System.Data.Linq.Binary" DbType="Image NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="LastUpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Users_aspnet_Profile" Member="aspnet_Users" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Roles" Member="aspnet_Roles">
+    <Type Name="aspnet_Roles">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="aspnet_Roles_aspnet_UsersInRoles" Member="aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_UsersInRoles" />
+      <Association Name="aspnet_Applications_aspnet_Roles" Member="aspnet_Applications" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Applications" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_SchemaVersions" Member="aspnet_SchemaVersions">
+    <Type Name="aspnet_SchemaVersions">
+      <Column Name="Feature" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CompatibleSchemaVersion" Type="System.String" DbType="NVarChar(128) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="IsCurrentVersion" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_Users">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="aspnet_Users_tbUsuario" Member="tbUsuario" ThisKey="UserId" OtherKey="FKUser" Type="tbUsuario" />
+      <Association Name="aspnet_Users_aspnet_Membership" Member="aspnet_Membership" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Membership" Cardinality="One" />
+      <Association Name="aspnet_Users_aspnet_PersonalizationPerUser" Member="aspnet_PersonalizationPerUser" ThisKey="UserId" OtherKey="UserId" Type="aspnet_PersonalizationPerUser" />
+      <Association Name="aspnet_Users_aspnet_Profile" Member="aspnet_Profile" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Profile" Cardinality="One" />
+      <Association Name="aspnet_Users_aspnet_UsersInRoles" Member="aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="aspnet_UsersInRoles" />
+      <Association Name="aspnet_Applications_aspnet_Users" Member="aspnet_Applications" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Applications" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_UsersInRoles" Member="aspnet_UsersInRoles">
+    <Type Name="aspnet_UsersInRoles">
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="aspnet_Roles_aspnet_UsersInRoles" Member="aspnet_Roles" ThisKey="RoleId" OtherKey="RoleId" Type="aspnet_Roles" IsForeignKey="true" />
+      <Association Name="aspnet_Users_aspnet_UsersInRoles" Member="aspnet_Users" ThisKey="UserId" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_WebEvent_Events" Member="aspnet_WebEvent_Events">
+    <Type Name="aspnet_WebEvent_Events">
+      <Column Name="EventId" Type="System.String" DbType="Char(32) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EventTimeUtc" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventTime" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="EventType" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="EventSequence" Type="System.Decimal" DbType="Decimal(19,0) NOT NULL" CanBeNull="false" />
+      <Column Name="EventOccurrence" Type="System.Decimal" DbType="Decimal(19,0) NOT NULL" CanBeNull="false" />
+      <Column Name="EventCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EventDetailCode" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Message" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="ApplicationPath" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="ApplicationVirtualPath" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="MachineName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="RequestUrl" Type="System.String" DbType="NVarChar(1024)" CanBeNull="true" />
+      <Column Name="ExceptionType" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="Details" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbAnuncio" Member="tbAnuncio">
+    <Type Name="tbAnuncio">
+      <Column Name="idAnuncio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKCursillo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbCursillo_tbAnuncio" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
+      <Association Name="tbEvento_tbAnuncio" Member="tbEvento" ThisKey="idAnuncio" OtherKey="idEvento" Type="tbEvento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbArticulo" Member="tbArticulo">
+    <Type Name="tbArticulo">
+      <Column Name="idArticulo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Imagen" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Descripcion" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Association Name="tbArticulo_tbRelacionLineaPedidoUsuarioArticulo" Member="tbRelacionLineaPedidoUsuarioArticulo" ThisKey="idArticulo" OtherKey="FKArticulo" Type="tbRelacionLineaPedidoUsuarioArticulo" />
+      <Association Name="tbArticulo_tbRelacionPedidoGlobalArticulo" Member="tbRelacionPedidoGlobalArticulo" ThisKey="idArticulo" OtherKey="FKArticulo" Type="tbRelacionPedidoGlobalArticulo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbAsociacion" Member="tbAsociacion">
+    <Type Name="tbAsociacion">
+      <Column Name="Tematica" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbEmpresa_tbAsociacion" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="idEmpresa" Type="tbEmpresa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbAvisoRetiradaPublicidad" Member="tbAvisoRetiradaPublicidad">
+    <Type Name="tbAvisoRetiradaPublicidad">
+      <Column Name="idAviso" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DescripcionRetirada" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FKCodigoPublicidad" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbPublicidad_tbAvisoRetiradaPublicidad" Member="tbPublicidad" ThisKey="FKCodigoPublicidad" OtherKey="idPublicidad" Type="tbPublicidad" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbContrato" Member="tbContrato">
+    <Type Name="tbContrato">
+      <Column Name="NombreEmpresa" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FKJuntaDirectiva" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaCaducidad" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DescripcionLegal" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Firmas" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="idContrato" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Importe" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbContrato_tbFactura" Member="tbFactura" ThisKey="idContrato" OtherKey="FKContrato" Type="tbFactura" />
+      <Association Name="tbContrato_tbInformeCancelacionContrato" Member="tbInformeCancelacionContrato" ThisKey="idContrato" OtherKey="FKCodigoContrato" Type="tbInformeCancelacionContrato" />
+      <Association Name="tbEmpresa_tbContrato" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="idEmpresa" Type="tbEmpresa" IsForeignKey="true" />
+      <Association Name="tbJuntaDirectiva_tbContrato" Member="tbJuntaDirectiva" ThisKey="FKJuntaDirectiva" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbConvenio" Member="tbConvenio">
+    <Type Name="tbConvenio">
+      <Column Name="idConvenio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DescripcionOferta" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbEmpresa_tbConvenio" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="idEmpresa" Type="tbEmpresa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCursillo" Member="tbCursillo">
+    <Type Name="tbCursillo">
+      <Column Name="idCursillo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Lugar" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="Actividad" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
+      <Column Name="FechaAperturaInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaLimiteInscripcione" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Tematica" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="FechaRealizacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="DescuentoSocios" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Plazas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ConocimientosPrevios" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FKUsuarioCreador" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbCursillo_tbAnuncio" Member="tbAnuncio" ThisKey="idCursillo" OtherKey="FKCursillo" Type="tbAnuncio" />
+      <Association Name="tbCursillo_tbCursilloMonitor" Member="tbCursilloMonitor" ThisKey="idCursillo" OtherKey="FKCursillo" Type="tbCursilloMonitor" />
+      <Association Name="tbCursillo_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idCursillo" OtherKey="FKCursillo" Type="tbDocInscripcion" />
+      <Association Name="tbCursillo_tbFactura" Member="tbFactura" ThisKey="idCursillo" OtherKey="FKCursillo" Type="tbFactura" />
+      <Association Name="tbJuntaDirectiva_tbCursillo" Member="tbJuntaDirectiva" ThisKey="FKUsuarioCreador" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbCursilloMonitor" Member="tbCursilloMonitor">
+    <Type Name="tbCursilloMonitor">
+      <Column Name="FKCursillo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKMonitor" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbCursillo_tbCursilloMonitor" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
+      <Association Name="tbMonitor_tbCursilloMonitor" Member="tbMonitor" ThisKey="FKMonitor" OtherKey="idMonitor" Type="tbMonitor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbDescuentoSocio" Member="tbDescuentoSocio">
+    <Type Name="tbDescuentoSocio">
+      <Column Name="idDescuentoSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Utilidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FechaCreacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FechaExpiracion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbDocInscripcion" Member="tbDocInscripcion">
+    <Type Name="tbDocInscripcion">
+      <Column Name="idDocumentoInscripcion" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Pagado" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="FKCursillo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbCursillo_tbDocInscripcion" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbDocInscripcion" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+      <Association Name="tbEvento_tbDocInscripcion" Member="tbEvento" ThisKey="FKEvento" OtherKey="idEvento" Type="tbEvento" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbEmpresa" Member="tbEmpresa">
+    <Type Name="tbEmpresa">
+      <Column Name="idEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Localidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DireccionWeb" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="TelefonodeContacto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CIF" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Association Name="tbEmpresa_tbAsociacion" Member="tbAsociacion" ThisKey="idEmpresa" OtherKey="FKCodigoEmpresa" Type="tbAsociacion" Cardinality="One" />
+      <Association Name="tbEmpresa_tbContrato" Member="tbContrato" ThisKey="idEmpresa" OtherKey="FKCodigoEmpresa" Type="tbContrato" />
+      <Association Name="tbEmpresa_tbConvenio" Member="tbConvenio" ThisKey="idEmpresa" OtherKey="FKCodigoEmpresa" Type="tbConvenio" />
+      <Association Name="tbEmpresa_tbPatrocinador" Member="tbPatrocinador" ThisKey="idEmpresa" OtherKey="FKCodigoEmpresa" Type="tbPatrocinador" />
+      <Association Name="tbEmpresa_tbProveedores" Member="tbProveedores" ThisKey="idEmpresa" OtherKey="FKCodigoEmpresa" Type="tbProveedores" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbEstadoFactura" Member="tbEstadoFactura">
+    <Type Name="tbEstadoFactura">
+      <Column Name="idEstadoFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="tbEstadoFactura_tbFactura" Member="tbFactura" ThisKey="idEstadoFactura" OtherKey="FKEstado" Type="tbFactura" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbEvento" Member="tbEvento">
+    <Type Name="tbEvento">
+      <Column Name="idEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Titulo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Lugar" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Actividad" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="FechaAperturaInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaLimiteInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaRealizacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PrioridadSocios" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Plazas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FKUsuarioCreador" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbEvento_tbAnuncio" Member="tbAnuncio" ThisKey="idEvento" OtherKey="idAnuncio" Type="tbAnuncio" Cardinality="One" />
+      <Association Name="tbEvento_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idEvento" OtherKey="FKEvento" Type="tbDocInscripcion" />
+      <Association Name="tbEvento_tbEventoOficial" Member="tbEventoOficial" ThisKey="idEvento" OtherKey="FKEvento" Type="tbEventoOficial" />
+      <Association Name="tbUsuario_tbEvento" Member="tbUsuario" ThisKey="FKUsuarioCreador" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbEventoOficial" Member="tbEventoOficial">
+    <Type Name="tbEventoOficial">
+      <Column Name="Precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="FKEvento" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKJuntaDirectiva" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="idEventoOficial" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbEventoOficial_tbFactura" Member="tbFactura" ThisKey="idEventoOficial" OtherKey="FKEventoOficial" Type="tbFactura" />
+      <Association Name="tbEvento_tbEventoOficial" Member="tbEvento" ThisKey="FKEvento" OtherKey="idEvento" Type="tbEvento" IsForeignKey="true" />
+      <Association Name="tbJuntaDirectiva_tbEventoOficial" Member="tbJuntaDirectiva" ThisKey="FKJuntaDirectiva" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbFactura" Member="tbFactura">
+    <Type Name="tbFactura">
+      <Column Name="idFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="FKEstado" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKJuntaDirectiva" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKCursillo" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKEventoOficial" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKProveedores" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKContrato" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Concepto" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="tbFactura_tbLineaFactura" Member="tbLineaFactura" ThisKey="idFactura" OtherKey="FKFactura" Type="tbLineaFactura" />
+      <Association Name="tbFactura_tbMovimientoGasto" Member="tbMovimientoGasto" ThisKey="idFactura" OtherKey="FKFactura" Type="tbMovimientoGasto" />
+      <Association Name="tbFactura_tbMovimientoIngreso" Member="tbMovimientoIngreso" ThisKey="idFactura" OtherKey="FKFactura" Type="tbMovimientoIngreso" />
+      <Association Name="tbFactura_tbPedidoGlobal" Member="tbPedidoGlobal" ThisKey="idFactura" OtherKey="FKFactura" Type="tbPedidoGlobal" />
+      <Association Name="tbFactura_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idFactura" OtherKey="FKFactura" Type="tbPedidoUsuario" />
+      <Association Name="tbEventoOficial_tbFactura" Member="tbEventoOficial" ThisKey="FKEventoOficial" OtherKey="idEventoOficial" Type="tbEventoOficial" IsForeignKey="true" />
+      <Association Name="tbCursillo_tbFactura" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
+      <Association Name="tbEstadoFactura_tbFactura" Member="tbEstadoFactura" ThisKey="FKEstado" OtherKey="idEstadoFactura" Type="tbEstadoFactura" IsForeignKey="true" />
+      <Association Name="tbContrato_tbFactura" Member="tbContrato" ThisKey="FKContrato" OtherKey="idContrato" Type="tbContrato" IsForeignKey="true" />
+      <Association Name="tbJuntaDirectiva_tbFactura" Member="tbJuntaDirectiva" ThisKey="FKJuntaDirectiva" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
+      <Association Name="tbProveedores_tbFactura" Member="tbProveedores" ThisKey="FKProveedores" OtherKey="idProveedores" Type="tbProveedores" IsForeignKey="true" />
+      <Association Name="tbSocio_tbFactura" Member="tbSocio" ThisKey="FKUsuario" OtherKey="FKUsuario" Type="tbSocio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbInformeCancelacionContrato" Member="tbInformeCancelacionContrato">
+    <Type Name="tbInformeCancelacionContrato">
+      <Column Name="DescripcionCancelacion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FKCodigoContrato" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="idInforme" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbContrato_tbInformeCancelacionContrato" Member="tbContrato" ThisKey="FKCodigoContrato" OtherKey="idContrato" Type="tbContrato" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbInventario" Member="tbInventario">
+    <Type Name="tbInventario">
+      <Column Name="idInventario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Localizacion" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbJuntaDirectiva" Member="tbJuntaDirectiva">
+    <Type Name="tbJuntaDirectiva">
+      <Column Name="CargoDirectivo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FKSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbJuntaDirectiva_tbContrato" Member="tbContrato" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbContrato" />
+      <Association Name="tbJuntaDirectiva_tbCursillo" Member="tbCursillo" ThisKey="FKSocio" OtherKey="FKUsuarioCreador" Type="tbCursillo" />
+      <Association Name="tbJuntaDirectiva_tbEventoOficial" Member="tbEventoOficial" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbEventoOficial" />
+      <Association Name="tbJuntaDirectiva_tbFactura" Member="tbFactura" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbFactura" />
+      <Association Name="tbJuntaDirectiva_tbPedidoGlobal" Member="tbPedidoGlobal" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbPedidoGlobal" />
+      <Association Name="tbSocio_tbJuntaDirectiva" Member="tbSocio" ThisKey="FKSocio" OtherKey="idSocio" Type="tbSocio" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbLineaFactura" Member="tbLineaFactura">
+    <Type Name="tbLineaFactura">
+      <Column Name="idLineaFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Unidades" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PrecioUnitario" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbFactura_tbLineaFactura" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbLineaPedidoUsuario" Member="tbLineaPedidoUsuario">
+    <Type Name="tbLineaPedidoUsuario">
+      <Column Name="idLineaPedidoUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKPedidoUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Unidades" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbLineaPedidoUsuario_tbRelacionLineaPedidoUsuarioArticulo" Member="tbRelacionLineaPedidoUsuarioArticulo" ThisKey="idLineaPedidoUsuario" OtherKey="FKLineaPedidoUsuario" Type="tbRelacionLineaPedidoUsuarioArticulo" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbMensaje" Member="tbMensaje">
+    <Type Name="tbMensaje">
+      <Column Name="idMensaje" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="FKRemitente" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKDestinatario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="asunto" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+<<<<<<< HEAD
+      <Column Name="cuerpomensaje" Type="System.String" DbType="NVarChar(600)" CanBeNull="true" />
+=======
+>>>>>>> 4de8db891b02e38095e2a4e3e7fa88208137bfc7
+      <Association Name="tbUsuario_tbMensaje" Member="tbUsuario" ThisKey="FKDestinatario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbMensaje1" Member="tbUsuario1" ThisKey="FKRemitente" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbMonitor" Member="tbMonitor">
+    <Type Name="tbMonitor">
+      <Column Name="idMonitor" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DNI" Type="System.String" DbType="NVarChar(60) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Apellidos" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Telefono" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(60)" CanBeNull="true" />
+      <Column Name="Foto" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Association Name="tbMonitor_tbCursilloMonitor" Member="tbCursilloMonitor" ThisKey="idMonitor" OtherKey="FKMonitor" Type="tbCursilloMonitor" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbMovimientoGasto" Member="tbMovimientoGasto">
+    <Type Name="tbMovimientoGasto">
+      <Column Name="idMovimientoGasto" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Concepto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbFactura_tbMovimientoGasto" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbMovimientoIngreso" Member="tbMovimientoIngreso">
+    <Type Name="tbMovimientoIngreso">
+      <Column Name="idMovimientoIngreso" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Concepto" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Responsable" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbFactura_tbMovimientoIngreso" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPatrocinador" Member="tbPatrocinador">
+    <Type Name="tbPatrocinador">
+      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPatrocinador" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbPatrocinador_tbPublicidad" Member="tbPublicidad" ThisKey="FKCodigoEmpresa" OtherKey="FKCodigoEmpresa" Type="tbPublicidad" />
+      <Association Name="tbEmpresa_tbPatrocinador" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="idEmpresa" Type="tbEmpresa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPedidoGlobal" Member="tbPedidoGlobal">
+    <Type Name="tbPedidoGlobal">
+      <Column Name="idPedidoGlobal" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKJuntaDirectiva" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="DescuentoFijo" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbPedidoGlobal_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idPedidoGlobal" OtherKey="FKPedidoGlobal" Type="tbPedidoUsuario" />
+      <Association Name="tbPedidoGlobal_tbRelacionPedidoGlobalArticulo" Member="tbRelacionPedidoGlobalArticulo" ThisKey="idPedidoGlobal" OtherKey="FKPedidoGlobal" Type="tbRelacionPedidoGlobalArticulo" />
+      <Association Name="tbFactura_tbPedidoGlobal" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
+      <Association Name="tbJuntaDirectiva_tbPedidoGlobal" Member="tbJuntaDirectiva" ThisKey="FKJuntaDirectiva" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPedidoUsuario" Member="tbPedidoUsuario">
+    <Type Name="tbPedidoUsuario">
+      <Column Name="idPedidoUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKPedidoGlobal" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Subtotal" Type="System.Decimal" DbType="Money" CanBeNull="true" />
+      <Column Name="Pagado" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaLimite" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbFactura_tbPedidoUsuario" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
+      <Association Name="tbPedidoGlobal_tbPedidoUsuario" Member="tbPedidoGlobal" ThisKey="FKPedidoGlobal" OtherKey="idPedidoGlobal" Type="tbPedidoGlobal" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbProveedores" Member="tbProveedores">
+    <Type Name="tbProveedores">
+      <Column Name="Mercado" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="DireccionFisica" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="CodigoPostal" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idProveedores" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbProveedores_tbFactura" Member="tbFactura" ThisKey="idProveedores" OtherKey="FKProveedores" Type="tbFactura" />
+      <Association Name="tbEmpresa_tbProveedores" Member="tbEmpresa" ThisKey="FKCodigoEmpresa" OtherKey="idEmpresa" Type="tbEmpresa" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbPublicidad" Member="tbPublicidad">
+    <Type Name="tbPublicidad">
+      <Column Name="LocalizacionPublicidad" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="FKCodigoEmpresa" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idPublicidad" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbPublicidad_tbAvisoRetiradaPublicidad" Member="tbAvisoRetiradaPublicidad" ThisKey="idPublicidad" OtherKey="FKCodigoPublicidad" Type="tbAvisoRetiradaPublicidad" />
+      <Association Name="tbPatrocinador_tbPublicidad" Member="tbPatrocinador" ThisKey="FKCodigoEmpresa" OtherKey="FKCodigoEmpresa" Type="tbPatrocinador" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbRelacionLineaPedidoUsuarioArticulo" Member="tbRelacionLineaPedidoUsuarioArticulo">
+    <Type Name="tbRelacionLineaPedidoUsuarioArticulo">
+      <Column Name="FKLineaPedidoUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKArticulo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbArticulo_tbRelacionLineaPedidoUsuarioArticulo" Member="tbArticulo" ThisKey="FKArticulo" OtherKey="idArticulo" Type="tbArticulo" IsForeignKey="true" />
+      <Association Name="tbLineaPedidoUsuario_tbRelacionLineaPedidoUsuarioArticulo" Member="tbLineaPedidoUsuario" ThisKey="FKLineaPedidoUsuario" OtherKey="idLineaPedidoUsuario" Type="tbLineaPedidoUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbRelacionPedidoGlobalArticulo" Member="tbRelacionPedidoGlobalArticulo">
+    <Type Name="tbRelacionPedidoGlobalArticulo">
+      <Column Name="FKPedidoGlobal" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="FKArticulo" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbArticulo_tbRelacionPedidoGlobalArticulo" Member="tbArticulo" ThisKey="FKArticulo" OtherKey="idArticulo" Type="tbArticulo" IsForeignKey="true" />
+      <Association Name="tbPedidoGlobal_tbRelacionPedidoGlobalArticulo" Member="tbPedidoGlobal" ThisKey="FKPedidoGlobal" OtherKey="idPedidoGlobal" Type="tbPedidoGlobal" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbRuta" Member="tbRuta">
+    <Type Name="tbRuta">
+      <Column Name="idRuta" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="URL" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="rutaArchivo" Type="System.String" DbType="VarChar(500) NOT NULL" CanBeNull="false" />
+      <Association Name="tbUsuario_tbRuta" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbSocio" Member="tbSocio">
+    <Type Name="tbSocio">
+      <Column Name="idSocio" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="NumeroSocio" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="FKUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="Foto" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Association Name="tbSocio_tbFactura" Member="tbFactura" ThisKey="FKUsuario" OtherKey="FKUsuario" Type="tbFactura" />
+      <Association Name="tbSocio_tbJuntaDirectiva" Member="tbJuntaDirectiva" ThisKey="idSocio" OtherKey="FKSocio" Type="tbJuntaDirectiva" Cardinality="One" />
+      <Association Name="tbUsuario_tbSocio" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
