@@ -7,11 +7,14 @@ using System.Web.UI;
 using System.Web.Security;
 using TortolasProject.Models;
 using System.Web.Routing;
+using TortolasProject.Models.Repositorios;
 
 namespace TortolasProject.Controllers
 {
     public class HomeController : Controller
     {
+        AccountRepositorio AccountRepo = new AccountRepositorio();
+
         public ActionResult Index()
         {
             ViewBag.Message = "ASP.NET MVC";
@@ -103,6 +106,16 @@ namespace TortolasProject.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    mtbMalagaDataContext db = new mtbMalagaDataContext();
+
+                    aspnet_Users u = db.aspnet_Users.Where(usuario => usuario.UserName == model.UserName).Single();
+                    tbUsuario nuevoUsuario = new tbUsuario {
+                        Nickname = u.UserName,
+                        idUsuario = Guid.NewGuid(),
+                        FKUser = u.UserId,
+                        Email = model.Email
+                    };
+                    AccountRepo.registro(nuevoUsuario);
                     FormsAuthentication.SetAuthCookie(model.UserName, false /* createPersistentCookie */);
                     return "ok";
                 }
@@ -116,6 +129,14 @@ namespace TortolasProject.Controllers
 
             // Si llegamos a este punto, es que se ha producido un error y volvemos a mostrar el formulario
             return "Error en modelo";
+        }
+
+
+        public static Guid obtenerUserIdActual()
+        {
+            // Obtenemos el UserID
+            MembershipUser myObject = Membership.GetUser();
+            return (Guid)Membership.GetUser().ProviderUserKey;
         }
 
         #region Status Codes
