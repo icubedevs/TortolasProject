@@ -18,7 +18,7 @@
 <asp:Content ID="EmpresasIndexMain" ContentPlaceHolderID="MainContent" runat="server">
      <div id="EmpresasNavegador">
         <ul>
-            <li id="EmpresasNav">
+            <li id="EmpresasNav" class="k-state-active">
                 Empresas
             </li>
             <li id="AsociacionesNav">
@@ -31,6 +31,10 @@
                 Patrocinadores
             </li>  
         </ul> 
+        <div class="pestana" id="empresas"></div>
+        <div class="pestana" id="asociaciones"></div>
+        <div class="pestana" id="proveedores"></div> 
+        <div class="pestana" id="patrocinadores"></div> 
         <div id="EmpresasFilter">Filtro ></div>   
     </div> 
     <br /><br />
@@ -47,8 +51,8 @@
         <label for="email">E-Mail: </label><input type="text" id="email-c" class="k-input CuadroTexto" /><br />
         <center>
             <input type="button" value="Aceptar" id="BotonAceptarVentanaEditar" class="k-button VisibilidadBotonAceptarEditar" />
-            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditar" class="k-button" />
             <input type="button" value="Confirmar" id="BotonAceptarVentanaEliminar" class="k-button VisibilidadBotonAceptarEliminar" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditar" class="k-button" />           
         </center>
     </div>
     <br />

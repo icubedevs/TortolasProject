@@ -101,7 +101,6 @@ namespace TortolasProject.Controllers
         public ActionResult CargarVistaNuevaEmpresa()
         {
             return PartialView("NuevaEmpresa");
-        }
-        
+        }        
     }    
 }

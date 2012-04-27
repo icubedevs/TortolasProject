@@ -10,13 +10,24 @@
             <label for="telefonodecontacto">Teléfono de Contacto: </label><input type="text" id="newtelefonodecontacto" class="k-input" /><br />
             <label for="email">E-Mail: </label><input type="text" id="newemail-c" class="k-input" /><br />
         </div>
-        <div id="NuevaEmpresaImagenEmpresa">        
+        <div id="NuevaEmpresaImagenEmpresa">  
 
             LOGOTIPO EMPRESA
         
         </div>
     </div>
-    
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <div id="NuevaEmpresaHerramientasContent">
         <center>
             <input type="button" value="Confirmar" id="BotonConfirmarNuevaEmpresa" class="k-button" />

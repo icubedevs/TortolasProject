@@ -195,19 +195,29 @@ $(document).ready(function () {
 
     $("#BotonAceptarVentanaEliminar").live("click", function () {
 
+        var datos = {};
+        //Coger datos
+        datos["nombreempresaupdate"] = $("#nombreempresa").val();
+        datos["cifupdate"] = $("#cif").val();
+        datos["localidadupdate"] = $("#localidad").val();
+        datos["direccionwebupdate"] = $("#direccionweb").val();
+        datos["telefonodecontactoupdate"] = $("#telefonodecontacto").val();
+        datos["emailupdate"] = $("#email-c").val();
+        datos["idempresa"] = idEmpresa;
+
         $.ajax(
         {
             url: "Empresas/DeleteEmpresa",
             type: "POST",
             data: datos,
             success: function () {
-                alert("hola?asyhuabsf");
+                alert("Estoy dentro del success!");
                 $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
                 $(".VisibilidadBotonAceptarEditar").show(); //Oculta el boton de aceptar de la ventana editar
                 $(".VisibilidadBotonAceptarEliminar").hide(); //Muestra el boton correspondiente para aceptar en la ventana eliminar
                 datasource.read();
                 weditar.close();
-                alert("hola?");
+                alert("Ya he terminado!?");
             },
             async: false
         });
