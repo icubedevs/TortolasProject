@@ -16,7 +16,7 @@
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexMain" ContentPlaceHolderID="MainContent" runat="server">
-     <div id="EmpresasNavegador">
+     <div id="EmpresasNavegador" class="k-widget">
         <ul>
             <li id="EmpresasNav" class="k-state-active">
                 Empresas
@@ -31,16 +31,21 @@
                 Patrocinadores
             </li>  
         </ul> 
-        <div class="pestana" id="empresas"></div>
-        <div class="pestana" id="asociaciones"></div>
+        <div class="pestana" id="empresas">
+            <img src="../../Content/images/empresas.png"  /> <!--Fuente: Calibri, size: 24-->
+            <div id="EmpresasGrid">
+            
+            </div>
+            
+        </div>
+        <div class="pestana" id="asociaciones">
+            <img src="../../Content/images/asociaciones.jpg"  /> <!--Fuente: Calibri, size: 24-->
+        </div>
         <div class="pestana" id="proveedores"></div> 
         <div class="pestana" id="patrocinadores"></div> 
-        <div id="EmpresasFilter">Filtro ></div>   
+          
     </div> 
-    <br /><br />
-    <div id="EmpresasGrid">
-    
-    </div>
+    <br />
 
     <div id="VentanaEditar">
         <label for="nombreempresa">Nombre: </label><input type="text" id="nombreempresa" class="k-input CuadroTexto" /><br />
@@ -55,7 +60,7 @@
             <input type="button" value="Cancelar" id="BotonCancelarVentanaEditar" class="k-button" />           
         </center>
     </div>
-    <br />
+    <div id="EmpresasFilter">Filtro ></div> 
     <div id="EmpresasHerramientasContent">
         <input type="button" value="Nueva Empresa" id="BotonNuevaEmpresa" class="k-button" />
     </div>

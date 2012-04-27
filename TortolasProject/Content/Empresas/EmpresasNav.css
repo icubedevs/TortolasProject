@@ -1,4 +1,4 @@
-﻿#EmpresasNavegador 
+﻿/*#EmpresasNavegador 
 {
     position:relative;
     float:left;
@@ -23,7 +23,7 @@
 #EmpresasNavegador ul li:hover
 {
     border-bottom:3px solid gray;   
-}
+}*/
 #EmpresasFilter
 {
     position:relative;

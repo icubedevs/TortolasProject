@@ -188,6 +188,8 @@
     <Content Include="Content\icons\yahoo-na.ico" />
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
+    <Content Include="Content\images\asociaciones.jpg" />
+    <Content Include="Content\images\empresas.png" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />

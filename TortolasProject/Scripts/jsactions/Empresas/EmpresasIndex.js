@@ -21,19 +21,34 @@ $(document).ready(function () {
                  id: "idEmpresa"
              }
         }
-    });
+     });
 
-    $("#EmpresasGrid").kendoGrid
+     $("#EmpresasNavegador").kendoTabStrip(); //Creo el kendo para pestañas
+
+    $("#EmpresasGrid").kendoGrid //Creo el kendo Grid
     ({
         //height: 400,
         dataSource: datasource,
         selectable: true,
         pageable: true,
         sortable: true,
+        filterable: true,
         columns: [
             {
                 field: "Nombre",
-                title: "Nombre"
+                title: "Nombre",
+                filterable: {
+                    extra: false, //do not show extra filters
+                    operators: { // redefine the string operators
+                        string: {
+                            eq: "Es igual a...",
+                            neq: "No es igual a...",
+                            startswith: "Empieza por...",
+                            contains: "Contiene"
+                        }
+                    }
+                }
+
             },
             {
                 field: "CIF",
@@ -140,6 +155,7 @@ $(document).ready(function () {
 
     $("#BotonNuevaEmpresa").click(function () {
         //alert("Crear!");
+        $("#EmpresasNavegador").hide();
         $.post('Empresas/CargarVistaNuevaEmpresa', function (data) {
             $("#EmpresasHerramientasContent").hide();
             $("#EmpresasGrid").hide();

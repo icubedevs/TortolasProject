@@ -33,6 +33,7 @@
                     $("#EmpresasHerramientasContent").show();
                     $("#EmpresasGrid").show();
                     $("#NuevaEmpresaFormulario2").hide();
+                    $("#EmpresasNavegador").show();
                 });
                 //alert("Ya he terminado!");
 
@@ -42,6 +43,7 @@
     });
     $("#BotonCancelarNuevaEmpresa").live("click", function () {
         $.post('Empresas/Index', function () {
+            $("#EmpresasNavegador").show();
             $("#EmpresasHerramientasContent").show();
             $("#EmpresasGrid").show();
             $("#NuevaEmpresaFormulario2").hide();
