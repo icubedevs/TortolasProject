@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icubeDB" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString1" Provider="System.Data.SqlClient" />
 <<<<<<< HEAD
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString1" Provider="System.Data.SqlClient" />
 =======
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString2" Provider="System.Data.SqlClient" />
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1
   <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
     <Type Name="aspnet_Applications">
       <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
@@ -14,15 +16,10 @@
       <Association Name="aspnet_Applications_aspnet_Users" Member="aspnet_Users" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Users" />
     </Type>
   </Table>
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
   <Table Name="dbo.tbUsuario" Member="tbUsuario">
     <Type Name="tbUsuario">
       <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Nickname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-<<<<<<< HEAD
-=======
-      <Column Name="Contraseña" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
       <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
       <Column Name="Apellidos" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
@@ -41,21 +38,6 @@
       <Association Name="aspnet_Users_tbUsuario" Member="aspnet_Users" ThisKey="FKUser" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
     </Type>
   </Table>
-<<<<<<< HEAD
-  <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
-    <Type Name="aspnet_Applications">
-      <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="LoweredApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="aspnet_Applications_aspnet_Membership" Member="aspnet_Membership" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Membership" />
-      <Association Name="aspnet_Applications_aspnet_Paths" Member="aspnet_Paths" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Paths" />
-      <Association Name="aspnet_Applications_aspnet_Roles" Member="aspnet_Roles" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Roles" />
-      <Association Name="aspnet_Applications_aspnet_Users" Member="aspnet_Users" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Users" />
-    </Type>
-  </Table>
-=======
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
   <Table Name="dbo.aspnet_Membership" Member="aspnet_Membership">
     <Type Name="aspnet_Membership">
       <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -410,9 +392,17 @@
     <Type Name="tbLineaFactura">
       <Column Name="idLineaFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Unidades" Type="System.Decimal" DbType="Decimal(18,2) NOT NULL" CanBeNull="false" />
+<<<<<<< HEAD
+      <Column Name="Unidades" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PrecioUnitario" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+=======
+      <Column Name="PrecioUnitario" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
+      <Column Name="Descripcion" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1
       <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Association Name="tbFactura_tbLineaFactura" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
     </Type>
@@ -433,10 +423,7 @@
       <Column Name="FKRemitente" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="FKDestinatario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="asunto" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
-<<<<<<< HEAD
       <Column Name="cuerpomensaje" Type="System.String" DbType="NVarChar(600)" CanBeNull="true" />
-=======
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
       <Association Name="tbUsuario_tbMensaje" Member="tbUsuario" ThisKey="FKDestinatario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
       <Association Name="tbUsuario_tbMensaje1" Member="tbUsuario1" ThisKey="FKRemitente" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
     </Type>

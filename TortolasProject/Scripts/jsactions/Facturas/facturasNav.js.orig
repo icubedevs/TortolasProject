@@ -1,0 +1,71 @@
+﻿$(document).ready(function () {
+<<<<<<< HEAD
+
+    $("#volverFacturasNav").hide();
+
+    $("#volverFacturasNav").click(function () {
+        volverListaFacturas();
+    });
+
+    /*
+=======
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1
+    $("#nuevaFacturaButtonNav").click(function () {
+        $.post('Facturas/cargarVistaNuevaFactura', function (data) {
+            $("#FacturasGrid").hide();
+            $("#FacturasContainer").html(data);
+            $("#FacturasContainer").show();
+<<<<<<< HEAD
+            $("#mainFacturasNav").hide();
+            $("#volverFacturasNav").show();
+=======
+            $("#nuevaFacturaButtonNav").hide();
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1
+        });
+    }); */
+
+    $("#ingresosButtonNav").click(function () {
+<<<<<<< HEAD
+
+=======
+        //$("#FacturasContainer").html("Sólo ingresos view");
+        //$("#FacturasIndexGrid").show();
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1
+        url = 'Facturas/nuevaFactura';
+        datos = { name: "dani", coche: "twingo" }
+        $.post(url, datos, function (data) {
+            $("#FacturasGrid").fadeOut('slow', function () {
+                $(this).hide();
+                $("#FacturasContainer").html(data);
+            });
+        });
+    });
+
+    $("#gastosButtonNav").click(function () {
+        $.post('Facturas/Details', function (data) {
+            $("#FacturasContainer").html(data);
+            $("#FacturasIndexGrid").hide();
+        });
+    });
+
+    $("#movimientosButtonNav").click(function () {
+        $("#FacturasContainer").html("Moviemientos view");
+    });
+
+    $("#graficosContablesButtonNav").click(function () {
+        $("#FacturasContainer").html("Graficos contables view");
+    });
+<<<<<<< HEAD
+});
+
+function volverListaFacturas() {
+    $("#volverFacturasNav").hide();
+    $("#FacturasContainer").hide();
+    $("#FacturasGrid").data("kendoGrid").dataSource.read();
+    $("#FacturasGrid").show();
+    $("#mainFacturasNav").show();
+
+}
+=======
+});
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1

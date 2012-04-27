@@ -1,0 +1,256 @@
+﻿$(document).ready(function () {
+<<<<<<< HEAD
+
+    estadoNuevaFactura();
+
+
+});
+
+function obtenerLineas() {
+    $.each($(".k-grid-content tbody tr"), function () {
+
+    });
+
+}
+
+function estadoNuevaFactura() {
+    // DatePicker fecha
+    $("#fechaFactura").kendoDatePicker({
+        start: "day",
+        depth: "year",
+        format: "dd/MM/yyyy"
+    });
+
+    /*
+    
+    function montarFecha(valor) {
+    var salida = valor.getDate() + "/" + (valor.getMonth() + 1) + "/" + valor.getFullYear();
+    salida = girarFecha(salida);
+    return salida;
+    }
+    function girarFecha(fecha)
+    {
+    var antiguacompleta = fecha.split("-");
+    salida = antiguacompleta[2] + "/" + antiguacompleta[1] + "/" + antiguacompleta[0];
+    return salida;
+    }
+    
+    */
+
+
+    // Autocomplete usuarios
+    var dsUsuarios = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/usuariosAutocomplete",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+    });
+
+    $("#usuariosFacturaAutocomplete").kendoComboBox({
+        suggest: true,
+        dataTextField: "nickname",
+        dataValueField: "idUsuario",
+        dataSource: dsUsuarios
+    });
+
+    // Autocomplete eventos
+    var dsEventos = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/eventosAutocomplete",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+    });
+
+    $("#eventosFacturaAutocomplete").kendoComboBox({
+        suggest: true,
+        dataTextField: "Titulo",
+        dataValueField: "idEvento",
+        dataSource: dsEventos
+    });
+
+    // Autocomplete artículos
+    var dsArticulos = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/articulosAutocomplete",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+    });
+
+    $("#articulosFacturaAutocomplete").kendoComboBox({
+        suggest: true,
+        dataTextField: "Nombre",
+        dataValueField: "idArticulo",
+        dataSource: dsEventos
+    });
+
+
+    // DataSource KENDO
+    var dataSource = new kendo.data.DataSource({
+        schema:
+            {
+                model:
+                {
+                    id: "idLineaFactura",
+                    fields: {
+                        concepto: { editable: true },
+                        unidades: { editable: true, type: "number", validation: { min: 0} },
+                        precio: { editable: true, type: "number" },
+                        total: { editable: false, type: "number" }
+                    }
+                }
+            }
+    });
+
+
+    // Tabla de facturas
+    $("#facturaLineasFacturaGrid").kendoGrid({
+        dataSource: dataSource,
+        columns: [
+                {
+                    field: "concepto",
+                    title: "Concepto"
+
+                },
+                {
+                    title: "Unidades",
+                    field: "unidades"
+                },
+                {
+                    title: "Precio",
+                    field: "precio"
+                },
+                {
+                    title: "Total",
+                    field: "total"
+                },
+                {
+                    command: { name: "edit", text: "", className: "editarLineaButton" },
+                    title: " "
+                }
+            ],
+        editable: "inline"
+    });
+
+    var tabla = $("#facturaLineasFacturaGrid").data("kendoGrid");
+    tabla.addRow();
+
+    $(".editarLineaButton").live('click', function () {
+        $(this).val();
+    });
+
+
+    $("#nuevaLineaButton").click(function () {
+        tabla.addRow();
+    });
+
+
+    $("#descartarFacturaButton").click(function () {
+        //volverListaFacturas();
+    });
+
+    $("#guardarFacturaButton").click(function () {
+
+        var estado = '9242c548-9283-4085-8e27-ebe1ff5e1307';
+        var concepto = $('#conceptoFactura').val();
+        var total = $('#totalFactura').val();
+
+        //var lineasFactura = kendo.stringify($("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource.view());
+        //alert($("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource.view());
+        //var d = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid");
+        //alert(d);
+
+        /*
+        alert(lineasFactura);
+        var ds = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid").dataSource;
+        //var grid = $("#nuevaFacturaLineasFacturaGrid").data("kendoGrid");
+        //grid.select(grid.tbody.find("tr"));
+        */
+        //alert(total);
+        //var lineasFactura = obtenerLineas();
+        var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
+        var lineasFactura = new Array();
+        for (var i = 0; i < lineasFacturaRaw.length; i++) {
+            lineasFactura.push({
+                "concepto": lineasFacturaRaw[i].concepto,
+                "unidades": lineasFacturaRaw[i].unidades,
+                "precio": lineasFacturaRaw[i].precio
+            });
+        }
+        var url = "nuevaFactura";
+        var datos = {
+            estado: estado,
+            concepto: concepto,
+            lineasFactura: kendo.stringify(lineasFactura)
+        };
+        $.post(url, datos, function (data) {
+            window.location.replace("../Facturas");
+        });
+
+    });
+
+
+    // Nueva línea de factura
+    $("facturaAñadirNuevaLineaFacturaButton").click(function () {
+        alert("Volver atrás");
+    });
+
+    // Al pulsar en concepto
+    $(".k-grid-edit-row .k-textbox").click(function () {
+        //alert("click");
+    });
+}
+
+
+
+=======
+    $("#fechaNuevaFactura").live('focus', function () {
+        // $(this).datepicker().datepicker('show');
+    });
+
+    $("#descartarNuevaFacturaButton").live('click', function () {
+        volverListaFacturas();
+    });
+
+    $("#guardarNuevaFacturaButton").live('click', function () {
+
+        var estado = '9242c548-9283-4085-8e27-ebe1ff5e1307';
+        var jd = '1a902aec-1a7f-4035-94fb-2540cbbc4831';
+
+        var concepto = $('#conceptoNuevaFactura').val();
+        var total = $('#totalNuevaFactura').val();
+
+        data = {
+            concepto: concepto,
+            total: total,
+            estado: estado,
+            jd: jd
+        };
+        url = 'Facturas/nuevaFactura';
+
+        $.post(url, data, function (data) {
+            volverListaFacturas();
+        });
+    });
+});
+
+function volverListaFacturas() {
+    $("#nuevaFacturaButtonNav").show();
+    $("#FacturasContainer").hide();
+    $("#FacturasGrid").data("kendoGrid").dataSource.read();
+    $("#FacturasGrid").show();
+
+    // Quitar listeners
+    //$("#descartarNuevaFacturaButton").die("click");
+    //$("#guardarNuevaFacturaButton").die("click");
+}
+
+>>>>>>> 565a4f2521705bd7aa0243c0ce93157a2fb422d1

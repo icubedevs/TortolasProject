@@ -1,0 +1,30 @@
+﻿body {
+}
+
+.titulotab
+{
+    padding: 20px 10px 20px 30px;
+    
+}
+
+textarea
+{
+    resize: none;
+
+}
+
+.toolbarIzq
+{
+    float: left;
+}
+
+.toolbarDer
+{
+    float: right;
+}
+
+.ventana
+{
+    padding-left: 40px;
+    padding-top: 40px;
+}
