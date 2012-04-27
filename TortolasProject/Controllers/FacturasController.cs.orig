@@ -12,18 +12,12 @@ namespace TortolasProject.Controllers
     {
         mtbMalagaDataContext bd = new mtbMalagaDataContext();
         static FacturasRepositorio FacturasRepo = new FacturasRepositorio();
-<<<<<<< HEAD
-      
-       
-        // Index
-=======
 
-        ///////////////////////////////////////////////////////////////////////////////
+       
         // Carga de vistas
         ///////////////////////////////////////////////////////////////////////////////
 
             // Index
->>>>>>> 5a565b7e0275528db0c90b7cd59d1e2ccfb87fef
         public ActionResult Index()
         {
             return View();

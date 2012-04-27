@@ -10,44 +10,101 @@ namespace TortolasProject.Controllers
 {
     public class FacturasController : Controller
     {
+        mtbMalagaDataContext bd = new mtbMalagaDataContext();
         static FacturasRepositorio FacturasRepo = new FacturasRepositorio();
-      
+
        
-        // Index
+        // Carga de vistas
+        ///////////////////////////////////////////////////////////////////////////////
+
+            // Index
         public ActionResult Index()
         {
-            //var facturas = from estadoFactura in FacturasRepositoriodoFactura select estadoFactura;
-        
             return View();
         }
 
-        
-        public ActionResult Create()
+            // NuevaFactura
+        [HttpPost]
+        public ActionResult cargarVistaNuevaFactura()
         {
-            return PartialView("Create");
+            return PartialView("NuevaFactura");
         }
 
-        public ActionResult Details(Guid id)
+            // Detalles factura
+        [HttpPost]
+        public ActionResult leerFactura(FormCollection datos)
         {
-
-            tbUsuario usuario = FacturasRepo.details(id);
+            Guid idFactura = Guid.Parse(datos["idFactura"]);
+            tbFactura usuario = FacturasRepo.leerFactura(idFactura);
             return PartialView("Details", usuario);
         }
-        //LeerFacturas
+
+        
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Funciones
+        ///////////////////////////////////////////////////////////////////////////////
+        
+
+        
+
+            //Leer dacturas
         [HttpPost]
         public ActionResult leerTodos()
         {
-            var usuarios = from u in FacturasRepo.listarTodos() 
+            var facturas = from f in FacturasRepo.listarFacturas() 
                            select new
                                {
-                                   idUsuario = u.idUsuario,
-                                   Nickname = u.Nickname,
-                                   DNI = u.DNI,
-                                   Email = u.Email
+                                   idFactura = f.idFactura,
+                                   concepto = f.Concepto,
+                                   estado = f.FKEstado,
+                                   total = f.Total,
+                                   juntaDirectiva = f.FKJuntaDirectiva,
+                                   fecha = f.Fecha.ToShortDateString()
                                };
-            
 
-            return Json(usuarios);
-        }   
+            return Json(facturas);
+        }
+  
+            // Nueva factura
+        [HttpPost]
+        public int nuevaFactura(FormCollection data)
+        {
+            // Obtenemos los datos del formulario
+            decimal total = decimal.Parse(data["total"]);
+            String concepto = data["concepto"];
+            Guid ef = Guid.Parse(data["estado"]);
+            Guid jd = Guid.Parse(data["jd"]);
+
+            // Creamos la nueva entidad            
+            tbFactura f = new tbFactura
+            {
+                idFactura = Guid.NewGuid(),
+                Fecha = DateTime.Now,
+                Total = total,
+                Concepto = concepto,
+                FKEstado = ef,
+                FKJuntaDirectiva = jd
+            };
+
+            // La insertamos en la BD
+            FacturasRepo.nuevaFactura(f);
+
+
+            return 1; // Pensado para devolver errores
+        }
+
+
+            // Eliminar factura
+        [HttpPost]
+        public void eliminarFactura(FormCollection id)
+        {
+            //FacturasRepo.eliminarFactura(id);
+            id.AllKeys.ToString();
+        }
+
+ 
     }
 }

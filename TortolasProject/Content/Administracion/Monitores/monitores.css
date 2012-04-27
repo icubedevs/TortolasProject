@@ -1,14 +1,39 @@
 ﻿body {
 }
 
-#editarfila
+.ventanaClass
 {
     padding-left: 40px;
     padding-top: 40px;
 }
 
-.k-input
+
+.formulario
 {
-    padding-left:15px;
+    float: left;
+    padding-left: 15px;
+    padding-top: 20px;
 }
 
+.k-container
+{
+    float: right;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+   /* -moz-opacity: 0.24;
+    opacity: 0.24; 
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha"(Opacity=24); */
+    background-color: #9B9A9A;
+    height: 140px;
+    width: 140px;
+    padding: 15px 15px 15px 15px;
+    margin-top:15px;
+}
+
+.k-container img
+{
+    margin:0px 0px 10px 0px;
+    width: inherit;
+    height: inherit;
+}

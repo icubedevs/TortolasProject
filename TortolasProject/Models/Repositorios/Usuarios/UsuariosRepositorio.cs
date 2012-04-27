@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 
 namespace TortolasProject.Models.Repositorios
 {
-    public class UsuariosRepositorio : Controller
+    public class UsuariosRepositorio
     {
         //
         // GET: /Usuarios/
 
         mtbMalagaDataContext mtbMalagaDB = new mtbMalagaDataContext();
 
-       
+        public IList<tbUsuario> listarUsuarios()
+        {
+            return mtbMalagaDB.tbUsuario.ToList();
+
+        }
 
     }
 }

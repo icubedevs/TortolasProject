@@ -8,10 +8,18 @@
 
 <h2>Index</h2>
 
+<div id="tabAdmin">
+
+</div>
+
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CssContent" runat="server">
 </asp:Content>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="ScriptContent" runat="server">
+<script src="../../Scripts/jsactions/Administracion/Administracion.js" ></script>
+<link rel="stylesheet" type="text/css" href="../../Scripts/pngfix/styles/kendo.common.min.css" />
+<link rel="stylesheet" type="text/css" href="../../Scripts/pngfix/styles/kendo.default.min.css" />
+
 </asp:Content>
