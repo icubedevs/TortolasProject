@@ -66,9 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArticulosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -78,12 +80,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
-=======
     <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -91,9 +91,9 @@
     <Content Include="Content\Empresas\EmpresasNav.css" />
     <Content Include="Content\Empresas\EmpresasNew.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
-    <Content Include="Content\Facturas\facturasIndex.css" />
     <Content Include="Content\Facturas\facturasNav.css" />
     <Content Include="Content\Facturas\factura.css" />
+    <Content Include="Content\Facturas\nuevaFactura.css" />
     <Content Include="Content\icons\agents.ico" />
     <Content Include="Content\icons\aim-away.ico" />
     <Content Include="Content\icons\aim-chat.ico" />
@@ -616,17 +616,13 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
-<<<<<<< HEAD
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
-=======
-    <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
-    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
     <Content Include="Scripts\jsactions\siteMaster.js" />
+    <Content Include="Scripts\jsactions\Pedidos\articulosIndex.js" />
     <Content Include="Scripts\kendo.all.min.js" />
     <Content Include="Scripts\kendo.autocomplete.min.js" />
     <Content Include="Scripts\kendo.binder.min.js" />
@@ -685,17 +681,11 @@
     <Content Include="Scripts\kendo.window.min.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
-<<<<<<< HEAD
     <Content Include="Views\Facturas\editarFactura.aspx" />
     <Content Include="Views\Facturas\leerFactura.aspx" />
+    <Content Include="Views\Articulos\AnadirArticulo.ascx" />
+    <Content Include="Views\Articulos\EditarArticulo.ascx" />
     <Content Include="Views\Facturas\factura.aspx" />
-=======
-    <Content Include="Views\Empresas\Index.aspx" />
-    <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
-    <Content Include="Views\Facturas\Create.ascx" />
-    <Content Include="Views\Facturas\Details.ascx" />
-    <Content Include="Views\Facturas\NuevaFactura.ascx" />
->>>>>>> a00fb34a0bc03cf4fb2774c2572e3a3c07ac517f
     <Content Include="Views\Home\cabron.aspx" />
     <Content Include="Views\Home\Hola.aspx" />
     <Content Include="Views\Home\eventos.aspx" />
@@ -757,6 +747,7 @@
     <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
+    <Content Include="Views\Articulos\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -788,12 +779,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-    <Folder Include="Controllers\Pedidos\" />
-    <Folder Include="Scripts\NewFolder1\" />
-    <Folder Include="Views\Pedidos\" />
-=======
->>>>>>> 5a565b7e0275528db0c90b7cd59d1e2ccfb87fef
+    <Folder Include="Content\Pedidos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -833,7 +819,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>2329</DevelopmentServerPort>
+          <DevelopmentServerPort>3608</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

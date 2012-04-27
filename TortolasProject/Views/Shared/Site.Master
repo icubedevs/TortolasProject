@@ -196,7 +196,10 @@
                             <%: Html.ActionLink("Artículos", "Index", "Articulos") %><img src="../../Content/images/UserGroup.png" width="10%" />
                         </li>
                         <li>
-                            <a href="Empresas"><img src="../../Content/images/UserGroup.png" width="10%" />Empresas</a>
+                            <a href="Articulos"><img src="../../Content/images/UserGroup.png" width="10%" />Articulos</a>
+                        </li>
+                        <li>
+                        <a href="Empresas"><img src="../../Content/images/UserGroup.png" width="10%" />Empresas</a>
                         </li>
                     </ul>
                 <% 
@@ -210,7 +213,7 @@
             </div><!-- / container -->
     
             <div id="containeright">
-                    lalal		
+                    lalalalala
             </div>
    
         </div>
