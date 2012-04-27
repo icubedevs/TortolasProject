@@ -51,7 +51,8 @@ namespace TortolasProject.Models.Repositorios
             ev.FechaLimiteInscripcion = evento.FechaLimiteInscripcion;
             ev.PrioridadSocios = evento.PrioridadSocios;
             ev.Plazas = evento.Plazas;
-            
+
+            save();
         }
 
         public IList<tbEvento> getByUser(Guid idUsuario)
