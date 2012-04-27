@@ -199,7 +199,7 @@
                             <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Empresas", "Index", "Empresas") %>
                         </li>
                         <li>
-                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Mensajes", "Index", "Administracion") %>
+                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Perfil", "Index", "Perfil") %>
                         </li>
                     </ul>
                 <% 
