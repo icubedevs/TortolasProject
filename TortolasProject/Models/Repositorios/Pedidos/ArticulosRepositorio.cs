@@ -26,7 +26,23 @@ namespace TortolasProject.Models.Repositorios
             save();
         }
 
+        public tbArticulo leerArticulo(Guid idArticulo)
+        {
+            return mtbMalagaDB.tbArticulo.Where(articulo => articulo.idArticulo == idArticulo).Single();
+        }
 
+        public void editarArticulo(tbArticulo f, Guid idArticulo)
+        {
+            tbArticulo articuloModificar = leerArticulo(idArticulo);
+
+            articuloModificar.Nombre = f.Nombre;
+            articuloModificar.Imagen = f.Imagen;
+            articuloModificar.Descripcion = f.Descripcion;
+            articuloModificar.Precio = f.Precio;
+
+            mtbMalagaDB.SubmitChanges();
+            save();
+        }
 
     }
 }

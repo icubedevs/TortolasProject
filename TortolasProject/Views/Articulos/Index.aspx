@@ -8,6 +8,7 @@
 
     <div id="anadirArticuloButton"><input type="button" class="k-button" value="Añadir artículo" /></div>
     <div id="anadirArticuloDiv"> </div>
+    <div id="editarArticuloDiv"> </div>
     <div id="articulosGrid"></div>
 
 </asp:Content>

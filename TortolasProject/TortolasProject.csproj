@@ -677,6 +677,7 @@
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
+    <Content Include="Views\Articulos\EditarArticulo.ascx" />
     <Content Include="Views\Empresas\Index.aspx" />
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
     <Content Include="Views\Facturas\Create.ascx" />

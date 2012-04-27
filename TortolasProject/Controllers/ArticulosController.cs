@@ -17,20 +17,16 @@ namespace TortolasProject.Controllers
             return View();
         }
 
-        public ActionResult AnadirArticulo()
-        {
-            return View();
-        }
-
         public ActionResult leerTodos()
         {
             var articulos = from art in ArticulosRepo.listarArticulos() 
                            select new
                                {
-                                   name = art.Nombre,
-                                   description = art.Descripcion,
-                                   image = art.Imagen,
-                                   price = art.Precio
+                                   idArticulo = art.idArticulo,
+                                   nombre = art.Nombre,
+                                   descripcion = art.Descripcion,
+                                   imagen = art.Imagen,
+                                   precio = art.Precio
                                };
 
             return Json(articulos);
@@ -39,6 +35,11 @@ namespace TortolasProject.Controllers
         public ActionResult cargarVistaAnadirArticulo()
         {
             return PartialView("AnadirArticulo");
+        }
+
+        public ActionResult cargarVistaEditarArticulo()
+        {
+            return PartialView("EditarArticulo");
         }
 
         public int nuevoArticulo(FormCollection Data)
@@ -58,6 +59,26 @@ namespace TortolasProject.Controllers
             };
 
             ArticulosRepo.anadirArticulo(f);
+            return 1; //mirar control de errores
+        }
+        public int editarArticulo(FormCollection Data)
+        {
+            String nombre = Data["nombre"];
+            String imagen = Data["imagen"];
+            String descripcion = Data["descripcion"];
+            decimal precio = Decimal.Parse(Data["precio"]);
+            Guid idArticulo = Guid.Parse(Data["idarticulo"]);
+
+            tbArticulo f = new tbArticulo()
+            {
+                idArticulo = idArticulo,
+                Nombre = nombre,
+                Imagen = imagen,
+                Descripcion = descripcion,
+                Precio = precio,
+            };
+
+            ArticulosRepo.editarArticulo(f, idArticulo);
             return 1; //mirar control de errores
         }
     }
