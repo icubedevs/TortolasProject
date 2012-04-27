@@ -81,5 +81,12 @@ namespace TortolasProject.Controllers
             ArticulosRepo.editarArticulo(f, idArticulo);
             return 1; //mirar control de errores
         }
+        public int eliminarArticulo(FormCollection Data)
+        {
+            Guid idArticulo = Guid.Parse(Data["idarticulo"]);
+
+            ArticulosRepo.eliminarArticulo(ArticulosRepo.leerArticulo(idArticulo));
+            return 1; //mirar control de errores
+        }
     }
 }

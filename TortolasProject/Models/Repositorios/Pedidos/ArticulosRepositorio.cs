@@ -44,5 +44,10 @@ namespace TortolasProject.Models.Repositorios
             save();
         }
 
+        public void eliminarArticulo(tbArticulo f)
+        {
+            mtbMalagaDB.tbArticulo.DeleteOnSubmit(f);
+            save();
+        }
     }
 }

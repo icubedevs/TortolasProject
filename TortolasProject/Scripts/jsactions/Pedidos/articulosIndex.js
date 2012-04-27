@@ -42,7 +42,7 @@
 
     //VISTA EDITAR ARTICULO
 
-    //Guardar articulo en la BD y volver al index de articulos
+    //Guardar edicion en la BD y volver al index de articulos
     $("#editarArticuloAceptarButton").live('click', function () {
         var nombre = $("#nombreEditarArticuloAutocomplete").val();
         var imagen = $("#imagenEditarArticuloAutocomplete").val();
@@ -109,6 +109,29 @@
         });
     });
 
+    //Eliminar fila
+    $(".botonEliminarFila").live('click', function () {
+
+        if (confirm("¿Estas seguro de que desea eliminar la fila?")) {
+            var fila = $("#articulosGrid").find("tbody tr.k-state-selected");
+            var filajson = $("#articulosGrid").data("kendoGrid").dataItem(fila).toJSON();
+
+            data = {
+                nombre: filajson.nombre,
+                imagen: filajson.imagen,
+                descripcion: filajson.descripcion,
+                precio: filajson.precio,
+                idarticulo: filajson.idArticulo
+            };
+
+            url = 'Articulos/eliminarArticulo';
+            $.post(url, data, function (data) {
+                $("#articulosGrid").data("kendoGrid").dataSource.read();
+            });
+        }
+
+    });
+
     //Grid de articulos
     $("#articulosGrid").kendoGrid({
         selectable: true,
@@ -132,6 +155,10 @@
               {
                   title: "Editar",
                   command: { text: "Editar", className: "botonEditarFila" }
+              },
+              {
+                  title: "Eliminar",
+                  command: { text: "Eliminar", className: "botonEliminarFila" }
               }],
         dataSource: {
             transport: {
