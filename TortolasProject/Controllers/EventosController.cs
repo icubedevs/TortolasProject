@@ -24,7 +24,7 @@ namespace TortolasProject.Controllers
         [HttpPost]
         public ActionResult cargarVistaCrearEvento()
         {
-            return PartialView("crearEvento");
+            return PartialView("VistaCrearEvento");
         }
 
         [HttpPost]
@@ -73,5 +73,43 @@ namespace TortolasProject.Controllers
 
             EventosRepo.editarEvento(idEvento,Evento);
         }
+        [HttpPost]
+        public void CreateEvento(FormCollection data)
+        {
+            Guid idEvento = Guid.NewGuid();
+            String Titulo = data["TituloUpdate"];
+            String Lugar = data["LugarUpdate"];
+            DateTime FechaRealizacion = DateTime.Parse(data["FechaRealizacionUpdate"]);
+            DateTime FechaAperturaIncripcion = DateTime.Parse(data["FechaAperturaInscripUpdate"]);
+            DateTime FechaLimiteIncripcion = DateTime.Parse(data["FechaLimiteInscripUpdate"]);
+            int Plazas = int.Parse(data["PlazasUpdate"]);
+            bool PrioridadSocios = bool.Parse(data["PrioridadSociosUpdate"]);
+            String Actividad = data["ActividadUpdate"];
+            Guid FKUsuario =  Guid.Parse(data["FKUsuario"]);
+
+            tbEvento Evento = new tbEvento
+            {
+                Titulo = Titulo,
+                Lugar = Lugar,
+                FechaRealizacion = FechaRealizacion,
+                FechaAperturaInscripcion = FechaAperturaIncripcion,
+                FechaLimiteInscripcion = FechaLimiteIncripcion,
+                Plazas = Plazas,
+                PrioridadSocios = PrioridadSocios,
+                Actividad = Actividad,
+                FKUsuarioCreador = FKUsuario
+            };
+
+            EventosRepo.crearEvento(Evento);
+        }
+
+        public void eliminarEvento(FormCollection data)
+        {
+            Guid idEvento = Guid.Parse(data["idEvento"]);
+
+            EventosRepo.eliminarEvento(idEvento);
+        }
     }
+
 }
+

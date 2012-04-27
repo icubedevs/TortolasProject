@@ -8,6 +8,7 @@
 <div id="Eventostabla">
 
 </div>
+<div id="FormularioCreacion"></div>
 
 <div id ="VentanaEditar">
     <label for="Titulo">Titulo: </label><input type="text" id="Titulo" class="k-input" /><br />

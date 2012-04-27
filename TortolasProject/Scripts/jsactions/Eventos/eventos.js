@@ -46,6 +46,9 @@
                     {
                         title: "Herramientas",
                         command: { text: "Editar", className: "botonEditarFila" }
+                    },
+                    {
+                        command: { text: "Eliminar", className: "botonEliminarFila" }
                     }
         ],
         detailTemplate: kendo.template($("#template").html()),
@@ -77,6 +80,72 @@
         dataSource: valoresComboPrioridad
     });
 
+    $("#FechaRealizacion").kendoDatePicker({
+
+        format: "dd/MM/yyyy"
+    });
+
+
+    $("#FechaAperturaInscrip").kendoDatePicker({
+
+        format: "dd/MM/yyyy"
+    });
+
+
+    $("#FechaLimiteInscrip").kendoDatePicker({
+
+        format: "dd/MM/yyyy"
+    });
+
+
+
+    $("#botonCrearEvento").live("click", function () {
+
+        $.ajax({
+            url: "Eventos/cargarVistaCrearEvento",
+            type: "POST",
+            success: function (data) {
+                $("#Eventostabla").hide();
+                $("#FormularioCreacion").html(data);
+                $("#FormularioCreacion").show();
+                $("#editor").kendoEditor();
+
+
+
+                $("#FechaRealizacion").kendoDatePicker({
+
+                    format: "dd/MM/yyyy"
+                });
+                $("#FechaAperturaInscrip").kendoDatePicker({
+
+                    format: "dd/MM/yyyy"
+                });
+                $("#FechaLimiteInscrip").kendoDatePicker({
+
+                    format: "dd/MM/yyyy"
+                });
+
+
+
+
+                var valoresComboPrioridad = [
+                        { texto: "Si", valor: true },
+                        { texto: "No", valor: false }
+
+                    ];
+
+                $("#PrioridadSocios").kendoDropDownList({
+                    dataTextField: "texto",
+                    dataValueField: "valor",
+                    dataSource: valoresComboPrioridad
+                });
+            }
+
+        });
+
+
+    });
+
     $(".botonEditarFila").live("click", function () {
 
         var fila = $("#Eventostabla").find("tbody tr.k-state-selected");
@@ -86,12 +155,11 @@
 
         $("#Titulo").val(filajson.Titulo);
         $("#Lugar").val(filajson.Lugar);
-        $("#FechaRealizacion").val(filajson.FechaRealizacion);
-        $("#FechaAperturaInscrip").val(filajson.FechaAperturaInscripcion);
-        $("#FechaLimiteInscrip").val(filajson.FechaLimiteInscripcion);
+        $("#FechaRealizacion").data("kendoDatePicker").value(filajson.FechaRealizacion);
+        $("#FechaAperturaInscrip").data("kendoDatePicker").value(filajson.FechaAperturaInscripcion);
+        $("#FechaLimiteInscrip").data("kendoDatePicker").value(filajson.FechaLimiteInscripcion);
         $("#Plazas").val(filajson.Plazas);
 
-+
 
         $("#PrioridadSocios").data("kendoDropDownList").value((filajson.PrioridadSocios));
         $("#editor").data("kendoEditor").value((filajson.Actividad));
@@ -102,7 +170,41 @@
 
     $("#BotonCancelarVentanaEditar").live("click", function () {
         windowEditar.close();
+        $("#Eventostabla").show();
     });
+
+    $("#BotonCancelarFormularioCrear").live("click", function () {
+        $("#FormularioCreacion").hide();
+        $("#Eventostabla").show();
+
+    });
+
+    $("#BotonAceptarFormularioCrear").live("click", function () {
+        var datos = {};
+
+        datos["TituloUpdate"] = $("#Titulo").val();
+        datos["LugarUpdate"] = $("#Lugar").val();
+        datos["FechaRealizacionUpdate"] = $("#FechaRealizacion").val();
+        datos["FechaAperturaInscripUpdate"] = $("#FechaAperturaInscrip").val();
+        datos["FechaLimiteInscripUpdate"] = $("#FechaLimiteInscrip").val();
+        datos["PlazasUpdate"] = $("#Plazas").val();
+        datos["PrioridadSociosUpdate"] = $("#PrioridadSocios").val();
+        datos["ActividadUpdate"] = $("#editor").data("kendoEditor").value();
+        datos["FKUsuario"] = "a98c5f56-763d-45cc-ab93-8788f7452bac";
+
+        $.ajax(
+        {
+            url: "Eventos/CreateEvento",
+            type: "POST",
+            data: datos,
+            success: function () {
+                datasource.read();
+                $("#FormularioCreacion").hide();
+            }
+        });
+
+    });
+
 
     $("#BotonAceptarVentanaEditar").click(function () {
         var datos = {};
@@ -140,10 +242,23 @@
             }
         });
 
-
-
-
-
     }
+
+    $(".botonEliminarFila").live("click", function () {
+        
+        var fila = $("#Eventostabla").data("kendoGrid").select(); // Cogemos la fila seleccionada
+        var filaJson = $("#Eventostabla").data("kendoGrid").dataItem(fila).toJSON(); // La pasamos a JSON
+
+        var idEvento = datasource.getByUid(fila.attr("data-uid")).idEvento;
+       
+        $.ajax({
+            url: "Eventos/eliminarEvento",
+            type: "POST",
+            data: { idEvento: idEvento },
+            success: function () {
+                datasource.read();
+            }
+        });
+    });
 
 });

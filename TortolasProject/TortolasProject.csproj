@@ -679,6 +679,7 @@
     <Content Include="Views\Empresas\Index.aspx" />
     <Content Include="Views\Eventos\Index.aspx" />
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
+    <Content Include="Views\Eventos\VistaCrearEvento.ascx" />
     <Content Include="Views\Facturas\Create.ascx" />
     <Content Include="Views\Facturas\Details.ascx" />
     <Content Include="Views\Facturas\NuevaFactura.ascx" />
