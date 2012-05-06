@@ -13,7 +13,7 @@
 
 <asp:Content ID="leerFacturaMainContent" ContentPlaceHolderID="MainContent" runat="server">
     <input type="hidden" id="idFactura" value="<%= Model.idFactura %>" />
-    <div id="editarFacturaButton">Editar</div>
+    <div id="editarFacturaButton" class='k-button'>Editar</div>
     <p>idFactura:    <%= Model.idFactura %>  </p>
     <p>Fecha:        <%= Model.Fecha %>      </p>
     <p>Concepto:     <%= Model.Concepto %>   </p>

@@ -17,7 +17,7 @@
 <input type="hidden" id="idFactura" value="<%= Model.idFactura %>" />
 <div id='facturaForm'>
     <div id='facturaHeader'>
-        <div id='eliminarFacturaButton'>Eliminar Factura</div>
+        <div id='eliminarFacturaButton' class='k-button'>Eliminar Factura</div>
         <div id='relacionesFacturaContainer'>
             <div id='usuariosFacturaDiv'>
                 Usuario     <input id='usuariosFacturaAutocomplete'/>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <div id='nuevaLineaButton'>Nueva línea</div>
+    <div id='nuevaLineaButton' class='k-button'>Nueva línea</div>
     <div id='facturaLineasFacturaGrid'>
     </div>
     <div id='totalFacturaDiv'>
@@ -46,8 +46,8 @@
     </div>
 
     <div id='facturaBottom'>
-        <div id='descartarFacturaButton'>Descartar</div>
-        <div id='guardarFacturaButton'>Guardar</div>
+        <div id='descartarFacturaButton' class='k-button'>Descartar</div>
+        <div id='guardarFacturaButton' class='k-button'>Guardar</div>
     </div>
 </div>
 
