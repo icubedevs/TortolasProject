@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<dynamic>" ValidateRequest="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     [MTB-MALAGA] Perfil de Usuario
@@ -20,11 +20,9 @@
         <img class="titulotab" src="../../Content/images/emailBIG_titulo.png"  />
         <br /><br />
         <h3>Mensajes No Leidos</h3>
-        <div id="tablaMensajesNoLeidos"></div><br /><br />
+        <div id="tablaMensajesNoLeidos" class="noLeidos"></div><br /><br />
         <h3>Mensajes Leidos</h3>
-        <div id="tablaMensajesLeidos"></div><br /><br />
-        <textarea id="asuntoMensaje" class="areaTexto" readonly rows="1" cols="95" Placeholder="Asunto"></textarea>
-        <textarea id="resultadoMensaje" class="areaTexto" readonly rows="6" cols="95" Placeholder="Cuerpo del mensaje"></textarea>
+        <div id="tablaMensajesLeidos" class="leidos"></div><br /><br />        
     </div>
     <div class="pestana" id="estadisticas"></div>
     <div class="pestana" id="rutas"></div>
@@ -34,8 +32,22 @@
     <div class="ventana">
         <label for="campoDestinatario"> Destinatario</label><input type="text" class="k-textbox" id="campoDestinatario" /><br /><br />
         <label for="campoAsunto"> Asunto</label<><input type="text" class="k-textbox" id="campoAsunto" size="70"/><br /><br />
-        <textarea id="campoCuerpoMensaje" rows="10" cols="60"></textarea><br />
+        <textarea id="campoCuerpoMensaje" class="editor" rows="10" cols="60"></textarea><br /><br />
        <center><input type="button" id="enviarMensaje" class="k-button" value="Enviar Mensaje" /></center> 
+    </div>
+</div>
+
+<div id="ventanaMostrar" class="ventana">
+    <div class="ventana">
+        <label for="mostrarDestinatario"> Destinatario</label><input type="text" class="k-textbox muestra" id="mostrarDestinatario" />
+        <input type="button" class="k-button" id="botonModoEnvio" value="Responder" modoEnvio="Muestra" />
+        <br /><br />
+        <label for="mostrarAsunto"> Asunto</label<><input type="text" class="k-textbox muestra" id="mostrarAsunto" size="70"/><br /><br />
+        <textarea id="mostrarCuerpoMensaje" class="muestra" rows="10" cols="60"></textarea>
+        <div class="editorwrapper">
+            <textarea id="mostrarCuerpoMensajeEditable" class="muestra" rows="10" cols="60"></textarea><br /><br />        
+        </div>
+       <center><input type="button" id="mostrarEnviarMensaje" class="k-button" value="Enviar Mensaje" /></center> 
     </div>
 </div>
 

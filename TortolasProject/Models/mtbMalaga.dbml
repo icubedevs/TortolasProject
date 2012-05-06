@@ -1,25 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icubeDB" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tbUsuario" Member="tbUsuario">
-    <Type Name="tbUsuario">
-      <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Nickname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Apellidos" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="DNI" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
-      <Column Name="Avatar" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="FKUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
-      <Association Name="tbUsuario_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbDocInscripcion" />
-      <Association Name="tbUsuario_tbEvento" Member="tbEvento" ThisKey="idUsuario" OtherKey="FKUsuarioCreador" Type="tbEvento" />
-      <Association Name="tbUsuario_tbMensaje" Member="tbMensaje" ThisKey="idUsuario" OtherKey="FKDestinatario" Type="tbMensaje" />
-      <Association Name="tbUsuario_tbMensaje1" Member="tbMensaje1" ThisKey="idUsuario" OtherKey="FKRemitente" Type="tbMensaje" />
-      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbPedidoUsuario" />
-      <Association Name="tbUsuario_tbRuta" Member="tbRuta" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbRuta" />
-      <Association Name="tbUsuario_tbSocio" Member="tbSocio" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbSocio" />
-      <Association Name="aspnet_Users_tbUsuario" Member="aspnet_Users" ThisKey="FKUser" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbMensaje" Member="tbMensaje">
+    <Type Name="tbMensaje">
+      <Column Name="idMensaje" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="estado" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="FKRemitente" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="FKDestinatario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="asunto" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
+      <Column Name="cuerpomensaje" Type="System.String" DbType="NVarChar(600)" CanBeNull="true" />
+      <Association Name="tbUsuario_tbMensaje" Member="tbUsuario" ThisKey="FKDestinatario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbMensaje1" Member="tbUsuario1" ThisKey="FKRemitente" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
@@ -32,6 +23,30 @@
       <Association Name="aspnet_Applications_aspnet_Paths" Member="aspnet_Paths" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Paths" />
       <Association Name="aspnet_Applications_aspnet_Roles" Member="aspnet_Roles" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Roles" />
       <Association Name="aspnet_Applications_aspnet_Users" Member="aspnet_Users" ThisKey="ApplicationId" OtherKey="ApplicationId" Type="aspnet_Users" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUsuario" Member="tbUsuario">
+    <Type Name="tbUsuario">
+      <Column Name="idUsuario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nickname" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Apellidos" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Direccion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="FechaNacimiento" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DNI" Type="System.String" DbType="VarChar(9)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="FKUser" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Association Name="tbUsuario_tbMensaje" Member="tbMensaje" ThisKey="idUsuario" OtherKey="FKDestinatario" Type="tbMensaje" />
+      <Association Name="tbUsuario_tbMensaje1" Member="tbMensaje1" ThisKey="idUsuario" OtherKey="FKRemitente" Type="tbMensaje" />
+      <Association Name="tbUsuario_tbDocInscripcion" Member="tbDocInscripcion" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbDocInscripcion" />
+      <Association Name="tbUsuario_tbEvento" Member="tbEvento" ThisKey="idUsuario" OtherKey="FKUsuarioCreador" Type="tbEvento" />
+      <Association Name="tbUsuario_tbMensaje11" Member="tbMensaje11" ThisKey="idUsuario" OtherKey="FKDestinatario" Type="tbMensaje1" />
+      <Association Name="tbUsuario_tbMensaje12" Member="tbMensaje12" ThisKey="idUsuario" OtherKey="FKRemitente" Type="tbMensaje1" />
+      <Association Name="tbUsuario_tbPedidoUsuario" Member="tbPedidoUsuario" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbPedidoUsuario" />
+      <Association Name="tbUsuario_tbRuta" Member="tbRuta" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbRuta" />
+      <Association Name="tbUsuario_tbSocio" Member="tbSocio" ThisKey="idUsuario" OtherKey="FKUsuario" Type="tbSocio" />
+      <Association Name="aspnet_Users_tbUsuario" Member="aspnet_Users" ThisKey="FKUser" OtherKey="UserId" Type="aspnet_Users" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Membership" Member="aspnet_Membership">
@@ -231,7 +246,7 @@
       <Column Name="Lugar" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="Actividad" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="FechaAperturaInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="FechaLimiteInscripcione" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="FechaLimiteInscripcion" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="Tematica" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="FechaRealizacion" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Precio" Type="System.Decimal" DbType="Money" CanBeNull="true" />
@@ -403,8 +418,8 @@
       <Association Name="tbLineaPedidoUsuario_tbRelacionLineaPedidoUsuarioArticulo" Member="tbRelacionLineaPedidoUsuarioArticulo" ThisKey="idLineaPedidoUsuario" OtherKey="FKLineaPedidoUsuario" Type="tbRelacionLineaPedidoUsuarioArticulo" />
     </Type>
   </Table>
-  <Table Name="dbo.tbMensaje" Member="tbMensaje">
-    <Type Name="tbMensaje">
+  <Table Name="dbo.tbMensaje" Member="tbMensaje1">
+    <Type Name="tbMensaje1">
       <Column Name="idMensaje" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="fecha" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="estado" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
@@ -412,8 +427,8 @@
       <Column Name="FKDestinatario" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
       <Column Name="asunto" Type="System.String" DbType="NVarChar(70)" CanBeNull="true" />
       <Column Name="cuerpomensaje" Type="System.String" DbType="NVarChar(600)" CanBeNull="true" />
-      <Association Name="tbUsuario_tbMensaje" Member="tbUsuario" ThisKey="FKDestinatario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
-      <Association Name="tbUsuario_tbMensaje1" Member="tbUsuario1" ThisKey="FKRemitente" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbMensaje11" Member="tbUsuario" ThisKey="FKDestinatario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
+      <Association Name="tbUsuario_tbMensaje12" Member="tbUsuario1" ThisKey="FKRemitente" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbMonitor" Member="tbMonitor">

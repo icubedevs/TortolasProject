@@ -14,6 +14,7 @@
     <AssemblyName>TortolasProject</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -762,6 +763,7 @@
     <Content Include="Scripts\styles\Silver\sprite.png" />
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Views\Administracion\Index.aspx" />
     <Content Include="Views\Facturas\editarFactura.aspx" />
     <Content Include="Views\Facturas\leerFactura.aspx" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
@@ -780,6 +782,8 @@
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
     <Content Include="Views\Articulos\Index.aspx" />
+    <Content Include="Views\Monitores\Index.aspx" />
+    <Content Include="Views\Perfil\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

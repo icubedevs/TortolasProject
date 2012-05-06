@@ -26,7 +26,7 @@ namespace TortolasProject.Models.Repositorios
 
         public String nombreUsuario(Guid usuario)
         {
-            return mtbMalagaDB.tbUsuario.Where(mensaje => mensaje.idUsuario == usuario).Single().Nickname;
+            return mtbMalagaDB.tbUsuario.Where(user => user.idUsuario == usuario).Single().Nickname;
         }
 
         public void enviarMensaje(tbMensaje nuevo)

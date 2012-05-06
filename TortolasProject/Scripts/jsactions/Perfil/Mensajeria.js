@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
 
+    // Variables para guardar los datos del mensaje actual que se 
+    // esta mostrando
+    var mensajeguardado = null;
 
     // Inicializo los DataSource de la pagina
     var dataSourceMensajesNoLeidos = new kendo.data.DataSource({
@@ -8,7 +11,7 @@
             read: {
                 url: "Perfil/leerMensajes",
                 type: "POST",
-                data: { idUsuario: "97779a08-76e5-4831-b0d0-53f10b60e879", tipo: "noleido" },
+                data: { tipo: "noleido" },
                 dataType: "json"
             },
             pageSize: 5
@@ -21,7 +24,7 @@
             read: {
                 url: "Perfil/leerMensajes",
                 type: "POST",
-                data: { idUsuario: "97779a08-76e5-4831-b0d0-53f10b60e879", tipo: "leido" },
+                data: { tipo: "leido" },
                 dataType: "json"
             },
             pageSize: 5
@@ -52,12 +55,26 @@
         height: 450
     }).data("kendoWindow");
 
+    // Inicializo la ventana de mostrar
+    var ventanaCrear = $("#ventanaMostrar").kendoWindow({
+        title: "Ver Mensaje",
+        modal: true,
+        visible: false,
+        resizable: false,
+        scrollable: false,
+        movable: false,
+        width: 600,
+        height: 450
+    }).data("kendoWindow");
+
+
+    // Combo de seleccion de destinatario
     $("#campoDestinatario").kendoComboBox({
         dataSource: dataSourceDestinatarios,
         dataValueField: "idUsuario",
-        dataTextField: "Nombre"
+        dataTextField: "Nombre",
+        suggest: true
     });
-
 
 
     // Inicializo la tabla de mensajes no leidos
@@ -69,21 +86,53 @@
         pageSize: 5,
         scrollable: true,
         toolbar: kendo.template($("#templateToolbarMensajeNoLeidos").html()),
-        change: mostrarMensajeNoLeido,
         columns: [
                     {
-                        field: "FKRemitente",
-                        title: "Usuario"
+                        field: "nombreRemitente",
+                        title: "Usuario",
+                        filterable: {
+                            extra: false, //do not show extra filters
+                            operators: { // redefine the string operators
+                                string: {
+                                    eq: "Es igual a..",
+                                    neq: "No es igual a...",
+                                    startswith: "Empieza por...",
+                                    contains: "Contiene"
+                                }
+                            }
+                        }
 
                     },
                      {
                          field: "asunto",
                          title: "Asunto"
-                        , width: "300"
+                        , width: "300",
+                         filterable: {
+                             extra: false, //do not show extra filters
+                             operators: { // redefine the string operators
+                                 string: {
+                                     eq: "Es igual a..",
+                                     neq: "No es igual a...",
+                                     startswith: "Empieza por...",
+                                     contains: "Contiene"
+                                 }
+                             }
+                         }
                      },
                      {
                          field: "fecha",
-                         title: "Fecha"
+                         title: "Fecha",
+                         filterable: {
+                             extra: false, //do not show extra filters
+                             operators: { // redefine the string operators
+                                 string: {
+                                     eq: "Es igual a..",
+                                     neq: "No es igual a...",
+                                     startswith: "Empieza por...",
+                                     contains: "Contiene"
+                                 }
+                             }
+                         }
                      },
                      {
                          command: { text: "Eliminar", className: "eliminarFilaNoLeidos" }
@@ -100,10 +149,9 @@
         pageSize: 5,
         scrollable: true,
         toolbar: kendo.template($("#templateToolbarMensajeLeidos").html()),
-        change: mostrarMensajeLeido,
         columns: [
                     {
-                        field: "FKRemitente",
+                        field: "nombreRemitente",
                         title: "Usuario",
                         filterable: {
                             extra: false, //do not show extra filters
@@ -155,23 +203,94 @@
         ]
     });
 
-    // Funciones para mostrar mensaje en los textarea de abajo
-    function mostrarMensajeNoLeido(e) {
+
+
+    // MOSTRAR MENSAJE (TABLA MENSAJES NO LEIDOS) [DOBLE CLICK]
+    $('.noLeidos .k-grid-content tr').live('dblclick', function () {
+
         var fila = $("#tablaMensajesNoLeidos").data("kendoGrid").select();
-        var filaJson = $("#tablaMensajesNoLeidos").data("kendoGrid").dataItem(fila).toJSON();
+        var data = dataSourceMensajesNoLeidos.getByUid(fila.attr("data-uid"));
 
-        $("#asuntoMensaje").text(filaJson.asunto);
-        $("#resultadoMensaje").text(filaJson.cuerpomensaje);
-    }
+        mostrarMensaje(data, "noleido");
+    });
 
-    function mostrarMensajeLeido(e) {
+    // MOSTRAR MENSAJE (TABLA MENSAJES LEIDOS) [DOBLE CLICK]
+    $('.leidos .k-grid-content tr').live('dblclick', function () {
+
         var fila = $("#tablaMensajesLeidos").data("kendoGrid").select();
-        var filaJson = $("#tablaMensajesLeidos").data("kendoGrid").dataItem(fila).toJSON();
+        var data = dataSourceMensajesLeidos.getByUid(fila.attr("data-uid"));
 
-        $("#asuntoMensaje").text(filaJson.asunto);
-        $("#resultadoMensaje").text(filaJson.cuerpomensaje);
+        mostrarMensaje(data, "leido");
+    });
+
+
+    // MOSTRAR MENSAJE (GENERAL)
+    function mostrarMensaje(mensaje, tipo) {
+
+        // Guardamos los datos del mensaje a mostrar
+        mensajeguardado = mensaje;
+
+        // Mostramos los datos
+        $("#mostrarDestinatario").val(mensaje.nombreRemitente);
+        $("#mostrarAsunto").val(mensaje.asunto);
+        $("#mostrarCuerpoMensaje").val(mensaje.cuerpomensaje);
+
+        // Ponemos los campos a no editable
+        $(".muestra").attr("disable", true);
+
+        // Ocultamos el boton de "Enviar" y el editor
+        $("#mostrarEnviarMensaje").hide();
+
+        $("#ventanaMostrar").data("kendoWindow").center();
+        $("#ventanaMostrar").data("kendoWindow").open();
+
+        // El editor debe montarse despues de abrirse la ventana 
+        // para que coja el ancho correcto
+        $("#mostrarCuerpoMensajeEditable").empty();
+        $("#mostrarCuerpoMensajeEditable").kendoEditor();
+        $(".editorwrapper").hide();
     }
 
+
+    // Funcion para ver/editar mensaje
+    $("#botonModoEnvio").toggle(
+        function () {
+            // Pasamos a modo edicion
+            $(".muestra").removeAttr("readonly");
+            $(this).val("Cancelar");
+            $("#mostrarEnviarMensaje").show();
+            $("#mostrarAsunto").val("");
+            $("#mostrarCuerpoMensaje").hide();
+            $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value("<p></p>");
+            $(".editorwrapper").show();
+        },  // MIRA AQUI ISMI, TIENES QUE USAR OTR O TEXTAREA Y CONTROLARLO
+        function () {
+            // Volvemos a modo lectura
+            $(".muestra").attr("readonly", true);
+            $(this).val("Responder");
+            $("#mostrarEnviarMensaje").hide();
+            $("#mostrarAsunto").val(mensajeguardado.asunto);
+            $("#mostrarCuerpoMensaje").show();
+            $(".editorwrapper").hide();
+        });
+
+    // Boton para responder desde la lectura del mensaje
+
+    $("#mostrarEnviarMensaje").click(function () {
+        var destinatario = mensajeguardado.FKRemitente;
+        var asunto = $("#mostrarAsunto").val();
+        var cuerpoMensaje = $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value();
+        var fecha = hoy();
+
+        $.ajax({
+            url: "Perfil/enviarMensaje",
+            type: "POST",
+            data: { Destinatario: destinatario, Asunto: asunto, CuerpoMensaje: cuerpoMensaje, Fecha: fecha },
+            success: function () {
+                alert("Mensaje enviado correctamente");
+            }
+        });
+    });
 
     // Inicializamos los combos para elegir los pageSize (mostrar o menos mensajes)
     var valoresPageSize = [
@@ -221,9 +340,6 @@
         var cuerpoMensaje = $("#campoCuerpoMensaje").data("kendoEditor").value();
         var fecha = hoy();
 
-        // Esta variable hay que cambiarla
-        var Remitente = "97779a08-76e5-4831-b0d0-53f10b60e879";
-
         $.ajax({
             url: "Perfil/enviarMensaje",
             type: "POST",
@@ -252,10 +368,10 @@
     }
 
     // Opcion de eliminar de las tablas
-   
 
-   $(".eliminarFilaNoLeidos").live("click",function () {
-        
+
+    $(".eliminarFilaNoLeidos").live("click", function () {
+
         if (confirm("¿Estas seguro de que desea eliminar el mensaje?")) {
 
             var fila = $("#tablaMensajesNoLeidos").data("kendoGrid").select();          // Cogemos la fila seleccionada
@@ -270,7 +386,7 @@
     });
 
     $(".eliminarFilaLeidos").live("click", function () {
-        
+
         if (confirm("¿Estas seguro de que desea eliminar el mensaje?")) {
             var fila = $("#tablaMensajesLeidos").data("kendoGrid").select();          // Cogemos la fila seleccionada
             var filaJson = $("#tablaMensajesLeidos").data("kendoGrid").dataItem(fila).toJSON();       // La pasamos a JSON

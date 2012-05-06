@@ -7,6 +7,7 @@ using TortolasProject.Controllers.Perfil;
 using TortolasProject.Models.Repositorios;
 using TortolasProject.Models;
 
+
 namespace TortolasProject.Controllers.Perfil
 {
     public class PerfilController : Controller
@@ -16,7 +17,8 @@ namespace TortolasProject.Controllers.Perfil
 
         mtbMalagaDataContext mtbDB = new mtbMalagaDataContext();
         MensajesRepositorio mensajesRepo = new MensajesRepositorio();
-        UsuariosRepositorio usuariosRepo = new UsuariosRepositorio();
+        UsuariosRepositorio usuariosRepo = new UsuariosRepositorio();        
+        
 
         public ActionResult Index()
         {
@@ -25,9 +27,11 @@ namespace TortolasProject.Controllers.Perfil
 
         // PESTAÑA : MENSAJES
 
+        [HttpPost]
         public ActionResult leerMensajes(FormCollection data)
         {
-            Guid usuario = Guid.Parse(data["idUsuario"]);
+
+            Guid usuario = HomeController.obtenerUserIdActual();
             String tipo = data["tipo"];
 
                 var mensaje = from m in mensajesRepo.listarMensajes(usuario,tipo)
@@ -38,14 +42,18 @@ namespace TortolasProject.Controllers.Perfil
                                   fecha = m.fecha.Value.ToShortDateString(),
                                   asunto = m.asunto,
                                   cuerpomensaje = m.cuerpomensaje,
-                                  FKDestinatario = mensajesRepo.nombreUsuario(m.FKDestinatario),
-                                  FKRemitente = mensajesRepo.nombreUsuario(m.FKDestinatario)
+                                  nombreDestinatario = mensajesRepo.nombreUsuario(m.FKDestinatario),
+                                  nombreRemitente = mensajesRepo.nombreUsuario(m.FKRemitente),
+                                  FKDestinatario = m.FKDestinatario,
+                                  FKRemitente = m.FKRemitente
+                                  
                               };
 
                 return Json(mensaje);
             
         }
 
+        [HttpPost]
         public ActionResult leerDestinatarios()
         {
           
@@ -68,6 +76,8 @@ namespace TortolasProject.Controllers.Perfil
 
         }
 
+        [HttpPost]
+        [ValidateInput(false)]
         public void enviarMensaje(FormCollection data)
         {
 
@@ -75,7 +85,7 @@ namespace TortolasProject.Controllers.Perfil
             String Asunto = data["Asunto"];
             String CuerpoMensaje = data["CuerpoMensaje"];
             DateTime Fecha = DateTime.Parse(data["Fecha"]);
-            Guid Remitente = Guid.Parse(data["Remitente"]);
+            Guid Remitente = HomeController.obtenerUserIdActual();
             Guid idMensaje = Guid.NewGuid();
             
             tbMensaje nuevo = new tbMensaje{
@@ -83,12 +93,14 @@ namespace TortolasProject.Controllers.Perfil
                                         asunto = Asunto,
                                         cuerpomensaje = CuerpoMensaje,
                                         fecha = Fecha,
+                                        estado = "noleido",
                                         FKRemitente = Remitente,
                                         idMensaje = idMensaje
             };
             mensajesRepo.enviarMensaje(nuevo);
         }
 
+        [HttpPost]
         public void marcarLeido(FormCollection data, String tipo)
         {
             Guid idMensaje = Guid.Parse(data["idMensaje"]);
@@ -97,6 +109,7 @@ namespace TortolasProject.Controllers.Perfil
             
         }
 
+        [HttpPost]
         public void eliminarMensaje(FormCollection data)
         {
             Guid idMensaje = Guid.Parse(data["idMensaje"]);
