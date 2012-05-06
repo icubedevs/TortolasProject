@@ -762,6 +762,7 @@
     <Content Include="Scripts\styles\Silver\sprite.png" />
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
+    <Content Include="Views\Administracion\Index.aspx" />
     <Content Include="Views\Facturas\editarFactura.aspx" />
     <Content Include="Views\Facturas\leerFactura.aspx" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
@@ -771,15 +772,14 @@
     <Content Include="Views\Empresas\NuevaEmpresa.ascx" />
     <Content Include="Views\Facturas\factura.aspx" />
     <Content Include="Views\Eventos\VistaCrearEvento.ascx" />
-    <Content Include="Views\Home\cabron.aspx" />
-    <Content Include="Views\Home\Hola.aspx" />
-    <Content Include="Views\Home\eventos.aspx" />
     <Content Include="Scripts\pngfix\supersleight-min.js" />
     <Content Include="Scripts\pngfix\x.gif" />
     <Content Include="Scripts\slide.js" />
     <Content Include="Views\Facturas\Index.aspx" />
     <Content Include="Views\Home\Captacion.aspx" />
     <Content Include="Views\Articulos\Index.aspx" />
+    <Content Include="Views\Monitores\Index.aspx" />
+    <Content Include="Views\Perfil\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -802,7 +802,6 @@
     <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
     <Content Include="Views\Account\LogOn.aspx" />
     <Content Include="Views\Account\Register.aspx" />
-    <Content Include="Views\Home\About.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
