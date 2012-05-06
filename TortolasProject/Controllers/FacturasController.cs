@@ -120,7 +120,9 @@ namespace TortolasProject.Controllers
             Guid juntaDirectiva = db.tbJuntaDirectiva.Where(jd => jd.FKSocio == db.tbSocio.Where(s => s.FKUsuario == db.tbUsuario.Where(u => u.FKUser == user).Single().idUsuario).Single().idSocio).Single().FKSocio;
             var lineasFacturaRaw = System.Web.Helpers.Json.Decode(data["lineasFactura"]);
             Decimal total = 0;
-
+            var relacion = System.Web.Helpers.Json.Decode(data["relacion"]);
+            string tipo = relacion.tipo;
+                                   
             // Creamos la nueva entidad
             tbFactura f = new tbFactura
             {
@@ -132,6 +134,27 @@ namespace TortolasProject.Controllers
                 FKJuntaDirectiva = juntaDirectiva
             };
 
+            // Metemos las relaciones con otros subsistemas
+            if (tipo.Equals("usuario"))
+            {
+                f.FKUsuario = Guid.Parse(relacion.idUsuario); 
+            }
+            else if (tipo.Equals("eventos"))
+            {
+                f.FKEventoOficial = Guid.Parse(relacion.idEventoOficial);
+            }
+            else if(tipo.Equals("cursillos"))
+            {
+                f.FKCursillo = Guid.Parse(relacion.idCursillo);
+            }
+            else if (tipo.Equals("pedidoGlobal"))
+            {
+                // METER FK PEDIDO GLOBAL EN FACTURA
+            }
+            else if (tipo.Equals("pedidoUsuario"))
+            {
+                // IDEM
+            }
             
             // Creamos la lista de lineas de factura
             List<tbLineaFactura> lineasFactura = new List<tbLineaFactura>();
@@ -261,11 +284,11 @@ namespace TortolasProject.Controllers
         }
 
         ///////////////////////////////////////////////////////////////////////////////
-        // Autocomplete                                                             
+        // Listas                                                            
         ///////////////////////////////////////////////////////////////////////////////
             // Usuarios
         [HttpPost]
-        public JsonResult usuariosAutocomplete()
+        public JsonResult usuariosListado()
         {
             var usuarios = from u in db.tbUsuario
                            select new
@@ -279,7 +302,7 @@ namespace TortolasProject.Controllers
 
             // Artículos
         [HttpPost]
-        public JsonResult articulosAutocomplete()
+        public JsonResult articulosListado()
         {
             var articulos = from a in db.tbArticulo
                            select new
@@ -293,16 +316,62 @@ namespace TortolasProject.Controllers
 
             // Eventos
         [HttpPost]
-        public JsonResult eventosAutocomplete()
+        public JsonResult eventosListado()
         {
             var eventos = from e in db.tbEvento
                             select new
                             {
                                 idEvento = e.idEvento,
-                                Titulo = e.Titulo
+                                Titulo = e.Titulo,
+                                Lugar = e.Lugar,
+                                FechaRealizacion = e.FechaRealizacion.ToShortDateString()
                             };
 
             return Json(eventos);
+        }
+        // Cursillos
+        [HttpPost]
+        public JsonResult cursillosListado()
+        {
+            var cursillos = from e in db.tbCursillo
+                          select new
+                          {
+                              idCursillo = e.idCursillo,
+                              Titulo = e.Titulo,
+                              Lugar = e.Lugar,
+                              FechaRealizacion = e.FechaRealizacion.ToShortDateString()
+                          };
+
+            return Json(cursillos);
+        }
+
+        // Pedidos globales
+        [HttpPost]
+        public JsonResult pedidosGlobalesListado()
+        {
+            var pedidos = from e in db.tbPedidoGlobal
+                            select new
+                            {
+                                idPedidoGlobal = e.idPedidoGlobal,
+                                Total = e.Total
+                            };
+
+            return Json(pedidos);
+        }
+
+        // Pedidos usuario
+        [HttpPost]
+        public JsonResult pedidosUsuarioListado()
+        {
+            var pedidos = from e in db.tbPedidoUsuario
+                          select new
+                          {
+                              idPedidoUsuario = e.idPedidoUsuario,
+                              idUsuario = e.FKUsuario,
+                              nickname = db.tbUsuario.Where(u => u.idUsuario == e.FKUsuario).Single()
+                          };
+
+            return Json(pedidos);
         }
     }
 }

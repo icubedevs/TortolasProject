@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+    var relacion = {};
     estadoNuevaFactura();
 
 
@@ -35,49 +35,227 @@ function estadoNuevaFactura() {
     }
     
     */
+    // Window Relaciones
 
+    $("#relacionesExistentesDiv").hide();
 
-    // Autocomplete usuarios
+    $("#relacionesButton").click(function(){
+        var w = $("#relacionesWindow").data("kendoWindow");
+        w.center();
+        w.open();
+    });
+
+    $("#relacionesWindow").kendoWindow({
+        width: "600px",
+        title: "Relaciones",
+        visible: false,
+        modal: true
+    });
+
+    // Pestañas
+    $("#relacionesTab").kendoTabStrip();
+
+    // Añadir relación button
+    $("#windowSelectButton").click(function () {
+        var tab = $("#relacionesTab").data("kendoTabStrip").select().index();
+        var grid = $("#relacionesTab .k-state-active .k-grid").data("kendoGrid");
+        var uid = $("#relacionesTab .k-state-active .k-state-selected").attr("data-uid");
+        var fila = grid.dataSource.getByUid(uid);
+
+        switch (tab) {
+            case 0: // Usuarios
+                relacion = {
+                    tipo: "usuario",
+                    idUsuario: fila.idUsuario
+                };
+                $("#relacionDiv").html(fila.nickname);
+                break;
+            case 1: // Eventos
+                relacion = {
+                    tipo: "evento",
+                    idEvento: fila.idEvento
+                };
+                $("#relacionDiv").html(fila.Titulo);
+                break;
+            case 2: // Cursillos
+                relacion = {
+                    tipo: "cursillo",
+                    idCursillo: fila.idCursillo
+                };
+                $("#relacionDiv").html(fila.Titulo);
+                break;
+            case 3: // Pedidos globales
+                relacion = {
+                    tipo: "pedidoGlobal",
+                    idPedidoGlobal: fila.idPedidoGlobal
+                };
+                $("#relacionDiv").html(fila.idPedido);
+
+                break;
+            case 4: // Pedidos socio
+                relacion = {
+                    tipo: "pedidoUsuario",
+                    idPedidoUsuario: fila.idPedidoUsuario
+                };
+                $("#relacionDiv").html("<p>" + fila.idPedidoUsuario + "</p><p>" + fila.nickname);
+                break;
+        }
+        alert(kendo.stringify(relacion));
+        $("#relacionesWindow").data("kendoWindow").close();
+        $("#relacionesButton").hide();
+        $("#relacionesExistentesDiv").show();
+
+    });
+
+    $("#quitarRelacionButton").click(function () {
+        $("#relacionesExistentesDiv").hide();
+        $("#relacionesButton").show();
+    });
+
+    // GRID usuarios
     var dsUsuarios = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/usuariosAutocomplete",
+                url: "../Facturas/usuariosListado",
                 dataType: "json",
                 type: "POST"
             }
         }
     });
 
-    $("#usuariosFacturaAutocomplete").kendoComboBox({
-        suggest: true,
-        dataTextField: "nickname",
-        dataValueField: "idUsuario",
-        dataSource: dsUsuarios
+    $("#usuariosFacturaGrid").kendoGrid({
+        dataSource: dsUsuarios,
+        columns: [
+                {
+                    field: "nickname",
+                    title: "Usuario"
+                }
+            ],
+        selectable: true,
+        filterable: true
     });
 
-    // Autocomplete eventos
+    // GRID eventos
     var dsEventos = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/eventosAutocomplete",
+                url: "../Facturas/eventosListado",
                 dataType: "json",
                 type: "POST"
             }
         }
     });
 
-    $("#eventosFacturaAutocomplete").kendoComboBox({
-        suggest: true,
-        dataTextField: "Titulo",
-        dataValueField: "idEvento",
-        dataSource: dsEventos
+    $("#eventosFacturaGrid").kendoGrid({
+        dataSource: dsEventos,
+        columns: [
+                {
+                    field: "Titulo",
+                    title: "Título"
+                },
+                {
+                    field: "Lugar",
+                    title: "Lugar"
+                },
+                {
+                    field: "FechaRealizacion",
+                    title: "Fecha de realización"
+                }                
+            ],
+        selectable: true,
+        filterable: true
     });
 
-    // Autocomplete artículos
+    // GRID cursillos
+    var dsCursillos = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/cursillosListado",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+    });
+
+    $("#cursillosFacturaGrid").kendoGrid({
+        dataSource: dsCursillos,
+        columns: [
+                {
+                    field: "Titulo",
+                    title: "Título"
+                },
+                {
+                    field: "Lugar",
+                    title: "Lugar"
+                },
+                {
+                    field: "FechaRealizacion",
+                    title: "Fecha de realización"
+                }
+            ],
+        selectable: true,
+        filterable: true
+    });
+
+    // GRID pedidos globales
+    var dsPedidosGlobales = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/pedidosGlobalesListado",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+
+    });
+    $("#pedidosGlobalesGrid").kendoGrid({
+        dataSource: dsPedidosGlobales,
+        columns: [
+                {
+                    field: "idPedidoGlobal",
+                    title: "idPedidoGlobal"
+                },
+                {
+                    field: "Total",
+                    title: "Total"
+                }
+            ],
+        selectable: true,
+        filterable: true
+    });
+
+    // GRID pedidos usuario
+    var dsPedidosUsuario = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../Facturas/pedidosUsuarioListado",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+
+    });
+    $("#pedidosUsuarioGrid").kendoGrid({
+        dataSource: dsPedidosUsuario,
+        columns: [
+                {
+                    field: "idPedidoUsuario",
+                    title: "idPedidoUsuario"
+                },
+                {
+                    field: "nickname",
+                    title: "Usuario"
+                }
+            ],
+        selectable: true,
+        filterable: true
+    });
+
+    // GRID artículos
     var dsArticulos = new kendo.data.DataSource({
         transport: {
             read: {
-                url: "../Facturas/articulosAutocomplete",
+                url: "../Facturas/articulosListado",
                 dataType: "json",
                 type: "POST"
             }
@@ -91,7 +269,8 @@ function estadoNuevaFactura() {
         dataSource: dsEventos
     });
 
-
+    
+    /* ####################### TABLA LÍNEAS FACTURA ############################# */
     // DataSource KENDO
     var dataSource = new kendo.data.DataSource({
         schema:
@@ -175,6 +354,9 @@ function estadoNuevaFactura() {
         */
         //alert(total);
         //var lineasFactura = obtenerLineas();
+
+
+        // Obtener líneas de factura
         var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
         var lineasFactura = new Array();
         for (var i = 0; i < lineasFacturaRaw.length; i++) {
@@ -188,7 +370,8 @@ function estadoNuevaFactura() {
         var datos = {
             estado: estado,
             concepto: concepto,
-            lineasFactura: kendo.stringify(lineasFactura)
+            lineasFactura: kendo.stringify(lineasFactura),
+            relacion: kendo.stringify(relacion)
         };
         $.post(url, datos, function (data) {
             window.location.replace("../Facturas");
