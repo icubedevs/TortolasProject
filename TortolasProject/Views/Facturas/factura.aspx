@@ -15,6 +15,7 @@
 
 <asp:Content ID="facturaMainContent" ContentPlaceHolderID="MainContent" runat="server">
 
+<input type="hidden" id='estadoPage' value='nueva' />
 <div id='facturaForm'>
     <div id='facturaHeader'>
         <div id='relacionesFacturaContainer'>

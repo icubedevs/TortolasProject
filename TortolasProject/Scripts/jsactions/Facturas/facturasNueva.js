@@ -1,6 +1,9 @@
 ﻿$(document).ready(function () {
+    var estado = $("#estadoPage").val();
     var relacion = {};
-    estadoNuevaFactura();
+    if (estado.equals("nueva")) {
+        estadoNuevaFactura();
+    }
 
 
 });
