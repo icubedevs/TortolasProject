@@ -68,6 +68,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\AsociacionesController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
@@ -214,11 +215,13 @@
     <Content Include="Content\images\monitores\4.jpg" />
     <Content Include="Content\images\monitores\5.jpg" />
     <Content Include="Content\images\monitores\chucknorris.jpg" />
+    <Content Include="Content\images\patrocinador.jpg" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\newCascadeStyleSheet.css" />
     <Content Include="Content\Perfil\Perfil.css" />
+    <Content Include="Content\images\proveedores.jpg" />
     <Content Include="Content\slide.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -639,11 +642,12 @@
     <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
+    <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
-    <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
+    <Content Include="Scripts\jsactions\Empresas\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
     <Content Include="Scripts\jsactions\Eventos\eventos.js" />
-    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
+    <Content Include="Scripts\jsactions\Empresas\Empresas\NuevaEmpresa.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />

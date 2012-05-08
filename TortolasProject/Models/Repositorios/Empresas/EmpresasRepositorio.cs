@@ -9,6 +9,8 @@ namespace TortolasProject.Models.Repositorios
     {
         mtbMalagaDataContext mtbMalagaDB = new mtbMalagaDataContext();
 
+        // EMPRESAS //
+
         public IList<tbEmpresa> ListarEmpresas()
         {
             return mtbMalagaDB.tbEmpresa.ToList();
@@ -18,7 +20,7 @@ namespace TortolasProject.Models.Repositorios
         {
             return mtbMalagaDB.tbEmpresa.Where(empresa => empresa.idEmpresa == idemp).Single();
         }
-        
+
         public void updateEmp(tbEmpresa emp)
         {
             tbEmpresa original = buscaremp(emp.idEmpresa);
@@ -35,7 +37,7 @@ namespace TortolasProject.Models.Repositorios
         public void createEmp(tbEmpresa emp)
         {
             mtbMalagaDB.tbEmpresa.InsertOnSubmit(emp);
-            salvar();        
+            salvar();
         }
         public void salvar()
         {
@@ -45,6 +47,28 @@ namespace TortolasProject.Models.Repositorios
         {
             mtbMalagaDB.tbEmpresa.DeleteOnSubmit(buscaremp(id));
             salvar();
+        }
+
+        // ASOCIACIONES //
+
+        public IList<tbAsociacion> ListarAsociaciones()
+        {
+            return mtbMalagaDB.tbAsociacion.ToList();
+        }
+
+        public void updateAsoc(tbAsociacion asoc)
+        {
+            tbAsociacion original = buscarasoc(asoc.FKCodigoEmpresa);
+
+            original.Direccion = asoc.Direccion;
+            original.Tematica = asoc.Tematica;
+
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        public tbAsociacion buscarasoc(Guid idemp)
+        {
+            return mtbMalagaDB.tbAsociacion.Where(asociacion => asociacion.FKCodigoEmpresa == idemp).Single();
         }
 
     }

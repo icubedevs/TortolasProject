@@ -6,9 +6,10 @@
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexScript" ContentPlaceHolderID="ScriptContent" runat="server">
-    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/EmpresasNav.js") %>" type="text/javascript"></script>
-    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/EmpresasIndex.js") %>" type="text/javascript"></script>
-    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/NuevaEmpresa.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Empresas/EmpresasNav.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Empresas/EmpresasIndex.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Empresas/NuevaEmpresa.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Asociaciones/Asociaciones.js") %>" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexTitle" ContentPlaceHolderID="TitleContent" runat="server">
@@ -36,13 +37,41 @@
             <div id="EmpresasGrid">
             
             </div>
-            
+            <br />
+            <div id="EmpresasHerramientasContent">
+                <input type="button" value="Nueva Empresa" id="BotonNuevaEmpresa" class="k-button" />
+            </div>
         </div>
         <div class="pestana" id="asociaciones">
             <img src="../../Content/images/asociaciones.jpg"  /> <!--Fuente: Calibri, size: 24-->
+            <div id="AsociacionesGrid">
+            
+            </div>
+            <br />
+            <div id="AsociacionesHerramientasContent">
+                <input type="button" value="Nueva Asociación" id="BotonNuevaAsociacion" class="k-button" />
+            </div>
         </div>
-        <div class="pestana" id="proveedores"></div> 
-        <div class="pestana" id="patrocinadores"></div> 
+        <div class="pestana" id="proveedores">
+            <img src="../../Content/images/proveedores.jpg"  /> <!--Fuente: Calibri, size: 24-->
+            <div id="ProveedoresGrid">
+            
+            </div>
+            <br />
+            <div id="ProveedorHerramientasContent">
+                <input type="button" value="Nueva Proveedor" id="BotonNuevoProveedor" class="k-button" />
+            </div>
+        </div> 
+        <div class="pestana" id="patrocinadores">
+            <img src="../../Content/images/patrocinador.jpg"  /> <!--Fuente: Calibri, size: 24-->
+            <div id="PatrocinadoresGrid">
+            
+            </div>
+            <br />
+            <div id="PatrocinadorHerramientasContent">
+                <input type="button" value="Nueva Patrocinador" id="BotonNuevoPatrocinador" class="k-button" />
+            </div>
+        </div> 
           
     </div> 
     <br />
@@ -60,10 +89,18 @@
             <input type="button" value="Cancelar" id="BotonCancelarVentanaEditar" class="k-button" />           
         </center>
     </div>
-    <div id="EmpresasFilter">Filtro ></div> 
-    <div id="EmpresasHerramientasContent">
-        <input type="button" value="Nueva Empresa" id="BotonNuevaEmpresa" class="k-button" />
+
+    <div id="VentanaEditarAsociacion">
+        <label for="nombreempresaasociacion">Nombre: </label><input type="text" id="nombreempresaasociacion" class="k-input CuadroTexto" /><br />
+        <label for="direccion">Dirección: </label><input type="text" id="direccion" class="k-input CuadroTexto" /><br />
+        <label for="tematica">Temática: </label><input type="text" id="tematica" class="k-input CuadroTexto" /><br />
+        <center>
+            <input type="button" value="Aceptar" id="BotonAceptarVentanaEditarAsociacion" class="k-button VisibilidadBotonAceptarEditar" />
+            <input type="button" value="Confirmar" id="BotonAceptarVentanaEliminarAsociacion" class="k-button VisibilidadBotonAceptarEliminar" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditarAsociacion" class="k-button" />           
+        </center>
     </div>
+    
     <div id="NuevaEmpresaFormulario" >
     
     </div>

@@ -2,6 +2,7 @@
 $(document).ready(function () {
 
     $(".VisibilidadBotonAceptarEliminar").hide(); //Oculta el boton de aceptar para la ventana de editaje/eliminacion
+
     var idEmpresa = null;
     var datasource = new kendo.data.DataSource
     ({
@@ -227,13 +228,13 @@ $(document).ready(function () {
             type: "POST",
             data: datos,
             success: function () {
-                alert("Estoy dentro del success!");
+                //alert("Estoy dentro del success!");
                 $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
                 $(".VisibilidadBotonAceptarEditar").show(); //Oculta el boton de aceptar de la ventana editar
                 $(".VisibilidadBotonAceptarEliminar").hide(); //Muestra el boton correspondiente para aceptar en la ventana eliminar
                 datasource.read();
                 weditar.close();
-                alert("Ya he terminado!?");
+                //alert("Ya he terminado!?");
             },
             async: false
         });
