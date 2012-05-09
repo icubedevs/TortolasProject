@@ -170,7 +170,7 @@
 
     //Boton Aceptar//
 
-    $("#BotonAceptarVentanaEliminar").live("click", function () {
+    $("#BotonAceptarVentanaEliminarAsociacion").live("click", function () {
 
         var datos = {};
         //Coger datos

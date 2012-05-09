@@ -60,6 +60,7 @@ namespace TortolasProject.Controllers.Empresas
         {
             Guid idAsociacion = Guid.Parse(data["idasociacion"]);
 
+            AsociacionesRepo.deleteAsoc(idAsociacion);
             AsociacionesRepo.deleteEmp(idAsociacion);
         }
 

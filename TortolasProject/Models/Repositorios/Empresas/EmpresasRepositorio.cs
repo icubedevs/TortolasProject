@@ -71,5 +71,10 @@ namespace TortolasProject.Models.Repositorios
             return mtbMalagaDB.tbAsociacion.Where(asociacion => asociacion.FKCodigoEmpresa == idemp).Single();
         }
 
+        public void deleteAsoc(Guid id)
+        {
+            mtbMalagaDB.tbAsociacion.DeleteOnSubmit(buscarasoc(id));
+            salvar();
+        }
     }
 }
