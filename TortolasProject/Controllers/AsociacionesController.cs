@@ -31,7 +31,8 @@ namespace TortolasProject.Controllers.Empresas
                                idAsociacion = ob.FKCodigoEmpresa,
                                Direccion = ob.Direccion,
                                Tematica = ob.Tematica,
-                               NombreAsociacion = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).Nombre
+                               NombreAsociacion = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).Nombre,
+                               Telefono = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).TelefonodeContacto
                                
                            };
             return Json(asociaciones);
@@ -62,6 +63,60 @@ namespace TortolasProject.Controllers.Empresas
 
             AsociacionesRepo.deleteAsoc(idAsociacion);
             AsociacionesRepo.deleteEmp(idAsociacion);
+        }
+
+        public void CreateAsociacion(FormCollection data)
+        {
+            bool existe = true;
+
+            Guid idEmpresa = Guid.NewGuid();
+            String Nombre = data["nombreempresa"];
+            String tematica = data["tematica"];
+            int TelefonodeContacto = int.Parse(data["telefono"]);
+            int TelefonodeContacto2 = int.Parse(data["telefono2"]);
+            String direccion = data["direccion"];
+            String CIF = data["cif"];
+
+            tbEmpresa Empresa = new tbEmpresa
+            {
+                idEmpresa = idEmpresa,
+                Nombre = Nombre,
+                Localidad = " ",
+                DireccionWeb = " ",
+                TelefonodeContacto = TelefonodeContacto,
+                Email = " ",
+                CIF = CIF
+            };
+            tbAsociacion Asociacion = new tbAsociacion 
+            { 
+                FKCodigoEmpresa = idEmpresa,
+                Tematica = tematica,
+                Direccion = direccion,
+            };
+            try
+            {
+                if (AsociacionesRepo.buscarempCIF(CIF).CIF.Equals(CIF)) //Si entra dentro del bucle es que EXISTE una empresa asociada
+                {
+                    Asociacion.FKCodigoEmpresa = AsociacionesRepo.buscarempCIF(CIF).idEmpresa;
+                }
+                /*else
+                {
+                    AsociacionesRepo.createEmp(Empresa);
+
+                }*/
+            }
+            catch
+            {
+                existe = false;
+            }
+
+            if (!existe)
+            {
+                AsociacionesRepo.createEmp(Empresa);
+            }
+
+            AsociacionesRepo.createAsoc(Asociacion);
+            
         }
 
     }

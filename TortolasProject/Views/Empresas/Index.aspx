@@ -91,17 +91,42 @@
     </div>
 
     <div id="VentanaEditarAsociacion">
+        <b><h5>Datos Asociacion</h5></b>
+        <br />
         <label for="nombreempresaasociacion">Nombre: </label><input type="text" id="nombreempresaasociacion" class="k-input CuadroTexto" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifremoto" class="k-input CuadroTexto" /> <input type="button" value="Vincular Empresa" id="BotonVincularEmpresaDesdeAsociacion" class="k-button VisibilidadBotonVincularEmpresa" /><br />
         <label for="direccion">Dirección: </label><input type="text" id="direccion" class="k-input CuadroTexto" /><br />
         <label for="tematica">Temática: </label><input type="text" id="tematica" class="k-input CuadroTexto" /><br />
+        <label for="telefono" class="VisibilidadTelefonodeContacto">Teléfono de Contacto: </label><input type="text" id="telefonoremoto" class="k-input CuadroTexto VisibilidadTelefonodeContacto" /><br />
+        <hr />
+
+        <div id="DatosNuevaEmpresaRemota" class="VisibilidadDatosNuevaEmpresaRemota">
+            <b><h5>Datos Empresa Asociada</h5></b>
+            <br />
+            <label for="localidad">Localidad: </label><input type="text" id="localidadremota" class="k-input CuadroTexto" /><br />
+            <label for="direccionweb">Dirección Web: </label><input type="text" id="dirwebremota" class="k-input CuadroTexto" /><br />
+            <label for="telefonodecontacto">Teléfono de Contacto: </label><input type="text" id="telefonoremoto2" class="k-input CuadroTexto" /><br />
+            <label for="email">E-Mail: </label><input type="text" id="emailremoto" class="k-input CuadroTexto" /><br />
+        </div>
+
         <center>
             <input type="button" value="Aceptar" id="BotonAceptarVentanaEditarAsociacion" class="k-button VisibilidadBotonAceptarEditar" />
             <input type="button" value="Confirmar" id="BotonAceptarVentanaEliminarAsociacion" class="k-button VisibilidadBotonAceptarEliminar" />
+            <input type="button" value="Crear" id="BotonAceptarVentanaCrearAsociacion" class="k-button VisibilidadBotonAceptarCrear" />
             <input type="button" value="Cancelar" id="BotonCancelarVentanaEditarAsociacion" class="k-button" />           
         </center>
+
+        
     </div>
     
     <div id="NuevaEmpresaFormulario" >
     
     </div>
+
+    <div id="VentanaEmpresasRemota">
+        <div id="EmpresasGridRemoto" class="VisibilidadGridEmpresasRemota">
+    
+        </div>
+    </div>
+    
 </asp:Content>

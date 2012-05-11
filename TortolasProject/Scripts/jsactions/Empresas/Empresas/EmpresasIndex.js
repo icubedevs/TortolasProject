@@ -1,7 +1,45 @@
 ﻿
+
 $(document).ready(function () {
 
+    $("#VentanaEmpresasRemota") //Creo la ventana como variable global para que pueda ser usado por todos
+        .kendoWindow
+        ({
+            title: "Seleccione una Empresa",
+            modal: false,
+            visible: false,
+            resizable: false,
+            width: 600,
+            height: 400
+        }).data("kendoWindow");
+
+    $('#EmpresasGridRemoto .k-grid-content tr').live('dblclick', function () {
+
+        var fila = $("#EmpresasGridRemoto").find("tbody tr.k-state-selected");
+
+        var filajson = $("#EmpresasGridRemoto").data("kendoGrid").dataItem(fila).toJSON();
+        idEmpresa = datasource.getByUid(fila.attr("data-uid")).idEmpresa;
+
+        $("#localidadremota").val(filajson.Localidad);
+        $("#dirwebremota").val(filajson.DireccionWeb);
+        $("#telefonoremoto2").val(filajson.TelefonodeContacto);
+        $("#emailremoto").val(filajson.Email);
+        $("#nombreempresaasociacion").val(filajson.Nombre);
+        $("#cifremoto").val(filajson.CIF);
+
+
+        $(".VisibilidadDatosNuevaEmpresaRemota").show(); //Muestro los datos de la empresa asociada
+        $(".VisibilidadTelefonodeContacto").hide(); //Oculto el telefono
+
+        $("#VentanaEmpresasRemota").data("kendoWindow").close();
+        $(".VisibilidadGridEmpresasRemota").hide(); //Lo oculto
+
+    });
+
+
+    $(".VisibilidadGridEmpresasRemota").hide(); //Inicio oculta la ventana para vincular empresas
     $(".VisibilidadBotonAceptarEliminar").hide(); //Oculta el boton de aceptar para la ventana de editaje/eliminacion
+    $(".VisibilidadDatosNuevaEmpresaRemota").hide(); //Oculta el boton de aceptar de la ventana editar
 
     var idEmpresa = null;
     var datasource = new kendo.data.DataSource
@@ -22,9 +60,9 @@ $(document).ready(function () {
                  id: "idEmpresa"
              }
         }
-     });
+    });
 
-     $("#EmpresasNavegador").kendoTabStrip(); //Creo el kendo para pestañas
+    $("#EmpresasNavegador").kendoTabStrip(); //Creo el kendo para pestañas
 
     $("#EmpresasGrid").kendoGrid //Creo el kendo Grid
     ({
@@ -83,6 +121,55 @@ $(document).ready(function () {
 
     });
 
+    $("#EmpresasGridRemoto").kendoGrid //Creo el kendo Grid
+    ({
+        //height: 400,
+        dataSource: datasource,
+        selectable: true,
+        pageable: true,
+        sortable: true,
+        filterable: true,
+        columns: [
+            {
+                field: "Nombre",
+                title: "Nombre",
+                filterable: {
+                    extra: false, //do not show extra filters
+                    operators: { // redefine the string operators
+                        string: {
+                            eq: "Es igual a...",
+                            neq: "No es igual a...",
+                            startswith: "Empieza por...",
+                            contains: "Contiene"
+                        }
+                    }
+                }
+
+            },
+            {
+                field: "CIF",
+                title: "CIF"
+            },
+            {
+                field: "Localidad",
+                title: "localidad"
+            },
+            {
+                field: "DireccionWeb",
+                title: "Direccion Web"
+            },
+            {
+                field: "TelefonodeContacto",
+                title: "Telefono de Contacto"
+            },
+            {
+                field: "Email",
+                title: "E-Mail"
+            }
+        ]
+
+    });
+
     var weditar = $("#VentanaEditar")
         .kendoWindow
         ({
@@ -95,6 +182,8 @@ $(document).ready(function () {
         }).data("kendoWindow");
 
 
+
+
     // FUNCIONES //
 
     //Funciones: Botones del GRID//
@@ -105,6 +194,7 @@ $(document).ready(function () {
     $(".botonEditarFila").live("click", function () {
 
         //alert("Editar!");
+        $(".VisibilidadBotonAceptarEditar").show();
 
         var fila = $("#EmpresasGrid").find("tbody tr.k-state-selected");
 
@@ -244,11 +334,8 @@ $(document).ready(function () {
     //Funciones: Enlaces Navegador
 
     $("#EmpresasNav").live("click", function () {
-        $.post('Empresas/Index', function () {
-            $("#EmpresasHerramientasContent").show();
-            $("#EmpresasGrid").show();
-            $("#NuevaEmpresaFormulario2").hide();
-        });
+        $("#NuevaEmpresaFormulario2").hide();
+        datasource.read();
     });
 
 

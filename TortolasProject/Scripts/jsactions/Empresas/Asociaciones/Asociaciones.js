@@ -1,4 +1,8 @@
 ﻿$(document).ready(function () {
+
+    $(".VisibilidadBotonAceptarCrear").hide(); //Oculta el boton de aceptar de la ventana editar
+    $(".VisibilidadBotonVincularEmpresa").hide();
+
     var idAsociacion = null;
     var datasourceasoc = new kendo.data.DataSource
     ({
@@ -19,7 +23,7 @@
              }
         }
     });
-    
+
     $("#AsociacionesGrid").kendoGrid //Creo el kendo Grid
     ({
         //height: 400,
@@ -54,6 +58,10 @@
                 title: "Tematica"
             },
             {
+                field: "Telefono",
+                title: "Teléfono"
+            },
+            {
                 title: "Editar",
                 command: { text: "Editar", className: "botonEditarFilaAsociacion" }
             },
@@ -63,18 +71,14 @@
             }
         ]
 
-        });
+    });
 
-        $("#AsociacionesNav").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
-            $.post('Asociaciones/LeerTodos', function () { 
-                
-            });
-        });
 
-        var weditarAsociacion = $("#VentanaEditarAsociacion")
+
+    var weditarAsociacion = $("#VentanaEditarAsociacion")
         .kendoWindow
         ({
-            title: "Editar",
+            title: "Asociación",
             modal: true,
             visible: false,
             resizable: false,
@@ -82,77 +86,80 @@
             height: 400
         }).data("kendoWindow");
 
-       
-        // FUNCIONES //
 
-        //Funciones: Botones del GRID//
+    // FUNCIONES //
 
-        //Boton Editar//
+    //Funciones: Botones del GRID//
 
-        $(".botonEditarFilaAsociacion").live("click", function () {
+    //Boton Editar//
 
-            //alert("Editar!");
+    $(".botonEditarFilaAsociacion").live("click", function () {
 
-            var fila = $("#AsociacionesGrid").find("tbody tr.k-state-selected");
+        //alert("Editar!");
 
-            var filajson = $("#AsociacionesGrid").data("kendoGrid").dataItem(fila).toJSON();
-            idAsociacion = datasourceasoc.getByUid(fila.attr("data-uid")).idAsociacion;
+        var fila = $("#AsociacionesGrid").find("tbody tr.k-state-selected");
 
-            $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
-            $("#direccion").val(filajson.Direccion);
-            $("#tematica").val(filajson.Tematica);
+        var filajson = $("#AsociacionesGrid").data("kendoGrid").dataItem(fila).toJSON();
+        idAsociacion = datasourceasoc.getByUid(fila.attr("data-uid")).idAsociacion;
 
-            weditarAsociacion.center();
+        $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
+        $("#direccion").val(filajson.Direccion);
+        $("#tematica").val(filajson.Tematica);
+        $("#telefono").val(filajson.Telefono);
 
-            weditarAsociacion.open();
-        });
+        weditarAsociacion.center();
 
-        //Boton Eliminar//
+        weditarAsociacion.open();
+    });
 
-        $(".botonEliminarFilaAsociacion").live("click", function () {
-            //alert("Eliminar!");
+    //Boton Eliminar//
 
-            $(".CuadroTexto").prop('disabled', true); //Bloquea editar los campos
-            $(".VisibilidadBotonAceptarEditar").hide(); //Oculta el boton de aceptar de la ventana editar
-            $(".VisibilidadBotonAceptarEliminar").show(); //Muestra el boton correspondiente para aceptar en la ventana eliminar
-            
-            var fila = $("#AsociacionesGrid").find("tbody tr.k-state-selected");
+    $(".botonEliminarFilaAsociacion").live("click", function () {
+        //alert("Eliminar!");
 
-            var filajson = $("#AsociacionesGrid").data("kendoGrid").dataItem(fila).toJSON();
-            idAsociacion = datasourceasoc.getByUid(fila.attr("data-uid")).idAsociacion;
-            
-            $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
-            $("#direccion").val(filajson.Direccion);
-            $("#tematica").val(filajson.Tematica);
+        $(".CuadroTexto").prop('disabled', true); //Bloquea editar los campos
+        $(".VisibilidadBotonAceptarEditar").hide(); //Oculta el boton de aceptar de la ventana editar
+        $(".VisibilidadBotonAceptarEliminar").show(); //Muestra el boton correspondiente para aceptar en la ventana eliminar
 
-            
-            weditarAsociacion.center();
+        var fila = $("#AsociacionesGrid").find("tbody tr.k-state-selected");
 
-            weditarAsociacion.open();
-        });
+        var filajson = $("#AsociacionesGrid").data("kendoGrid").dataItem(fila).toJSON();
+        idAsociacion = datasourceasoc.getByUid(fila.attr("data-uid")).idAsociacion;
 
-        // Funciones: Botones Ventana Editaje //
+        $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
+        $("#direccion").val(filajson.Direccion);
+        $("#tematica").val(filajson.Tematica);
 
-        //Boton Cancelar//
-        $("#BotonCancelarVentanaEditarAsociacion").live("click", function () {
 
-            $(".VisibilidadBotonAceptarEditar").show(); //Muestra el boton de aceptar de la ventana editar
-            $(".VisibilidadBotonAceptarEliminar").hide(); //Oculta el boton correspondiente para aceptar en la ventana eliminar
+        weditarAsociacion.center();
 
-            weditarAsociacion.close();
-        });
+        weditarAsociacion.open();
+    });
 
-        //Boton Aceptar//
+    // Funciones: Botones Ventana Editaje //
 
-        $("#BotonAceptarVentanaEditarAsociacion").live("click", function () {
-            var datos = {};
-            //Coger datos
-            datos["nombreasociacion"] = $("#nombreempresaasociacion").val();
-            datos["direccionupdate"] = $("#direccion").val();
-            datos["tematicaupdate"] = $("#tematica").val();
-            datos["idempresa"] = idAsociacion;
+    //Boton Cancelar//
+    $("#BotonCancelarVentanaEditarAsociacion").live("click", function () {
 
-            $.ajax(
+        $(".VisibilidadBotonAceptarEditar").show(); //Muestra el boton de aceptar de la ventana editar
+        $(".VisibilidadBotonAceptarEliminar").hide(); //Oculta el boton correspondiente para aceptar en la ventana eliminar
+        $(".VisibilidadBotonAceptarCrear").hide();
+
+        $(".VisibilidadDatosNuevaEmpresaRemota").hide(); //Muestro los datos de la empresa asociada
+        weditarAsociacion.close();
+    });
+
+    //Boton Aceptar//
+
+    $("#BotonAceptarVentanaEditarAsociacion").live("click", function () {
+        var datos = {};
+        //Coger datos
+        datos["nombreasociacion"] = $("#nombreempresaasociacion").val();
+        datos["direccionupdate"] = $("#direccion").val();
+        datos["tematicaupdate"] = $("#tematica").val();
+        datos["idempresa"] = idAsociacion;
+
+        $.ajax(
             {
                 url: "Asociaciones/UpdateAsociacion",
                 type: "POST",
@@ -161,8 +168,8 @@
                     $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
                     datasourceasoc.read();
                     weditarAsociacion.close();
-                 },
-            async: false
+                },
+                async: false
             });
     });
 
@@ -174,7 +181,7 @@
 
         var datos = {};
         //Coger datos
-        
+
         datos["idasociacion"] = idAsociacion;
 
         $.ajax(
@@ -183,16 +190,96 @@
             type: "POST",
             data: datos,
             success: function () {
-                alert("Estoy dentro del success!");
+                //alert("Estoy dentro del success!");
                 $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
                 $(".VisibilidadBotonAceptarEditar").show(); //Oculta el boton de aceptar de la ventana editar
                 $(".VisibilidadBotonAceptarEliminar").hide(); //Muestra el boton correspondiente para aceptar en la ventana eliminar
                 datasourceasoc.read();
                 weditarAsociacion.close();
-                alert("Ya he terminado!?");
+                //alert("Ya he terminado!?");
             },
             async: false
         });
 
+    });
+
+    //Boton Nueva Asociacion//
+
+    $("#BotonNuevaAsociacion").click(function () {
+        //alert("Crear!");
+        $(".VisibilidadBotonAceptarCrear").show();
+        $(".VisibilidadBotonAceptarEditar").hide();
+        $(".VisibilidadBotonVincularEmpresa").show();
+
+        weditarAsociacion.center();
+
+        weditarAsociacion.open();
+
+    });
+
+    // Ventana Nueva Asociacion //
+
+    //Boton Vincular Empresa//
+
+    $("#BotonVincularEmpresaDesdeAsociacion").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
+
+        $("#VentanaEmpresasRemota").data("kendoWindow").center();
+        $(".VisibilidadGridEmpresasRemota").show(); //Lo muestro
+        $("#VentanaEmpresasRemota").data("kendoWindow").open();
+    });
+
+    //Boton Crear Asociacion//
+
+    $("#BotonAceptarVentanaCrearAsociacion").click(function () {
+
+        var datos = {};
+
+        //Coger datos
+        datos["nombreempresa"] = $("#nombreempresaasociacion").val();
+        datos["cif"] = $("#cifremoto").val();
+        datos["direccion"] = $("#direccion").val();
+        datos["tematica"] = $("#tematica").val();
+        if ($("#telefonoremoto").val() == "") {
+            datos["telefono"] = 0
+        }
+        else {
+            datos["telefono"] = $("#telefonoremoto").val(); 
+        }
+        if ($("#telefonoremoto2").val() == "") {
+            datos["telefono2"] = 0 
+        }
+        else {
+            datos["telefono2"] = $("#telefonoremoto2").val(); 
+        }
+
+
+        $.ajax(
+        {
+            url: "Asociaciones/CreateAsociacion",
+            type: "POST",
+            data: datos,
+            success: function () {
+                //alert("Estoy dentro del success!");
+                //alert($("#EmpresasGrid"));
+                var temp = $("#AsociacionesGrid").data("kendoGrid").dataSource;
+                //alert("soy el temp:" + temp);
+                temp.read();
+                
+                //alert("Ya he cogido e datasource!");
+                $("#NuevaEmpresaFormulario2").hide();
+
+
+                weditarAsociacion.close();
+
+                //alert("Ya he terminado!");
+            },
+            async: false
+        });
+
+    });
+
+
+    $("#AsociacionesNav").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
+        datasourceasoc.read();
     });
 });

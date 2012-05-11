@@ -20,6 +20,10 @@ namespace TortolasProject.Models.Repositorios
         {
             return mtbMalagaDB.tbEmpresa.Where(empresa => empresa.idEmpresa == idemp).Single();
         }
+        public tbEmpresa buscarempCIF(string cif)
+        {
+            return mtbMalagaDB.tbEmpresa.Where(empresa => empresa.CIF.Equals(cif)).Single();
+        }
 
         public void updateEmp(tbEmpresa emp)
         {
@@ -32,7 +36,7 @@ namespace TortolasProject.Models.Repositorios
             original.TelefonodeContacto = emp.TelefonodeContacto;
             original.Email = emp.Email;
 
-            mtbMalagaDB.SubmitChanges();
+            salvar();
         }
         public void createEmp(tbEmpresa emp)
         {
@@ -45,6 +49,10 @@ namespace TortolasProject.Models.Repositorios
         }
         public void deleteEmp(Guid id)
         {
+            if (mtbMalagaDB.tbAsociacion.Any(a => a.FKCodigoEmpresa == id))
+            {
+                deleteAsoc(id);
+            }
             mtbMalagaDB.tbEmpresa.DeleteOnSubmit(buscaremp(id));
             salvar();
         }
@@ -74,6 +82,12 @@ namespace TortolasProject.Models.Repositorios
         public void deleteAsoc(Guid id)
         {
             mtbMalagaDB.tbAsociacion.DeleteOnSubmit(buscarasoc(id));
+            salvar();
+        }
+
+        public void createAsoc(tbAsociacion asoc)
+        {
+            mtbMalagaDB.tbAsociacion.InsertOnSubmit(asoc);
             salvar();
         }
     }
