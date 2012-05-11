@@ -92,6 +92,7 @@
     <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
     <Compile Include="Models\Repositorios\Perfil\MensajesRepositorio.cs" />
     <Compile Include="Models\Repositorios\Usuarios\UsuariosRepositorio.cs" />
+    <Compile Include="Models\tbFactura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -639,6 +640,7 @@
     <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturas.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
