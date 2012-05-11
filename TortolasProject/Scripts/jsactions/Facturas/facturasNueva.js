@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
     var estado = $("#estadoPage").val();
-    var relacion = {};
-    if (estado.equals("nueva")) {
+
+    if (estado == "nueva") {
         estadoNuevaFactura();
+    } else if (estado == "detalles") {
+        estadoDetallesFactura();
     }
-
-
 });
 
 function obtenerLineas() {
@@ -16,6 +16,7 @@ function obtenerLineas() {
 }
 
 function estadoNuevaFactura() {
+    var relacion = null;
     // DatePicker fecha
     $("#fechaFactura").kendoDatePicker({
         start: "day",
@@ -111,6 +112,7 @@ function estadoNuevaFactura() {
     });
 
     $("#quitarRelacionButton").click(function () {
+        relacion = null;
         $("#relacionesExistentesDiv").hide();
         $("#relacionesButton").show();
     });
@@ -370,11 +372,15 @@ function estadoNuevaFactura() {
             });
         }
         var url = "nuevaFactura";
+        
+        if (relacion != null) {
+            relacion = kendo.stringify(relacion);
+        }
         var datos = {
             estado: estado,
             concepto: concepto,
             lineasFactura: kendo.stringify(lineasFactura),
-            relacion: kendo.stringify(relacion)
+            relacion: relacion
         };
         $.post(url, datos, function (data) {
             window.location.replace("../Facturas");

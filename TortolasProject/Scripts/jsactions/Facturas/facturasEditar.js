@@ -10,21 +10,6 @@
         format: "dd/MM/yyyy"
     });
 
-
-
-    function montarFecha(valor) {
-        var salida = valor.getDate() + "/" + (valor.getMonth() + 1) + "/" + valor.getFullYear();
-        salida = girarFecha(salida);
-        return salida;
-    }
-    function girarFecha(fecha) {
-        var antiguacompleta = fecha.split("-");
-        salida = antiguacompleta[2] + "/" + antiguacompleta[1] + "/" + antiguacompleta[0];
-        return salida;
-    }
-
-
-
     // Autocomplete usuarios
     var dsUsuarios = new kendo.data.DataSource({
         transport: {
