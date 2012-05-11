@@ -19,7 +19,9 @@ var idFactura;          // idFactura
 
 
 $(document).ready(function () {
+    $("#facturaForm").hide();
     estadoPagina = $("#estadoPage").val();
+
     inicializar();
 
     if (estadoPagina == "nueva") {
@@ -36,6 +38,7 @@ function estadoNuevaFactura() {
     tipo = null;
     // Ocultar botón poli
     $("#poliButton").hide();
+    $("#eliminarButton").hide();
     
 
     // DatePicker fecha
@@ -50,7 +53,7 @@ function estadoNuevaFactura() {
     datosTablaNueva();
     tablaEditable();
     tabla.addRow();
-    
+    $("#facturaForm").show();    
 }
 
 function estadoDetallesFactura() {
@@ -62,6 +65,7 @@ function estadoDetallesFactura() {
     concepto = factura.Concepto;
 
     // Ocultar campos
+    $("#eliminarButton").hide();
     $("#fechaFacturaContainer").hide();
     $("#relacionesButton").hide();
     $("#quitarRelacionButton").hide();
@@ -138,7 +142,7 @@ function estadoDetallesFactura() {
                 }
             ]
     });
-
+    $("#facturaForm").show();
  }
 
  function estadoEditarFactura() 
@@ -148,6 +152,7 @@ function estadoDetallesFactura() {
     $("#estadoPage").val(estadoPagina);
 
     $("#poliButton").hide();
+    $("#eliminarButton").show();
 
     if (factura.tipo == null) {
         $("#quitarRelacionButton").hide();
@@ -194,7 +199,8 @@ function estadoDetallesFactura() {
 
     // Tabla de facturas
     datosTablaEditar();
-    tablaEditable();   
+    tablaEditable();
+    $("#facturaForm").show(); 
 }
 
 
@@ -319,6 +325,20 @@ function inicializar() {
     $("#poliButton").click(function () {
         estadoEditarFactura();
     });
+
+    // Botón eliminar
+    $("#eliminarButton").text("Eliminar");
+    $("#eliminarButton").click(function () {
+        var url = "../eliminarFactura";
+        var datos = {
+            idFactura: idFactura
+        };
+        $.post(url, datos, function () 
+        {
+            window.location.replace("../../Facturas");
+        });
+    });
+
 
 
     // Estado factura

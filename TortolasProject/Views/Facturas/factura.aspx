@@ -22,6 +22,7 @@
     <div id='facturaForm'>
         <div id='facturaHeader'>
             <div id='poliButton' class='k-button'></div>
+            <div id='eliminarButton' class='k-button'></div>
             <div id='relacionesFacturaContainer'>
                 <div id='relacionesButton' class='k-button'>Añadir relación</div>
                 <div id='relacionesExistentesDiv'>
