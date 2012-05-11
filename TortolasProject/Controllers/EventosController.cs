@@ -37,8 +37,8 @@ namespace TortolasProject.Controllers
                               Titulo = ob.Titulo,
                               Lugar = ob.Lugar,
                               Actividad = ob.Actividad,
-                              FechaAperturaInscripcion = ob.FechaAperturaInscripcion.Value.ToShortDateString(),
-                              FechaLimiteInscripcion = ob.FechaLimiteInscripcion.Value.ToShortDateString(),
+                              FechaAperturaInscripcion = ob.FechaAperturaInscripcion.ToShortDateString(),
+                              FechaLimiteInscripcion = ob.FechaLimiteInscripcion.ToShortDateString(),
                               FechaRealizacion = ob.FechaRealizacion.ToShortDateString(),
                               PrioridadSocios = ob.PrioridadSocios,
                               Plazas = ob.Plazas

@@ -641,14 +641,14 @@
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Facturas\facturas.js" />
-    <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
+    <Content Include="Scripts\jsactions\Facturas\Old\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
-    <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
+    <Content Include="Scripts\jsactions\Facturas\Old\facturasEditar.js" />
     <Content Include="Scripts\jsactions\Eventos\eventos.js" />
     <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
-    <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
+    <Content Include="Scripts\jsactions\Facturas\Old\facturasNueva.js" />
     <Content Include="Scripts\jsactions\Perfil\Mensajeria.js" />
     <Content Include="Scripts\jsactions\Perfil\Perfil.js" />
     <Content Include="Scripts\jsactions\siteMaster.js" />
