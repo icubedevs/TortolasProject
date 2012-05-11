@@ -26,11 +26,12 @@ namespace TortolasProject.Controllers
 
             // Nueva Factura
         public ActionResult nuevaFactura()
-        {
-            var configuracion = new {
+        {   
+            tbFactura f = new tbFactura {
                     vista = "nueva"
             };
-            return View("factura", configuracion);
+            var estado = f.vista;
+            return View("factura",f);
         }
 
             // Detalles factura
@@ -38,14 +39,11 @@ namespace TortolasProject.Controllers
         {
             Guid idFactura = Guid.Parse(id);
             tbFactura f = FacturasRepo.leerFactura(idFactura);
-            var factura = new {
-                              idFactura = f.idFactura,
-                              Concepto = f.Concepto,
-                              Fecha = f.Fecha.ToShortDateString(),
-                              Estado = FacturasRepo.getEstado(f.idFactura),
-                              Total = f.Total
-                          };
-            return View("leerFactura", f);
+            f.vista = "detalles";
+            if (f.FKUsuario != null) { f.idRelacion = f.FKUsuario.ToString(); }
+            else { f.idRelacion = null; }
+   
+            return View("factura", f);
         }
 
         [HttpGet]
@@ -55,13 +53,14 @@ namespace TortolasProject.Controllers
             tbFactura f = FacturasRepo.leerFactura(idFactura);
             var factura = new
             {
+                vista = "editar",
                 idFactura = f.idFactura,
                 Concepto = f.Concepto,
                 Fecha = f.Fecha.ToShortDateString(),
                 Estado = FacturasRepo.getEstado(f.idFactura),
                 Total = f.Total
             };
-            return View("editarFactura", f);
+            return View("factura", f);
         }
             
 
@@ -120,8 +119,9 @@ namespace TortolasProject.Controllers
             Guid juntaDirectiva = db.tbJuntaDirectiva.Where(jd => jd.FKSocio == db.tbSocio.Where(s => s.FKUsuario == db.tbUsuario.Where(u => u.FKUser == user).Single().idUsuario).Single().idSocio).Single().FKSocio;
             var lineasFacturaRaw = System.Web.Helpers.Json.Decode(data["lineasFactura"]);
             Decimal total = 0;
-            var relacion = System.Web.Helpers.Json.Decode(data["relacion"]);
-            string tipo = relacion.tipo;
+            var idRelacion = data["idRelacion"];
+            string tipo = data["tipo"];
+
                                    
             // Creamos la nueva entidad
             tbFactura f = new tbFactura
@@ -135,18 +135,9 @@ namespace TortolasProject.Controllers
             };
 
             // Metemos las relaciones con otros subsistemas
-            if (tipo.Equals("usuario"))
-            {
-                f.FKUsuario = Guid.Parse(relacion.idUsuario); 
-            }
-            else if (tipo.Equals("eventos"))
-            {
-                f.FKEventoOficial = Guid.Parse(relacion.idEventoOficial);
-            }
-            else if(tipo.Equals("cursillos"))
-            {
-                f.FKCursillo = Guid.Parse(relacion.idCursillo);
-            }
+            if (tipo.Equals("usuario"))         f.FKUsuario = Guid.Parse(idRelacion);
+            else if (tipo.Equals("eventos"))    f.FKEventoOficial = Guid.Parse(idRelacion);
+            else if(tipo.Equals("cursillos"))   f.FKCursillo = Guid.Parse(idRelacion);
             else if (tipo.Equals("pedidoGlobal"))
             {
                 // METER FK PEDIDO GLOBAL EN FACTURA
@@ -209,6 +200,14 @@ namespace TortolasProject.Controllers
             var lineasFacturaRaw = System.Web.Helpers.Json.Decode(data["lineasFactura"]);
             Decimal total = 0;
             DateTime fecha = DateTime.Parse(data["fecha"]);
+            //var relacion = System.Web.Helpers.Json.Decode(data["idRelacion"]); <--- SI DESEAS DECODIFICAR UN JSON
+            Guid idRelacion = new Guid();
+            if (!data["idRelacion"].Equals("null"))
+            {
+                idRelacion = Guid.Parse(data["idRelacion"]);
+            }
+            string tipo = data["tipo"];
+
             
             tbFactura facturaAntigua = new tbFactura
             {
@@ -219,6 +218,17 @@ namespace TortolasProject.Controllers
                 FKJuntaDirectiva = juntaDirectiva
             };
 
+            // Metemos las relaciones con otros subsistemas
+            if (tipo.Equals("usuario")) facturaAntigua.FKUsuario = idRelacion; else facturaAntigua.FKUsuario = null;
+            if (tipo.Equals("eventos")) facturaAntigua.FKEventoOficial = idRelacion; else facturaAntigua.FKEventoOficial = null;
+            if (tipo.Equals("cursillos")) facturaAntigua.FKCursillo = idRelacion; else facturaAntigua.FKCursillo = null;
+            //if (tipo.Equals("pedidoGlobal")) facturaAntigua.FKPedidoGlobal = idRelacion; else facturaAntigua.FKPedidoGlobal = null;
+            //if (tipo.Equals("pedidoUsuario")) facturaAntigua.FKPedidoUsuario = idRelacion; else facturaAntigua.FKPedidoUsuario = null;
+            if (tipo.Equals("empresa")) facturaAntigua.FKCodigoEmpresa = idRelacion; else facturaAntigua.FKCodigoEmpresa = null;
+            if (tipo.Equals("proveedor")) facturaAntigua.FKProveedores = idRelacion; else facturaAntigua.FKProveedores = null;
+            if (tipo.Equals("contrato")) facturaAntigua.FKContrato = idRelacion; else facturaAntigua.FKContrato = null;
+            
+            
             // Creamos la lista de lineas de factura
             List<tbLineaFactura> lineasFactura = new List<tbLineaFactura>();
             List<tbLineaFactura> lineasExistentes = FacturasRepo.listarLineasFactura(idFactura).ToList<tbLineaFactura>() ;
@@ -283,6 +293,30 @@ namespace TortolasProject.Controllers
             FacturasRepo.eliminarFactura(idFactura);            
         }
 
+
+        [HttpPost]
+        public JsonResult leerFactura(FormCollection data)
+        {
+            Guid idFactura = Guid.Parse(data["idFactura"]);
+            tbFactura factura = FacturasRepo.leerFactura(idFactura);
+            if (factura.FKUsuario != null) { factura.idRelacion = factura.FKUsuario.Value.ToString(); factura.tipo = "usuario"; }
+           
+            
+
+            var f = new
+            {
+                idFactura = factura.idFactura,
+                Total = factura.Total,
+                FKEstado = factura.FKEstado,
+                Fecha = factura.Fecha.ToShortDateString().ToString(),
+                Concepto = factura.Concepto,
+                idRelacion = factura.idRelacion,
+                tipo = factura.tipo,
+                NombreEstado = FacturasRepo.getEstado(factura.idFactura)
+            };            
+
+            return Json(f);
+        }
         ///////////////////////////////////////////////////////////////////////////////
         // Listas                                                            
         ///////////////////////////////////////////////////////////////////////////////
@@ -372,6 +406,69 @@ namespace TortolasProject.Controllers
                           };
 
             return Json(pedidos);
+        }
+        
+        // Empresas
+        [HttpPost]
+        public JsonResult empresasListado()
+        {
+            var empresas = from e in db.tbEmpresa
+                           select new
+                           {
+                                idEmpresa = e.idEmpresa,
+                                CIF = e.CIF,
+                                Nombre = e.Nombre,
+                                Email = e.Email,
+                                Localidad = e.Localidad,
+                                Telefono = e.TelefonodeContacto
+                           };
+            return Json(empresas);
+        }
+
+        // Proveedores
+        [HttpPost]
+        public JsonResult proveedoresListado()
+        {
+            var proveedores = from p in db.tbProveedores
+                              select new
+                              {
+                                  idProveedores = p.idProveedores,
+                                  Mercado = p.Mercado,
+                                  Direccion = p.DireccionFisica,
+                                  Nombre = db.tbEmpresa.Where(e => p.FKCodigoEmpresa == e.idEmpresa).Single().Nombre
+                              };
+            return Json(proveedores);
+        }
+
+        // Contratos
+        public JsonResult contratosListado()
+        {
+            var contratos = from c in db.tbContrato
+                            select new
+                            {
+                                Descripcion = c.DescripcionLegal,
+                                FechaCaducidad = c.FechaCaducidad.ToShortDateString(),
+                                FechaCreacion = c.FechaCreacion.Value.ToShortDateString(),
+                                Firmas = c.Firmas,
+                                FKCodigoEmpresa = c.FKCodigoEmpresa,
+                                idContrato = c.idContrato,
+                                Importe = c.Importe,
+                                NombreEmpresa = c.NombreEmpresa
+                            };
+            return Json(contratos);
+        }
+
+        // Estados de factura
+        [HttpPost]
+        public JsonResult estadosListado()
+        {
+            var estados = from e in db.tbEstadoFactura
+                          select new
+                          {
+                              idEstadoFactura = e.idEstadoFactura,
+                              Nombre = e.Nombre
+                          };
+            return Json(estados);
         }
     }
 }
