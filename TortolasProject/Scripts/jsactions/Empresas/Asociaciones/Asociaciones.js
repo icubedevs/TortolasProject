@@ -38,6 +38,10 @@
                 title: "Nombre"
             },
             {
+                field: "CIFEmpresa",
+                title: "CIF"
+            },
+            {
                 field: "Direccion",
                 title: "Direccion",
                 filterable: {
@@ -97,6 +101,8 @@
 
         //alert("Editar!");
 
+        $(".NoModificable").prop('disabled', true); //Bloquea editar los campos
+
         var fila = $("#AsociacionesGrid").find("tbody tr.k-state-selected");
 
         var filajson = $("#AsociacionesGrid").data("kendoGrid").dataItem(fila).toJSON();
@@ -105,7 +111,8 @@
         $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
         $("#direccion").val(filajson.Direccion);
         $("#tematica").val(filajson.Tematica);
-        $("#telefono").val(filajson.Telefono);
+        $("#telefonoremoto").val(filajson.Telefono);
+        $("#cifremoto").val(filajson.CIFEmpresa);
 
         weditarAsociacion.center();
 
@@ -129,6 +136,8 @@
         $("#nombreempresaasociacion").val(filajson.NombreAsociacion);
         $("#direccion").val(filajson.Direccion);
         $("#tematica").val(filajson.Tematica);
+        $("#telefonoremoto").val(filajson.Telefono);
+        $("#cifremoto").val(filajson.CIFEmpresa);
 
 
         weditarAsociacion.center();
@@ -140,6 +149,8 @@
 
     //Boton Cancelar//
     $("#BotonCancelarVentanaEditarAsociacion").live("click", function () {
+
+        $(".CuadroTexto").prop('disabled', false); //Bloquea editar los campos
 
         $(".VisibilidadBotonAceptarEditar").show(); //Muestra el boton de aceptar de la ventana editar
         $(".VisibilidadBotonAceptarEliminar").hide(); //Oculta el boton correspondiente para aceptar en la ventana eliminar

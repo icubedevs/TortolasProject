@@ -32,8 +32,8 @@ namespace TortolasProject.Controllers.Empresas
                                Direccion = ob.Direccion,
                                Tematica = ob.Tematica,
                                NombreAsociacion = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).Nombre,
-                               Telefono = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).TelefonodeContacto
-                               
+                               Telefono = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).TelefonodeContacto,
+                               CIFEmpresa = AsociacionesRepo.buscaremp(ob.FKCodigoEmpresa).CIF,                              
                            };
             return Json(asociaciones);
         }
@@ -57,6 +57,7 @@ namespace TortolasProject.Controllers.Empresas
             AsociacionesRepo.updateAsoc(asociacion);
         }
 
+        [HttpPost]
         public void DeleteAsociacion(FormCollection data)
         {
             Guid idAsociacion = Guid.Parse(data["idasociacion"]);
@@ -65,6 +66,7 @@ namespace TortolasProject.Controllers.Empresas
             AsociacionesRepo.deleteEmp(idAsociacion);
         }
 
+        [HttpPost]
         public void CreateAsociacion(FormCollection data)
         {
             bool existe = true;

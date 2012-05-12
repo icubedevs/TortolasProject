@@ -90,5 +90,34 @@ namespace TortolasProject.Models.Repositorios
             mtbMalagaDB.tbAsociacion.InsertOnSubmit(asoc);
             salvar();
         }
+
+        // PROVEEDORES //
+
+        public IList<tbProveedores> ListarProveedores()
+        {
+            return mtbMalagaDB.tbProveedores.ToList();
+        }
+
+        public tbProveedores buscarprov(Guid idprov)
+        {
+            return mtbMalagaDB.tbProveedores.Where(proveedor => proveedor.FKCodigoEmpresa == idprov).Single();
+        }
+
+        public void updateProv(tbProveedores prov)
+        {
+            tbProveedores original = buscarprov(prov.FKCodigoEmpresa);
+
+            original.DireccionFisica = prov.DireccionFisica;
+            original.Mercado = prov.Mercado;
+            original.CodigoPostal = prov.CodigoPostal;
+
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        public void deleteProv(Guid id)
+        {
+            mtbMalagaDB.tbProveedores.DeleteOnSubmit(buscarprov(id));
+            salvar();
+        }
     }
 }

@@ -10,6 +10,7 @@
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Empresas/EmpresasIndex.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Empresas/NuevaEmpresa.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Asociaciones/Asociaciones.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Proveedores/Proveedores.js") %>" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexTitle" ContentPlaceHolderID="TitleContent" runat="server">
@@ -77,6 +78,8 @@
     <br />
 
     <div id="VentanaEditar">
+        <b><h5>Datos Proveedor</h5></b>
+        <br />
         <label for="nombreempresa">Nombre: </label><input type="text" id="nombreempresa" class="k-input CuadroTexto" /><br />
         <label for="cif">CIF: </label><input type="text" id="cif" class="k-input CuadroTexto" /><br />
         <label for="localidad">Localidad: </label><input type="text" id="localidad" class="k-input CuadroTexto" /><br />
@@ -93,11 +96,11 @@
     <div id="VentanaEditarAsociacion">
         <b><h5>Datos Asociacion</h5></b>
         <br />
-        <label for="nombreempresaasociacion">Nombre: </label><input type="text" id="nombreempresaasociacion" class="k-input CuadroTexto" /><br />
-        <label for="cif">CIF: </label><input type="text" id="cifremoto" class="k-input CuadroTexto" /> <input type="button" value="Vincular Empresa" id="BotonVincularEmpresaDesdeAsociacion" class="k-button VisibilidadBotonVincularEmpresa" /><br />
+        <label for="nombreempresaasociacion">Nombre: </label><input type="text" id="nombreempresaasociacion" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifremoto" class="k-input CuadroTexto NoModificable" /> <input type="button" value="Vincular Empresa" id="BotonVincularEmpresaDesdeAsociacion" class="k-button VisibilidadBotonVincularEmpresa " /><br />
         <label for="direccion">Dirección: </label><input type="text" id="direccion" class="k-input CuadroTexto" /><br />
         <label for="tematica">Temática: </label><input type="text" id="tematica" class="k-input CuadroTexto" /><br />
-        <label for="telefono" class="VisibilidadTelefonodeContacto">Teléfono de Contacto: </label><input type="text" id="telefonoremoto" class="k-input CuadroTexto VisibilidadTelefonodeContacto" /><br />
+        <label for="telefono" class="VisibilidadTelefonodeContacto">Teléfono de Contacto: </label><input type="text" id="telefonoremoto" class="k-input CuadroTexto VisibilidadTelefonodeContacto NoModificable" /><br />
         <hr />
 
         <div id="DatosNuevaEmpresaRemota" class="VisibilidadDatosNuevaEmpresaRemota">
@@ -117,6 +120,44 @@
         </center>
 
         
+    </div>
+
+    <div id="VentanaEditarProveedor">
+        <b><h5>Datos Proveedor</h5></b>
+        <br />
+        <label for="nombreempresaproveedor">Nombre: </label><input type="text" id="nombreempresaproveedor" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifproveedor" class="k-input CuadroTexto NoModificable" /> <input type="button" value="Vincular Empresa" id="Button1" class="k-button VisibilidadBotonVincularEmpresa " /><br />
+        <label for="direccion">Dirección Física: </label><input type="text" id="dirfisica" class="k-input CuadroTexto" /><br />
+        <label for="mercado">Mercado: </label><input type="text" id="mercado" class="k-input CuadroTexto" /><br />
+        <label for="codigopostal">Código Postal: </label><input type="text" id="codigopostal" class="k-input CuadroTexto VisibilidadTelefonodeContacto" /><br />
+        <br />
+        <hr />
+        <br />
+
+
+        <center>
+            <input type="button" value="Aceptar" id="BotonAceptarVentanaEditarProveedor" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditarProveedor" class="k-button FuncionBotonCancelarProveedores" />    
+        </center>
+    </div>
+
+    <div id="VentanaEliminarProveedor">
+        <b><h5>Datos Proveedor</h5></b>
+        <br />
+        <label for="nombreempresaproveedor">Nombre: </label><input type="text" id="nombreempresaproveedoreliminar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifproveedoreliminar" class="k-input CuadroTexto NoModificable" /> <input type="button" value="Vincular Empresa" id="Button2" class="k-button VisibilidadBotonVincularEmpresa " /><br />
+        <label for="direccion">Dirección Física: </label><input type="text" id="direccionproveedoreliminar" class="k-input CuadroTexto" /><br />
+        <label for="mercado">Mercado: </label><input type="text" id="mercadoproveedoreliminar" class="k-input CuadroTexto" /><br />
+        <label for="codigopostal">Código Postal: </label><input type="text" id="codigopostalproveedoreliminar" class="k-input CuadroTexto VisibilidadTelefonodeContacto" /><br />
+        <br />
+        <hr />
+        <br />
+
+
+        <center>
+            <input type="button" value="Eliminar" id="BotonAceptarVentanaEliminarProveedor" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEliminarProveedor" class="k-button FuncionBotonCancelarProveedores" />    
+        </center>
     </div>
     
     <div id="NuevaEmpresaFormulario" >

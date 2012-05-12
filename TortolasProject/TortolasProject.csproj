@@ -76,6 +76,7 @@
     <Compile Include="Controllers\Monitores\MonitoresController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
+    <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -644,6 +645,7 @@
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
+    <Content Include="Scripts\jsactions\Empresas\Proveedores\Proveedores.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Empresas\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
