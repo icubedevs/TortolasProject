@@ -21,6 +21,7 @@
 <input type="hidden" id='idFactura' value='<% Response.Write(Model.idFactura); %>' />
     <div id='facturaForm'>
         <div id='facturaHeader'>
+            <div id='volverButton' class='k-button'></div>
             <div id='poliButton' class='k-button'></div>
             <div id='eliminarButton' class='k-button'></div>
             <div id='relacionesFacturaContainer'>
@@ -90,11 +91,10 @@
                  %>
                  </div>   
                 <div id='fechaFacturaContainer'>
-                    <input id='fechaFacturaInput' />
-                </div>       
-             
-              
+                    <input id='fechaFacturaInput' name='fecha' required validationMessage='Introduzca fecha' /><span class="k-invalid-msg" data-for="fecha"></span>
+                </div>
             </div>
+
             <div id='conceptoFacturaDiv'>
                 Concepto  
                 <div id='conceptoFacturaLabel'><% 
@@ -106,41 +106,46 @@
                    if( Model.vista.Equals("editar"))
                    {
                        %>
-                            <input type='text' id='conceptoFactura' class='k-input' value='<%= Model.Concepto %>'/>
+                            <input type='text' id='conceptoFactura' name='concepto' class='k-input' value='<% Response.Write(Model.Concepto); %>' required validationMessage='Introduzca concepto' /><span class="k-invalid-msg" data-for="concepto"></span>
                        <%
                    }
                    else
                    {
                         %>
-                            <input type='text' id='conceptoFactura' class='k-input'/>
+                            <input type='text' id='conceptoFactura' name='concepto' class='k-input' required validationMessage='Introduzca concepto' /><span class="k-invalid-msg" data-for="concepto"></span>
                         <%
                    }
                 %>
                 </div>
 
-                 <div id='estadoFacturaDiv'>
-                    Estado factura
-                    <div id='estadoFacturaLabel'></div>
-                    <div id='estadoFacturaDropDownListContainer'>
-                        <input id='estadoFacturaDropDownList' />
-                    </div>
+            <div id='estadoFacturaDiv'>
+                Estado factura
+                <div id='estadoFacturaLabel'></div>
+                <div id='estadoFacturaDropDownListContainer'>
+                    <input id='estadoFacturaDropDownList' />
                 </div>
+            </div>
         </div>
 
         <div id='nuevaLineaButton'>Nueva línea</div>
-        <div id='facturaLineasFacturaGrid'>
-        </div>
+        <div id='facturaLineasFacturaGrid'></div>
+
         <div id='totalFacturaDiv'>
-                Cuantía     
-                <% if (Model.vista.Equals("detalles") || Model.vista.Equals("editar"))
-                   { 
-                       %><% Response.Write(Model.Total); %><% 
-                   }
-                %>
+                <div id='baseImponibleLabel'>Base imponible</div>
+                <div id='baseImponibleNumero'><% if (!Model.vista.Equals("nueva")) Response.Write(Model.BaseImponible); else Response.Write(0); %></div>
+                <div id='ivaLabel'>IVA</div>
+                <div id='ivaNumero'>18%</div>
+                <div id='totalFacturaLabel'>
+                    Total
+                </div>
+                <div id='totalFacturaNumero'>
+                <%// if (!Model.vista.Equals("nueva")) Response.Write(Model.Total); else Response.Write(0); %>
+                </div>
         </div>
         <div id='facturaBottom'>
             <div id='descartarFacturaButton' class='k-button'>Descartar</div>
             <div id='guardarFacturaButton' class='k-button'>Guardar</div>
+            <div class='status' class='k-invalid-msg'></div>
         </div>
     </div>
 
