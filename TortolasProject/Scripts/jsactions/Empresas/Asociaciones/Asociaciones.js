@@ -232,7 +232,7 @@
 
     //Boton Vincular Empresa//
 
-    $("#BotonVincularEmpresaDesdeAsociacion").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
+    $("#BotonVincularEmpresaDesdeAsociacion").live("click", function () {
 
         $("#VentanaEmpresasRemota").data("kendoWindow").center();
         $(".VisibilidadGridEmpresasRemota").show(); //Lo muestro

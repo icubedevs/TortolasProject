@@ -19,9 +19,9 @@
                  id: "idProveedor"
              }
         }
-     });
+    });
 
-     $("#ProveedoresGrid").kendoGrid //Creo el kendo Grid
+    $("#ProveedoresGrid").kendoGrid //Creo el kendo Grid
     ({
         //height: 400,
         dataSource: datasourceprov,
@@ -72,12 +72,12 @@
             }
         ]
 
-        });
+    });
 
-        var weditarProveedor = $("#VentanaEditarProveedor")
+    var weditarProveedor = $("#VentanaEditarProveedor")
         .kendoWindow
         ({
-            title: "Proveedor",
+            title: "Editar Proveedor",
             modal: true,
             visible: false,
             resizable: false,
@@ -85,10 +85,10 @@
             height: 400
         }).data("kendoWindow");
 
-        var weliminarProveedor = $("#VentanaEliminarProveedor")
+    var weliminarProveedor = $("#VentanaEliminarProveedor")
         .kendoWindow
         ({
-            title: "Proveedor",
+            title: "Eliminar Proveedor",
             modal: true,
             visible: false,
             resizable: false,
@@ -97,82 +97,96 @@
         }).data("kendoWindow");
 
 
-        // FUNCIONES //
 
-        //Funciones: Botones del GRID//
-
-        //Boton Editar//
-
-        $(".botonEditarFilaProveedor").live("click", function () {
-
-            //alert("Editar!");
-
-            $(".NoModificable").prop('disabled', true); //Bloquea editar los campos
-
-            var fila = $("#ProveedoresGrid").find("tbody tr.k-state-selected");
-
-            var filajson = $("#ProveedoresGrid").data("kendoGrid").dataItem(fila).toJSON();
-            idProveedor = datasourceprov.getByUid(fila.attr("data-uid")).idProveedor;
-
-            $("#nombreempresaproveedor").val(filajson.NombreProveedor);
-            $("#dirfisica").val(filajson.DireccionFisica);
-            $("#mercado").val(filajson.Mercado);
-            $("#codigopostal").val(filajson.CodigoPostal);
-            $("#cifproveedor").val(filajson.CIFEmpresaP);
-
-            weditarProveedor.center();
-
-            weditarProveedor.open();
-        });
-
-        //Boton Eliminar//
-
-        $(".botonEliminarFilaProveedor").live("click", function () {
-            //alert("Eliminar!");
-
-            $(".CuadroTexto").prop('disabled', true); //Bloquea editar los campos
-
-            var fila = $("#ProveedoresGrid").find("tbody tr.k-state-selected");
-
-            var filajson = $("#ProveedoresGrid").data("kendoGrid").dataItem(fila).toJSON();
-            idProveedor = datasourceprov.getByUid(fila.attr("data-uid")).idProveedor;
-
-            $("#nombreempresaproveedoreliminar").val(filajson.NombreProveedor);
-            $("#direccionproveedoreliminar").val(filajson.DireccionFisica);
-            $("#mercadoproveedoreliminar").val(filajson.Mercado);
-            $("#codigopostalproveedoreliminar").val(filajson.CodigoPostal);
-            $("#cifproveedoreliminar").val(filajson.CIFEmpresaP);
+    var wcrearProveedor = $("#VentanaCrearProveedor")
+        .kendoWindow
+        ({
+            title: "Crear Proveedor",
+            modal: true,
+            visible: false,
+            resizable: false,
+            width: 600,
+            height: 400
+        }).data("kendoWindow");
 
 
-            weliminarProveedor.center();
+    // FUNCIONES //
 
-            weliminarProveedor.open();
-        });
+    //Funciones: Botones del GRID//
 
-        // Funciones: Botones Ventana Editaje //
+    //Boton Editar//
 
-        //Boton Cancelar//
+    $(".botonEditarFilaProveedor").live("click", function () {
 
-        $(".FuncionBotonCancelarProveedores").live("click", function () {
 
-            $(".CuadroTexto").prop('disabled', false); //Bloquea editar los campos
+        $(".NoModificable").prop('disabled', true); //Bloquea editar los campos
 
-            weditarProveedor.close();
-            weliminarProveedor.close();
-        });
+        var fila = $("#ProveedoresGrid").find("tbody tr.k-state-selected");
 
-        //Boton Aceptar//
+        var filajson = $("#ProveedoresGrid").data("kendoGrid").dataItem(fila).toJSON();
+        idProveedor = datasourceprov.getByUid(fila.attr("data-uid")).idProveedor;
 
-        $("#BotonAceptarVentanaEditarProveedor").live("click", function () {
-            var datos = {};
-            //Coger datos
-            datos["codigopostal"] = $("#codigopostal").val();
-            datos["direccionfisupdate"] = $("#dirfisica").val();
-            datos["mercado"] = $("#mercado").val();
-            datos["idproveedor"] = idProveedor;
-            datos["fkcodigoempresa"] = idProveedor;
+        $("#nombreempresaproveedor").val(filajson.NombreProveedor);
+        $("#dirfisica").val(filajson.DireccionFisica);
+        $("#mercado").val(filajson.Mercado);
+        $("#codigopostal").val(filajson.CodigoPostal);
+        $("#cifproveedor").val(filajson.CIFEmpresaP);
 
-            $.ajax(
+        weditarProveedor.center();
+
+        weditarProveedor.open();
+    });
+
+    //Boton Eliminar//
+
+    $(".botonEliminarFilaProveedor").live("click", function () {
+        //alert("Eliminar!");
+
+        $(".CuadroTexto").prop('disabled', true); //Bloquea editar los campos
+
+        var fila = $("#ProveedoresGrid").find("tbody tr.k-state-selected");
+
+        var filajson = $("#ProveedoresGrid").data("kendoGrid").dataItem(fila).toJSON();
+        idProveedor = datasourceprov.getByUid(fila.attr("data-uid")).idProveedor;
+
+        $("#nombreempresaproveedoreliminar").val(filajson.NombreProveedor);
+        $("#direccionproveedoreliminar").val(filajson.DireccionFisica);
+        $("#mercadoproveedoreliminar").val(filajson.Mercado);
+        $("#codigopostalproveedoreliminar").val(filajson.CodigoPostal);
+        $("#cifproveedoreliminar").val(filajson.CIFEmpresaP);
+
+
+        weliminarProveedor.center();
+
+        weliminarProveedor.open();
+    });
+
+    // Funciones: Botones Ventana Editaje //
+
+    //Boton Cancelar//
+
+    $(".FuncionBotonCancelarProveedores").live("click", function () {
+
+        $(".CuadroTexto").prop('disabled', false); //Bloquea editar los campos
+        $(".VisibilidadDatosNuevaEmpresaRemota").hide();
+
+        weditarProveedor.close();
+        weliminarProveedor.close();
+        wcrearProveedor.close();
+    });
+
+    //Boton Aceptar//
+
+    $("#BotonAceptarVentanaEditarProveedor").live("click", function () {
+        var datos = {};
+        //Coger datos
+        datos["codigopostal"] = $("#codigopostal").val();
+        datos["direccionfisupdate"] = $("#dirfisica").val();
+        datos["mercado"] = $("#mercado").val();
+        datos["idproveedor"] = idProveedor;
+        datos["fkcodigoempresa"] = idProveedor;
+
+        $.ajax(
             {
                 url: "Proveedores/UpdateProveedor",
                 type: "POST",
@@ -184,37 +198,105 @@
                 },
                 async: false
             });
-        });
+    });
 
-        // Funciones: Botones Ventana Eliminar //
+    // Funciones: Botones Ventana Eliminar //
 
-        //Boton Aceptar//
+    //Boton Aceptar//
 
-        $("#BotonAceptarVentanaEliminarProveedor").live("click", function () {
+    $("#BotonAceptarVentanaEliminarProveedor").live("click", function () {
 
-            var datos = {};
-            //Coger datos
+        var datos = {};
+        //Coger datos
 
-            datos["idproveedor"] = idProveedor;
+        datos["idproveedor"] = idProveedor;
 
-            $.ajax(
+        $.ajax(
+            {
+                url: "Proveedores/DeleteProveedor",
+                type: "POST",
+                data: datos,
+                success: function () {
+                    $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
+                    datasourceprov.read();
+                    weliminarProveedor.close();
+                },
+                async: false
+            });
+
+    });
+
+    //Boton Nueva Asociacion//
+
+    $("#BotonNuevoProveedor").click(function () {
+
+
+        wcrearProveedor.center();
+
+        wcrearProveedor.open();
+
+    });
+
+    //Funciones: Botones Ventana Crear //
+
+    //Boton Vincular//
+
+    $("#BotonVincularEmpresaDesdeProveedor").live("click", function () {  
+
+        $("#VentanaEmpresasRemota").data("kendoWindow").center();
+        $(".VisibilidadGridEmpresasRemota").show(); //Lo muestro
+        $("#VentanaEmpresasRemota").data("kendoWindow").open();
+    });
+
+    //Boton Crear Asociacion//
+
+    $("#BotonAceptarVentanaCrearProveedor").click(function () {
+
+        var datos = {};
+
+        //Coger datos
+        datos["nombreempresa"] = $("#nuevoproveedornombre").val();
+        datos["cif"] = $("#nuevoproveedorcif").val();
+        datos["direccion"] = $("#nuevoproveedordir").val();
+        datos["mercado"] = $("#nuevoproveedormercado").val();
+        datos["codigopostal"] = $("#nuevoproveedorcpostal").val();
+        if ($("#nuevoproveedortlf").val() == "") {
+            datos["telefono"] = 0
+        }
+        else {
+            datos["telefono"] = $("#nuevoproveedortlf").val();
+        }
+        if ($("#telefonoempresa").val() == "") {
+            datos["telefono2"] = 0
+        }
+        else {
+            datos["telefono2"] = $("#telefonoempresa").val();
+        }
+
+
+        $.ajax(
         {
-            url: "Proveedores/DeleteProveedor",
+            url: "Proveedores/CreateProveedor",
             type: "POST",
             data: datos,
             success: function () {
-                $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
-                datasourceprov.read();
-                weliminarProveedor.close();
+                
+                var temp = $("#ProveedoresGrid").data("kendoGrid").dataSource;
+                
+                temp.read();
+
+                wcrearProveedor.close();
+
+                
             },
             async: false
         });
 
-        });
+    });
 
 
-        $("#ProveedoresNav").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
-            datasourceprov.read();
-        });
+    $("#ProveedoresNav").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
+        datasourceprov.read();
+    });
 
 });

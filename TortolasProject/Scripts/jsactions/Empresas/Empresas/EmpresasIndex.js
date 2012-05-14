@@ -20,12 +20,12 @@ $(document).ready(function () {
         var filajson = $("#EmpresasGridRemoto").data("kendoGrid").dataItem(fila).toJSON();
         idEmpresa = datasource.getByUid(fila.attr("data-uid")).idEmpresa;
 
-        $("#localidadremota").val(filajson.Localidad);
-        $("#dirwebremota").val(filajson.DireccionWeb);
-        $("#telefonoremoto2").val(filajson.TelefonodeContacto);
-        $("#emailremoto").val(filajson.Email);
-        $("#nombreempresaasociacion").val(filajson.Nombre);
-        $("#cifremoto").val(filajson.CIF);
+        $(".localidadremota").val(filajson.Localidad);
+        $(".dirwebremota").val(filajson.DireccionWeb);
+        $(".telefonoremoto2").val(filajson.TelefonodeContacto);
+        $(".emailremoto").val(filajson.Email);
+        $(".nombreempresaasociacion").val(filajson.Nombre);
+        $(".cifremoto").val(filajson.CIF);
 
 
         $(".VisibilidadDatosNuevaEmpresaRemota").show(); //Muestro los datos de la empresa asociada

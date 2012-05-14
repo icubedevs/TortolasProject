@@ -71,5 +71,63 @@ namespace TortolasProject.Controllers.Empresas
             ProveedoresRepo.deleteEmp(idProveedor);
         }
 
+        [HttpPost]
+        public void CreateProveedor(FormCollection data)
+        {
+            bool existe = true;
+
+            Guid idEmpresa = Guid.NewGuid();
+            String Nombre = data["nombreempresa"];
+            String mercado = data["mercado"];
+            int TelefonodeContacto = int.Parse(data["telefono"]);
+            int TelefonodeContacto2 = int.Parse(data["telefono2"]);
+            int codigopostal = int.Parse(data["codigopostal"]);
+            String direccion = data["direccion"];
+            String CIF = data["cif"];
+
+            tbEmpresa Empresa = new tbEmpresa
+            {
+                idEmpresa = idEmpresa,
+                Nombre = Nombre,
+                Localidad = " ",
+                DireccionWeb = " ",
+                TelefonodeContacto = TelefonodeContacto,
+                Email = " ",
+                CIF = CIF
+            };
+            tbProveedores Proveedor = new tbProveedores
+            {
+                FKCodigoEmpresa = idEmpresa,
+                idProveedores = Guid.NewGuid(),
+                Mercado = mercado,
+                CodigoPostal = codigopostal,
+                DireccionFisica = direccion
+            };
+            try
+            {
+                if (ProveedoresRepo.buscarempCIF(CIF).CIF.Equals(CIF)) //Si entra dentro del bucle es que EXISTE una empresa asociada
+                {
+                    Proveedor.FKCodigoEmpresa = ProveedoresRepo.buscarempCIF(CIF).idEmpresa;
+                }
+                /*else
+                {
+                    AsociacionesRepo.createEmp(Empresa);
+
+                }*/
+            }
+            catch
+            {
+                existe = false;
+            }
+
+            if (!existe)
+            {
+                ProveedoresRepo.createEmp(Empresa);
+            }
+
+            ProveedoresRepo.createProv(Proveedor);
+
+        }
+
     }
 }

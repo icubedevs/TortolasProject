@@ -119,5 +119,18 @@ namespace TortolasProject.Models.Repositorios
             mtbMalagaDB.tbProveedores.DeleteOnSubmit(buscarprov(id));
             salvar();
         }
+
+        public void createProv(tbProveedores prov)
+        {
+            mtbMalagaDB.tbProveedores.InsertOnSubmit(prov);
+            salvar();
+        }
+
+        // PATROCINADORES //
+
+        public IList<tbPatrocinador> ListarPatrocinadores()
+        {
+            return mtbMalagaDB.tbPatrocinador.ToList();
+        }
     }
 }

@@ -74,6 +74,7 @@
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Monitores\MonitoresController.cs" />
+    <Compile Include="Controllers\PatrocinadoresController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
@@ -645,6 +646,7 @@
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
+    <Content Include="Scripts\jsactions\Empresas\Patrocinadores\Patrocinadores.js" />
     <Content Include="Scripts\jsactions\Empresas\Proveedores\Proveedores.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Empresas\Empresas\EmpresasIndex.js" />
