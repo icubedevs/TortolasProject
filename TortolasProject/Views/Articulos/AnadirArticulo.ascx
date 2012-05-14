@@ -14,7 +14,11 @@
     </div>
 
     <div id="precioText">
-    Precio  <input id='precioAnadirArticuloAutocomplete' />
+    Precio  <input type='text' id='precioAnadirArticuloAutocomplete' />
+    </div>
+
+    <div id="categoriaDrop">
+    Categoria <input id="dropDownList" />
     </div>
 
 <div id="anadirArticuloAceptarButton"><input type="button" class="k-button" value="Aceptar" /></div>

@@ -10,6 +10,8 @@ namespace TortolasProject.Controllers
 {
     public class PedidosController : Controller
     {
+        static PedidosRepositorio PedidosRepo = new PedidosRepositorio();
+
         public ActionResult Index()
         {
             return View();

@@ -17,8 +17,21 @@ namespace TortolasProject.Controllers
             return View();
         }
 
+        public ActionResult leerCategorias()
+        {
+            var categorias = from cat in ArticulosRepo.listarCategorias()
+                             select new
+                             {
+                                 categoria = cat.idCategoria,
+                                 nombre = cat.Nombre
+                             };
+
+            return Json(categorias);
+        }
+
         public ActionResult leerTodos()
         {
+
             var articulos = from art in ArticulosRepo.listarArticulos() 
                            select new
                                {
@@ -26,7 +39,9 @@ namespace TortolasProject.Controllers
                                    nombre = art.Nombre,
                                    descripcion = art.Descripcion,
                                    imagen = art.Imagen,
-                                   precio = art.Precio
+                                   precio = art.Precio,
+                                   categoriaNombre = ArticulosRepo.leerCategoria(art.FKCategoria).Nombre,
+                                   categoriaId = ArticulosRepo.leerCategoria(art.FKCategoria).idCategoria
                                };
 
             return Json(articulos);
@@ -48,6 +63,7 @@ namespace TortolasProject.Controllers
             String imagen = Data ["imagen"];
             String descripcion = Data ["descripcion"];
             decimal precio = Decimal.Parse(Data ["precio"]);
+            Guid categoria = Guid.Parse(Data["categoria"]);
 
             tbArticulo f = new tbArticulo()
             {
@@ -56,6 +72,7 @@ namespace TortolasProject.Controllers
                 Imagen = imagen,
                 Descripcion = descripcion,
                 Precio = precio,
+                FKCategoria = categoria,
             };
 
             ArticulosRepo.anadirArticulo(f);
