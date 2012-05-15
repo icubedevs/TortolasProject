@@ -68,7 +68,7 @@ namespace TortolasProject.Controllers.Empresas
             Guid idProveedor = Guid.Parse(data["idProveedor"]);
 
             ProveedoresRepo.deleteProv(idProveedor);
-            ProveedoresRepo.deleteEmp(idProveedor);
+            //ProveedoresRepo.deleteEmp(idProveedor);
         }
 
         [HttpPost]

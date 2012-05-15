@@ -192,19 +192,58 @@
     <div id="VentanaEditarPatrocinador">
         <b><h5>Datos Patrocinador</h5></b>
         <br />
-        <label for="nombreempresaproveedor">Nombre: </label><input type="text" id="Text1" class="k-input CuadroTexto NoModificable" /><br />
-        <label for="cif">CIF: </label><input type="text" id="Text2" class="k-input CuadroTexto NoModificable" /><br />
-        <label for="direccion">Dirección Física: </label><input type="text" id="Text3" class="k-input CuadroTexto" /><br />
-        <label for="mercado">Mercado: </label><input type="text" id="Text4" class="k-input CuadroTexto" /><br />
-        <label for="codigopostal">Código Postal: </label><input type="text" id="Text5" class="k-input CuadroTexto VisibilidadTelefonodeContacto" /><br />
+        <label for="nombreempresapatrocinadoreditar">Nombre: </label><input type="text" id="nombreempresapatrocinadoreditar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifpatrocinadoreditar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="localizacion">Localización Publicidad: </label><input type="text" id="locpatrocinadoreditar" class="k-input CuadroTexto" /><br />
+        <br />
+        <hr />
+        <br />
+        <center>
+            <input type="button" value="Aceptar" id="BotonAceptarVentanaEditarpatrocinador" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditarpatrocinador" class="k-button FuncionBotonCancelarProveedores" />    
+        </center>
+    </div>
+
+    <div id="VentanaEliminarPatrocinador">
+        <b><h5>Datos Patrocinador</h5></b>
+        <br />
+        <label for="nombreempresaproveedor">Nombre: </label><input type="text" id="nombrepatrocinadoreliminar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifpatrocinadoreliinar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="localizacion">Localización Publicidad: </label><input type="text" id="lopatrocinadoreliminar" class="k-input CuadroTexto" /><br />
         <br />
         <hr />
         <br />
 
 
         <center>
-            <input type="button" value="Aceptar" id="Button1" class="k-button" />
-            <input type="button" value="Cancelar" id="Button2" class="k-button FuncionBotonCancelarProveedores" />    
+            <input type="button" value="Eliminar" id="BotonAceptarVentanaEliminarPatrocinador" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEliminarPatrocinador" class="k-button FuncionBotonCancelarProveedores" />    
+        </center>
+    </div>
+
+    <div id="VentanaCrearPatrocinador">
+        <b><h5>Datos Patrocinador</h5></b>
+        <br />
+        <label for="nombreempresaproveedor">Nombre: </label><input type="text" id="nombrepatrocinadornuevo" class="k-input CuadroTexto NoModificable nombreempresaasociacion" /><br />
+        <label for="cif">CIF: </label><input type="text" id="cifpatrocinadornuevo" class="k-input CuadroTexto NoModificable cifremoto" /> <input type="button" value="Vincular Empresa" id="BotonVincularEmpresaDesdePatrocinador" class="k-button" /><br />
+        <label for="loc">Localización Publicidad: </label><input type="text" id="locpatrocinadornuevo" class="k-input CuadroTexto" /><br />
+        <label for="telefono" class="VisibilidadTelefonodeContacto">Teléfono de Contacto: </label><input type="text" id="tlfpatrocinadornuevo" class="k-input CuadroTexto VisibilidadTelefonodeContacto NoModificable" /><br />
+        <br />
+        <hr />
+        <br />
+        
+        <div id="DatosNuevaEmpresaRemota3" class="VisibilidadDatosNuevaEmpresaRemota">
+            <b><h5>Datos Empresa Asociada</h5></b>
+            <br />
+            <label for="localidad">Localidad: </label><input type="text" id="patrocinadorlocalidadremoto" class="k-input CuadroTexto localidadremota" /><br />
+            <label for="direccionweb">Dirección Web: </label><input type="text" id="patrocinadorwebremoto" class="k-input CuadroTexto dirwebremota" /><br />
+            <label for="telefonodecontacto">Teléfono de Contacto: </label><input type="text" id="patrocinadortflremoto" class="k-input CuadroTexto telefonoremoto2" /><br />
+            <label for="email">E-Mail: </label><input type="text" id="patrocinadoremailremoto" class="k-input CuadroTexto emailremoto" /><br />
+        </div>
+
+        <center>
+            <input type="button" value="Crear" id="BotonAceptarVentanaCrearPatrocinador" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaCrearPatrocinador" class="k-button FuncionBotonCancelarProveedores" />          
         </center>
     </div>
     

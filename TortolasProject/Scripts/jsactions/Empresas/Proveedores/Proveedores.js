@@ -226,10 +226,11 @@
 
     });
 
-    //Boton Nueva Asociacion//
+        //Boton Nuevo Proveedor//
 
     $("#BotonNuevoProveedor").click(function () {
 
+        $(".VisibilidadTelefonodeContacto").show();
 
         wcrearProveedor.center();
 
@@ -248,7 +249,7 @@
         $("#VentanaEmpresasRemota").data("kendoWindow").open();
     });
 
-    //Boton Crear Asociacion//
+    //Boton Crear Proveedor//
 
     $("#BotonAceptarVentanaCrearProveedor").click(function () {
 

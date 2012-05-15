@@ -132,5 +132,31 @@ namespace TortolasProject.Models.Repositorios
         {
             return mtbMalagaDB.tbPatrocinador.ToList();
         }
+
+        public tbPatrocinador buscarpat(Guid idpat)
+        {
+            return mtbMalagaDB.tbPatrocinador.Where(patrocinador => patrocinador.FKCodigoEmpresa == idpat).Single();
+        }
+
+        public void updatePat(tbPatrocinador pat)
+        {
+            tbPatrocinador original = buscarpat(pat.FKCodigoEmpresa);
+
+            original.LocalizacionPublicidad = pat.LocalizacionPublicidad;
+
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        public void deletePat(Guid id)
+        {
+            mtbMalagaDB.tbPatrocinador.DeleteOnSubmit(buscarpat(id));
+            salvar();
+        }
+
+        public void createPat(tbPatrocinador pat)
+        {
+            mtbMalagaDB.tbPatrocinador.InsertOnSubmit(pat);
+            salvar();
+        }
     }
 }
