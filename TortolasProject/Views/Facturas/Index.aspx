@@ -21,7 +21,7 @@
                 <li id="nuevaFacturaButtonNav"><%: Html.ActionLink("Nueva Factura", "nuevaFactura", "Facturas") %></li>
                 <li id="ingresosButtonNav">Ingresos</li>
                 <li id="gastosButtonNav">Gastos</li>
-                <li id="movimientosButtonNav">Movimientos</li>
+                <li id="movimientosButtonNav"><%: Html.ActionLink("Movimientos", "Movimientos", "Facturas") %></li>
                 <li id="graficosContablesButtonNav">Gráficos contables</li>
             </ul>
             <div id="FacturasFilter">Filtro ></div>
