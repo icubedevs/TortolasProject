@@ -69,6 +69,7 @@
     <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
     <Compile Include="Controllers\AsociacionesController.cs" />
+    <Compile Include="Controllers\ConveniosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\PublicidadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -646,6 +648,7 @@
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
+    <Content Include="Scripts\jsactions\Empresas\Convenios\Convenios.js" />
     <Content Include="Scripts\jsactions\Empresas\Patrocinadores\Patrocinadores.js" />
     <Content Include="Scripts\jsactions\Empresas\Proveedores\Proveedores.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />

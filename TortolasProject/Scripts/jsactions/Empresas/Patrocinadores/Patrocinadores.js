@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
-
+    
+    var idPublicidad = null;
     var idPatrocinador = null;
     var datasourcepat = new kendo.data.DataSource
     ({
@@ -23,12 +24,13 @@
 
     $("#PatrocinadoresGrid").kendoGrid //Creo el kendo Grid
     ({
-        //height: 400,
         dataSource: datasourcepat,
         selectable: true,
         pageable: true,
         sortable: true,
         filterable: true,
+        detailTemplate: kendo.template($("#detallepublicidad").html()),
+        detailInit: funciondetallepublicidad,
         columns: [
             {
                 field: "NombrePatrocinador",
@@ -65,6 +67,58 @@
 
     });
 
+    function funciondetallepublicidad(e) {
+
+        
+        var datasourcepub = new kendo.data.DataSource
+        ({
+            transport:
+            {
+                read:
+                {
+                    url: "Publicidad/LeerTodos",
+                    data: { idPat: e.data.idPatrocinador },
+                    datatype: "json",
+                    type: "POST"
+                },
+            },
+            schema:
+        {
+            
+            model:
+             {
+                 id: "idPublicidad",
+             }
+        }
+        });
+
+        $(".PublicidadGrid").kendoGrid //Creo el kendo Grid
+        ({
+            dataSource: datasourcepub,
+            selectable: true,
+            sortable: true,
+            filterable: true,
+            columns: [
+            {
+                field: "Loc",
+                title: "Situación"
+            },
+            {
+                field: "Caracteristicas",
+                title: "Características"
+            },
+            {
+                title: "Editar",
+                command: { text: "Editar", className: "botonEditarFilaPublicidad" }
+            },
+            {
+                title: "Eliminar",
+                command: { text: "Eliminar", className: "botonEliminarFilaPublicidad" }
+            }
+        ],
+        });
+    }
+
     // VENTANAS (POP-UP) //
 
     //Editar//
@@ -76,8 +130,6 @@
             modal: true,
             visible: false,
             resizable: false,
-            width: 600,
-            height: 400
         }).data("kendoWindow");
 
     // Eliminar //
@@ -89,8 +141,6 @@
             modal: true,
             visible: false,
             resizable: false,
-            width: 600,
-            height: 400
         }).data("kendoWindow");
 
     // Crear //
@@ -102,13 +152,33 @@
             modal: true,
             visible: false,
             resizable: false,
-            width: 600,
-            height: 400
         }).data("kendoWindow");
 
     $("#PatrocinadoresNav").live("click", function () {  //Actualiza los datos al pulsar en su pestaña.
         datasourcepat.read();
     });
+
+    //VENTANA EDITAJE PUBLICIDAD//
+
+    var weditarPublicidad = $("#VentanaEditarPublicidad")
+        .kendoWindow
+        ({
+            title: "Editar Publicidad",
+            modal: true,
+            visible: false,
+            resizable: false
+        }).data("kendoWindow");
+
+    //VENTANA CREACION PUBLICIDAD//
+
+    var wcrearPublicidad = $("#VentanaCrearPublicidad")
+        .kendoWindow
+        ({
+            title: "Crear Publicidad",
+            modal: true,
+            visible: false,
+            resizable: false
+        }).data("kendoWindow");
 
     // FUNCIONES //
 
@@ -168,6 +238,8 @@
         weditarPatrocinador.close();
         weliminarPatrocinador.close();
         wcrearPatrocinador.close();
+        weditarPublicidad.close();
+
     });
 
     //Boton Aceptar//
@@ -288,5 +360,66 @@
         });
 
     });
+    //Funcionnes: Botones Grid Publicidad//
+    
+    //Editar//
+    
+    $(".botonEditarFilaPublicidad").live("click", function () {
+
+        /*var fila = $("#PublicidadGrid").find("tbody tr.k-state-selected");
+        var filajson = $("#PublicidadGrid").data("kendoGrid").dataItem(fila).toJSON();
+        alert("maricon");
+        idPublicidad = datasourcepub.getByUid(fila.attr("data-uid")).idPublicidad;
+        
+
+        $("#locpublicidadeditar").val(filajson.NombrePatrocinador);
+        $("#caracpublicidadeditar").val(filajson.LocalizacionP);*/
+
+        weditarPublicidad.center();
+
+        weditarPublicidad.open();
+    });
+
+    //Eliminar//
+    
+    $(".botonEliminarFilaPublicidad").live("click", function () {
+
+        
+    });
+
+    //Crear//
+
+    $(".BotonNuevaPublicidad").live("click", function () {
+
+        wcrearPublicidad.center();
+
+        wcrearPublicidad.open();
+    });
+
+    //Funciones: Botones Ventana Editar PUBLICIDAD //
+
+    $("#BotonAceptarVentanaEditarPublicidad").live("click", function () {
+        var datos = {};
+        //Coger datos
+
+        datos["locupdate"] = $("#locpublicidadeditar").val();
+        datos["idpublicidad"] = idPublicidad;
+        alert(idPublicidad);
+        datos["caracpublicidadeditar"] = $("#caracpublicidadeditar").val();
+
+        $.ajax(
+            {
+                url: "Publicidad/UpdatePublicidad",
+                type: "POST",
+                data: datos,
+                success: function () {
+                    $(".CuadroTexto").prop('disabled', false); //Devuelve poder editar los campos en la ventana editar
+                    datasourcepub.read();
+                    weditarPublicidad.close();
+                },
+                async: false
+            });
+    });
+
 
 });

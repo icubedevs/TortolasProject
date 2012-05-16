@@ -158,5 +158,61 @@ namespace TortolasProject.Models.Repositorios
             mtbMalagaDB.tbPatrocinador.InsertOnSubmit(pat);
             salvar();
         }
+
+        // PUBLICIDAD //
+
+        public IList<tbPublicidad> ListarPublicidad(Guid id)
+        {
+            return mtbMalagaDB.tbPublicidad.Where(publicidad => publicidad.FKCodigoEmpresa == id).ToList();
+        }
+
+        public tbPublicidad buscarpub(Guid idpat)
+        {
+            return mtbMalagaDB.tbPublicidad.Where(patrocinador => patrocinador.FKCodigoEmpresa == idpat).Single();
+        }
+
+        public void updatePub(tbPublicidad pub)
+        {
+            tbPublicidad original = buscarpub(pub.idPublicidad);
+
+            original.Caracteristicas = pub.Caracteristicas;
+            original.LocalizacionPublicidad = pub.LocalizacionPublicidad;
+
+
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        // CONVENIOS //
+
+        public IList<tbConvenio> ListarConvenios()
+        {
+            return mtbMalagaDB.tbConvenio.ToList();
+        }
+
+        public tbConvenio buscarcon(Guid id)
+        {
+            return mtbMalagaDB.tbConvenio.Where(convenios => convenios.FKCodigoEmpresa == id).Single();
+        }
+
+        public void updateCon(tbConvenio con)
+        {
+            tbConvenio original = buscarcon(con.FKCodigoEmpresa);
+
+            original.DescripcionOferta = con.DescripcionOferta;
+
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        public void deleteCon(Guid id)
+        {
+            mtbMalagaDB.tbConvenio.DeleteOnSubmit(buscarcon(id));
+            salvar();
+        }
+
+        public void createCon(tbConvenio con)
+        {
+            mtbMalagaDB.tbConvenio.InsertOnSubmit(con);
+            salvar();
+        }
     }
 }

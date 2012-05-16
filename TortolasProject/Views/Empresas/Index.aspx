@@ -12,6 +12,7 @@
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Asociaciones/Asociaciones.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Proveedores/Proveedores.js") %>" type="text/javascript"></script>
     <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Patrocinadores/Patrocinadores.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jsactions/Empresas/Convenios/Convenios.js") %>" type="text/javascript"></script>
 </asp:Content>
 
 <asp:Content ID="EmpresasIndexTitle" ContentPlaceHolderID="TitleContent" runat="server">
@@ -32,6 +33,9 @@
             </li>
             <li id="PatrocinadoresNav">
                 Patrocinadores
+            </li>  
+            <li id="ConveniosNav">
+                Convenios
             </li>  
         </ul> 
         <div class="pestana" id="empresas">
@@ -69,11 +73,27 @@
             <div id="PatrocinadoresGrid">
             
             </div>
+            <script type="text/x-kendo-template" id="detallepublicidad">
+                <div class="PublicidadGrid">
+                </div>
+                <br />
+                <input type="button" value="Nuevo Elemento Publicitario" class="k-button BotonNuevaPublicidad" />
+            </script>
             <br />
             <div id="PatrocinadorHerramientasContent">
                 <input type="button" value="Nueva Patrocinador" id="BotonNuevoPatrocinador" class="k-button" />
             </div>
         </div> 
+        <div class="pestana" id="convenios">
+            <img src="../../Content/images/proveedores.jpg"  /> <!--Fuente: Calibri, size: 24-->
+            <div id="ConveniosGrid">
+            
+            </div>
+            <br />
+            <div id="ConveniosHerramientasContent">
+                <input type="button" value="Nueva Proveedor" id="BotonNuevoConvenio" class="k-button" />
+            </div>
+        </div>
           
     </div> 
     <br />
@@ -244,6 +264,35 @@
         <center>
             <input type="button" value="Crear" id="BotonAceptarVentanaCrearPatrocinador" class="k-button" />
             <input type="button" value="Cancelar" id="BotonCancelarVentanaCrearPatrocinador" class="k-button FuncionBotonCancelarProveedores" />          
+        </center>
+    </div>
+
+    <div id="VentanaEditarPublicidad">
+        <b><h5>Datos Elemento Publicitario</h5></b>
+        <br />
+        <label for="loca">Localización: </label><input type="text" id="locpublicidadeditar" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="carac">Características: </label><input type="text" id="caracpublicidadeditar" class="k-input CuadroTexto NoModificable" /><br />
+        <br />
+        <hr />
+        <br />
+        <center>
+            <input type="button" value="Aceptar" id="BotonAceptarVentanaEditarPublicidad" class="k-button" />
+            <input type="button" value="Cancelar" id="BotonCancelarVentanaEditarPublicidad" class="k-button FuncionBotonCancelarProveedores" />    
+        </center>
+    </div>
+
+    <div id="VentanaCrearPublicidad">
+        <b><h5>Datos Elemento Publicitario</h5></b>
+        <br />
+        <label for="loca">Localización: </label><input type="text" id="Text1" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="carac">Características: </label><input type="text" id="Text2" class="k-input CuadroTexto NoModificable" /><br />
+        <label for="cif">CIF Patrocinador: </label><input type="text" id="cifpatrocinador" class="k-input CuadroTexto NoModificable" /><br />
+        <br />
+        <hr />
+        <br />
+        <center>
+            <input type="button" value="Aceptar" id="Button1" class="k-button" />
+            <input type="button" value="Cancelar" id="Button2" class="k-button FuncionBotonCancelarProveedores" />    
         </center>
     </div>
     
