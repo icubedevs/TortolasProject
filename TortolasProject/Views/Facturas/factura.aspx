@@ -19,8 +19,8 @@
 <% String estado = Model.vista; %>
 <input type="hidden" id='estadoPage' value='<% Response.Write(estado); %>' />
 <input type="hidden" id='idFactura' value='<% Response.Write(Model.idFactura); %>' />
-    <div id='facturaForm'>
-        <div id='facturaHeader'>
+    <div id='facturaForm' class='k-header'>
+        <div id='facturaHeader' class='k-content'>
             <div id='volverButton' class='k-button'></div>
             <div id='poliButton' class='k-button'></div>
             <div id='eliminarButton' class='k-button'></div>
@@ -42,7 +42,6 @@
                             <li>Cursillos</li>
                             <li>Pedidos globales</li>
                             <li>Pedidos usuario</li>
-                            <li>Artículos (QUITAR)</li>
                             <li>Empresas</li>
                             <li>Proveedores</li>
                             <li>Contratos</li>
@@ -61,9 +60,6 @@
                         </div>
                         <div id='pedidosUsuarioDiv'>
                             <div id='pedidosUsuarioGrid'></div>
-                        </div>
-                        <div id='articulosDiv'>
-                            <div id='articulosGrid'></div>
                         </div>
                         <div id='empresasDiv'>
                             <div id='empresasGrid'></div>
@@ -126,9 +122,17 @@
                 </div>
             </div>
         </div>
-
-        <div id='nuevaLineaButton'>Nueva línea</div>
+        
         <div id='facturaLineasFacturaGrid'></div>
+        <div id='conceptoLineaFacturaWindow'>
+            <div id='conceptoLineaDiv'>
+                <div id='conceptoLineaLabel'>Concepto</div>
+                <input id='conceptoLinea' type='text' required />
+            </div>
+            <div id='articulosDiv'>
+                            <div id='articulosGrid'></div>
+            </div>
+        </div>
 
         <div id='totalFacturaDiv'>
                 <div id='baseImponibleLabel'>Base imponible</div>
