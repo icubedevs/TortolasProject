@@ -36,10 +36,6 @@
         });
     });
 
-    $("#movimientosButtonNav").click(function () {
-        $("#FacturasContainer").html("Moviemientos view");
-    });
-
     $("#graficosContablesButtonNav").click(function () {
         $("#FacturasContainer").html("Graficos contables view");
     });
