@@ -44,15 +44,24 @@ namespace TortolasProject.Models.Repositorios
 
         }
 
-        public void setEstado(tbEstadoFactura estado, Guid id)
+        public void setEstadoFactura(tbEstadoFactura estado, Guid id)
         {
             tbFactura f = leerFactura(id);
-            f.FKEstado = estado.idEstadoFactura;
+            f.FKEstado = estado.idEstadoFactura;            
             save();
 
         }
 
-        public String getEstado(Guid id)
+        public tbEstadoFactura leerEstadoByNombre(String Nombre)
+        {
+            return mtbMalagaDB.tbEstadoFactura.Where(e => e.Nombre.Equals(Nombre)).Single();
+        }
+
+        public String leerEstadoByGuid(Guid id)
+        {
+            return mtbMalagaDB.tbEstadoFactura.Where(e => e.idEstadoFactura.Equals(id)).Single().Nombre;
+        }
+        public String getEstadoFactura(Guid id)
         {
             tbFactura f = leerFactura(id);
 
@@ -201,10 +210,20 @@ namespace TortolasProject.Models.Repositorios
             save();
         }
 
+        public Boolean esMovimientoGasto(Guid idMovimiento)
+        {
+            return mtbMalagaDB.tbMovimientoGasto.Any(m => m.idMovimientoGasto.Equals(idMovimiento));
+        }
+
+        public Boolean esMovimientoIngreso(Guid idMovimiento)
+        {
+            return mtbMalagaDB.tbMovimientoIngreso.Any(m => m.idMovimientoIngreso.Equals(idMovimiento));
+        }
 
         // 
         //  Funciones auxiliares
         //
+
         private void save()
         {
             mtbMalagaDB.SubmitChanges();
