@@ -10,7 +10,7 @@
             }
         },
         schema:
-            {   
+            {
                 model:
                 {
                     id: "idFactura"
@@ -22,10 +22,6 @@
         dataSource: dataSource,
         columns: [
             {
-                field: "idFactura",
-                title: "idFactura"
-            },
-            {
                 field: "fecha",
                 title: "Fecha"
             },
@@ -36,6 +32,10 @@
             {
                 field: "total",
                 title: "Total"
+            },
+            {
+                field: "estadoNombre",
+                title: "Estado factura"
             }
         ]
     });
