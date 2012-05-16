@@ -73,6 +73,9 @@ function estadoDetallesFactura() {
     vieneDeDetalles = false;
 
     // Ocultar campos
+    if(factura.NombreEstado == "Pagado") $("#poliButton").hide();   
+    else $("#poliButton").show();
+
     $("#eliminarButton").hide();
     $("#fechaFacturaContainer").hide();
     $("#relacionesButton").hide();
@@ -88,7 +91,7 @@ function estadoDetallesFactura() {
     $("#volverButton").show();
     $("#fechaFacturaLabel").show();
     $("#conceptoFacturaLabel").show();
-    $("#poliButton").show();
+    
     $("#relacionDiv").show();
     $("#estadoFacturaLabel").html(factura.NombreEstado);
     $("#estadoFacturaLabel").show();
@@ -277,6 +280,7 @@ function tablaEditable() {
     // Tabla de facturas
     $("#facturaLineasFacturaGrid").kendoGrid({
         dataSource: dataSource,
+        toolbar: ["create"],
         columns: [
                 {
                     field: "concepto",
@@ -296,8 +300,9 @@ function tablaEditable() {
                     field: "total"
                 },
                 {
-                    command: "destroy" , text: "Eliminar" ,
-                    title: " "
+                    command: "destroy",
+                    title: " ",
+                    width: "200px"
                 }
             ],
            editable: true
@@ -307,6 +312,7 @@ function tablaEditable() {
 
     tabla.refresh();
 }
+
 /* #########    INICIALIZAR FACTURA     ################################# */
 function inicializarFactura()
 {
@@ -391,11 +397,6 @@ function inicializar() {
         dataSource: dsEstadoFactura
     });
 
-    $("#nuevaLineaButton").click(function () {
-        tabla.addRow();
-    });
-
-
     $("#descartarFacturaButton").click(function () {
         if (estadoPagina == "nueva") {
             volverAtras();            
@@ -410,85 +411,79 @@ function inicializar() {
         }
         else
         {
-            status.empty();
-            var estadoF = $("#estadoFacturaCombobox").val();
-            var concepto = $('#conceptoFactura').val();
-            var total = $('#totalFactura').val();
+            if( ($("#estadoFacturaDropDownList").data("kendoDropDownList").text() != "Pagado") || confirm("Ha indicado que la factura está pagada. Si lo confirma no podrá modificarla ni eliminarla en el futuro. \n ¿Está seguro que desea establecer la factura como pagada?") )
+            {
+                    status.empty();
+                    var estadoF = $("#estadoFacturaCombobox").val();
+                    var concepto = $('#conceptoFactura').val();
+                    var total = $('#totalFactura').val();
 
 
 
-            var url = "";
-            if (estadoPagina == "nueva") {
-                url = "nuevaFactura";
-
-                // Obtener líneas de factura
-                var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
-                var lineasFactura = new Array();
-                for (var i = 0; i < lineasFacturaRaw.length; i++) {
-                    lineasFactura.push({
-                        "concepto": lineasFacturaRaw[i].concepto,
-                        "unidades": lineasFacturaRaw[i].unidades,
-                        "precio": lineasFacturaRaw[i].precio
-                    });
-                }
-                var datos = {
-                    estado: $("#estadoFacturaDropDownList").data("kendoDropDownList").value(),
-                    concepto: concepto,
-                    lineasFactura: kendo.stringify(lineasFactura),
-                    idRelacion: idRelacion,
-                    tipo: tipo
-                };
-            } else if (estadoPagina == "editar") {
-                url = "../editarFactura";
-
-                // Obtener líneas de factura
-                var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
-                var lineasFactura = new Array();
-                for (var i = 0; i < lineasFacturaRaw.length; i++) {
-                    lineasFactura.push({
-                        "idLineaFactura": lineasFacturaRaw[i].idLineaFactura,
-                        "concepto": lineasFacturaRaw[i].concepto,
-                        "unidades": lineasFacturaRaw[i].unidades,
-                        "precio": lineasFacturaRaw[i].precio
-                    });
-                }
-
-                var datos = {
-                    idFactura: idFactura,
-                    estado: $("#estadoFacturaDropDownList").data("kendoDropDownList").value(),
-                    concepto: concepto,
-                    lineasFactura: kendo.stringify(lineasFactura),
-                    idRelacion: idRelacion,
-                    tipo: tipo,
-                    fecha: $("#fechaFacturaInput").val()
-                };
-            }
-
-            if (lineasFactura.length == 1 && lineasFactura[0].concepto == "") {
-                status.text("Introduzca al menos una línea de factura completa");
-            }
-            else {
-                $.post(url, datos, function (data) {
+                    var url = "";
                     if (estadoPagina == "nueva") {
-                        window.location.replace("../Facturas");
+                        url = "nuevaFactura";
+
+                        // Obtener líneas de factura
+                        var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
+                        var lineasFactura = new Array();
+                        for (var i = 0; i < lineasFacturaRaw.length; i++) {
+                            lineasFactura.push({
+                                "concepto": lineasFacturaRaw[i].concepto,
+                                "unidades": lineasFacturaRaw[i].unidades,
+                                "precio": lineasFacturaRaw[i].precio
+                            });
+                        }
+                        var datos = {
+                            estado: $("#estadoFacturaDropDownList").data("kendoDropDownList").value(),
+                            concepto: concepto,
+                            lineasFactura: kendo.stringify(lineasFactura),
+                            idRelacion: idRelacion,
+                            tipo: tipo,
+                            fecha: $("#fechaFacturaInput").val()
+                        };
                     } else if (estadoPagina == "editar") {
-                        estadoDetallesFactura();
+                        url = "../editarFactura";
+
+                        // Obtener líneas de factura
+                        var lineasFacturaRaw = $("#facturaLineasFacturaGrid").data("kendoGrid").dataSource.view();
+                        var lineasFactura = new Array();
+                        for (var i = 0; i < lineasFacturaRaw.length; i++) {
+                            lineasFactura.push({
+                                "idLineaFactura": lineasFacturaRaw[i].idLineaFactura,
+                                "concepto": lineasFacturaRaw[i].concepto,
+                                "unidades": lineasFacturaRaw[i].unidades,
+                                "precio": lineasFacturaRaw[i].precio
+                            });
+                        }
+
+                        var datos = {
+                            idFactura: idFactura,
+                            estado: $("#estadoFacturaDropDownList").data("kendoDropDownList").value(),
+                            concepto: concepto,
+                            lineasFactura: kendo.stringify(lineasFactura),
+                            idRelacion: idRelacion,
+                            tipo: tipo,
+                            fecha: $("#fechaFacturaInput").val()
+                        };
                     }
-                });
+
+                    if (lineasFactura.length <= 1 && lineasFactura[0].concepto == "") {
+                        status.text("Introduzca al menos una línea de factura completa");
+                    }
+                    else {
+                        $.post(url, datos, function (data) {
+                            if (estadoPagina == "nueva") {
+                                window.location.replace("../Facturas");
+                            } else if (estadoPagina == "editar") {
+                                estadoDetallesFactura();
+                            }
+                        });
+                    }
             }
         }
     });
 
-
-    // Nueva línea de factura
-    $("facturaAñadirNuevaLineaFacturaButton").click(function () {
-        alert("Volver atrás");
-    });
-
-    // Al pulsar en concepto
-    $(".k-grid-edit-row .k-textbox").click(function () {
-        //alert("click");
-    });
 
     // Cambio en unidades
     $("#facturaLineasFacturaGrid .k-grid-content .k-edit-cell .k-numerictextbox input").change(function () {
@@ -528,23 +523,18 @@ function inicializar() {
                 tipo = "pedidoUsuario";
                 idRelacion = fila.idPedidoUsuario;
                 $("#relacionDiv").html("<p>" + fila.idPedidoUsuario + "</p><p>" + fila.nickname);
-                break;
-            case 5: // Artículo (QUITAR)
-                tipo = "articulo";
-                idRelacion = fila.idArticulo;
-                $("#relacionDiv").html(fila.idArticulo);
-                break;
-            case 6:
+                break;           
+            case 5:
                 tipo = "empresa";
                 idRelacion = fila.idEmpresa;
                 $("#relacionDiv").html(fila.Nombre);
                 break;
-            case 7:
+            case 6:
                 tipo: "proveedor";
                 idRelacion = fila.idProveedores;
                 $("#relacionDiv").html(fila.Nombre);
                 break;
-            case 8:
+            case 7:
                 tipo = "contrato";
                 idRelacion = fila.idContrato;
                 $("#relacionDiv").html("Contrato: " + fila.NombreEmpresa);
@@ -566,7 +556,7 @@ function inicializar() {
     });
 
     datosVentana();
-
+    ventanaConceptoLineaFactura();
 }
 
 /* ##############   VENTANA ########################################################################## */
@@ -730,27 +720,7 @@ function datosVentana() {
         filterable: true
     });
 
-    // GRID artículos
-    dsArticulos = new kendo.data.DataSource({
-        transport: {
-            read: {
-                url: "../../../Facturas/articulosListado",
-                dataType: "json",
-                type: "POST"
-            }
-        }
-    });
-
-    $("#articulosGrid").kendoGrid({
-        dataSource: dsArticulos,
-        columns: [
-            {
-                field: "Nombre",
-                title: "Nombre"
-            }
-        ],
-            selectable: true
-        });
+   
 
         // GRID empresas
         dsEmpresas = new kendo.data.DataSource({
@@ -790,6 +760,47 @@ function datosVentana() {
         });
     }
 
+/* ##############   VENTANA CONCEPTO ################################################################# */
+function ventanaConceptoLineaFactura()
+{
+    $("#conceptoLineaFacturaWindow").kendoWindow({
+        width: "600px",
+        title: "Concepto",
+        visible: false,
+        modal: true
+    });
+
+    // Al pulsar en concepto
+    $(".k-grid-content .k-grid-edit-row .k-edit-cell .k-textbox").click(function () {
+        alert("Concpeto línea");
+        w = $("#conceptoLineaFacturaWindow").data("kendoWindow");
+        w.center();
+        w.open();
+    });
+
+     // GRID artículos
+    dsArticulos = new kendo.data.DataSource({
+        transport: {
+            read: {
+                url: "../../../Facturas/articulosListado",
+                dataType: "json",
+                type: "POST"
+            }
+        }
+    });
+
+    $("#articulosGrid").kendoGrid({
+        dataSource: dsArticulos,
+        columns: [
+            {
+                field: "Nombre",
+                title: "Nombre"
+            }
+        ],
+            selectable: true
+        });
+
+}
 /* ##############    AUXILIARES ###################################################################### */
 
 function obtenerTotalGrid() {
@@ -812,16 +823,12 @@ function actualizarTotal(bi, t) {
 }
 
 function volverAtras() {
-    if (estadoPagina == "nueva") 
-    {
-        history.back();
-    }
-    else if(estadoPagina == "editar" && vieneDeDetalles)
+    if(estadoPagina == "editar" && vieneDeDetalles)
     {
         estadoDetallesFactura();
     }
-    else
+    else 
     {
-        window.location.replace("../../Facturas");
+        history.back();
     }
 }
