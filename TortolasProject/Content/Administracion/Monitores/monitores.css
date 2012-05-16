@@ -13,6 +13,7 @@
     float: left;
     padding-left: 15px;
     padding-top: 20px;
+    width:300px;
 }
 
 .k-container
@@ -37,3 +38,10 @@
     width: inherit;
     height: inherit;
 }
+
+.formulario input 
+{
+    margin: 10px 0px 8px 0px;
+}
+
+

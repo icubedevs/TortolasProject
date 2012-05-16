@@ -1,12 +1,26 @@
 ﻿$(document).ready(function () {
 
+    // Variables Auxiliares
     var idMonitor = null;
+
+    // Validadores de creacion / edicion
+    var validadorCrear = $("#camposcrear").kendoValidator({
+        messages: {                        
+            required: "Este campo es obligatorio"           
+        }
+    }).data("kendoValidator");
+
+    var validadorEditar = $("#camposedicion").kendoValidator({
+        messages: {                        
+            required: "Este campo es obligatorio"           
+        }
+    }).data("kendoValidator");
 
     var dataSourceMonitores = new kendo.data.DataSource({
         transport: {
             type: "json",
             read: {
-                url: "Monitores/obtenerTodos",
+                url: "obtenerTodos",
                 type: "POST",
                 dataType: "json"
             },
@@ -22,8 +36,8 @@
                             resizable: false,
                             scrollable: false,
                             movable: false,
-                            width: 500,
-                            height: 300
+                            width: 550,
+                            height: 400
                         }).data("kendoWindow");
 
     var ventanaCrear = $("#crearMonitor")
@@ -34,8 +48,8 @@
                             resizable: false,
                             scrollable: false,
                             movable: false,
-                            width: 500,
-                            height: 300
+                            width: 550,
+                            height: 400
                         }).data("kendoWindow");
 
 
@@ -45,42 +59,201 @@
         sortable: true,    
         selectable: true,               
         scrollable:false, 
+        filterable: true,
         toolbar: kendo.template($("#templateToolbarMonitor").html()),
-        height: 200,
+        detailTemplate: kendo.template($("#templateDetailMonitor").html()),
+        detailInit : inicializarTabla,        
         columns: [
                     {
                         field: "nombre",
-                        title: "Nombre"
+                        title: "Nombre",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
 
                     },
                     {
                         field: "dni",
-                        title: "DNI"
+                        title: "DNI",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
                     },
                     {
                         field: "apellidos",
-                        title: "Apellidos"
+                        title: "Apellidos",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
                     },
                     {
                         field: "email",
-                        title: "Email"
+                        title: "Email",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
                     },
                     {
                         field: "direccion",
-                        title: "Direccion"
+                        title: "Direccion",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
                     },
                     {
                         field: "telefono",
-                        title: "Telefono"
+                        title: "Telefono",
+                        filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
                     },
                     {
-                        command: { text: "editar", className: "editarfila" }
-                    },
-                    {
-                        command: { text: "eliminar", className: "eliminarfila" }
+                        title:"Herramientas",
+                        command:
+                        [  
+                          { text: "editar", className: "editarfila" } ,
+                          { text: "eliminar", className: "eliminarfila" } 
+                        ]
                     }
+                    
             ]
     });
+
+    function inicializarTabla(e){
+        
+        $(".tabsMonitor").kendoTabStrip();
+
+        $(".cursillosDeMonitor").kendoGrid({
+                    dataSource: { 
+                        transport:{
+                            read:{
+                                url: "Monitores/cursillosMonitor",
+                                data: { idMonitor : e.data.idMonitor },
+                                dataType: "json",
+                                type: "POST"
+                            }
+                        },
+                    },
+                    pageable: true,        
+                    sortable: true,    
+                    selectable: true,               
+                    scrollable:true,
+                    filterable:true,
+                    detailTemplate: kendo.template($("#templateDetailCursillo").html()),                                         
+                    columns: [
+                                {
+                                    field: "Titulo",
+                                    title: "Titulo",
+                                    filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
+                                },
+                                {
+                                    field: "Lugar",
+                                    title: "Lugar",
+                                    filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
+                                },
+                                {
+                                    field: "Actividad",
+                                    title: "Actividad",
+                                    filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
+                                },
+                                {
+                                    field: "FechaAperturaInscripcion",
+                                    title: "Fecha Apertura",
+                                    width: 50,
+                                    filterable: {
+                                    extra: false, //do not show extra filters
+                                    operators: { // redefine the string operators
+                                        string: {
+                                            eq: "Es igual a..",
+                                            neq: "No es igual a...",
+                                            startswith: "Empieza por...",
+                                            contains: "Contiene"
+                                        }
+                                    }
+                                }
+                                }                                                    
+                        ]
+        });
+    }
+
 
     $("#subirFoto").kendoUpload({
         async: {
@@ -143,8 +316,7 @@
         $("#direccionedit").val(filaJson.direccion);
         $("#emailedit").val(filaJson.email);
         $("#telefonoedit").val(filaJson.telefono);
-       
-        
+               
         if(foto!=null){
             $("#fotoMonitor").attr("src","/Content/images/Monitores/"+foto);
         }
@@ -161,30 +333,34 @@
     // Boton de confirmacion de edicion de campos
     $("#botonEditar").click(function () {
 
-        var arrayEnviar = {};
+        if(validadorEditar.validate()){
 
-        // Obtenemos los campos
-        arrayEnviar["nombre"] = $("#nombreedit").val();
-        arrayEnviar["apellidos"] = $("#apellidosedit").val();
-        arrayEnviar["dni"] = $("#dniedit").val();
-        arrayEnviar["direccion"] = $("#direccionedit").val();
-        arrayEnviar["email"] = $("#emailedit").val();
-        arrayEnviar["telefono"] = $("#telefonoedit").val();
-        arrayEnviar["idMonitor"] = idMonitor;
-        var url = $("#fotoMonitor").attr("src").split("/");
-        arrayEnviar["foto"] = url[4];
+            var arrayEnviar = {};
+
+            // Obtenemos los campos
+            arrayEnviar["nombre"] = $("#nombreedit").val();
+            arrayEnviar["apellidos"] = $("#apellidosedit").val();
+            arrayEnviar["dni"] = $("#dniedit").val();
+            arrayEnviar["direccion"] = $("#direccionedit").val();
+            arrayEnviar["email"] = $("#emailedit").val();
+            arrayEnviar["telefono"] = $("#telefonoedit").val();
+            arrayEnviar["idMonitor"] = idMonitor;
+            var url = $("#fotoMonitor").attr("src").split("/");
+            arrayEnviar["foto"] = url[4];
         
-        $.ajax(                                         // Enviamos a databasequery los datos
-                {
-                url: "Monitores/editar",
-                type: "POST",
-                data: arrayEnviar,
-                success: function () {
-                    dataSourceMonitores.read();
-                    wnd.close();
-                },
-                async: false
-            });
+            $.ajax(                                         // Enviamos a databasequery los datos
+                    {
+                    url: "Monitores/editar",
+                    type: "POST",
+                    data: arrayEnviar,
+                    success: function () {
+                        dataSourceMonitores.read();
+                        wnd.close();
+                    },
+                    async: false
+                });
+
+         }
     });
 
     // Boton de Eliminacion de la fila
@@ -223,33 +399,35 @@
     // Boton de confirmacion de creacion
     $("#botonCrear").click(function(){
     
-        var arrayEnviar = {};
+        if(validadorCrear.validate()){
 
-        // Obtenemos los campos
-        arrayEnviar["nombre"] = $("#nombrenuevo").val();
-        arrayEnviar["apellidos"] = $("#apellidosnuevo").val();
-        arrayEnviar["dni"] = $("#dninuevo").val();
-        arrayEnviar["direccion"] = $("#direccionnuevo").val();
-        arrayEnviar["email"] = $("#emailnuevo").val();
-        arrayEnviar["telefono"] = $("#telefononuevo").val();        
-        var url = $("#fotoMonitorNuevo").attr("src").split("/");
-        arrayEnviar["foto"] = url[5];
+            var arrayEnviar = {};
+
+            // Obtenemos los campos
+            arrayEnviar["nombre"] = $("#nombrenuevo").val();
+            arrayEnviar["apellidos"] = $("#apellidosnuevo").val();
+            arrayEnviar["dni"] = $("#dninuevo").val();
+            arrayEnviar["direccion"] = $("#direccionnuevo").val();
+            arrayEnviar["email"] = $("#emailnuevo").val();
+            arrayEnviar["telefono"] = $("#telefononuevo").val();        
+            var url = $("#fotoMonitorNuevo").attr("src").split("/");
+            arrayEnviar["foto"] = url[5];
         
-        $.ajax(                                         // Enviamos a databasequery los datos
-                {
-                url: "Monitores/crear",
-                type: "POST",
-                data: arrayEnviar,
-                success: function () {
-                    dataSourceMonitores.read();
-                    ventanaCrear.close();
-                },
-                async: false
-            });
+            $.ajax(                                         // Enviamos a databasequery los datos
+                    {
+                    url: "Monitores/crear",
+                    type: "POST",
+                    data: arrayEnviar,
+                    success: function () {
+                        dataSourceMonitores.read();
+                        ventanaCrear.close();
+                    },
+                    async: false
+                });
+
+          }
     });
 
-
-    
 
     $(".cancelar").live("click", function () {
    
@@ -258,6 +436,49 @@
     });
 
 
+     setTimeout(cargarQtipsMonitores, 3000);
 
+    function cargarQtipsMonitores(){
+        $("#nuevoMonitorToolbar").qtip({
+            content: {
+                text: "Pulse para crear un nuevo Monitor"
+            },
+            position: {
+                my: "top left"
+            }
+        });
+
+        $(".editarfila").qtip({
+            content: {
+                text: "Pulse para editar un Monitor"
+            },
+            position: {
+                my: "top left"
+            }
+        });
+
+        $(".eliminarfila").qtip({
+            content: {
+                text: "Pulse para eliminar un Monitor"
+            },
+            position: {
+                my: "top left"
+            }
+        });
+
+        $("tbody tr").qtip({
+            content: {
+                text: function () {
+                    
+
+                    return "Para ver mas informacion pulse sobre la flecha";
+                }
+            },
+            position: {
+                at: "bottom left"
+            }
+        });
+
+    }
 
 });

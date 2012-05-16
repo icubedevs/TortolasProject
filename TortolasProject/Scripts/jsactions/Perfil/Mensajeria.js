@@ -4,6 +4,23 @@
     // esta mostrando
     var mensajeguardado = null;
 
+    // Para la inicializacion de los editores
+    var contadorventanacrear = 0;
+    var contadorventanaleer = 0;
+
+    // Inicializamos los validadores de formularios
+    var validadorCrear = $("#formularioCrear").kendoValidator({
+        messages: {                        
+            required: "Este campo es obligatorio"           
+        }
+    }).data("kendoValidator");
+
+    var validadorResponder = $("#formularioResponder").kendoValidator({
+       messages: {                        
+            required: "Este campo es obligatorio"           
+        }
+    }).data("kendoValidator");
+
     // Inicializo los DataSource de la pagina
     var dataSourceMensajesNoLeidos = new kendo.data.DataSource({
         transport: {
@@ -39,7 +56,6 @@
                 type: "POST",
                 dataType: "json"
             }
-
         }
     });
 
@@ -56,7 +72,7 @@
     }).data("kendoWindow");
 
     // Inicializo la ventana de mostrar
-    var ventanaCrear = $("#ventanaMostrar").kendoWindow({
+    var ventanaMostrar = $("#ventanaMostrar").kendoWindow({
         title: "Ver Mensaje",
         modal: true,
         visible: false,
@@ -73,12 +89,13 @@
         dataSource: dataSourceDestinatarios,
         dataValueField: "idUsuario",
         dataTextField: "Nombre",
-        suggest: true
+        suggest: true,
+        index:0
     });
 
 
     // Inicializo la tabla de mensajes no leidos
-    $("#tablaMensajesNoLeidos").kendoGrid({
+    var tablaMensajesNoLeidos = $("#tablaMensajesNoLeidos").kendoGrid({
         dataSource: dataSourceMensajesNoLeidos,
         filterable: true,
         selectable: true,
@@ -141,7 +158,7 @@
     });
 
     // Inicializo la tabla de mensajes
-    $("#tablaMensajesLeidos").kendoGrid({
+    var tablaMensajesLeidos = $("#tablaMensajesLeidos").kendoGrid({
         dataSource: dataSourceMensajesLeidos,
         filterable: true,
         selectable: true,
@@ -246,8 +263,11 @@
 
         // El editor debe montarse despues de abrirse la ventana 
         // para que coja el ancho correcto
-        $("#mostrarCuerpoMensajeEditable").empty();
-        $("#mostrarCuerpoMensajeEditable").kendoEditor();
+        contadorventanaleer++;
+        if (contadorventanaleer == 1)
+            $("#mostrarCuerpoMensajeEditable").kendoEditor();
+
+        $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value("<p></p>");
         $(".editorwrapper").hide();
     }
 
@@ -263,7 +283,7 @@
             $("#mostrarCuerpoMensaje").hide();
             $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value("<p></p>");
             $(".editorwrapper").show();
-        },  // MIRA AQUI ISMI, TIENES QUE USAR OTR O TEXTAREA Y CONTROLARLO
+        },  
         function () {
             // Volvemos a modo lectura
             $(".muestra").attr("readonly", true);
@@ -277,19 +297,22 @@
     // Boton para responder desde la lectura del mensaje
 
     $("#mostrarEnviarMensaje").click(function () {
-        var destinatario = mensajeguardado.FKRemitente;
-        var asunto = $("#mostrarAsunto").val();
-        var cuerpoMensaje = $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value();
-        var fecha = hoy();
 
-        $.ajax({
-            url: "Perfil/enviarMensaje",
-            type: "POST",
-            data: { Destinatario: destinatario, Asunto: asunto, CuerpoMensaje: cuerpoMensaje, Fecha: fecha },
-            success: function () {
-                alert("Mensaje enviado correctamente");
-            }
-        });
+    if(validadorResponder.validate()){
+            var destinatario = mensajeguardado.FKRemitente;
+            var asunto = $("#mostrarAsunto").val();
+            var cuerpoMensaje = $("#mostrarCuerpoMensajeEditable").data("kendoEditor").value();
+            var fecha = hoy();
+
+            $.ajax({
+                url: "Perfil/enviarMensaje",
+                type: "POST",
+                data: { Destinatario: destinatario, Asunto: asunto, CuerpoMensaje: cuerpoMensaje, Fecha: fecha },
+                success: function () {
+                    ventanaMostrar.close();
+                }
+            });
+        }
     });
 
     // Inicializamos los combos para elegir los pageSize (mostrar o menos mensajes)
@@ -328,26 +351,38 @@
 
         ventanaCrear.center();
         ventanaCrear.open();
-        $("#campoCuerpoMensaje").empty();
-        $("#campoCuerpoMensaje").kendoEditor();
+
+        contadorventanacrear++;
+
+        // Comprobamos si es la primera vez que se abre
+        if (contadorventanacrear == 1)
+            $("#campoCuerpoMensaje").kendoEditor();
+
+        $("#campoCuerpoMensaje").data("kendoEditor").value("<p></p>");
+
     });
 
     // Boton de enviar mensaje
 
     $("#enviarMensaje").click(function () {
-        var destinatario = $("#campoDestinatario").data("kendoComboBox").value();
-        var asunto = $("#campoAsunto").val();
-        var cuerpoMensaje = $("#campoCuerpoMensaje").data("kendoEditor").value();
-        var fecha = hoy();
 
-        $.ajax({
-            url: "Perfil/enviarMensaje",
-            type: "POST",
-            data: { Destinatario: destinatario, Asunto: asunto, CuerpoMensaje: cuerpoMensaje, Fecha: fecha, Remitente: Remitente },
-            success: function () {
-                ventanaCrear.close();
-            }
-        });
+        if (validadorCrear.validate()) {
+
+            var destinatario = $("#campoDestinatario").data("kendoComboBox").value();
+            var asunto = $("#campoAsunto").val();
+            var cuerpoMensaje = $("#campoCuerpoMensaje").data("kendoEditor").value();
+            var fecha = hoy();
+
+            $.ajax({
+                url: "Perfil/enviarMensaje",
+                type: "POST",
+                data: { Destinatario: destinatario, Asunto: asunto, CuerpoMensaje: cuerpoMensaje, Fecha: fecha },
+                success: function () {
+                    ventanaCrear.close();
+                }
+            });
+        }
+
     });
 
     // Funcion para mostrar la fecha de hoy
@@ -356,7 +391,7 @@
 
         dia = fechaActual.getDate();
         mes = fechaActual.getMonth() + 1;
-        anno = fechaActual.getYear();
+        anno = fechaActual.getFullYear();
 
 
         if (dia < 10) dia = "0" + dia;
@@ -448,7 +483,65 @@
     });
 
 
+    // Zona de qTip
 
+    // Este timeout es para meter un delay debido a que tarda en cargar la tabla
+    setTimeout(cargarQtips, 4000);
+
+    // Prueba a cargar la funcion desde la tabla dicha, al iniciar (como con change)
+
+    function cargarQtips() {
+        $("#tablaMensajesNoLeidos .k-grid-content tr").qtip({
+            content: {
+                text: function () {
+                    var uid = $(this).attr("data-uid");
+
+                    return 'Cuerpo del mensaje:<br><i>"' + dataSourceMensajesNoLeidos.getByUid(uid).cuerpomensaje + '"</i>';
+                }
+            },
+            position: {
+                at: "bottom right"
+            }
+        });
+
+        $("#tablaMensajesLeidos .k-grid-content tr").qtip({
+            content: {
+                text: function () {
+                    var uid = $(this).attr("data-uid");
+
+                    return "Cuerpo del mensaje:<br><i>" + dataSourceMensajesLeidos.getByUid(uid).cuerpomensaje + "</i>";
+                }
+            },
+            position: {
+                at: "bottom right"
+            }
+        });
+
+        $(".componerMensaje").qtip({
+            content: {
+                text: "Pulse para enviar un nuevo mensaje"
+            },
+            position: {
+                my: "top left"
+            }
+        });
+
+        $(".marcar").qtip({
+            content: {
+                text: "Pulse para mover a la otra tabla"
+            },
+            position: {
+                my: "top right"
+            }
+        });
+
+        $(".eliminarFilaNoLeidos,.eliminarFilaLeidos").qtip({
+            content: {
+                text: "Pulse para eliminar este mensaje"
+            },
+            position: {
+                my: "top right"
+            }
+        });
+    }
 });
-
-

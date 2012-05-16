@@ -15,7 +15,7 @@ namespace TortolasProject.Models.Repositorios
 
         public IList<tbMensaje> listarMensajes(Guid usuario, String tipo)
         {            
-            return mtbMalagaDB.tbMensaje.Where(mensaje => mensaje.FKDestinatario == usuario ^ !(mensaje.estado.Equals(tipo))).OrderByDescending(mensaje => mensaje.fecha).ToList();
+            return mtbMalagaDB.tbMensaje.Where(mensaje => mensaje.FKDestinatario.Equals(usuario) && mensaje.estado.Equals(tipo)).OrderByDescending(mensaje => mensaje.fecha).ToList();
                 
         }
 
