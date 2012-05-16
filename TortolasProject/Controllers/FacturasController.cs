@@ -58,30 +58,82 @@ namespace TortolasProject.Controllers
         [HttpGet]
         public ActionResult editarFactura(String id)
         {
+            
             Guid idFactura = Guid.Parse(id);
             tbFactura f = FacturasRepo.leerFactura(idFactura);
-            f.vista = "editar";
-            if (f.FKUsuario != null) { f.idRelacion = f.FKUsuario.ToString(); f.tipo = "usuario"; }
-            else if (f.FKEventoOficial != null) { f.idRelacion = f.FKEventoOficial.ToString(); f.tipo = "eventos"; }
-            else if (f.FKCursillo != null) { f.idRelacion = f.FKCursillo.ToString(); f.tipo = "cursillos"; }
-            //else if (f.FKPedidoGlobal != null) { f.idRelacion = f.FKPedidoGlobal.ToString(); f.tipo = "pedidoGlobal"; }
-            //else if (f.FKPedidoUsuario != null) { f.idRelacion = f.FKPedidoUsuario.ToString(); f.tipo = "pedidoUsuario"; }
-            else if (f.FKCodigoEmpresa != null) { f.idRelacion = f.FKCodigoEmpresa.ToString(); f.tipo = "empresa"; }
-            else if (f.FKProveedores != null) { f.idRelacion = f.FKProveedores.ToString(); f.tipo = "proveedor"; }
-            else if (f.FKContrato != null) { f.idRelacion = f.FKContrato.ToString(); f.tipo = "contrato"; }
-            else { f.idRelacion = null; f.tipo = null; }
-   
+            if (FacturasRepo.getEstadoFactura(idFactura).Equals("Pagado"))
+            {
+                return RedirectToAction("leerFactura", "Facturas", new { id = id });
+            }
+            else
+            {
+                f.vista = "editar";
+                if (f.FKUsuario != null) { f.idRelacion = f.FKUsuario.ToString(); f.tipo = "usuario"; }
+                else if (f.FKEventoOficial != null) { f.idRelacion = f.FKEventoOficial.ToString(); f.tipo = "eventos"; }
+                else if (f.FKCursillo != null) { f.idRelacion = f.FKCursillo.ToString(); f.tipo = "cursillos"; }
+                //else if (f.FKPedidoGlobal != null) { f.idRelacion = f.FKPedidoGlobal.ToString(); f.tipo = "pedidoGlobal"; }
+                //else if (f.FKPedidoUsuario != null) { f.idRelacion = f.FKPedidoUsuario.ToString(); f.tipo = "pedidoUsuario"; }
+                else if (f.FKCodigoEmpresa != null) { f.idRelacion = f.FKCodigoEmpresa.ToString(); f.tipo = "empresa"; }
+                else if (f.FKProveedores != null) { f.idRelacion = f.FKProveedores.ToString(); f.tipo = "proveedor"; }
+                else if (f.FKContrato != null) { f.idRelacion = f.FKContrato.ToString(); f.tipo = "contrato"; }
+                else { f.idRelacion = null; f.tipo = null; }
 
-            return View("factura", f);
+                return View("factura", f);
+            }
         }
-            
 
-        
+            // Índice Movimientos
+        public ActionResult Movimientos()
+        {
+            return View();
+        }
 
+            // Ver movimiento
+        public ActionResult leerMovimiento(String id)
+        {
+            Guid idMovimiento = Guid.Parse(id);
+
+            if(FacturasRepo.esMovimientoGasto(idMovimiento))
+            {
+                tbMovimientoGasto mg = FacturasRepo.leerMovimientoGasto(idMovimiento);
+                Movimiento movimiento = new Movimiento
+                {
+                            idMovimiento = mg.idMovimientoGasto,
+                            Concepto = mg.Concepto,
+                            Fecha = mg.Fecha,
+                            Descripcion = mg.Descripcion,
+                            Total = mg.Total,                            
+                            Responsable = mg.Responsable,
+                            ResponsableName = obtenerJuntaDirectivaNickname(mg.Responsable)
+                };
+                if (mg.FKFactura.HasValue) movimiento.FKFactura = (Guid)mg.FKFactura;
+
+                return View("leerMovimiento",movimiento);
+            }
+            else if(FacturasRepo.esMovimientoIngreso(idMovimiento))
+            {
+                tbMovimientoIngreso mi = FacturasRepo.leerMovimientoIngreso(idMovimiento);
+                Movimiento movimiento = new Movimiento
+                {
+                    idMovimiento = mi.idMovimientoIngreso,
+                    Concepto = mi.Concepto,
+                    Fecha = mi.Fecha,
+                    Descripcion = mi.Descripcion,
+                    Total = mi.Total,
+                    Responsable = mi.Responsable,
+                    ResponsableName = obtenerJuntaDirectivaNickname(mi.Responsable)
+                };
+                if (mi.FKFactura.HasValue) movimiento.FKFactura = (Guid)mi.FKFactura;
+
+                return View("leerMovimiento", movimiento);
+            }
+
+            return View("Movimientos");
+        }
 
 
         ///////////////////////////////////////////////////////////////////////////////
-        // Funciones
+        // Funciones FACTURAS
         ///////////////////////////////////////////////////////////////////////////////
 
             //  Leer facturas
@@ -94,6 +146,7 @@ namespace TortolasProject.Controllers
                                    idFactura = f.idFactura,
                                    concepto = f.Concepto,
                                    estado = f.FKEstado,
+                                   estadoNombre = FacturasRepo.getEstadoFactura(f.idFactura),
                                    total = f.Total,
                                    juntaDirectiva = f.FKJuntaDirectiva,
                                    fecha = f.Fecha.ToShortDateString()
@@ -197,6 +250,35 @@ namespace TortolasProject.Controllers
                     FacturasRepo.nuevaLinea(linea);
                 }
             }
+
+
+            // Creamos un movimiento relacionado con la factura
+            if( f.Total < 0)
+            {
+                tbMovimientoGasto mg = new tbMovimientoGasto
+                {
+                    idMovimientoGasto = Guid.NewGuid(),
+                    Concepto = f.Concepto,
+                    Fecha = f.Fecha,
+                    Responsable = f.FKJuntaDirectiva,
+                    FKFactura = f.idFactura,
+                    Total = f.Total
+                };
+                FacturasRepo.nuevoMovimientoGasto(mg);
+            }
+            else
+            {
+                tbMovimientoIngreso mg = new tbMovimientoIngreso {
+                                idMovimientoIngreso = Guid.NewGuid(),
+                                Concepto = f.Concepto,
+                                Fecha = f.Fecha,
+                                Responsable = f.FKJuntaDirectiva,
+                                FKFactura = f.idFactura,
+                                Total = f.Total
+                };
+                FacturasRepo.nuevoMovimientoIngreso(mg);
+
+            }
             
             return "ok"; // Pensado para devolver errores
         }
@@ -214,6 +296,7 @@ namespace TortolasProject.Controllers
             var lineasFacturaRaw = System.Web.Helpers.Json.Decode(data["lineasFactura"]);
             Decimal baseImponible = 0;
             Decimal total = 0;
+            Guid estadoFactura = Guid.Parse(data["estado"]);
 
             DateTime fecha = DateTime.Parse(data["fecha"]);
             //var relacion = System.Web.Helpers.Json.Decode(data["idRelacion"]); <--- SI DESEAS DECODIFICAR UN JSON
@@ -293,12 +376,48 @@ namespace TortolasProject.Controllers
             }
             facturaAntigua.BaseImponible = baseImponible;
             facturaAntigua.Total = baseImponible * IVA;
+            facturaAntigua.FKEstado = estadoFactura;
+
+            if (estadoFactura.Equals(FacturasRepo.leerEstadoByNombre("Pagado")))
+            {
+                // Creamos un movimiento relacionado con la factura
+                if (facturaAntigua.Total < 0)
+                {
+                    tbMovimientoGasto mg = new tbMovimientoGasto
+                    {
+                        idMovimientoGasto = Guid.NewGuid(),
+                        Concepto = facturaAntigua.Concepto,
+                        Fecha = facturaAntigua.Fecha,
+                        Responsable = facturaAntigua.FKJuntaDirectiva,
+                        FKFactura = facturaAntigua.idFactura,
+                        Total = facturaAntigua.Total
+                    };
+                    FacturasRepo.nuevoMovimientoGasto(mg);
+                }
+                else
+                {
+                    tbMovimientoIngreso mg = new tbMovimientoIngreso
+                    {
+                        idMovimientoIngreso = Guid.NewGuid(),
+                        Concepto = facturaAntigua.Concepto,
+                        Fecha = facturaAntigua.Fecha,
+                        Responsable = facturaAntigua.FKJuntaDirectiva,
+                        FKFactura = facturaAntigua.idFactura,
+                        Total = facturaAntigua.Total
+                    };
+                    FacturasRepo.nuevoMovimientoIngreso(mg);
+
+                }
+            }
+                
             FacturasRepo.modificarFactura(idFactura, facturaAntigua);
 
             foreach (tbLineaFactura lineaExistente in lineasExistentes)
             {
                 FacturasRepo.eliminarLinea(FacturasRepo.listarLineasFactura(idFactura).Where(l => l.idLineaFactura == lineaExistente.idLineaFactura).Single().idLineaFactura);
             }
+
+
         }
 
             // Eliminar factura
@@ -339,11 +458,154 @@ namespace TortolasProject.Controllers
                 Concepto = f.Concepto,
                 idRelacion = f.idRelacion,
                 tipo = f.tipo,
-                NombreEstado = FacturasRepo.getEstado(f.idFactura)
+                NombreEstado = FacturasRepo.getEstadoFactura(f.idFactura)
             };            
 
             return Json(factura);
         }
+
+        [HttpPost]
+        public ActionResult establecerPagado(String id)
+        {
+            Guid idFactura = Guid.Parse(id);
+
+            FacturasRepo.setEstadoFactura(FacturasRepo.leerEstadoByNombre("Pagado"), idFactura);
+
+            return RedirectToAction("leerFactura", id);
+        }
+        ///////////////////////////////////////////////////////////////////////////////
+        // Movimientos                                                            
+        ///////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public JsonResult leerMovimientos()
+        {
+
+            IList<tbMovimientoGasto> mg = FacturasRepo.listarMovimientosGasto();
+            IList<tbMovimientoIngreso> mi = FacturasRepo.listarMovimientosIngreso();
+
+            IList<Movimiento> listaMovimientos = new List<Movimiento>();
+
+            foreach (tbMovimientoGasto m in mg)
+            {
+                Movimiento mov = new Movimiento()
+                  {
+                      idMovimiento = m.idMovimientoGasto,
+                      Concepto = m.Concepto,
+                      Total = m.Total,
+                      ResponsableName = obtenerJuntaDirectivaNickname(m.Responsable),
+                      Fecha = m.Fecha,                      
+                      Descripcion = m.Descripcion,
+                      Responsable = m.Responsable
+                  };
+                if (m.FKFactura.HasValue) mov.FKFactura = (Guid)m.FKFactura;
+                listaMovimientos.Add(mov);
+            }
+
+            foreach(tbMovimientoIngreso m in mi)
+            {
+                              Movimiento mov = new Movimiento()
+                              {
+                                  idMovimiento = m.idMovimientoIngreso,
+                                  Concepto = m.Concepto,
+                                  Total = m.Total,
+                                  ResponsableName = obtenerJuntaDirectivaNickname(m.Responsable),
+                                  Fecha = m.Fecha,                                  
+                                  Descripcion = m.Descripcion,
+                                  Responsable = m.Responsable
+                              };
+                              if (m.FKFactura.HasValue) mov.FKFactura = (Guid)m.FKFactura;
+                              listaMovimientos.Add(mov);
+            }
+
+            var movimientos = from m in listaMovimientos
+                              select new
+                              {
+                                  idMovimiento = m.idMovimiento.ToString(),
+                                  Concepto = m.Concepto,
+                                  Total = m.Total,
+                                  ResponsableName = obtenerJuntaDirectivaNickname(m.Responsable),
+                                  Fecha = m.Fecha.ToShortDateString(),
+                                  FKFactura = m.FKFactura.ToString(),
+                                  Descripcion = m.Descripcion
+                              };
+
+
+            return Json(movimientos);                                
+        }
+
+        [HttpPost]
+        public int eliminarMovimiento(FormCollection data)
+        {
+            Guid idMovimiento = Guid.Parse(data["idMovimiento"]);
+            String tipo = data["tipo"];
+
+            if (tipo.Equals("gasto"))
+            {
+                FacturasRepo.eliminarMovimientoGasto(idMovimiento);
+            }
+            else if (tipo.Equals("ingreso"))
+            {
+                FacturasRepo.eliminarMovimientoIngreso(idMovimiento);
+            }
+
+            return 1;
+        }
+
+        [HttpPost]
+        public int nuevoMovimiento(FormCollection data)
+        {
+            DateTime fecha = DateTime.Parse(data["fecha"]);
+            String concepto = data["concepto"];
+            String descripcion = data["descripcion"];
+            Decimal total = Decimal.Parse(data["total"]);
+
+            if (total >= 0)
+            {
+                tbMovimientoIngreso mi = new tbMovimientoIngreso
+                {
+                    idMovimientoIngreso = Guid.NewGuid(),
+                    Fecha = fecha,
+                    Concepto = concepto,
+                    Descripcion = descripcion,
+                    Total = total,
+                    Responsable = obtenerJuntaDirectivaLogueado()
+                };
+
+                FacturasRepo.nuevoMovimientoIngreso(mi);
+            }
+            else
+            {
+                tbMovimientoGasto mg = new tbMovimientoGasto
+                {
+                    idMovimientoGasto = Guid.NewGuid(),
+                    Fecha = fecha,
+                    Concepto = concepto,
+                    Descripcion = descripcion,
+                    Total = total,
+                    Responsable = obtenerJuntaDirectivaLogueado()
+                };
+
+                FacturasRepo.nuevoMovimientoGasto(mg);
+            }
+            return 1;
+        }
+
+
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Auxiliares                                                            
+        ///////////////////////////////////////////////////////////////////////////////
+        private Guid obtenerJuntaDirectivaLogueado()
+        {
+            Guid user = HomeController.obtenerUserIdActual();
+            return db.tbJuntaDirectiva.Where(jd => jd.FKSocio == db.tbSocio.Where(s => s.FKUsuario == db.tbUsuario.Where(u => u.FKUser == user).Single().idUsuario).Single().idSocio).Single().FKSocio;
+        }
+
+        private String obtenerJuntaDirectivaNickname(Guid idJuntaDirectiva)
+        {           
+            return db.tbUsuario.Where(u => u.idUsuario == (db.tbSocio.Where(s => s.idSocio == idJuntaDirectiva).Single().FKUsuario)).Single().Nickname;
+        }
+
         ///////////////////////////////////////////////////////////////////////////////
         // Listas                                                            
         ///////////////////////////////////////////////////////////////////////////////
