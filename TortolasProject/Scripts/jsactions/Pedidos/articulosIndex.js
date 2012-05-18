@@ -2,7 +2,7 @@
 
     var idArticulo = null;
 
-    //VISTA AÑADIR ARTICULO
+    //***********************************VISTA AÑADIR ARTICULO******************************************
 
     //Cargar vista Index de articulos al cancelar
     $("#anadirArticuloCancelarButton").live('click', function () {
@@ -15,11 +15,14 @@
         var imagen = $("#imagenAnadirArticuloAutocomplete").val();
         var descripcion = $("#descripcionAnadirArticuloAutocomplete").val();
         var precio = $("#precioAnadirArticuloAutocomplete").val();
+        var ddl = $("#dropDownList").data("kendoDropDownList");
+        var categoria = ddl.value();
         data = {
             nombre: nombre,
             imagen: imagen,
             descripcion: descripcion,
-            precio: precio
+            precio: precio,
+            categoria: categoria
         };
 
         url = 'Articulos/nuevoArticulo';
@@ -29,8 +32,10 @@
         });
     });
 
+
     //numeric texbox
-    $('#precioAnadirArticuloAutocomplete').kendoNumericTextBox();
+    $("#precioAnadirArticuloAutocomplete").kendoNumericTextBox();
+
 
     //auxiliar para volver a index de articulo
     function volverIndexArticulos() {
@@ -40,7 +45,7 @@
         $("#anadirArticuloCancelarButton").hide();
     }
 
-    //VISTA EDITAR ARTICULO
+    //*********************************************VISTA EDITAR ARTICULO*****************************************
 
     //Guardar edicion en la BD y volver al index de articulos
     $("#editarArticuloAceptarButton").live('click', function () {
@@ -75,10 +80,7 @@
         $("#editarArticuloCancelarButton").hide();
     }
 
-    //numeric texbox
-    $('#precioEditarArticuloAutocomplete').kendoNumericTextBox();
-
-    //VISTA INDEX
+    //*****************************************************VISTA INDEX************************************************
     //Cargar vista Anadir articulo
     $("#anadirArticuloButton").click(function () {
         $.post('Articulos/cargarVistaAnadirArticulo', function (data) {
@@ -86,6 +88,32 @@
             $("#anadirArticuloDiv").html(data);
             $("#anadirArticuloDiv").show();
             $("#anadirArticuloButton").hide();
+
+            //numeric texbox
+            $("#precioAnadirArticuloAutocomplete").kendoNumericTextBox({
+                format: "c2"
+            });
+
+            $("#dropDownList").kendoDropDownList({
+                dataTextField: "nombre",
+                dataValueField: "categoria",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "Articulos/leerCategorias",
+                            dataType: "json",
+                            type: "POST"
+                        }
+                    },
+                    schema:
+                    {
+                        model:
+                       {
+                           id: "idArticulo"
+                       }
+                    }
+                }
+            });
         });
     });
 
@@ -112,15 +140,11 @@
     //Eliminar fila
     $(".botonEliminarFila").live('click', function () {
 
-        if (confirm("¿Estas seguro de que desea eliminar la fila?")) {
+        if (confirm("¿Estas seguro de que desea eliminar el articulo?")) {
             var fila = $("#articulosGrid").find("tbody tr.k-state-selected");
             var filajson = $("#articulosGrid").data("kendoGrid").dataItem(fila).toJSON();
 
             data = {
-                nombre: filajson.nombre,
-                imagen: filajson.imagen,
-                descripcion: filajson.descripcion,
-                precio: filajson.precio,
                 idarticulo: filajson.idArticulo
             };
 
@@ -136,30 +160,34 @@
     $("#articulosGrid").kendoGrid({
         selectable: true,
         columns: [
-              {
-                  field: "nombre",
-                  title: "Nombre"
-              },
-              {
-                  field: "imagen",
-                  title: "Imagen"
-              },
-               {
-                   field: "descripcion",
-                   title: "Descripcion"
-               },
-              {
-                  field: "precio",
-                  title: "Precio"
-              },
-              {
-                  title: "Editar",
-                  command: { text: "Editar", className: "botonEditarFila" }
-              },
-              {
-                  title: "Eliminar",
-                  command: { text: "Eliminar", className: "botonEliminarFila" }
-              }],
+                  {
+                      field: "nombre",
+                      title: "Nombre"
+                  },
+                  {
+                      field: "imagen",
+                      title: "Imagen"
+                  },
+                   {
+                       field: "descripcion",
+                       title: "Descripcion"
+                   },
+                  {
+                      field: "precio",
+                      title: "Precio"
+                  },
+                  {
+                      field: "categoriaNombre",
+                      title: "Categoria"
+                  },
+                  {
+                      title: "Editar",
+                      command: { text: "Editar", className: "botonEditarFila" }
+                  },
+                  {
+                      title: "Eliminar",
+                      command: { text: "Eliminar", className: "botonEliminarFila" }
+                  }],
         dataSource: {
             transport: {
                 read: {
@@ -169,12 +197,13 @@
                 }
             },
             schema:
-            {
-                model:
-                   {
-                       id: "idArticulo"
-                   }
-            }
+                {
+                    model:
+                       {
+                           id: "idArticulo"
+                       }
+                }
         }
     });
+
 });

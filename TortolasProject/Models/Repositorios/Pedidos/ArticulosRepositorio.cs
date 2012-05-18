@@ -14,10 +14,14 @@ namespace TortolasProject.Models.Repositorios
             mtbMalagaDB.SubmitChanges();
         }
         
-        //tbArticulo
         public IList<tbArticulo> listarArticulos()
         {
             return mtbMalagaDB.tbArticulo.ToList();
+        }
+
+        public IList<tbCategoria> listarCategorias()
+        {
+            return mtbMalagaDB.tbCategoria.ToList();
         }
 
         public void anadirArticulo(tbArticulo f)
@@ -29,6 +33,11 @@ namespace TortolasProject.Models.Repositorios
         public tbArticulo leerArticulo(Guid idArticulo)
         {
             return mtbMalagaDB.tbArticulo.Where(articulo => articulo.idArticulo == idArticulo).Single();
+        }
+
+        public tbCategoria leerCategoria(Guid idCategoria)
+        {
+            return mtbMalagaDB.tbCategoria.Where(categoria => categoria.idCategoria == idCategoria).Single();
         }
 
         public void editarArticulo(tbArticulo f, Guid idArticulo)

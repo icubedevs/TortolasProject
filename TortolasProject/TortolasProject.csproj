@@ -72,6 +72,7 @@
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\Monitores\MonitoresController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
@@ -91,6 +92,8 @@
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Monitores\MonitoresRepositorio.cs" />
     <Compile Include="Models\Repositorios\Pedidos\ArticulosRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Pedidos\InventarioRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Pedidos\PedidosRepositorio.cs" />
     <Compile Include="Models\Repositorios\Perfil\MensajesRepositorio.cs" />
     <Compile Include="Models\Repositorios\Usuarios\UsuariosRepositorio.cs" />
     <Compile Include="Models\tbFactura.cs" />
@@ -655,6 +658,8 @@
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\Old\facturasNueva.js" />
+    <Content Include="Scripts\jsactions\Pedidos\inventarioIndex.js" />
+    <Content Include="Scripts\jsactions\Pedidos\pedidosIndex.js" />
     <Content Include="Scripts\jsactions\Perfil\Mensajeria.js" />
     <Content Include="Scripts\jsactions\Perfil\Perfil.js" />
     <Content Include="Scripts\jsactions\siteMaster.js" />
@@ -799,7 +804,11 @@
     <Content Include="Views\Articulos\Index.aspx" />
     <Content Include="Views\Monitores\Index.aspx" />
     <Content Include="Views\Perfil\Index.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Views\Inventario\Index.aspx" />
+    <Content Include="Views\Pedidos\Index.aspx" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -825,7 +834,9 @@
     <Content Include="Views\Shared\Error.aspx" />
     <Content Include="Views\Shared\LogOnUserControl.ascx" />
     <Content Include="Views\Shared\Site.Master" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

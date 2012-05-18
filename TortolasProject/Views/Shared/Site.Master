@@ -196,6 +196,12 @@
                             <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Artículos", "Index", "Articulos") %>
                         </li>
                         <li>
+                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Inventario", "Index", "Inventario") %>
+                        </li>
+                        <li>
+                            <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Pedidos", "Index", "Pedidos") %>
+                        </li>
+                        <li>
                             <img src="../../Content/images/UserGroup.png" width="10%" /><%: Html.ActionLink("Empresas", "Index", "Empresas") %>
                         </li>
                         <li>
