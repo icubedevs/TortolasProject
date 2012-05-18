@@ -20,6 +20,15 @@
     // Tabla de facturas
     $("#FacturasGrid").kendoGrid({
         dataSource: dataSource,
+        sortable: true,
+        pageable: true,
+        toolbar: [
+            { text: "Nueva factura", className: "nuevaFacturaButton" },
+            { text: "Ingresos", className: "ingresosButton" },
+            { text: "Gastos", className: "gastosButton" },
+            { text: "Sólo pendientes", className: "pendientesButton" },
+            { text: "Quitar filtros", className: "limpiarButton" }
+        ],
         columns: [
             {
                 field: "fecha",
@@ -38,6 +47,26 @@
                 title: "Estado factura"
             }
         ]
+    });
+
+    $(".nuevaFacturaButton").click(function () {
+        location.replace("../Facturas/nuevaFactura");
+    });
+
+    $(".ingresosButton").click(function () {
+        dataSource.filter({ field: "total", operator: "gte", value: 0 });
+    });
+
+    $(".gastosButton").click(function () {
+        dataSource.filter({field: "total", operator: "lt", value: 0});
+    });
+
+    $(".pendientesButton").click(function () {
+        dataSource.filter({ field: "estadoNombre", operator: "eq", value: "Pendientes" });
+    });
+
+    $(".limpiarButton").click(function () {
+        dataSource.filter({});
     });
 
     $(".k-grid-content tr").live("click", function () {
