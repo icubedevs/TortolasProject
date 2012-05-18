@@ -34,6 +34,8 @@ $(document).ready(function () {
     tabla = $("#MovimientosGrid").kendoGrid({
         dataSource: dataSource,
         filterable: true,
+        sortable: true,
+        pageable: true,
         toolbar: [
                     { text: "Nuevo movimiento", className: "nuevoMovimiento" },
                     { text: "Ingresos", className: "ingresosButton" },
