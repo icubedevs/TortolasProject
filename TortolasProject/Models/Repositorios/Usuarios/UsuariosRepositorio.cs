@@ -102,6 +102,11 @@ namespace TortolasProject.Models.Repositorios
         {
             return mtbMalagaDB.tbCuota.Where(cuota => cuota.FKSocio.Equals(Socio)).ToList();
         }
+
+        public Guid obtenerUsuarioByUser(Guid user)
+        {
+            return mtbMalagaDB.tbUsuario.Where(u => u.FKUser == user).Single().idUsuario;
+        }
         
     }
 }
