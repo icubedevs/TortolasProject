@@ -2,8 +2,6 @@
     $("#BotonConfirmarNuevaEmpresa").live("click", function () {
         var datos = {};
 
-
-
         //Coger datos
         datos["nombreempresa"] = $("#newnombreempresa").val();
         datos["cif"] = $("#newcif").val();

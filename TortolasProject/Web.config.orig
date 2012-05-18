@@ -4,6 +4,7 @@
   http://go.microsoft.com/fwlink/?LinkId=152368
   -->
 <configuration>
+<<<<<<< HEAD
 	<connectionStrings>
   <add name="icubeDBConnectionString" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
    providerName="System.Data.SqlClient" />
@@ -11,13 +12,19 @@
    providerName="System.Data.SqlClient" />
   <add name="icubeDBConnectionString2" connectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
    providerName="System.Data.SqlClient" />
-<<<<<<< HEAD
   <add name="icubeDBConnectionString3" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;User ID=sa;Password=pitopito"
-=======
-  <add name="icubeDBConnectionString3" connectionString="Data Source=192.168.1.2\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
->>>>>>> cce0e266cadbf796238edfddaa9982f21e9f58eb
    providerName="System.Data.SqlClient" />
  </connectionStrings>
+=======
+    <connectionStrings>
+        <add name="icubeDBConnectionString" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
+         providerName="System.Data.SqlClient" />
+        <add name="icubeDBConnectionString1" connectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
+         providerName="System.Data.SqlClient" />
+        <add name="icubeDBConnectionString2" connectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
+         providerName="System.Data.SqlClient" />
+    </connectionStrings>
+>>>>>>> 5120924a24cf417e9e5169a91208393645884e63
 	<appSettings>
 		<add key="webpages:Version" value="1.0.0.0"/>
 		<add key="ClientValidationEnabled" value="true"/>

@@ -68,15 +68,24 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\CursillosController.cs" />
+=======
+    <Compile Include="Controllers\AsociacionesController.cs" />
+    <Compile Include="Controllers\ContratosController.cs" />
+    <Compile Include="Controllers\ConveniosController.cs" />
+>>>>>>> 5120924a24cf417e9e5169a91208393645884e63
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\Monitores\MonitoresController.cs" />
+    <Compile Include="Controllers\PatrocinadoresController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
+    <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\PublicidadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -106,6 +115,7 @@
     <Content Include="Content\crud.css" />
     <Content Include="Content\emailBIG_titulo.png" />
     <Content Include="Content\Empresas\EmpresasNav.css" />
+    <Content Include="Content\Empresas\FormatoTexto.css" />
     <Content Include="Content\Eventos\EventosKendocss.css" />
     <Content Include="Content\Empresas\EmpresasNew.css" />
     <Content Include="Content\Facturas\facturasIndex.css" />
@@ -213,7 +223,12 @@
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
     <Content Include="Content\images\asociaciones.jpg" />
+<<<<<<< HEAD
     <Content Include="Content\images\cursillostitulo.png" />
+=======
+    <Content Include="Content\images\contrato.jpg" />
+    <Content Include="Content\images\convenios.jpg" />
+>>>>>>> 5120924a24cf417e9e5169a91208393645884e63
     <Content Include="Content\images\empresas.png" />
     <Content Include="Content\images\eventostitulo.png" />
     <Content Include="Content\images\monitores\01_1024x768.jpg" />
@@ -225,11 +240,13 @@
     <Content Include="Content\images\monitores\4.jpg" />
     <Content Include="Content\images\monitores\5.jpg" />
     <Content Include="Content\images\monitores\chucknorris.jpg" />
+    <Content Include="Content\images\patrocinador.jpg" />
     <Content Include="Content\logo_azul.png" />
     <Content Include="Content\master.css" />
     <Content Include="Content\nav.css" />
     <Content Include="Content\newCascadeStyleSheet.css" />
     <Content Include="Content\Perfil\Perfil.css" />
+    <Content Include="Content\images\proveedores.jpg" />
     <Content Include="Content\slide.css" />
     <Content Include="Content\style.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -653,17 +670,24 @@
     <Content Include="Scripts\jsactions\captacion.js" />
 <<<<<<< HEAD
     <Content Include="Scripts\jsactions\Facturas\facturas.js" />
+    <Content Include="Scripts\jsactions\Eventos\cursillos.js" />
     <Content Include="Scripts\jsactions\Facturas\graficosContables.js" />
     <Content Include="Scripts\jsactions\Facturas\movimientos.js" />
     <Content Include="Scripts\jsactions\Facturas\Old\facturasDetalles.js" />
-=======
-    <Content Include="Scripts\jsactions\Eventos\cursillos.js" />
-    <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
->>>>>>> cce0e266cadbf796238edfddaa9982f21e9f58eb
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\Old\facturasEditar.js" />
+=======
+    <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
+    <Content Include="Scripts\jsactions\Empresas\Contratos\Contratos.js" />
+    <Content Include="Scripts\jsactions\Empresas\Convenios\Convenios.js" />
+    <Content Include="Scripts\jsactions\Empresas\Patrocinadores\Patrocinadores.js" />
+    <Content Include="Scripts\jsactions\Empresas\Proveedores\Proveedores.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
+    <Content Include="Scripts\jsactions\Empresas\Empresas\EmpresasIndex.js" />
+    <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
+>>>>>>> 5120924a24cf417e9e5169a91208393645884e63
     <Content Include="Scripts\jsactions\Eventos\eventos.js" />
-    <Content Include="Scripts\jsactions\Empresas\NuevaEmpresa.js" />
+    <Content Include="Scripts\jsactions\Empresas\Empresas\NuevaEmpresa.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\Old\facturasNueva.js" />
@@ -791,18 +815,13 @@
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Administracion\Index.aspx" />
-<<<<<<< HEAD
     <Content Include="Views\Facturas\facturasNav.ascx" />
     <Content Include="Views\Facturas\graficosContables.aspx" />
+    <Content Include="Views\Cursillos\Index.aspx" />
+    <Content Include="Views\Cursillos\VistaCrearCursillo.ascx" />
     <Content Include="Views\Facturas\informesContables.aspx" />
     <Content Include="Views\Facturas\Old\editarFactura.aspx" />
     <Content Include="Views\Facturas\Old\leerFactura.aspx" />
-=======
-    <Content Include="Views\Cursillos\Index.aspx" />
-    <Content Include="Views\Cursillos\VistaCrearCursillo.ascx" />
-    <Content Include="Views\Facturas\editarFactura.aspx" />
-    <Content Include="Views\Facturas\leerFactura.aspx" />
->>>>>>> cce0e266cadbf796238edfddaa9982f21e9f58eb
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
     <Content Include="Views\Articulos\EditarArticulo.ascx" />
     <Content Include="Views\Empresas\Index.aspx" />
@@ -895,7 +914,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>9541</DevelopmentServerPort>
+          <DevelopmentServerPort>3608</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
