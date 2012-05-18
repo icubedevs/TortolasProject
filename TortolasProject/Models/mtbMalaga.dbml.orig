@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="icubeDB" Class="mtbMalagaDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+<<<<<<< HEAD
   <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString1" Provider="System.Data.SqlClient" />
+=======
+  <Connection Mode="WebSettings" ConnectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="icubeDBConnectionString2" Provider="System.Data.SqlClient" />
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
   <Table Name="dbo.aspnet_Applications" Member="aspnet_Applications">
     <Type Name="aspnet_Applications">
       <Column Name="ApplicationName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
@@ -312,7 +316,7 @@
       <Column Name="NumAcom" Type="System.Int32" DbType="Int" CanBeNull="true" />
 =======
       <Column Name="NumAcom" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
->>>>>>> 5120924a24cf417e9e5169a91208393645884e63
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
       <Association Name="tbCursillo_tbDocInscripcion" Member="tbCursillo" ThisKey="FKCursillo" OtherKey="idCursillo" Type="tbCursillo" IsForeignKey="true" />
       <Association Name="tbUsuario_tbDocInscripcion" Member="tbUsuario" ThisKey="FKUsuario" OtherKey="idUsuario" Type="tbUsuario" IsForeignKey="true" />
       <Association Name="tbEvento_tbDocInscripcion" Member="tbEvento" ThisKey="FKEvento" OtherKey="idEvento" Type="tbEvento" IsForeignKey="true" />
@@ -429,7 +433,7 @@
 <<<<<<< HEAD
 =======
       <Association Name="tbJuntaDirectiva_tbPedidoGlobal" Member="tbPedidoGlobal" ThisKey="FKSocio" OtherKey="FKJuntaDirectiva" Type="tbPedidoGlobal" />
->>>>>>> 5120924a24cf417e9e5169a91208393645884e63
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
       <Association Name="tbSocio_tbJuntaDirectiva" Member="tbSocio" ThisKey="FKSocio" OtherKey="idSocio" Type="tbSocio" IsForeignKey="true" />
     </Type>
   </Table>
@@ -486,7 +490,11 @@
       <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Responsable" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+<<<<<<< HEAD
       <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+=======
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
       <Association Name="tbFactura_tbMovimientoGasto" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
       <Association Name="tbJuntaDirectiva_tbMovimientoGasto" Member="tbJuntaDirectiva" ThisKey="Responsable" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
     </Type>
@@ -499,7 +507,11 @@
       <Column Name="Total" Type="System.Decimal" DbType="Money NOT NULL" CanBeNull="false" />
       <Column Name="Descripcion" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Responsable" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+<<<<<<< HEAD
       <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+=======
+      <Column Name="FKFactura" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
       <Association Name="tbFactura_tbMovimientoIngreso" Member="tbFactura" ThisKey="FKFactura" OtherKey="idFactura" Type="tbFactura" IsForeignKey="true" />
       <Association Name="tbJuntaDirectiva_tbMovimientoIngreso" Member="tbJuntaDirectiva" ThisKey="Responsable" OtherKey="FKSocio" Type="tbJuntaDirectiva" IsForeignKey="true" />
     </Type>

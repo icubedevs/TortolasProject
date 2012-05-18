@@ -42,9 +42,9 @@ namespace TortolasProject.Controllers
                               FechaAperturaInscripcion = ob.FechaAperturaInscripcion.ToShortDateString(),
                               FechaLimiteInscripcion = ob.FechaLimiteInscripcion.ToShortDateString(),
 =======
-                              //FechaAperturaInscripcion = ob.FechaAperturaInscripcion.Value.ToShortDateString(),
-                              //FechaLimiteInscripcion = ob.FechaLimiteInscripcion.Value().ToShortDateString(),
->>>>>>> 5120924a24cf417e9e5169a91208393645884e63
+                             // FechaAperturaInscripcion = ob.FechaAperturaInscripcion.Value.ToShortDateString(),
+                             // FechaLimiteInscripcion = ob.FechaLimiteInscripcion.Value.ToShortDateString(),
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
                               FechaRealizacion = ob.FechaRealizacion.ToShortDateString(),
                               PrioridadSocios = ob.PrioridadSocios,
                               Plazas = ob.Plazas,

@@ -4,7 +4,6 @@
   http://go.microsoft.com/fwlink/?LinkId=152368
   -->
 <configuration>
-<<<<<<< HEAD
 	<connectionStrings>
   <add name="icubeDBConnectionString" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
    providerName="System.Data.SqlClient" />
@@ -12,19 +11,13 @@
    providerName="System.Data.SqlClient" />
   <add name="icubeDBConnectionString2" connectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
    providerName="System.Data.SqlClient" />
+<<<<<<< HEAD
   <add name="icubeDBConnectionString3" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;User ID=sa;Password=pitopito"
    providerName="System.Data.SqlClient" />
  </connectionStrings>
 =======
-    <connectionStrings>
-        <add name="icubeDBConnectionString" connectionString="Data Source=ESCAPARATE\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
-         providerName="System.Data.SqlClient" />
-        <add name="icubeDBConnectionString1" connectionString="Data Source=icubedevs.dyndns.org\SQLEXPRESS;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
-         providerName="System.Data.SqlClient" />
-        <add name="icubeDBConnectionString2" connectionString="Data Source=icubedevs.dyndns.org;Initial Catalog=icubeDB;Persist Security Info=True;User ID=sa;Password=pitopito"
-         providerName="System.Data.SqlClient" />
-    </connectionStrings>
->>>>>>> 5120924a24cf417e9e5169a91208393645884e63
+ </connectionStrings>  
+>>>>>>> b2f7b8e412f69b0121988508c2d3f5fd07a4a3de
 	<appSettings>
 		<add key="webpages:Version" value="1.0.0.0"/>
 		<add key="ClientValidationEnabled" value="true"/>
@@ -85,6 +78,6 @@
 				<assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35"/>
 				<bindingRedirect oldVersion="1.0.0.0-2.0.0.0" newVersion="3.0.0.0"/>
 			</dependentAssembly>
-		</assemblyBinding>
+		</assemblyBinding>   
 	</runtime>
 </configuration>

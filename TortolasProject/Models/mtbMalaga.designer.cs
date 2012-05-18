@@ -177,7 +177,7 @@ namespace TortolasProject.Models
     #endregion
 		
 		public mtbMalagaDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["icubeDBConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -7090,9 +7090,9 @@ namespace TortolasProject.Models
 		
 		private System.Nullable<bool> _Pagado;
 		
-		private System.Guid _FKCursillo;
+		private System.Nullable<System.Guid> _FKCursillo;
 		
-		private System.Guid _FKEvento;
+		private System.Nullable<System.Guid> _FKEvento;
 		
 		private System.Guid _FKUsuario;
 		
@@ -7112,9 +7112,9 @@ namespace TortolasProject.Models
     partial void OnidDocumentoInscripcionChanged();
     partial void OnPagadoChanging(System.Nullable<bool> value);
     partial void OnPagadoChanged();
-    partial void OnFKCursilloChanging(System.Guid value);
+    partial void OnFKCursilloChanging(System.Nullable<System.Guid> value);
     partial void OnFKCursilloChanged();
-    partial void OnFKEventoChanging(System.Guid value);
+    partial void OnFKEventoChanging(System.Nullable<System.Guid> value);
     partial void OnFKEventoChanged();
     partial void OnFKUsuarioChanging(System.Guid value);
     partial void OnFKUsuarioChanged();
@@ -7170,8 +7170,8 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKCursillo", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid FKCursillo
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKCursillo", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FKCursillo
 		{
 			get
 			{
@@ -7194,8 +7194,8 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid FKEvento
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FKEvento", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> FKEvento
 		{
 			get
 			{
@@ -7289,7 +7289,7 @@ namespace TortolasProject.Models
 					}
 					else
 					{
-						this._FKCursillo = default(System.Guid);
+						this._FKCursillo = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("tbCursillo");
 				}
@@ -7357,7 +7357,7 @@ namespace TortolasProject.Models
 					}
 					else
 					{
-						this._FKEvento = default(System.Guid);
+						this._FKEvento = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("tbEvento");
 				}
@@ -11568,7 +11568,7 @@ namespace TortolasProject.Models
 		
 		private System.Nullable<decimal> _Total;
 		
-		private string _Estado;
+		private System.Nullable<System.DateTime> _FechaLimite;
 		
 		private string _Nombre;
 		
@@ -11586,8 +11586,8 @@ namespace TortolasProject.Models
     partial void OnDescuentoFijoChanged();
     partial void OnTotalChanging(System.Nullable<decimal> value);
     partial void OnTotalChanged();
-    partial void OnEstadoChanging(string value);
-    partial void OnEstadoChanged();
+    partial void OnFechaLimiteChanging(System.Nullable<System.DateTime> value);
+    partial void OnFechaLimiteChanged();
     partial void OnNombreChanging(string value);
     partial void OnNombreChanged();
     #endregion
@@ -11659,22 +11659,22 @@ namespace TortolasProject.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Estado", DbType="VarChar(25)")]
-		public string Estado
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaLimite", DbType="DateTime")]
+		public System.Nullable<System.DateTime> FechaLimite
 		{
 			get
 			{
-				return this._Estado;
+				return this._FechaLimite;
 			}
 			set
 			{
-				if ((this._Estado != value))
+				if ((this._FechaLimite != value))
 				{
-					this.OnEstadoChanging(value);
+					this.OnFechaLimiteChanging(value);
 					this.SendPropertyChanging();
-					this._Estado = value;
-					this.SendPropertyChanged("Estado");
-					this.OnEstadoChanged();
+					this._FechaLimite = value;
+					this.SendPropertyChanged("FechaLimite");
+					this.OnFechaLimiteChanged();
 				}
 			}
 		}
@@ -11786,10 +11786,6 @@ namespace TortolasProject.Models
 		
 		private string _Pagado;
 		
-		private System.Nullable<System.DateTime> _Fecha;
-		
-		private System.Nullable<System.DateTime> _FechaLimite;
-		
 		private EntityRef<tbPedidoGlobal> _tbPedidoGlobal;
 		
 		private EntityRef<tbUsuario> _tbUsuario;
@@ -11808,10 +11804,6 @@ namespace TortolasProject.Models
     partial void OnSubtotalChanged();
     partial void OnPagadoChanging(string value);
     partial void OnPagadoChanged();
-    partial void OnFechaChanging(System.Nullable<System.DateTime> value);
-    partial void OnFechaChanged();
-    partial void OnFechaLimiteChanging(System.Nullable<System.DateTime> value);
-    partial void OnFechaLimiteChanged();
     #endregion
 		
 		public tbPedidoUsuario()
@@ -11925,46 +11917,6 @@ namespace TortolasProject.Models
 					this._Pagado = value;
 					this.SendPropertyChanged("Pagado");
 					this.OnPagadoChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fecha", DbType="DateTime")]
-		public System.Nullable<System.DateTime> Fecha
-		{
-			get
-			{
-				return this._Fecha;
-			}
-			set
-			{
-				if ((this._Fecha != value))
-				{
-					this.OnFechaChanging(value);
-					this.SendPropertyChanging();
-					this._Fecha = value;
-					this.SendPropertyChanged("Fecha");
-					this.OnFechaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FechaLimite", DbType="DateTime")]
-		public System.Nullable<System.DateTime> FechaLimite
-		{
-			get
-			{
-				return this._FechaLimite;
-			}
-			set
-			{
-				if ((this._FechaLimite != value))
-				{
-					this.OnFechaLimiteChanging(value);
-					this.SendPropertyChanging();
-					this._FechaLimite = value;
-					this.SendPropertyChanged("FechaLimite");
-					this.OnFechaLimiteChanged();
 				}
 			}
 		}
