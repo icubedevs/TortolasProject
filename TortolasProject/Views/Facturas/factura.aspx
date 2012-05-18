@@ -8,6 +8,7 @@
 
 <asp:Content ID="facturaCssContent" ContentPlaceHolderID="CssContent" runat="server">
     <link href="../../Content/Facturas/factura.css" rel="stylesheet" type="text/css" /> 
+    <link href="../../Content/Facturas/facturasNav.css" rel="stylesheet" type="text/css" /> 
 </asp:Content>
 
 <asp:Content ID="facturaScriptContent" ContentPlaceHolderID="ScriptContent" runat="server">
@@ -16,6 +17,7 @@
 
 
 <asp:Content ID="facturaMainContent" ContentPlaceHolderID="MainContent" runat="server">
+<%Html.RenderPartial("facturasNav"); %>
 <% String estado = Model.vista; %>
 <input type="hidden" id='estadoPage' value='<% Response.Write(estado); %>' />
 <input type="hidden" id='idFactura' value='<% Response.Write(Model.idFactura); %>' />
