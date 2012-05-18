@@ -10,6 +10,17 @@ namespace TortolasProject.Models.Repositorios
     {
         mtbMalagaDataContext mtbMalagaDB = new mtbMalagaDataContext();
 
+        public IList<tbPedidoGlobal> listarPedidos()
+        {
+            return mtbMalagaDB.tbPedidoGlobal.ToList();
+        }
+
+        public void anadirPedido(tbPedidoGlobal f)
+        {
+            mtbMalagaDB.tbPedidoGlobal.InsertOnSubmit(f);
+            save();
+        }
+        
         private void save()
         {
             mtbMalagaDB.SubmitChanges();

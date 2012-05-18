@@ -21,6 +21,7 @@
     //Guardar añadir articulos
     $("#anadirInventarioAceptarButton").live('click', function () {
         $("#Ubicacion").val("");
+        $("#Cantidad").val("");
         var w = $("#anadirInventarioVentana").data("kendoWindow");
         w.center();
         w.open();
@@ -34,11 +35,8 @@
         $("#anadirInventarioCancelarButton").hide();
         $("#anadirInventarioButton").show();
 
-        //alert("alert1");
         InvGridDataSource.read();
-        //alert("alert2");
         var tabla = $("#inventarioGrid").data("kendoGrid");
-        //alert("alert3");
         tabla.refresh();
     });
 

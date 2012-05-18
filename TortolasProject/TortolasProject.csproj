@@ -651,6 +651,7 @@
     <Content Include="Scripts\jsactions\Facturas\facturasNav.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasNueva.js" />
     <Content Include="Scripts\jsactions\Pedidos\inventarioIndex.js" />
+    <Content Include="Scripts\jsactions\Pedidos\pedidosIndex.js" />
     <Content Include="Scripts\jsactions\Perfil\Mensajeria.js" />
     <Content Include="Scripts\jsactions\Perfil\Perfil.js" />
     <Content Include="Scripts\jsactions\siteMaster.js" />
