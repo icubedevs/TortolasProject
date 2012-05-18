@@ -26,6 +26,12 @@ namespace TortolasProject.Models.Repositorios
             return mtbMalagaDB.tbEvento.Where(evento => evento.idEvento == id).Single();
         }
 
+        public void inscripcionEvento(tbDocInscripcion doc)
+        {
+            mtbMalagaDB.tbDocInscripcion.InsertOnSubmit(doc);
+            save();
+        }
+
         public void crearEvento(tbEvento ev)
         {
             mtbMalagaDB.tbEvento.InsertOnSubmit(ev);
@@ -51,6 +57,7 @@ namespace TortolasProject.Models.Repositorios
             ev.FechaLimiteInscripcion = evento.FechaLimiteInscripcion;
             ev.PrioridadSocios = evento.PrioridadSocios;
             ev.Plazas = evento.Plazas;
+            ev.NumAcompa = evento.NumAcompa;
 
             save();
         }

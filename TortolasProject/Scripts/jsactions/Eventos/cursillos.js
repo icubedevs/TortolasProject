@@ -1,5 +1,5 @@
 ﻿var maxacompa;
-var idEvento = null;
+var idCursillo = null;
 
 $(document).ready(function () {
 
@@ -9,7 +9,7 @@ $(document).ready(function () {
         {
             read:
             {
-                url: "Eventos/LeerTodos",
+                url: "Cursillos/LeerTodos",
                 datatype: "json",
                 type: "POST"
             }
@@ -18,17 +18,17 @@ $(document).ready(function () {
         {
             model:
             {
-                id: "idEvento"
+                id: "idCursillo"
             }
         }
     });
-    var tablaevento = $("#Eventostabla").kendoGrid({
+    var tablacursillo = $("#Cursillostabla").kendoGrid({
         dataSource: datasource,
-        toolbar: kendo.template($("#templateToolbarEvento").html()),
-        sortable: true,
+        toolbar: kendo.template($("#templateToolbarCursillo").html()),
+        sorteable: true,
         pageable: true,
         selectable: true,
-        filterable: true,
+        filtreable: true,
         columns: [
                     {
                         field: "Titulo",
@@ -48,6 +48,21 @@ $(document).ready(function () {
                     {
                         field: "Lugar",
                         text: "Lugar",
+                        filterable: {
+                            extra: false, //do not show extra filters
+                            operators: { // redefine the string operators
+                                string: {
+                                    eq: "Es igual a..",
+                                    neq: "No es igual a...",
+                                    startswith: "Empieza por...",
+                                    contains: "Contiene"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        field: "Tematica",
+                        text: "Tematica",
                         filterable: {
                             extra: false, //do not show extra filters
                             operators: { // redefine the string operators
@@ -95,8 +110,7 @@ $(document).ready(function () {
                         width: "200px",
                         command: [{ text: "Editar", className: "botonEditarFila" }, { text: "Eliminar", className: "botonEliminarFila" }, { text: "Inscribirse", className: "botonInscripcion"}]
                     }
-
-        ],
+            ],
         detailTemplate: kendo.template($("#template").html()),
         detailInit: inicializarDetalles
     });
@@ -119,17 +133,26 @@ $(document).ready(function () {
         resizable: false
     }).data("kendoWindow");
 
-    // ..........................FUNCIONES..............................
+    //...........................FUNCIONES............................
 
     $("#editor").kendoEditor();
 
-    var valoresComboPrioridad = [{ texto: "No", valor: false },{ texto: "Si", valor: true }];
+    var valoresComboPrioridad = [{ texto: "No", valor: false }, { texto: "Si", valor: true}];
 
-    $("#PrioridadSocios").kendoDropDownList({
+    $("#DescuentoSocios").kendoDropDownList({
         dataTextField: "texto",
         dataValueField: "valor",
+        index: 0,
         dataSource: valoresComboPrioridad
     });
+
+    $("#Acompanantes").kendoNumericTextBox({
+        min: 1,
+        max: maxacompa,
+        step: 1,
+        format: "0"
+    });
+    $("#Acompanantes").hide();
 
     $("#AcompanantesDropdown").kendoDropDownList({
         dataTextField: "texto",
@@ -138,12 +161,6 @@ $(document).ready(function () {
         select: function (e) {
             var numacompa = this.dataItem(e.item.index());
             if (numacompa.valor == true) {
-                $("#Acompanantes").kendoNumericTextBox({
-                    min: 1,
-                    max: maxacompa,
-                    step: 1,
-                    format:"0"
-                });
                 $("#NumeroAcompa").show();
             }
             else {
@@ -152,7 +169,6 @@ $(document).ready(function () {
         }
     });
     $("#NumeroAcompa").hide();
-
     $("#FechaRealizacion").kendoDatePicker({
 
         format: "dd/MM/yyyy"
@@ -170,18 +186,16 @@ $(document).ready(function () {
         format: "dd/MM/yyyy"
     });
 
-    $("#botonCrearEvento").live("click", function () {
+    $("#botonCrearCursillo").live("click", function () {
 
         $.ajax({
-            url: "Eventos/cargarVistaCrearEvento",
+            url: "Cursillos/cargarVistaCrearCursillo",
             type: "POST",
             success: function (data) {
-                $("#Eventostabla").hide();
+                $("#Cursillostabla").hide();
                 $("#FormularioCreacion").html(data);
                 $("#FormularioCreacion").show();
                 $("#editor").kendoEditor();
-
-
 
                 $("#FechaRealizacion").kendoDatePicker({
 
@@ -196,16 +210,13 @@ $(document).ready(function () {
                     format: "dd/MM/yyyy"
                 });
 
-
-
-
                 var valoresComboPrioridad = [
                         { texto: "Si", valor: true },
                         { texto: "No", valor: false }
 
                     ];
 
-                $("#PrioridadSocios").kendoDropDownList({
+                $("#DescuentoSocios").kendoDropDownList({
                     dataTextField: "texto",
                     dataValueField: "valor",
                     dataSource: valoresComboPrioridad
@@ -214,25 +225,26 @@ $(document).ready(function () {
 
         });
 
-
     });
 
     $(".botonEditarFila").live("click", function () {
 
-        var fila = $("#Eventostabla").find("tbody tr.k-state-selected");
-
-        var filajson = $("#Eventostabla").data("kendoGrid").dataItem(fila).toJSON();
-        idEvento = datasource.getByUid(fila.attr("data-uid")).idEvento;
+        var fila = $("#Cursillostabla").find("tbody tr.k-state-selected");
+        var filajson = $("#Cursillostabla").data("kendoGrid").dataItem(fila).toJSON();
+        idCursillo = datasource.getByUid(fila.attr("data-uid")).idCursillo;
 
         $("#Titulo").val(filajson.Titulo);
         $("#Lugar").val(filajson.Lugar);
+        $("#Tematica").val(filajson.Tematica);
+        $("#ConocimientosPrevios").val(filajson.ConocimientosPrevios);
         $("#FechaRealizacion").data("kendoDatePicker").value(filajson.FechaRealizacion);
         $("#FechaAperturaInscrip").data("kendoDatePicker").value(filajson.FechaAperturaInscripcion);
         $("#FechaLimiteInscrip").data("kendoDatePicker").value(filajson.FechaLimiteInscripcion);
         $("#Plazas").val(filajson.Plazas);
+        $("#Precio").val(filajson.Precio);
         $("#NumAcompa").val(filajson.NumAcompa);
 
-        $("#PrioridadSocios").data("kendoDropDownList").value((filajson.PrioridadSocios));
+        $("#DescuentoSocios").data("kendoDropDownList").value((filajson.DescuentoSocios));
         $("#editor").data("kendoEditor").value((filajson.Actividad));
 
         windowEditar.center();
@@ -241,47 +253,45 @@ $(document).ready(function () {
 
     $("#BotonCancelarVentanaEditar").live("click", function () {
         windowEditar.close();
-        $("#Eventostabla").show();
+        $("#Cursillostabla").show();
     });
 
     $("#BotonCancelarInscripcion").live("click", function () {
         windowInscripcion.close();
-        $("#Eventostabla").show();
+        $("#Cursillostabla").show();
     });
-
 
     $("#BotonCancelarFormularioCrear").live("click", function () {
         $("#FormularioCreacion").hide();
-        $("#Eventostabla").show();
-
+        $("#Cursillostabla").show();
     });
 
     $("#BotonAceptarFormularioCrear").live("click", function () {
         var datos = {};
-
         datos["TituloUpdate"] = $("#Titulo").val();
         datos["LugarUpdate"] = $("#Lugar").val();
+        datos["TematicaUpdate"] = $("#Tematica").val();
+        datos["ConocimientosPreviosUpdate"] = $("#ConocimientosPrevios").val();
         datos["FechaRealizacionUpdate"] = $("#FechaRealizacion").val();
         datos["FechaAperturaInscripUpdate"] = $("#FechaAperturaInscrip").val();
         datos["FechaLimiteInscripUpdate"] = $("#FechaLimiteInscrip").val();
         datos["PlazasUpdate"] = $("#Plazas").val();
         datos["NumAcompaUpdate"] = $("#NumAcompa").val();
-        datos["PrioridadSociosUpdate"] = $("#PrioridadSocios").val();
+        datos["PrecioUpdate"] = $("#Precio").val();
+        datos["DescuentoSociosUpdate"] = $("#DescuentoSocios").val();
         datos["ActividadUpdate"] = $("#editor").data("kendoEditor").value();
-
 
         $.ajax(
         {
-            url: "Eventos/CreateEvento",
+            url: "Cursillos/CreateCursillo",
             type: "POST",
             data: datos,
             success: function () {
                 datasource.read();
                 $("#FormularioCreacion").hide();
-                $("#Eventostabla").show();
+                $("#Cursillostabla").show();
             }
         });
-
     });
 
     $("#BotonAceptarInscripcion").click(function () {
@@ -291,10 +301,10 @@ $(document).ready(function () {
         if (!$("#AcompanantesDropdown").data("kendoDropDownList").value()) {
             datos["numacompa"] = $("#Acompanantes").val();
         }
-        datos["idEvento"] = idEvento;
+        datos["idCursillo"] = idCursillo;
         $.ajax(
         {
-            url: "Eventos/InscripcionEvento",
+            url: "Cursillos/InscripcionCursillo",
             type: "POST",
             data: datos,
             success: function () {
@@ -309,18 +319,21 @@ $(document).ready(function () {
 
         datos["TituloUpdate"] = $("#Titulo").val();
         datos["LugarUpdate"] = $("#Lugar").val();
+        datos["TematicaUpdate"] = $("#Tematica").val();
+        datos["ConocimientosPreviosUpdate"] = $("#ConocimientosPreviosTematica").val();
         datos["FechaRealizacionUpdate"] = $("#FechaRealizacion").val();
         datos["FechaAperturaInscripUpdate"] = $("#FechaAperturaInscrip").val();
         datos["FechaLimiteInscripUpdate"] = $("#FechaLimiteInscrip").val();
         datos["PlazasUpdate"] = $("#Plazas").val();
         datos["NumAcompaUpdate"] = $("#NumAcompa").val();
-        datos["PrioridadSociosUpdate"] = $("#PrioridadSocios").val();
+        datos["PrecioUpdate"] = $("#Precio").val();
+        datos["DescuentoSociosUpdate"] = $("#DescuentoSocios").val();
         datos["ActividadUpdate"] = $("#editor").data("kendoEditor").value();
-        datos["idEvento"] = idEvento;
+        datos["idCursillo"] = idCursillo;
 
         $.ajax(
         {
-            url: "Eventos/UpdateEvento",
+            url: "Cursillos/UpdateCursillo",
             type: "POST",
             data: datos,
             success: function () {
@@ -335,7 +348,7 @@ $(document).ready(function () {
 
         var detailRow = e.detailRow;
 
-        detailRow.find(".detallesEventosPestanas").kendoTabStrip({
+        detailRow.find(".detallesCursillosPestanas").kendoTabStrip({
             animation: {
                 open: { effects: "fadeIn" }
             }
@@ -344,28 +357,28 @@ $(document).ready(function () {
 
     $(".botonInscripcion").live("click", function () {
 
-        var fila = $("#Eventostabla").data("kendoGrid").select();
-        var filaJson = $("#Eventostabla").data("kendoGrid").dataItem(fila).toJSON(); // La pasamos a JSON
+        var fila = $("#Cursillostabla").data("kendoGrid").select();
+        var filaJson = $("#Cursillostabla").data("kendoGrid").dataItem(fila).toJSON(); // La pasamos a JSON
 
-        var Evento = datasource.getByUid(fila.attr("data-uid"));
-        var Titulo = Evento.Titulo;
-        idEvento = Evento.idEvento;
-        var Precio = Evento.Precio;
-        maxacompa = Evento.NumAcompa;
+        var Cursillo = datasource.getByUid(fila.attr("data-uid"));
+        var Titulo = Cursillo.Titulo;
+        idCursillo = Cursillo.idCursillo;
+        var Precio = Cursillo.Precio;
+        maxacompa = Cursillo.NumAcompa;
 
-        $("#TituloEventoInscripcion").text(Titulo);
-        $("#PrecioEventoInscripcion").text(Precio);
+        $("#TituloCursilloInscripcion").text(Titulo);
+        $("#PrecioCursilloInscripcion").text(Precio);
 
         $("#acompaWrapper").empty();
         $("#acompaWrapper").html('<div id="NumeroAcompa"><label> Número de acompañantes: </label><input id="Acompanantes" /></div>');
         $("#AcompanantesDropdown").data("kendoDropDownList").select(0);
 
         $("#Acompanantes").kendoNumericTextBox({
-            
+
             min: 1,
             max: maxacompa,
             step: 1,
-            format:"0"
+            format: "0"
         });
 
         $("#NumeroAcompa").hide();
@@ -376,15 +389,15 @@ $(document).ready(function () {
 
     $(".botonEliminarFila").live("click", function () {
 
-        var fila = $("#Eventostabla").data("kendoGrid").select(); // Cogemos la fila seleccionada
-        var filaJson = $("#Eventostabla").data("kendoGrid").dataItem(fila).toJSON(); // La pasamos a JSON
+        var fila = $("#Cursillostabla").data("kendoGrid").select(); // Cogemos la fila seleccionada
+        var filaJson = $("#Cursillostabla").data("kendoGrid").dataItem(fila).toJSON(); // La pasamos a JSON
 
-        var idEvento = datasource.getByUid(fila.attr("data-uid")).idEvento;
+        var idCursillo = datasource.getByUid(fila.attr("data-uid")).idCursillo;
 
         $.ajax({
-            url: "Eventos/eliminarEvento",
+            url: "Cursillos/eliminarCursillo",
             type: "POST",
-            data: { idEvento: idEvento },
+            data: { idCursillo: idCursillo },
             success: function () {
                 datasource.read();
             }

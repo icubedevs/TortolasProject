@@ -12,7 +12,8 @@ namespace TortolasProject.Controllers
     {
         // GET: /Eventos/
         mtbMalagaDataContext bd = new mtbMalagaDataContext();
-        static EventosRepositorio EventosRepo = new EventosRepositorio();
+        EventosRepositorio EventosRepo = new EventosRepositorio();
+        UsuariosRepositorio UsuariosRepo = new UsuariosRepositorio();
 
           //Index
         public ActionResult Index()
@@ -20,7 +21,7 @@ namespace TortolasProject.Controllers
             return View();
         }
 
-          //CrearEvento
+         
         [HttpPost]
         public ActionResult cargarVistaCrearEvento()
         {
@@ -41,12 +42,34 @@ namespace TortolasProject.Controllers
                               FechaLimiteInscripcion = ob.FechaLimiteInscripcion.ToShortDateString(),
                               FechaRealizacion = ob.FechaRealizacion.ToShortDateString(),
                               PrioridadSocios = ob.PrioridadSocios,
-                              Plazas = ob.Plazas
+                              Plazas = ob.Plazas,
+                              NumAcompa = ob.NumAcompa
                           };
             return Json(eventos);
         }
 
         [HttpPost]
+        public void InscripcionEvento(FormCollection data)
+        {
+            Guid idDocumentoInscripcion = Guid.NewGuid();
+            Guid idEvento = Guid.Parse(data["idEvento"]);
+            int NumAcompa = int.Parse(data["numacompa"]);
+            Guid FKUsuario = UsuariosRepo.obtenerUsuarioByUser(HomeController.obtenerUserIdActual());
+            tbDocInscripcion DocInscrip = new tbDocInscripcion
+            {
+                idDocumentoInscripcion = idDocumentoInscripcion,
+                Pagado = false,
+                NumAcom = NumAcompa,
+                FKCursillo = null,
+                FKEvento = idEvento,
+                FKUsuario = FKUsuario
+            };
+            EventosRepo.inscripcionEvento(DocInscrip);
+            
+        }
+
+        [HttpPost]
+
         public void UpdateEvento(FormCollection data)
         {
             Guid idEvento = Guid.Parse(data["idEvento"]);
@@ -56,6 +79,7 @@ namespace TortolasProject.Controllers
             DateTime FechaAperturaIncripcion = DateTime.Parse(data["FechaAperturaInscripUpdate"]);
             DateTime FechaLimiteIncripcion = DateTime.Parse(data["FechaLimiteInscripUpdate"]);
             int Plazas = int.Parse(data["PlazasUpdate"]);
+            int NumAcompa = int.Parse(data["NumAcompaUpdate"]);
             bool PrioridadSocios = bool.Parse(data["PrioridadSociosUpdate"]);
             String Actividad = data["ActividadUpdate"];
 
@@ -67,6 +91,7 @@ namespace TortolasProject.Controllers
                 FechaAperturaInscripcion = FechaAperturaIncripcion,
                 FechaLimiteInscripcion = FechaLimiteIncripcion,
                 Plazas = Plazas,
+                NumAcompa = NumAcompa,
                 PrioridadSocios = PrioridadSocios,
                 Actividad = Actividad
             };
@@ -83,18 +108,21 @@ namespace TortolasProject.Controllers
             DateTime FechaAperturaIncripcion = DateTime.Parse(data["FechaAperturaInscripUpdate"]);
             DateTime FechaLimiteIncripcion = DateTime.Parse(data["FechaLimiteInscripUpdate"]);
             int Plazas = int.Parse(data["PlazasUpdate"]);
+            int NumAcompa = int.Parse(data["NumAcompaUpdate"]);
             bool PrioridadSocios = bool.Parse(data["PrioridadSociosUpdate"]);
             String Actividad = data["ActividadUpdate"];
-            Guid FKUsuario =  Guid.Parse(data["FKUsuario"]);
+            Guid FKUsuario =  UsuariosRepo.obtenerUsuarioByUser(HomeController.obtenerUserIdActual());
 
             tbEvento Evento = new tbEvento
             {
+                idEvento = idEvento,
                 Titulo = Titulo,
                 Lugar = Lugar,
                 FechaRealizacion = FechaRealizacion,
                 FechaAperturaInscripcion = FechaAperturaIncripcion,
                 FechaLimiteInscripcion = FechaLimiteIncripcion,
                 Plazas = Plazas,
+                NumAcompa = NumAcompa,
                 PrioridadSocios = PrioridadSocios,
                 Actividad = Actividad,
                 FKUsuarioCreador = FKUsuario
@@ -102,7 +130,7 @@ namespace TortolasProject.Controllers
 
             EventosRepo.crearEvento(Evento);
         }
-
+        [HttpPost]
         public void eliminarEvento(FormCollection data)
         {
             Guid idEvento = Guid.Parse(data["idEvento"]);
