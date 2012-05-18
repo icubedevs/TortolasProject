@@ -68,6 +68,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\CursillosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
     <Compile Include="Controllers\FacturasController.cs" />
@@ -85,6 +86,7 @@
       <DependentUpon>mtbMalaga.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\Repositorios\Account\AccountRepositorio.cs" />
+    <Compile Include="Models\Repositorios\Eventos\CursillosRepositorio.cs" />
     <Compile Include="Models\Repositorios\Eventos\EventosRepositorio.cs" />
     <Compile Include="Models\Repositorios\Empresas\EmpresasRepositorio.cs" />
     <Compile Include="Models\Repositorios\Facturas\FacturasRepositorio.cs" />
@@ -204,7 +206,9 @@
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
     <Content Include="Content\images\asociaciones.jpg" />
+    <Content Include="Content\images\cursillostitulo.png" />
     <Content Include="Content\images\empresas.png" />
+    <Content Include="Content\images\eventostitulo.png" />
     <Content Include="Content\images\monitores\01_1024x768.jpg" />
     <Content Include="Content\images\monitores\13.jpg" />
     <Content Include="Content\images\monitores\17881-1280x800-husky.jpg" />
@@ -639,6 +643,7 @@
     <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
+    <Content Include="Scripts\jsactions\Eventos\cursillos.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasDetalles.js" />
     <Content Include="Scripts\jsactions\Empresas\EmpresasIndex.js" />
     <Content Include="Scripts\jsactions\Facturas\facturasEditar.js" />
@@ -763,6 +768,8 @@
     <Content Include="Scripts\styles\textures\glass.png" />
     <Content Include="Scripts\styles\textures\highlight.png" />
     <Content Include="Views\Administracion\Index.aspx" />
+    <Content Include="Views\Cursillos\Index.aspx" />
+    <Content Include="Views\Cursillos\VistaCrearCursillo.ascx" />
     <Content Include="Views\Facturas\editarFactura.aspx" />
     <Content Include="Views\Facturas\leerFactura.aspx" />
     <Content Include="Views\Articulos\AnadirArticulo.ascx" />
@@ -849,7 +856,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3608</DevelopmentServerPort>
+          <DevelopmentServerPort>9541</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

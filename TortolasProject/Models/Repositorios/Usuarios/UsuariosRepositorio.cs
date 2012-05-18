@@ -18,5 +18,9 @@ namespace TortolasProject.Models.Repositorios
 
         }
 
+        public Guid obtenerUsuarioByUser(Guid user)
+        {
+            return mtbMalagaDB.tbUsuario.Where(u => u.FKUser == user).Single().idUsuario;
+        }
     }
 }
