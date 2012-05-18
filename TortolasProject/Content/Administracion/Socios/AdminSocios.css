@@ -1,0 +1,15 @@
+﻿body {
+}
+
+
+.infoSocio table li label
+{
+     font-weight :bold;
+     margin-right: 20px;
+     margin-left: 20px;        
+}
+
+.infoSocio table
+{
+    list-style-type:none;
+}

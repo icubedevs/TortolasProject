@@ -48,5 +48,19 @@ namespace TortolasProject.Models.Repositorios
             mtbMalagaDB.SubmitChanges();
         }
 
+        public IList<tbCursillo> cursillosDeMonitor(Guid monitor)
+        {            
+            var identificadores = from i in mtbMalagaDB.tbCursilloMonitor.Where(ident => ident.FKMonitor.Equals(monitor)).ToList() 
+                                  select i.FKCursillo;
+
+            IList<tbCursillo> todosCursillos = mtbMalagaDB.tbCursillo.ToList<tbCursillo>();
+
+            var listaCursillos = from c in todosCursillos
+                                 where identificadores.Contains(c.idCursillo)
+                                 select c;
+          
+            return listaCursillos.ToList<tbCursillo>();
+        }
+
     }
 }

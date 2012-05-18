@@ -28,3 +28,86 @@ textarea
     padding-left: 40px;
     padding-top: 40px;
 }
+
+#formularioIzquierda
+{ 
+    padding: 10px 0px 10px 35px;
+    margin: 10px 0px 10px 10px;
+    width: 60%;
+}
+
+#formularioIzquierda input , textarea
+{
+    padding: 4px;
+	border: solid 1px #E5E5E5;
+	outline: 0;
+	/*font: normal 10px/100% Verdana, Tahoma, sans-serif;
+	width: 200px; */
+	background: #FFFFFF url('bg_form.png') left top repeat-x;
+	background: -webkit-gradient(linear, left top, left 25, from(#FFFFFF), color-stop(4%, #EEEEEE), to(#FFFFFF));
+	background: -moz-linear-gradient(top, #FFFFFF, #EEEEEE 1px, #FFFFFF 25px);
+	box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-moz-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	-webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
+	margin: 5px 5px 5px 5px;
+
+}
+
+#formularioIzquierda input:hover, textarea:hover, input:focus, textarea:focus 
+{ 
+	border-color: #C9C9C9; 
+	-webkit-box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 8px;
+	
+}
+
+#formularioFoto
+{    
+   padding: 10px 0px 10px 10px;
+   margin: 10px 0px 10px 10px;
+}
+
+#carnet
+{ 
+    margin : 50px 50px 30px 50px;
+    padding: 20px 20px 20px 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border: 3px solid black;
+    background-image: url(../images/fondocarnet.png);    
+}
+
+#fotoCarnet
+{
+    float: left;
+    margin: 10px 10px 10px 10px;
+}
+
+#camposCarnet div
+{    
+    margin: 15px 10px 10px 40px;           
+    font-weight: bolder;    
+}
+
+#infoSocio
+{
+    margin : 10px 50px 50px 50px;
+    padding: 20px 20px 20px 20px;
+}
+
+.cuadroCuentas
+{
+    float: right;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    width:35%;
+    padding: 5px 5px 5px 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+table thead
+{
+    background: #BDBDBD;
+}

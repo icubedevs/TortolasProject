@@ -128,7 +128,32 @@ namespace TortolasProject.Controllers.Monitores
             //return Content("");
             return fileName;
         }
-    
+
+        [HttpPost]
+        public JsonResult cursillosMonitor(FormCollection data)
+        {
+            Guid idMonitor = Guid.Parse(data["idMonitor"]);
+
+            var cursillos = from c in MonitoresRepo.cursillosDeMonitor(idMonitor)
+                            select new
+                            {
+                                idCursillo = c.idCursillo,
+                                Actividad = c.Actividad,
+                                ConocimientosPrevios = c.ConocimientosPrevios,
+                                DescuentoSocios = c.DescuentoSocios,
+                                FechaAperturaInscripcion = c.FechaAperturaInscripcion.ToString(),
+                                FechaLimiteInscripcion = c.FechaLimiteInscripcion.ToString(),
+                                FechaRealizacion = c.FechaRealizacion.ToShortDateString(),
+                                Lugar = c.Lugar,
+                                Plazas = c.Plazas,
+                                Precio = c.Precio,
+                                FKUsuarioCreador = c.FKUsuarioCreador,
+                                Tematica = c.Tematica,
+                                Titulo = c.Titulo 
+                            };
+
+            return Json(cursillos);
+        }
 
     }
     
