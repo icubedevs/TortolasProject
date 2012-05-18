@@ -5,12 +5,10 @@ $(document).ready(function () {
     $("#VentanaEmpresasRemota") //Creo la ventana como variable global para que pueda ser usado por todos
         .kendoWindow
         ({
-            title: "Seleccione una Empresa",
+            title: "Editar Empresa",
             modal: false,
             visible: false,
             resizable: false,
-            width: 600,
-            height: 400
         }).data("kendoWindow");
 
     $('#EmpresasGridRemoto .k-grid-content tr').live('dblclick', function () {
@@ -177,8 +175,6 @@ $(document).ready(function () {
             modal: true,
             visible: false,
             resizable: false,
-            width: 600,
-            height: 400
         }).data("kendoWindow");
 
 

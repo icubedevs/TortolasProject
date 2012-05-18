@@ -283,8 +283,10 @@
             success: function () {
                 
                 var temp = $("#ProveedoresGrid").data("kendoGrid").dataSource;
-                
+
                 temp.read();
+
+                $(".VisibilidadDatosNuevaEmpresaRemota").hide();
 
                 wcrearProveedor.close();
 

@@ -191,12 +191,12 @@ namespace TortolasProject.Models.Repositorios
 
         public tbConvenio buscarcon(Guid id)
         {
-            return mtbMalagaDB.tbConvenio.Where(convenios => convenios.FKCodigoEmpresa == id).Single();
+            return mtbMalagaDB.tbConvenio.Where(convenios => convenios.idConvenio == id).Single();
         }
 
         public void updateCon(tbConvenio con)
         {
-            tbConvenio original = buscarcon(con.FKCodigoEmpresa);
+            tbConvenio original = buscarcon(con.idConvenio);
 
             original.DescripcionOferta = con.DescripcionOferta;
 
@@ -213,6 +213,13 @@ namespace TortolasProject.Models.Repositorios
         {
             mtbMalagaDB.tbConvenio.InsertOnSubmit(con);
             salvar();
+        }
+
+        //CONTRATOS//
+
+        public IList<tbContrato> ListarContratos()
+        {
+            return mtbMalagaDB.tbContrato.ToList();
         }
     }
 }

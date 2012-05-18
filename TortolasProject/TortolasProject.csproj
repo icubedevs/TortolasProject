@@ -69,6 +69,7 @@
     <Compile Include="Controllers\Administracion\AdministracionController.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
     <Compile Include="Controllers\AsociacionesController.cs" />
+    <Compile Include="Controllers\ContratosController.cs" />
     <Compile Include="Controllers\ConveniosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\EmpresasController.cs" />
@@ -210,6 +211,8 @@
     <Content Include="Content\icons\yahoo-occupied.ico" />
     <Content Include="Content\icons\yahoo.ico" />
     <Content Include="Content\images\asociaciones.jpg" />
+    <Content Include="Content\images\contrato.jpg" />
+    <Content Include="Content\images\convenios.jpg" />
     <Content Include="Content\images\empresas.png" />
     <Content Include="Content\images\monitores\01_1024x768.jpg" />
     <Content Include="Content\images\monitores\13.jpg" />
@@ -648,6 +651,7 @@
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
     <Content Include="Scripts\jsactions\Empresas\Asociaciones\Asociaciones.js" />
+    <Content Include="Scripts\jsactions\Empresas\Contratos\Contratos.js" />
     <Content Include="Scripts\jsactions\Empresas\Convenios\Convenios.js" />
     <Content Include="Scripts\jsactions\Empresas\Patrocinadores\Patrocinadores.js" />
     <Content Include="Scripts\jsactions\Empresas\Proveedores\Proveedores.js" />
