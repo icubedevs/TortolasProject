@@ -76,6 +76,7 @@
     <Compile Include="Controllers\Monitores\MonitoresController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\Perfil\PerfilController.cs" />
+    <Compile Include="Controllers\Socios\SociosController.cs" />
     <Compile Include="Controllers\Usuarios\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -98,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Administracion\Monitores\monitores.css" />
+    <Content Include="Content\Administracion\Socios\AdminSocios.css" />
     <Content Include="Content\Administracion\Usuarios\Usuarios.css" />
     <Content Include="Content\crud.css" />
     <Content Include="Content\emailBIG_titulo.png" />
@@ -229,6 +231,7 @@
     <Content Include="Content\images\nosocio.png" />
     <Content Include="Content\images\pago.gif" />
     <Content Include="Content\images\socios\danie.png" />
+    <Content Include="Content\images\tituloadminsocios.png" />
     <Content Include="Content\images\titulousuarios.png" />
     <Content Include="Content\images\user-new.png" />
     <Content Include="Content\images\usuarios\526214_10150894749063804_1689304985_n.jpg" />
@@ -658,6 +661,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jsactions\Administracion\Administracion.js" />
     <Content Include="Scripts\jsactions\Administracion\Monitores\Monitores.js" />
+    <Content Include="Scripts\jsactions\Administracion\Socios\AdminSocios.js" />
     <Content Include="Scripts\jsactions\Administracion\Usuarios.js" />
     <Content Include="Scripts\jsactions\Administracion\Usuarios\AdminUsuarios.js" />
     <Content Include="Scripts\jsactions\captacion.js" />
@@ -813,6 +817,7 @@
     <Content Include="Views\Articulos\Index.aspx" />
     <Content Include="Views\Monitores\Index.aspx" />
     <Content Include="Views\Perfil\Index.aspx" />
+    <Content Include="Views\Socios\Index.aspx" />
     <Content Include="Views\Usuarios\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -9,8 +9,7 @@
     <img src="../../Content/images/titulousuarios.png" /><br /><br />
     
     <div id="tablaAdminUsuarios"></div>
-
-
+    
     <div id="ventanaNuevoUsuario" class="ventana">
         <div class="ventanaWrapper">
             <center><img src="../../Content/images/user-new.png" /></center> <br />
@@ -19,12 +18,16 @@
             <br /><br />
             <div id="formularioNuevoUsuario">
                 <label for="nuevoNickname">Nickname : </label><input type="text" class="k-textbox nuevoUsuario" placeholder="Apodo del Usuario" id="nuevoNickname" /><br />
-                <label for="nuevoEmail">Email : </label><input type="text" class="k-textbox nuevoUsuario" placeholder="Email del Usuario" id="nuevoEmail" />
+                <label for="nuevoEmail">Email : </label><input type="text" class="k-textbox nuevoUsuario" placeholder="Email del Usuario" id="nuevoEmail" /><br />
+                <label for="nuevoPassword">Contraseña : </label><input type="text" class="k-textbox nuevoUsuario" placeholder="Contraseña del Usuario" id="nuevoPassword" /><br />
+                <input type="checkbox" id="checkPasswordRandom" /> Generar contraseña aleatoriamente
                 <br /><br />
                 <input type="button" id="botonNuevoUsuario" class="k-button" value="Crear Usuario"/>
             </div>
         </div>
     </div>
+
+   
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="CssContent" runat="server">
@@ -39,8 +42,8 @@
     <script type="text/x-kendo-template" id="templateToolbarAdminUsuario">
     <div class="toolbarAdminUsuarios">        
             <input type="button" class="k-button" id="nuevoUsuarioToolbar" value="+ Nuevo Usuario">
-            <input type="button" class="k-button" id="nuevoSocioToolbar" value="Crear y Enlazar Socio">
-            <input type="button" class="k-button" id="nuevoJuntaDirectivaToolbar" value="Ingresar Junta Directiva">    
+        <!--    <input type="button" class="k-button" id="nuevoSocioToolbar" value="Crear y Enlazar Socio">
+            <input type="button" class="k-button" id="nuevoJuntaDirectivaToolbar" value="Ingresar Junta Directiva">     -->
     </div>
     </script>
 
@@ -89,7 +92,7 @@
                     </div>
                     <div>
                         <div class="tabSocio_#= idUsuario #">
-                            <div class="esSocio">
+                            <div class="noEsSocio">
                               <center>
                                 <img src="../../Content/images/exclamacion.png" width="100"/><h2>¡Este Usuario no es Socio!</h2><br /><br />
                                 Puede crear un nuevo Socio y enlazar esa ficha de Socio a este usuario. Para hacerlo pulse el boton de abajo
@@ -98,7 +101,7 @@
                                 <input type="button" class="k-button botonCrearEnlazarSocio" value="Crear Socio y enlazar">
                                 </center>
                             </div>
-                            <div class="noEsSocio">
+                            <div class="esSocio">
                                         <div class="carnet">
                                             <div class="fotoCarnet"><img src="../../Content/images/usuarios/darthvader_1600.jpg" width="180" height="150" /></div>
                                             <div class="camposCarnet">

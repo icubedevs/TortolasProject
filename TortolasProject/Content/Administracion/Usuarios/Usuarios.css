@@ -52,6 +52,12 @@
     margin-left: 25%;
 }
 
+#checkPasswordRandom
+{    
+    margin-left: 25%;
+}
+
+
 .k-invalid,k-invalid:hover
 {
     border : 1px solid red;

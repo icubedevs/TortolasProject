@@ -121,5 +121,35 @@ namespace TortolasProject.Controllers.Usuarios
             }
         }
 
+        [HttpPost]
+        public Boolean nuevoSocio(FormCollection data)
+        {
+            Guid idUsuario = Guid.Parse(data["idUsuario"]);
+
+          /*  if (esSocio(idUsuario))
+            {
+                return false;
+            }
+            else
+            {
+             /*   tbSocio socio = new tbSocio{
+                        Estado = "Activo",
+                        FechaAlta = DateTime.Today,
+                        FechaExpiracion = ,                        
+                        NumeroSocio = ,                        
+                        FKUsuario = idUsuario
+                }
+            }*/
+            return false;
+        }
+
+        [HttpPost]
+        public void eliminarUsuario(FormCollection data)
+        {
+            Guid idUsuario = Guid.Parse(data["idUsuario"]);
+
+            usuariosRepo.eliminarUsuario(idUsuario);
+        }
+
     }
 }

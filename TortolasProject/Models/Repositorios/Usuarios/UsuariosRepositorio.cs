@@ -18,6 +18,11 @@ namespace TortolasProject.Models.Repositorios
 
         }
 
+        public tbUsuario obtenerUsuario(Guid abuscar) 
+        {
+            return mtbMalagaDB.tbUsuario.Where(usuario => usuario.idUsuario.Equals(abuscar)).Single();
+        }
+
         public tbUsuario obtenerUsuarioNoAsp(Guid abuscar)
         {
             return mtbMalagaDB.tbUsuario.Where(usuario => usuario.FKUser == abuscar).Single();
@@ -75,5 +80,28 @@ namespace TortolasProject.Models.Repositorios
         {
             return mtbMalagaDB.tbUsuario.Count(usuario => usuario.Email.Equals(Email));
         }
+
+
+        public void eliminarUsuario(Guid usuario)
+        {
+            tbUsuario usuarioAEliminar = obtenerUsuario(usuario);
+            String nickname = usuarioAEliminar.Nickname;
+
+            mtbMalagaDB.tbUsuario.DeleteOnSubmit(usuarioAEliminar);
+            mtbMalagaDB.SubmitChanges();
+            System.Web.Security.Membership.DeleteUser(nickname);
+            mtbMalagaDB.SubmitChanges();
+        }
+
+        public IList<tbSocio> listarSocios()
+        {
+            return mtbMalagaDB.tbSocio.ToList();
+        }
+
+        public IList<tbCuota> cuotasDeSocio(Guid Socio)
+        {
+            return mtbMalagaDB.tbCuota.Where(cuota => cuota.FKSocio.Equals(Socio)).ToList();
+        }
+        
     }
 }

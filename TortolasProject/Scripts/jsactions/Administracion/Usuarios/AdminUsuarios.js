@@ -8,10 +8,8 @@
         modal: true,
         visible: false,
         resizable: false,
-        scrollable: false,
-        movable: false,
-        width: 550,
-        height: 400
+        //scrollable: false,
+        movable: false
     }).data("kendoWindow").close();
 
     // Cargamos la tabla de Usuarios
@@ -132,7 +130,7 @@
                         command:
                         [
                         //   { text: "editar", className: "editarfila" },
-                            {text: "eliminar", className: "eliminarfila" }
+                            {text: "eliminar", className: "eliminarUsuario" }
                         ]
                     }
 
@@ -156,8 +154,8 @@
         });
 
         if (socio != "No hay Socio") {     // Es un socio        
-            $(".tabSocio_" + e.data.idUsuario + " .esSocio").hide();
-            $(".tabSocio_" + e.data.idUsuario + " .noEsSocio").show();
+            $(".tabSocio_" + e.data.idUsuario + " .esSocio").show();
+            $(".tabSocio_" + e.data.idUsuario + " .noEsSocio").hide();
             $(".tabSocio_" + e.data.idUsuario + " .fotoCarnet img").attr("src", socio.Foto);
             $(".tabSocio_" + e.data.idUsuario + " .carnetNumeroSocio").append(socio.NumeroSocio);
             $(".tabSocio_" + e.data.idUsuario + " .carnetFechaAlta").append(socio.FechaAlta);
@@ -167,14 +165,12 @@
         }
         // No es un socio
         else {
-            $(".tabSocio_" + e.data.idUsuario + " .esSocio").show();
-            $(".tabSocio_" + e.data.idUsuario + " .noEsSocio").hide();
+            $(".tabSocio_" + e.data.idUsuario + " .esSocio").hide();
+            $(".tabSocio_" + e.data.idUsuario + " .noEsSocio").show();
         }
 
         $(".tabSocio_" + e.data.idUsuario + " .botonCrearEnlazarSocio").click(function () {
-            alert("cucu");
-            alert("soy el uzuario " + e.data.idUsuario);
-
+            enlazarUsuario(e.data.idUsuario);
         });
     }
 
@@ -194,6 +190,8 @@
             success: function (respuesta) {
                 if (respuesta == "True") {       // No Hay repeticiones
                     $("#nuevoNickname").removeClass("k-invalid");
+                    if ($("#nuevoNickname").val() == "")
+                        $("#nuevoNickname").addClass("k-invalid");
                 }
                 else {
                     $("#nuevoNickname").addClass("k-invalid");
@@ -211,6 +209,8 @@
             success: function (respuesta) {
                 if (respuesta == "True") {       // No Hay repeticiones
                     $("#nuevoEmail").removeClass("k-invalid");
+                    if ($("#nuevoEmail").val() == "")
+                        $("#nuevoEmail").addClass("k-invalid");
                 }
                 else {
                     $("#nuevoEmail").addClass("k-invalid");
@@ -221,17 +221,89 @@
     });
 
 
-    // Boton para crear Usuario
-    $("#botonNuevoUsuario").click(function () {
-        alert("estoy por aqui");
-        if (validadorNuevoUsuario.validate()) {
-            alert("todo way");
+    // Funcion para el check de password Random
+    $("#checkPasswordRandom").change(function () {
+        var password = $("#nuevoPassword").val();
+        if (password == "") {       // Que no este vacio
+            $("#nuevoPassword").val(Math.random().toString(36).substring(7));
+            $("#nuevoPassword").attr("disabled", true);
         }
         else {
-            alert("no todo tan way");
+            $("#nuevoPassword").val("");
+            $("#nuevoPassword").attr("disabled", false);
+        }
+
+    });
+
+
+    // Boton para crear Usuario
+    $("#botonNuevoUsuario").click(function () {
+
+
+        if ($(".k-invalid").size() == 0) {
+            var nickname = $("#nuevoNickname").val();
+            var email = $("#nuevoEmail").val();
+            var password = $("#nuevoPassword").val();
+
+            if (nickname == "" || email == "" || password == "") {
+                alert("Uno o varios campos estan vacios.");
+            }
+            else {
+                $.ajax({
+                    url: "Home/Registro",
+                    type: "POST",
+                    data: { UserName: nickname, Email: email, Password: password, ConfirmPassword: password },
+                    success: function () {
+                        $("#tablaAdminUsuarios").data("kendoGrid").dataSource.read();
+                        ventanaNuevoUsuario.close();
+                    },
+                    async: false
+                });
+            }
+        }
+        else {
+            alert("Uno o varios campos ya existen en la Base de Datos, elija otro.");
         }
     });
 
+
+    // Funcion de eliminar
+    $(".eliminarUsuario").live("click", function () {
+
+        var fila = $("#tablaAdminUsuarios").data("kendoGrid").select();          // Cogemos la fila seleccionada
+        var filaJson = $("#tablaAdminUsuarios").data("kendoGrid").dataItem(fila).toJSON();       // La pasamos a JSON
+        idUsuario = $("#tablaAdminUsuarios").data("kendoGrid").dataSource.getByUid(fila.attr("data-uid")).idUsuario;
+
+        var socio = null;
+
+        $.ajax({
+            url: "Usuarios/socioDeUsuario",
+            type: "POST",
+            data: { idUsuario: idUsuario },
+            success: function (societe) {
+                socio = societe;
+            },
+            async: false
+        });
+
+        if (socio != "No hay Socio") {
+            alert("Este usuario es un Socio, por lo que no puede ser eliminado.");
+        }
+        else {
+            if (confirm("¿Estas seguro de que desea eliminar este usuario?")) {
+                $.ajax({
+                    url: "Usuarios/eliminarUsuario",
+                    type: "POST",
+                    data: { idUsuario: idUsuario },
+                    success: function () {
+                        $("#tablaAdminUsuarios").data("kendoGrid").dataSource.read();
+                    },
+                    async: false
+                });
+            }
+        }
+
+    });
 
     // Zona para Qtips
 
@@ -266,6 +338,41 @@
             }
         });
 
+        $(".nuevoUsuario").qtip({
+            content: {
+                text: "Este campo no es <font color='red'><b>modificable</b></font>.<br> No puede estar repetido en la Base de Datos."
+            },
+            position: {
+                my: "top left"
+            }
+        });
+
     }
+
+
+    // Funciones descartadas (MIGRAR A SOCIOS)
+
+
+    // Boton para crear un Socio y enlazarselo al Usuario
+    $("#nuevoSocioToolbar").click(function () {
+
+        var fila = $("#tablaAdminUsuarios").data("kendoGrid").select();          // Cogemos la fila seleccionada
+        var filaJson = $("#tablaAdminUsuarios").data("kendoGrid").dataItem(fila).toJSON();       // La pasamos a JSON
+        idUsuario = $("#tablaAdminUsuarios").data("kendoGrid").dataSource.getByUid(fila.attr("data-uid")).idUsuario;          // Obtenemos el idMonitor seleccionado
+        enlazarUsuario(idUsuario);
+    });
+
+    function enlazarUsuario(idUsuario) {
+        $.ajax({
+            url: "Usuarios/nuevoSocio",
+            type: "POST",
+            data: { idUsuario: idUsuario },
+            success: function () {
+                $("#tablaAdminUsuarios").data("kendoGrid").dataSource.read();
+            },
+            async: false
+        });
+    };
+
 
 });
