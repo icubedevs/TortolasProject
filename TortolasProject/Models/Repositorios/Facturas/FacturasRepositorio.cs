@@ -220,6 +220,65 @@ namespace TortolasProject.Models.Repositorios
             return mtbMalagaDB.tbMovimientoIngreso.Any(m => m.idMovimientoIngreso.Equals(idMovimiento));
         }
 
+        ///////////////////////////////////////////////////////////////////////////////
+        // Gráficas contables                                                            
+        ////////////////// /////////////////////////////////////////////////////////////
+
+        public IList<tbFactura> soloIngresosFactura()
+        {
+            return mtbMalagaDB.tbFactura.Where(f => f.Total >= 0).ToList(); 
+        }
+
+        public IList<tbFactura> soloGastosFactura()
+        {
+            return mtbMalagaDB.tbFactura.Where(f => f.Total < 0).ToList();
+        }
+
+        public Decimal ingresosFecha(DateTime inicial, DateTime final)
+        {
+            return mtbMalagaDB.tbFactura.Where(f => f.Fecha.CompareTo(inicial) > 0 && f.Fecha.CompareTo(final) < 0 && f.Total >= 0).ToList().Sum(f=> f.Total);
+        }
+
+        public Decimal gastosFecha(DateTime inicial, DateTime final)
+        {
+            return mtbMalagaDB.tbFactura.Where(f => f.Fecha.CompareTo(inicial) > 0 && f.Fecha.CompareTo(final) < 0 && f.Total < 0).ToList().Sum(f => f.Total);
+        }
+
+        public Dictionary<DateTime, Decimal[]> todosIngresosGastos()
+        {
+            Dictionary<DateTime,Decimal[]> datos = new Dictionary<DateTime,decimal[]>();
+
+            foreach (tbFactura f in mtbMalagaDB.tbFactura.ToList())
+            {
+                DateTime fecha = new DateTime(f.Fecha.Year,f.Fecha.Month,f.Fecha.Day);
+                if (!datos.ContainsKey(fecha))
+                {
+                    Decimal[] valores = new Decimal[2];
+                    if(f.Total >= 0)
+                    {
+                        valores[0] = f.Total;
+                        valores[1] = 0;
+                    }else
+                    {
+                        valores[0] = 0;
+                        valores[1] = f.Total;
+                    }
+                    datos.Add(fecha,valores);
+                }
+                else
+                {                   
+                    if(f.Total >= 0)
+                    {
+                        datos[fecha][0] = datos[fecha][0] + f.Total;
+                    }
+                    else
+                    {
+                        datos[fecha][1] = datos[fecha][1] - f.Total;
+                    }
+                }
+            }
+            return datos;
+        }
         // 
         //  Funciones auxiliares
         //

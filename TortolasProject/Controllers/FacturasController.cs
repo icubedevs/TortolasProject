@@ -18,6 +18,11 @@ namespace TortolasProject.Controllers
         ///////////////////////////////////////////////////////////////////////////////
         // Carga de vistas
         ///////////////////////////////////////////////////////////////////////////////
+            // Vista de navegación
+        public ActionResult facturasNav()
+        {
+            return PartialView();
+        }
 
             // Index
         public ActionResult Index()
@@ -131,6 +136,18 @@ namespace TortolasProject.Controllers
             return View("Movimientos");
         }
 
+            // Gráficos contables
+        public ActionResult graficosContables()
+        {
+            return View();
+        }
+
+            // Informes contables
+        public ActionResult informesContables()
+        {
+            return View();
+        }
+            
 
         ///////////////////////////////////////////////////////////////////////////////
         // Funciones FACTURAS
@@ -473,6 +490,12 @@ namespace TortolasProject.Controllers
 
             return RedirectToAction("leerFactura", id);
         }
+
+        [HttpPost]
+        public void establecerPagado(Guid idFactura)
+        { 
+            FacturasRepo.setEstadoFactura(FacturasRepo.leerEstadoByNombre("Pagado"), idFactura);
+        }
         ///////////////////////////////////////////////////////////////////////////////
         // Movimientos                                                            
         ///////////////////////////////////////////////////////////////////////////////
@@ -730,6 +753,7 @@ namespace TortolasProject.Controllers
         }
 
         // Contratos
+        [HttpPost]
         public JsonResult contratosListado()
         {
             var contratos = from c in db.tbContrato
@@ -759,5 +783,119 @@ namespace TortolasProject.Controllers
                           };
             return Json(estados);
         }
+
+        ///////////////////////////////////////////////////////////////////////////////
+        // Gráficos contables
+        ///////////////////////////////////////////////////////////////////////////////
+        [HttpPost]
+        public JsonResult periodoIngresosGastos(FormCollection data)
+        {
+            DateTime inicial = DateTime.Parse(data["inicial"]);
+            DateTime final = DateTime.Parse(data["final"]);            
+            
+            DateTime fi;
+            
+
+            IList<dynamic> raw = new List<dynamic>();
+            for (fi = inicial; fi.CompareTo(final) < 0; fi = new DateTime(fi.Year, (fi.Month + 1), fi.Day))
+            {
+                DateTime ff;
+                if (fi.Month == 12)
+                {
+                    ff = new DateTime(fi.Year + 1, 1, fi.Day);
+                }
+                else
+                {
+                    ff = new DateTime(fi.Year, fi.Month + 1, fi.Day);
+                }
+
+                raw.Add(new{
+                    ingresos =  FacturasRepo.ingresosFecha(fi, ff),
+                    gastos= FacturasRepo.gastosFecha(fi, ff),
+                    mes = ConvertToTimestamp(fi)
+                });
+            }
+            
+            double[][] datos = new double[raw.Count][];
+
+            int i = 0;
+            foreach (var r in raw)
+            {
+                datos[i] = new double[2];
+                datos[i][0] = r.mes;
+                datos[i][1] = (Double)r.ingresos;
+                datos[i][2] = (Double)r.gastos; 
+                i = i + 1;    
+            };
+            
+            return Json(datos);
+        }
+
+        [HttpPost]
+        public JsonResult todosIngresosGastos(FormCollection data)
+        {
+            IDictionary<DateTime,Decimal[]> diccionario = FacturasRepo.todosIngresosGastos();
+
+            Double[][] datos = new Double[diccionario.Count][];
+
+            int i;
+            for ( i=0; i< diccionario.Count; ++i)
+            {
+                var item = diccionario.ElementAt(i);
+                DateTime fecha = item.Key;
+                Decimal[] ingresosGastos = item.Value;
+
+                datos[i] = new Double[3];
+                datos[i][0] = ConvertToTimestamp(fecha);
+                datos[i][1] = (Double)ingresosGastos[0];
+                datos[i][2] = (Double)ingresosGastos[1];
+            }
+
+            return Json(datos);
+        }
+
+        [HttpPost]
+        public String obtenerMesString(DateTime fecha)
+        {
+            String mes = "";
+            switch (fecha.Month)
+            {
+                case 1: mes = "Enero";
+                    break;
+                case 2: mes =  "Febrero";
+                    break;
+                case 3: mes = "Marzo";
+                    break;
+                case 4: mes = "Abril";
+                    break;
+                case 5: mes = "Mayo";
+                    break;
+                case 6: mes = "Junio";
+                    break;
+                case 7: mes = "Julio";
+                    break;
+                case 8: mes = "Agosto";
+                    break;
+                case 9: mes = "Septiembre";
+                    break;
+                case 10: mes = "Octubre";
+                    break;
+                case 11: mes = "Noviembre";
+                    break;
+                case 12: mes = "Diciembre";
+                    break;
+            }
+            return mes;
+
+        }
+
+        private double ConvertToTimestamp(DateTime value)
+        {
+            TimeSpan span = (value - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime());            
+            return (double)span.TotalSeconds*1000;
+        }
+
     }
+    
+    
 }
